@@ -1,0 +1,337 @@
+<div class="main-content-imam bg-white atoms-create-work-order" id="maincontent">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="d-flex justify-content-between p-2 head-button-mobile">
+            <h5 class="card-title">Create Work Order</h5>
+            <button class="text-white atoms-button-success">Under Repair Internal</button>
+        </div>
+
+        <div class="row">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
+                <div class="col-12">
+                    <div class="row px-3">
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Sites</mat-label>
+                              <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                                <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                                @for (selectitem of selectedItems; track $index) {
+                                  <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                                }
+                              </mat-select>
+                              <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                              @if (selected.hasError('required')) {
+                                <mat-error>You must make a selection</mat-error>
+                              }
+                              @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                                <mat-error>Your selection is invalid</mat-error>
+                              }
+                            </mat-form-field>
+                         </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Sites</mat-label>
+                            <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                              <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                              @for (selectitem of selectedItems; track $index) {
+                                <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                              }
+                            </mat-select>
+                            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                            @if (selected.hasError('required')) {
+                              <mat-error>You must make a selection</mat-error>
+                            }
+                            @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                              <mat-error>Your selection is invalid</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-4">
+                           <mat-form-field appearance="fill">
+                                <mat-label>Sites</mat-label>
+                                <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                                  <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                                  @for (selectitem of selectedItems; track $index) {
+                                    <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                                  }
+                                </mat-select>
+                                <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                                @if (selected.hasError('required')) {
+                                  <mat-error>You must make a selection</mat-error>
+                                }
+                                @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                                  <mat-error>Your selection is invalid</mat-error>
+                                }
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="form-floating mt-5">
+                        <div class="select-buttons">
+                            <input type="radio" id="callInfo" name="users" class="hidden-radio" checked>
+                            <label for="callInfo" class="select-button"><span class="select-button-text">Caller
+                                    Info</span>
+                            </label>
+                            <input type="radio" id="woDetails" name="users" class="hidden-radio">
+                            <label for="woDetails" class="select-button"><span class="select-button-text">WO
+                                    Details</span>
+                            </label>
+                            <input type="radio" id="spareParts" name="users" class="hidden-radio">
+                            <label for="spareParts" class="select-button"><span class="select-button-text">Spare
+                                    Parts</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="sub-form-content">
+                            <div class="row px-1">
+                                <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 mt-1">
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Sites</mat-label>
+                                    <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                                      <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                                      @for (selectitem of selectedItems; track $index) {
+                                        <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                                      }
+                                    </mat-select>
+                                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                                    @if (selected.hasError('required')) {
+                                      <mat-error>You must make a selection</mat-error>
+                                    }
+                                    @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                                      <mat-error>Your selection is invalid</mat-error>
+                                    }
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 mt-1">
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Sites</mat-label>
+                                    <mat-select color="secondary" class="my-custom-class" [formControl]="selected"  [errorStateMatcher]="matcher">
+                                      <input class="mat-select-input-control"  placeholder="Search Sites" (keyup)="onKey($event)">
+                                      @for (selectitem of selectedItems; track $index) {
+                                        <mat-option  [value]="selectitem.id">{{selectitem.name}}</mat-option>
+                                      }
+                                    </mat-select>
+                                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                                    @if (selected.hasError('required')) {
+                                      <mat-error>You must make a selection</mat-error>
+                                    }
+                                    @if (selected.hasError('pattern') && !selected.hasError('required')) {
+                                      <mat-error>Your selection is invalid</mat-error>
+                                    }
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-12 col-sm-12"></div>
+
+                            </div>
+                        </div>
+                        <span class="delete-bg-circle mx-4 my-4">
+                            <a href="#">
+                                <svg width="17" height="22" viewBox="0 0 17 22" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.8654 2.57812H11.4231V1.93359C11.4231 0.867367 10.5691 0 9.51923 0H6.98077C5.93095 0 5.07692 0.867367 5.07692 1.93359V2.57812H0.634615C0.283842 2.57812 0 2.8664 0 3.22266C0 3.57891 0.283842 3.86719 0.634615 3.86719H15.8654C16.2162 3.86719 16.5 3.57891 16.5 3.22266C16.5 2.8664 16.2162 2.57812 15.8654 2.57812ZM6.34615 1.93359C6.34615 1.57798 6.63063 1.28906 6.98077 1.28906H9.51923C9.86937 1.28906 10.1538 1.57798 10.1538 1.93359V2.57812H6.34615V1.93359Z"
+                                        fill="#D02127" />
+                                    <path
+                                        d="M14.596 5.15625H1.90366C1.55289 5.15625 1.26904 5.44453 1.26904 5.80078V21.3555C1.26904 21.7117 1.55289 22 1.90366 22H14.596C14.9467 22 15.2306 21.7117 15.2306 21.3555V5.80078C15.2306 5.44453 14.9467 5.15625 14.596 5.15625ZM5.07674 17.4453C5.07674 17.8016 4.79289 18.0898 4.44212 18.0898C4.09135 18.0898 3.8075 17.8016 3.8075 17.4453V9.71094C3.8075 9.35468 4.09135 9.06641 4.44212 9.06641C4.79289 9.06641 5.07674 9.35468 5.07674 9.71094V17.4453ZM8.88443 17.4453C8.88443 17.8016 8.60059 18.0898 8.24981 18.0898C7.89904 18.0898 7.6152 17.8016 7.6152 17.4453V9.71094C7.6152 9.35468 7.89904 9.06641 8.24981 9.06641C8.60059 9.06641 8.88443 9.35468 8.88443 9.71094V17.4453ZM12.6921 17.4453C12.6921 17.8016 12.4083 18.0898 12.0575 18.0898C11.7067 18.0898 11.4229 17.8016 11.4229 17.4453V9.71094C11.4229 9.35468 11.7067 9.06641 12.0575 9.06641C12.4083 9.06641 12.6921 9.35468 12.6921 9.71094V17.4453Z"
+                                        fill="#D02127" />
+                                </svg>
+                            </a>
+                        </span>
+                    </div>
+
+                    <div>
+                        <button class="atoms-button-outline-dashed me-auto mx-3 my-4">
+                            + Add more
+                        </button>
+                    </div>
+                    <div class="sub-buttons-content">
+                        <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 border-top mt-5 border-top create-schedule-footer-first">
+                        <div class="row p-4 float-end">
+                            <button class="atoms-button-outline me-auto m-2 ">
+                                New Customer Survey
+                            </button>
+                            <button class="text-white atoms-button-secondary m-2" (click)="alertService.showAlert('success')">
+                                <span class="">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+
+                    <app-alert-message *ngIf="alertService.isVisible"></app-alert-message>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

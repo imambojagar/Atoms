@@ -1,0 +1,239 @@
+<p-toast></p-toast>
+<div class="view-data-header">
+  <div class="card flex justify-content-center mb-5">
+    <p-breadcrumb [model]="items"></p-breadcrumb>
+  </div>
+  <div class=" card-flush mb-6 mb-xl-9">
+    <p-accordion>
+      <p-accordionTab class="filter-header" header="Search Fields">
+        <app-search-component (OnSearch)="search()" (OnReset)="Reset()">
+          <div class="card-body pt-5">
+            <form [formGroup]="searchForm">
+              <div class="row py-3">
+                <div class="col-md-3"*ngIf="false">
+                  <label class="form-label">Asset Group</label>
+                  <p-dropdown [options]="AssetGroups" optionLabel="name" formControlName="assetGroup" class="dropdown" [hidden]="true"
+                    placeholder="select"></p-dropdown>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Asset S.N</label>
+                  <p-autoComplete [delay]="1000" formControlName="assetId" [suggestions]="serialList"
+                    (onSelect)="filter.assetId=$event.id" (completeMethod)="selectAssetSN($event)"
+                    field="assetSerialNo"></p-autoComplete>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Asset Number</label>
+                  <p-autoComplete [delay]="1000" formControlName="assetId" [suggestions]="assetNumberList"
+                    (onSelect)="filter.assetId=$event.id" (completeMethod)="assetNumberFilter($event)"
+                    field="assetNumber"></p-autoComplete>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Asset Name</label>
+                  <p-autoComplete [delay]="1000" formControlName="assetId" [suggestions]="assetNames"
+                    (onSelect)="filter.assetId=$event.id" (completeMethod)="assetNameFilter($event)"
+                    field="modelDefinition.assetName"></p-autoComplete>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Model</label>
+                  <p-autoComplete [delay]="1000" formControlName="modelId" [suggestions]="models"
+                    (onSelect)="filter.modelId=$event.modelId" (completeMethod)="modelFilter($event)"
+                    field="modelName"></p-autoComplete>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">PPM Visit Status</label>
+                  <p-dropdown [options]="visitStatus" placeholder="Select" formControlName="visitStatusId"
+                    (onChange)="filter.visitStatusId=$event.value" optionLabel="name" optionValue="id">
+                  </p-dropdown>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Assigned Employee</label>
+                  <p-dropdown [options]="employee" placeholder="Select" formControlName="assignedEmployeeId"
+                    (onChange)="filter.assignedEmployeeId=$event.value" optionLabel="userName" optionValue="userId">
+                  </p-dropdown>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Assigned To</label>
+                  <p-dropdown [options]="assigned" placeholder="Select" formControlName="assignedToId"
+                    (onChange)="filter.assignedToId=$event.value" optionLabel="name" optionValue="id"></p-dropdown>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Work Order Number</label>
+                  <input pInputText formControlName="jobSheetNo" (keyup)="onInput($event)" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Expected Date From</label>
+                  <p-calendar formControlName="expectedDateFrom" (onSelect)="filter.expectedDateFrom=$event"
+                    dateFormat="yy/mm/dd" dataType="string" placeholder="Expected Date From" [showIcon]="true"
+                    [showButtonBar]="true" [showOnFocus]="false"></p-calendar>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Expected Date To</label>
+                  <p-calendar formControlName="expectedDateTo" (onSelect)="filter.expectedDateTo=$event"
+                    dateFormat="yy/mm/dd" dataType="string" placeholder="Expected Date To" [showIcon]="true"
+                    [showButtonBar]="true" [showOnFocus]="false"></p-calendar>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Actual Date From</label>
+                  <p-calendar formControlName="actualDateFrom" (onSelect)="filter.actualDateFrom=$event"
+                    dateFormat="yy/mm/dd" dataType="string" placeholder="Actual Date From" [showIcon]="true"
+                    [showButtonBar]="true" [showOnFocus]="false"></p-calendar>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Actual Date To</label>
+                  <p-calendar formControlName="actualDateTo" (onSelect)="filter.actualDateTo=$event"
+                    dateFormat="yy/mm/dd" dataType="string" placeholder="Actual Date To" [showIcon]="true"
+                    [showButtonBar]="true" [showOnFocus]="false"></p-calendar>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Site</label>
+                  <p-autoComplete [delay]="1000" formControlName="siteId" [suggestions]="siteList" (onSelect)="filter.siteId=$event.id"
+                    (completeMethod)="siteNumberFilter($event)" field="custName"></p-autoComplete>
+                </div>
+              </div>
+            </form>
+          </div>
+        </app-search-component>
+
+      </p-accordionTab>
+    </p-accordion>
+
+
+
+
+  </div>
+  <div class="view-name-def-header card">
+    <p-table #dt [value]="visites" selectionMode="multiple" [(selection)]="isChecked"
+      (onHeaderCheckboxToggle)="onSelectAll($event)" [selectionPageOnly]="true" (onRowSelect)="onRowSelect($event)"
+      (onRowUnselect)="onRowUnselect($event)" styleClass="p-datatable-striped p-datatable-gridlines" [loading]="loading"
+      [rows]="filter.pageSize" [tableStyle]="{'min-width': '75rem'}" [lazy]="true" [totalRecords]="totalRows"
+      [rowHover]="false" dataKey="id">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <div class="card-header bg-primary">
+            <div class="card-title">
+              <span class="text-white"> PPM Table <br>
+                <span class="total_rows_data"> Total: {{totalRows}} </span>
+              </span>
+            </div>
+
+            <div class="card-title table-btns">
+              <a [pTooltip]="isChecked.length === 0 ? 'Please Select PPM To Print!': ''" tooltipPosition="bottom">
+                <button [icon]="'pi '+this.isPrinting" (click)="downloadPDFToPrintPPMs()" pButton pRipple
+                  label="Print PPM Tags" class="btn btn-light-primary me-2"
+                  [disabled]="isChecked.length === 0 || !isChecked"></button>
+              </a>
+              <!-- <a [pTooltip]="isChecked.length === 0 ? 'Please Select PPM To Print!': ''" tooltipPosition="bottom">
+                <button [icon]="'pi '+this.isCustomPrinting" (click)="showDialog = true" pButton pRipple
+                  label="Custom Print PPM Tags" class="btn btn-light-primary me-2"
+                  [disabled]="isChecked.length === 0 || !isChecked"></button>
+              </a> -->
+            </div>
+
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th>PPM Entry</th>
+          <th>Entry Date</th>
+          <th>Actual Visit Date</th>
+          <th>Asset S.N</th>
+          <th>Internal Asset NO</th>
+          <th>Asset Name</th>
+          <th>Assigned Employee</th>
+          <th>Model</th>
+          <th>Site</th>
+          <th>Work Order Number</th>
+          <th>Visit Status</th>
+          <th>Task Status</th>
+          <th>Device Status</th>
+          <th>Working Hours</th>
+          <th>Travelling Hours</th>
+          <th>Assigned To</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-visit>
+
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="visit"></p-tableCheckbox>
+          </td>
+          <td><a class="link-info" pRipple (click)="navToDetails(visit.id,0)">View PPM Entry</a></td>
+          <td>{{visit.expectedDate |date}}</td>
+          <td>{{visit.actualDate |date}}</td>
+          <td>{{visit.assetSerialNo}}</td>
+          <td>{{visit.assetNumber}}</td>
+          <td>{{visit.assetName}}</td>
+          <td>{{visit.assignedEmployeeName}}</td>
+          <td>{{visit.modelName}}</td>
+          <td>{{visit.siteName}}</td>
+          <td>{{visit.jobSheetNo}}</td>
+          <td>{{visit.visitStatusName}}</td>
+          <td>{{visit.taskStatusName}}</td>
+          <td>{{visit.deviceStatusName}}</td>
+          <td>{{visit.workingHours}}</td>
+          <td>{{visit.travelingHours}}</td>
+          <td>{{visit.assignedToName}}</td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+    <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+  </div>
+
+  <br />
+  <div class="card-flush mb-6 mb-xl-9">
+    <p-accordion>
+      <p-accordionTab header="Update Ppm Entries">
+        <div class="card-body pt-5">
+          <form [formGroup]="updateVisitForm" (ngSubmit)="updateVisit()">
+            <div class="row m-4 py-3">
+              <div class="col-md-3">
+                <label class="form-label">Assigned Engineer</label>
+                <p-dropdown [options]="employee" placeholder="Select" formControlName="assignedEmployeeId"
+                  (onChange)="changeEngineer($event)" optionLabel="userName" optionValue="userId"
+                  [required]="true"></p-dropdown>
+              </div>
+            </div>
+            <div class="saveButton mb-1">
+              <button pButton type="submit" [disabled]="isChecked.length==0" (submit)="updateVisit()" label="Update"
+                class="p-button-info col-lg-2"></button>
+            </div>
+          </form>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+  <br />
+
+  <p-dialog header="Print PPM" [(visible)]="showDialog" [modal]="true" [style]="{width: '50vw', height:'50vh'}"
+    [maximizable]="true" [draggable]="false" [resizable]="true">
+    <div class="row py-3">
+      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+        <label class="form-label" for="contentType">Custom Label</label>
+        <p-dropdown placeholder="--Select--" [(ngModel)]="selectedCustomCardId" [options]="customLabelsList"
+          optionLabel="name" optionValue="id" class="dropdown">
+        </p-dropdown>
+      </div>
+      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+        <label class="form-label" for="contentType">Language</label>
+        <p-dropdown placeholder="--Select--" [(ngModel)]="languageId" [options]="languages" optionLabel="name"
+          optionValue="id" class="dropdown">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+
+      <p-button (click)="VisitCardCustomPrint()" label="Print" styleClass="p-button-text"
+        [disabled]="!languageId || !selectedCustomCardId"></p-button>
+    </ng-template>
+  </p-dialog>
+
+
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

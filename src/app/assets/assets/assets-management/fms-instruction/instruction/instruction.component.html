@@ -1,0 +1,77 @@
+<form [formGroup]="assetFormService.assetInstructionForm">
+
+  <div class="row py-2">
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-multiSelect [options]="assetFormService.InstructionDescription" dataKey="id" optionLabel="description"
+          formControlName="instructionDescription" (onChange)="assetFormService.onChange($event,null)" [filter]="true"
+          filterBy="description" placeholder="Please select . . ." id="instructionDescription"></p-multiSelect>
+        <label for="instructionDescription" class="">Instruction Description </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row py-3" *ngIf="assetFormService.isVisiable">
+    <div style="height: 200px; overflow:auto">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th colspan="2">Instruction Text</th>
+          </tr>
+        </thead>
+
+        <ng-container *ngFor="let instDesc of assetFormService.instructionDescriptions">
+          <tr>
+            <td >
+              <strong>{{ instDesc.description }}</strong>
+              </td>
+              <td style="text-align: right;">
+              <button style="border: none; font-weight: bold;" (click)="assetFormService.toggle(instDesc.description)" >
+                {{ assetFormService.expanded[instDesc.description] ? '−' : '+' }}
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="assetFormService.expanded[instDesc.description]">
+            <td>
+              <table>
+                <tbody>
+                  <tr *ngFor="let instText of instDesc.instructionTexts">
+                    <td>
+                      <input type="checkbox" [value]="instText.id" [attr.disabled]="true" [checked]="true">
+                    </td>
+                    <td>
+                      {{ instText.instructionText }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </ng-container>
+
+
+
+        <!-- <tbody>
+          <tr>
+            <th colspan="2">assetFormService.InstructionText[0].instructionDescription</th>
+          </tr>
+          <tr *ngFor="let instText of assetFormService.InstructionText; let i=index;">
+            <td>
+              <input type="checkbox" value="{{instText.id}}" [attr.disabled]="true" [checked]="true">
+            </td>
+
+            <td>
+              {{ instText.instructionText }}
+            </td>
+         </tr>
+
+        </tbody> -->
+
+
+      </table>
+    </div>
+  </div>
+
+
+</form>

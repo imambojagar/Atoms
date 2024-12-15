@@ -1,0 +1,91 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="custom-card">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <!--begin Search Fields -->
+            <div class="mb-6 mb-xl-9">
+              <div class="col-12">
+                <h3 class="section-heading">Search</h3>
+              </div>
+
+              <div class="pt-2">
+                <form [formGroup]="searchForm">
+                  <div class="row box-gryco">
+                    <div class="row py-3">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <div class="form-floating mb-2">
+                          <label class="form-label"> Engineer </label>
+                          <p-dropdown
+                            [options]="engineerList"
+                            optionLabel="userName"
+                            dataKey="userId"
+                            formControlName="engineer"
+                            class="dropdown"
+                            placeholder="select"
+                          ></p-dropdown>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <div class="form-floating mb-2">
+                          <label class="form-label">Dates</label>
+                          <p-multiSelect
+                            [options]="yearmonthList"
+                            formControlName="periods"
+                            dataKey="id"
+                            defaultLabel="Select"
+                            optionLabel="name"
+                            class="multiselect-custom"
+                          >
+                          </p-multiSelect>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="fixed-bottom">
+                <div class="row">
+                  <div class="col-12">
+                    <button
+                      class="btn btn-blue text-white form-button border-r10 float-end mx-4"
+                      type="button"
+                      (click)="Search()"
+                    >
+                      Search
+                    </button>
+                    <button
+                      type="button"
+                      (click)="Reset()"
+                      class="btn btn-light form-button float-end mx-4"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end Search Fields-->
+          </div>
+
+          <div class="row py-4">
+            <div class="col-md-12 col-12">
+              <div id="chart1" style="min-height: 600px"></div>
+            </div>
+          </div>
+          <div class="row py-4">
+            <div class="col-md-12 col-12">
+              <div id="chart2" style="min-height: 600px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

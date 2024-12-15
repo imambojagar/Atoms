@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <KPI2 Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>KPI2</Alias>
+        <HeadersString />
+        <Key />
+        <Name>KPI2</Name>
+        <PathData>C:\Users\user\Downloads\KPI2.json</PathData>
+      </KPI2>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>yearAndMonth,System.String</value>
+          <value>valuesMonths,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>ff8c8153ca0a45e9879168c749f131a4</Key>
+        <Name>root</Name>
+        <NameInSource>KPI2.root</NameInSource>
+      </root>
+      <root_valuesMonths Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_valuesMonths</Alias>
+        <Columns isList="true" count="3">
+          <value>name,System.String</value>
+          <value>value,System.Decimal</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>fac2992cf04f49d6a1ccf546f445df06</Key>
+        <Name>root_valuesMonths</Name>
+        <NameInSource>KPI2.root_valuesMonths</NameInSource>
+      </root_valuesMonths>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <root Ref="5" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>b1b001e0488c4b89940e377ee804f29a</Key>
+        <Name>root</Name>
+        <NameInSource>root_valuesMonths</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>valuesMonths</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="1">
+      <value>Name=Auto, Alias=Auto, Type=Xml, Content=UzsPCVJuq7sV0PkuvyYxzwSyaNpV12HCDj_x002B_ZSF4tS8wTglzdhcCClnYQDbKVHpgZ0tYnbvrRST6n7dXf3Tnhw7bzcWNzlyqXmr1PyssM8SvEAk_x002F_l5m3Q8XEwiTeA8o4ExVZfp5SC9DjqwPuLc7NdjbzQFQJ71XdrK_x002F_oL9xJY2MFS5FWuHPnbRlTx4nlzXOpRV9GGL5BSCwZXT_x002F_k9TV7_x002B_pI3rKvHoG8MoGR7ZAgjK5SW81rwjXFqSE6SS7WvN9EdlmX_x002F_dLYaFyDEtmtgipD49vIiaENpr0LNYWbNUs38Zag_x002B_VUfxF5y5JpfuGMtepcVKXqPRDEur2vRdvGh1GP9NRfG_x002F_b0BsDA83qqtEBJWQldsduLSF4CfC5lULmISmmPQYQW5_x002B_D_x002F_0SiEnVg6Z3_x002F_V7C5FIbel7TsI20ZzAoBfk7ckB2RLAYDRe_x002F_aHzMUpFgq7aXH_x002B_t9MAUbjUQ1IAnhrI2p1uglSYcWl6zuPFjtoch6lZFHFLlby1v3Ir7gdhXBv9zv6MOqBAgf6Su38IPrnEWVt8BCQ6L5BIfKVUQYrfasp9ZJVQDAdg9SwE_x002F_ON5A2T7gg74Em_x002B_mqT_x002F_kSsRNZe6Gihyq6ZK_x002F_MiIwjhP675ICb0zr9A6EB_x002F_vWhPXIMI1HyETN1zBoCGuH86lZpaeKY1ioJx4eD_x002F_Lp63w0iG1_x002B_JcbvcyF5ZBwil7IlWGn8pYeihoGG_x002B_yPXFpbSZff33sV_x002F_YFW2yqHuiuYySnSmRIOP0OGg6Uz3IYA8bsSt9WemHnAozvCg3f99mumCT5znDX2dJV5be4ss_x002F_Z30GTpw8H91qnmyFyXfhYXESKfdhOsxQPw2Gr8pzxD1q0zdOALO6Tx8CUgGJ4Gy2R4c7VB_x002B_LnIqsiew4zhwrMkYCi0f8_x002B_3OazguovuekZwXLuMGyPWL1N28FQiF9ZIvv4dS6ONOfDKW4vRl_x002F_jxHEywU1USFe_x002F_tEFne9Uf4RPbC7E_x002B_GTiX0zNMzZ1plE_x002B_iXRkVidsTGZqmaNegdIWNUASa3AqswJV1mk_x002B_Aq_x002B_xI47xXSjRoGV6BdDA6JhuPsNOjxZ4ic99tQViDB7ntJslLdFsoXmvbrgQTEDGRjDW1Zodlg2LEtkwaHHgklb3HWR4KtcFF3nVXhy7Gb_x002B_LAYonOxUxVmvn8YfGjwSU8NEokAwLP60UViafwlGm_x002F_w30R07hRVklEoXnlonai8nVLlRJUyVWZ4bwz4l2m8yETAd_x002F_tzAxy9_x002F_Epc4Ovxo7Erc6heehuSW0qPGsZngSHK1v899csEtihaOkWI00Agk0qLwaV9IvQnyHf9wQjvm8pQjnlF4lMYOh_x002F_taoB10_x002B_jEu5zZho4pnJDrldosujEIeal2qaoTAe_x002F__x002F_vKgv0DnaqvrmxEA5qJp9GDq5LyJeZxFg7ZQww9X6Gk1yC2spzfK83c7O8TWvuNTBJAkMpONXwWnKvbl126dOKMRMCWlJbA6G_x002F_TNJMTFoW_x002F_PLFOIdmmF010EO6Qg0wKPpMQhCc2kC09Uim51tVJ09KQ5vsnyvLAmw3R3wEpKbHX8sL38abi_x002F_ia8aEcDKZmQvDcmMgThLLN5jCdZXI5AVKaYH4C62sLuX8n5L0KSMMFXJjs_x002F_r084Yh0zJ8prwyoxDsKzASSlF7pmPgng54ZoCBAIy0eTSmsNvyssBii8OecjUCOic690r4eMTEkIMZCB_x002B_aQmQga7jd3SdlRdZEYTUTwI_x002F_S9Q5qRmlRX4l2L0QKIaEpSMJULm1Z7VpCf5EdHO_x002B_7BAgoFlYywdySX_x002F_SGv2TO9sx3IOdUymKJ7WMucYnRiotuTu9rll0ec_x002F_a0mah4UVHElTP3NdIyvfZu7Mo_x002B_jb_x002B_sdnUNC0k1Lff2_x002B_cd9D6n9q4kE3l3XPfUwzbAmOW4kNcbh8QKCkKlaFnDsYIRcuIGUajCkWv9MW_x002B_C7lSiA5JUK8tjoTx9IJsapny9MnAe3VrmCjUWwhJR7PRVR5i6G</value>
+    </Resources>
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>700e78741e084666b34206b00f4f8be9</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="6" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <Chart1 Ref="7" type="Stimulsoft.Dashboard.Components.Chart.StiChartElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <Area Ref="8" type="Stimulsoft.Dashboard.Components.Chart.StiChartArea" isKey="true">
+            <InterlacingHor Ref="9" type="Stimulsoft.Dashboard.Components.Chart.StiHorChartInterlacing" isKey="true">
+              <Color>Transparent</Color>
+            </InterlacingHor>
+            <InterlacingVert Ref="10" type="Stimulsoft.Dashboard.Components.Chart.StiVertChartInterlacing" isKey="true">
+              <Color>Transparent</Color>
+            </InterlacingVert>
+          </Area>
+          <Arguments isList="true" count="1">
+            <Item7 Ref="11" type="Stimulsoft.Dashboard.Components.Chart.StiArgumentChartMeter" isKey="true">
+              <Expression>root.yearAndMonth</Expression>
+              <Key>cfcb5409b27648a6939325433df44b98</Key>
+              <Label>yearAndMonth</Label>
+            </Item7>
+          </Arguments>
+          <BackColor>Transparent</BackColor>
+          <ChartConditions isList="true" count="0" />
+          <ClientRectangle>0,0,1200,600</ClientRectangle>
+          <CloseValues isList="true" count="0" />
+          <ConstantLines isList="true" count="0" />
+          <DataFilters isList="true" count="0" />
+          <EndValues isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>94d4dedf048344bda57c22fb2f636187</Guid>
+          <HighValues isList="true" count="0" />
+          <Labels Ref="12" type="Stimulsoft.Dashboard.Components.Chart.StiChartLabels" isKey="true">
+            <Font>Arial,8</Font>
+            <ForeColor>Transparent</ForeColor>
+          </Labels>
+          <Legend Ref="13" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegend" isKey="true">
+            <Labels Ref="14" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegendLabels" isKey="true">
+              <Color>Transparent</Color>
+              <Font>Arial,8</Font>
+            </Labels>
+            <Title Ref="15" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegendTitle" isKey="true">
+              <Color>Transparent</Color>
+              <Font>Arial,12,Bold</Font>
+            </Title>
+          </Legend>
+          <LowValues isList="true" count="0" />
+          <ManuallyEnteredChartMeter Ref="16" type="Stimulsoft.Dashboard.Components.Chart.StiValueChartMeter" isKey="true">
+            <Key>25e94b665fd94e99a6757829b50e18fc</Key>
+          </ManuallyEnteredChartMeter>
+          <ManuallyEnteredData>H4sIAAAAAAAEAIvm5VJQiAYRCgpKYYk5palKOlCea14KqoBzTn5xKqqQT345qoBHZnoGqohjUXppbmpeCVwgPBWoBsENTi3KTC1WAvFiebliAcwjTseRAAAAWklQ</ManuallyEnteredData>
+          <Margin>3,3,3,3</Margin>
+          <Marker Ref="17" type="Stimulsoft.Dashboard.Components.Chart.StiChartMarker" isKey="true" />
+          <Name>Chart1</Name>
+          <NegativeSeriesColors />
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <ParetoSeriesColors />
+          <RoundValues>True</RoundValues>
+          <Series Ref="18" type="Stimulsoft.Dashboard.Components.Chart.StiSeriesChartMeter" isKey="true">
+            <Expression>root_valuesMonths.name</Expression>
+            <Key>eefa1df123254cb996c95bb572cbc99f</Key>
+            <Label>name</Label>
+          </Series>
+          <SeriesColors />
+          <Title Ref="19" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Operations KPIs Report (Monthly) per Engineer</Text>
+          </Title>
+          <TopN Ref="20" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <TrendLines isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+          <UserViewStates isList="true" count="0" />
+          <ValueFormat Ref="21" type="NumberFormat" isKey="true">
+            <DecimalDigits>0</DecimalDigits>
+            <GroupSeparator>,</GroupSeparator>
+            <NegativePattern>1</NegativePattern>
+            <State>DecimalDigits, Abbreviation</State>
+          </ValueFormat>
+          <Values isList="true" count="1">
+            <Item8 Ref="22" type="Stimulsoft.Dashboard.Components.Chart.StiValueChartMeter" isKey="true">
+              <Expression>Sum(root_valuesMonths.value)</Expression>
+              <Key>72e09ad2393f43a690689ee782c91a7f</Key>
+              <Label>value</Label>
+              <SeriesType>Line</SeriesType>
+            </Item8>
+          </Values>
+          <Weights isList="true" count="0" />
+        </Chart1>
+      </Components>
+      <DashboardWatermark Ref="23" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>56597f09a1ab4b6c9f3706c0ed7f6284</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>11/6/2023 7:11:25 PM</ReportChanged>
+  <ReportCreated>11/5/2023 4:13:23 PM</ReportCreated>
+  <ReportFile>C:\inetpub\wwwroot\CloudERP\Atoms\Frontend\Atom-NewDesign\src\assets\reports\KPIReport2.mrt</ReportFile>
+  <ReportGuid>6252539967a34cd0a644e0586b915a62</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

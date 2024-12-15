@@ -1,0 +1,184 @@
+<div
+  #drawerFilter
+  [ngClass]="showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Asset Inventory</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="assetInventorySearchForm">
+          <div class="row form-scroller mb-4">
+            <div class="row box-gryco">
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <p-autoComplete
+                    [delay]="1000"
+                    formControlName="surveyCode"
+                    [suggestions]="titleList"
+                    (completeMethod)="fillTitle($event)"
+                    (onSelect)="filter.surveyCode=$event.value.surveyCode"
+                    field="surveyCode"
+                  ></p-autoComplete>
+                  <label class="form-label">Title</label>
+                </div>
+              </div>
+
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <p-autoComplete
+                    [delay]="1000"
+                    [suggestions]="customers"
+                    [field]="'custName'"
+                    (onSelect)="getBuildingList($event)"
+                    (completeMethod)="getCustomers($event)"
+                    formControlName="siteId"
+                  ></p-autoComplete>
+                  <label class="form-label">Site </label>
+                </div>
+              </div>
+
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <label class="form-label">Building </label>
+
+                  <p-dropdown
+                    placeholder="--Select--"
+                    (onChange)="getFloorList($event)"
+                    formControlName="buildingId"
+                    [options]="buildingList"
+                    optionLabel="name"
+                    optionValue="id"
+                    class="dropdown"
+                  >
+                  </p-dropdown>
+                </div>
+              </div>
+
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <label class="form-label">Floor </label>
+                  <p-dropdown
+                    placeholder="--Select--"
+                    (onChange)="getDepartments($event)"
+                    formControlName="floorId"
+                    [options]="floorList"
+                    optionLabel="name"
+                    optionValue="id"
+                    class="dropdown"
+                  >
+                  </p-dropdown>
+                </div>
+              </div>
+
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <label class="form-label">Department</label>
+                  <p-dropdown
+                    placeholder="--Select--"
+                    (onChange)="onSelectDept($event)"
+                    formControlName="departmentId"
+                    [options]="departmentList"
+                    optionLabel="name"
+                    optionValue="id"
+                    class="dropdown"
+                  >
+                  </p-dropdown>
+                </div>
+              </div>
+
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <label class="form-label">Room</label>
+                  <p-dropdown
+                    placeholder="--Select--"
+                    (onChange)="onSelectRoom($event)"
+                    formControlName="roomId"
+                    [options]="roomList"
+                    optionLabel="name"
+                    optionValue="id"
+                    class="dropdown"
+                  >
+                  </p-dropdown>
+                </div>
+              </div>
+
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <label class="form-label">Date From</label>
+                  <p-calendar
+                    formControlName="surveyDateFrom"
+                    (onSelect)="filter.surveyDateFrom = $event"
+                    dateFormat="yy/mm/dd"
+                    dataType="string"
+                    [showIcon]="true"
+                    [showButtonBar]="true"
+                    [showOnFocus]="false"
+                  ></p-calendar>
+
+                  <!-- <label for="floatingSendeStartrDate" class="select-label">Sender Start Date</label>
+                        <p-calendar formControlName="startDateTime" (onSelect)="selectSenderStart($event,i)"
+                          (onBlur)="selectSenderStart($event,i)" [minDate]="minDateVal" [showTime]="true"
+                          [dateFormat]="'dd/mm/yy'" hourFormat="12" [showIcon]="true"  [iconDisplay]="'input'"
+                          id="floatingSendeStartrDate"  >
+                        </p-calendar> -->
+                </div>
+              </div>
+
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <label class="form-label">Date To</label>
+                  <p-calendar
+                    formControlName="surveyDateTo"
+                    (onSelect)="filter.surveyDateTo = $event"
+                    dateFormat="yy/mm/dd"
+                    dataType="string"
+                    [showIcon]="true"
+                    [showButtonBar]="true"
+                    [showOnFocus]="false"
+                  ></p-calendar>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="search()"
+          >
+            Apply Filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

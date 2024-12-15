@@ -1,0 +1,155 @@
+<div
+  #drawerAdd
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="status == 'add'">
+      Add Shift
+    </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="status == 'view'">
+      View Shift
+    </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="status == 'edit'">
+      Edit Shift
+    </h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="shiftForm">
+          <div class="row mb-4">
+            <div class="row box-gryco">
+              <div class="row py-3">
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <p-dropdown
+                      [options]="AssetGroups"
+                      optionLabel="name"
+                      formControlName="assetGroup"
+                      class="dropdown"
+                      placeholder="select"
+                    ></p-dropdown>
+                    <label class="form-label"
+                      >Asset Group<small class="text-danger">*</small></label
+                    >
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <input
+                      formControlName="shiftName"
+                      type="text"
+                      pInputText
+                      class="form-control"
+                      placeholder="Shift Name"
+                    />
+                    <label class="form-label"
+                      >Shift Name<small class="text-danger">*</small>
+                    </label>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <label class="form-label"
+                      >Shift Type<small class="text-danger">*</small></label
+                    >
+                    <p-dropdown
+                      [options]="Shift_Types"
+                      optionLabel="name"
+                      formControlName="shiftType"
+                      placeholder="Please select ..."
+                      (onChange)="resetPeriod()"
+                    ></p-dropdown>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  *ngIf="shiftForm.value?.shiftType?.value == 1"
+                >
+                  <div class="form-floating mb-2">
+                    <label class="form-label">Start Shift</label>
+
+                    <p-calendar
+                      [showIcon]="true"
+                      [showOnFocus]="false"
+                      formControlName="startShift"
+                      [showTime]="true"
+                      hourFormat="12"
+                      [timeOnly]="true"
+                      dataType="string"
+                      (onChange)="changeDate()"
+                    ></p-calendar>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  *ngIf="shiftForm.value?.shiftType?.value == 1"
+                >
+                  <div class="form-floating mb-2">
+                    <label class="form-label">End Shift</label>
+
+                    <p-calendar
+                      [showIcon]="true"
+                      [showOnFocus]="false"
+                      formControlName="endShift"
+                      [showTime]="true"
+                      hourFormat="12"
+                      [timeOnly]="true"
+                      dataType="string"
+                      (onChange)="changeDate()"
+                    ></p-calendar>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3" *ngIf="!isAddMode">
+              <app-transaction-history
+                *ngIf="transactionHistory"
+                [transactionHistory]="transactionHistory"
+              ></app-transaction-history>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="save()"
+            *ngIf="status == 'add'"
+          >
+            Save
+          </button>
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="save()"
+            *ngIf="status == 'edit'"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+  </div>
+</div>

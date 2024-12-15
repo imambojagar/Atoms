@@ -1,0 +1,275 @@
+<p-toast></p-toast>
+<div class="card flex justify-content-center mb-5">
+  <p-breadcrumb [model]="items"></p-breadcrumb>
+</div>
+
+<div class="card card-flush mb-6 mb-xl-9">
+  <div class="card-header bg-primary">
+    <div class="card-title">
+      <h2 class="d-flex align-items-center text-white">Create PPM</h2>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="addPpmForm" (ngSubmit)="addPpmSubmit()">
+  <p-tabView>
+    <p-tabPanel header="PPM Information" leftIcon="pi pi-icon">
+      <div class="row py-3">
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">PPM Frequency<span class="span-color">*</span></label>
+          <p-dropdown [required]="true" placeholder="Select" formControlName="timePeriodId" [options]="period"
+            optionLabel="name" optionValue="id" (onChange)="changePeriod($event)" class="dropdown">
+          </p-dropdown>
+          <small class="p-error block"
+            *ngIf="addPpmForm.get('timePeriodId')?.invalid&&addPpmForm.get('timePeriodId')?.dirty">
+          </small>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Type of Service</label>
+          <p-dropdown [options]="TypeService" placeholder="Select" formControlName="typeOfServiceId"
+            (onChange)="changeService($event)" optionLabel="name" optionValue="id">
+          </p-dropdown>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="check">
+          <label class="form-label">Supplier</label>
+          <p-autoComplete [delay]="1000" formControlName="supplierName" [suggestions]="suppliers"
+            (onSelect)="onSelectSupplier($event)" (completeMethod)="searchSupplier($event)" field="suppliername">
+          </p-autoComplete>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Assigned To</label>
+          <p-dropdown [options]="assigned" placeholder="Select" formControlName="assignedToId"
+            (onChange)="changeAssigned($event)" optionLabel="name" optionValue="id">
+          </p-dropdown>
+          <small class="p-error block"
+            *ngIf="addPpmForm.get('assignedToId')?.invalid&&addPpmForm.get('assignedToId')?.dirty">
+          </small>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Execution Time Frame<span class="span-color">*</span> </label>
+          <p-dropdown [options]="timeFrame" placeholder="Select" formControlName="executionTimeFrameId"
+            (onChange)="changeTimeFrame($event)" optionLabel="name" optionValue="id">
+          </p-dropdown>
+          <small class="p-error block"
+            *ngIf="addPpmForm.get('executionTimeFrameId')?.invalid&&addPpmForm.get('executionTimeFrameId')?.dirty">
+          </small>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Contract No</label>
+          <p-autoComplete [delay]="1000" [suggestions]="contractList" field="contractNumber"
+            (completeMethod)="searchContract($event)" formControlName="maintenanceContractId"
+            (onSelect)="onSelectContract($event)">
+          </p-autoComplete>
+        </div>
+      </div>
+      <div class="first-date pt-4">
+        <h4 class="ps-3">First Next Date</h4>
+        <hr>
+        <div class="row py-3">
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="isShow">
+            <label class="form-label">From date<span class="span-color">*</span></label>
+            <p-calendar [showOnFocus]="false" [required]="true" formControlName="fromDate" [dateFormat]="'dd/mm/yy'"
+              [showIcon]="true" [showButtonBar]="true" (onSelect)="selectFromDate($event)"></p-calendar>
+            <small class="p-error block" *ngIf="addPpmForm.get('fromDate')?.invalid&&addPpmForm.get('fromDate')?.dirty">
+            </small>
+          </div>
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+            <label class="form-label">To date <span class="span-color">*</span></label>
+            <input pInputText [readonly]="true" [value]="addPpmForm.value.toDate|date:'dd/MM/yyyy'" type="datetime"
+              formControlName="toDate" [required]="true">
+
+          </div>
+          <div class=" col-md-6 col-xl-3 col-xxl-3 mb-3">
+            <label class="form-label">Equipment To Add <span class="span-color">*</span></label>
+            <input class="" pInputText type="hidden" formArrayName="ppmAssets" [required]="true" />
+            <button type="button" (click)="openDialog()" pButton class="navbar-brand look p-0"
+              icon="pi pi-external-link" label="Lookup"></button>
+            <br>
+            <span *ngIf="isSubmit==true" class="ms-4 add-more-value-button">
+              <label [hidden]="selectedRowIds.size==0">Asset Serial Numbers ID:</label>
+              <ul *ngFor="let asset of serialNumbersArray">
+                <li>{{asset}}</li>
+              </ul>
+              <label [hidden]="selectedRowIds.size==0">Asset Numbers :</label>
+              <ul *ngFor="let asset of assetNumberArray">
+                <li>{{asset}}</li>
+              </ul>
+              <button pButton type="button" [hidden]="selectedRowIds.size==0" (click)="deleteSerial()"
+                class="p-button-rounded p-button-danger mr-2" icon="pi pi-trash"></button>
+            </span>
+          </div>
+
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="isInstruction">
+            <label class="form-label">Instruction Description</label>
+            <p-dropdown  placeholder="Select" formControlName="instructionDescription" [options]="InstructionDescription"
+              optionLabel="description" optionValue="id" (onChange)="changeInstructionDescription($event)" class="dropdown">
+            </p-dropdown>
+            
+          </div>
+
+
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+            <p-checkbox formControlName="autoRenew" (onChange)="setCheckbox($event)" [value]="false" [binary]="true"
+              inputId="binary"></p-checkbox>
+            <label class="form-label">Auto Renew</label>
+          </div>
+        </div>
+        <div class="row py-3">
+
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+            <label class="form-label">Comments</label>
+            <textarea id="comment" formControlName="comments" pInputTextarea></textarea>
+          </div>
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+            <label class="form-label">Attachment</label>
+            <app-attachments (onUploaded)="attachmentReady($event)" formArrayName="attachments"
+              [attachments]="attachmentName"></app-attachments>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+
+  </p-tabView>
+  <div class="saveButton">
+    <button pButton type="submit" (submit)="addPpmSubmit()" label="Save" class="p-button-info col-lg-2"></button>
+    <button BackButton pButton type="button" (click)="cancel()" label="Cancel"
+      class="p-button-cancel col-lg-2"></button>
+  </div>
+
+</form>
+
+
+
+<p-dialog header="Equipment lookup search" [(visible)]="showDialog" [modal]="true"
+  [style]="{width: '90vw',height:'60hw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
+  <div class="card-body pt-5">
+    <div class="row py-3">
+      <app-search-component (OnSearch)="search()" (OnReset)="Reset()">
+        <form [formGroup]="searchForm">
+          <div class="row py-3">
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" *ngIf="false">
+              <label class="form-label">Asset Group</label>
+              <p-dropdown [options]="AssetGroups" optionLabel="name" formControlName="assetGroup" [hidden]="true"
+                class="dropdown" placeholder="select"></p-dropdown>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+              <label class="form-label">Asset Number</label>
+              <p-autoComplete [delay]="1000" [suggestions]="assetNumbs" formControlName="assetNo" field="assetNumber"
+                (completeMethod)="selectAssetNumber($event)" (onSelect)="bindAssetNumber($event)"></p-autoComplete>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+              <label class="form-label">Asset Serial Number</label>
+              <p-autoComplete [delay]="1000" formControlName="assetSerialNumber" [suggestions]="serialList"
+                (onSelect)="bindSN($event)" (completeMethod)="serialNumberFilter($event)" field="assetSerialNo">
+              </p-autoComplete>
+
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+              <label class="form-label">Asset Name</label>
+              <p-autoComplete [delay]="1000" [suggestions]="assetNames" field="modelDefinition.assetName"
+                formControlName="assetName" (completeMethod)="selectAssetName($event)"
+                (onSelect)="bindAssetName($event)"></p-autoComplete>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+              <label class="form-label">Manufacturer</label>
+              <p-autoComplete [delay]="1000" formControlName="manufacturer" [suggestions]="manufacts"
+                field="taxonomyName" (completeMethod)="selectManufact($event)" (onSelect)="bindManufacturer($event)">
+              </p-autoComplete>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+              <label class="form-label">Model</label>
+              <p-autoComplete [delay]="1000" formControlName="model" [suggestions]="models" field="modelName"
+                (completeMethod)="searchModel($event)" (onSelect)="bindModel($event)"></p-autoComplete>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+              <label class="form-label">Site</label>
+              <p-autoComplete [delay]="1000" [suggestions]="sites" field="custName"
+                (completeMethod)="selectSite($event)" formControlName="site" (onSelect)="bindSite($event)">
+              </p-autoComplete>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Department Name</label>
+              <p-autoComplete [delay]="1000" [suggestions]="depsList" (completeMethod)="fillDeps($event)"
+                formControlName="department" (onSelect)="selectDept($event)" field="departmentName">
+              </p-autoComplete>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Supplier Name</label>
+              <p-autoComplete [delay]="1000" [suggestions]="suppList" (completeMethod)="fillSuppliers($event)"
+                formControlName="supplier" (onSelect)="selectSupplier($event)" field="suppliername">
+              </p-autoComplete>
+            </div>
+          </div>
+        </form>
+      </app-search-component>
+    </div>
+  </div>
+  <div class="view-name-def-header card">
+    <p-table #dt [value]="assetsData" selectionMode="multiple" [(selection)]="isChecked" [loading]="loading"
+      [lazy]="true" styleClass="p-datatable-striped p-datatable-gridlines" [rows]="pageSize"
+      [tableStyle]="{width: '90vw'}" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+      [lazy]="true" [totalRecords]="totalRows" [rowHover]="false" dataKey="id">
+      <ng-template pTemplate="caption">
+        <div class="lookup-table flex align-items-center justify-content-between">
+          <div class="card-header bg-primary">
+            <div class="card-title">
+              <span class="text-white">Assets Table <br>
+                <span class="total_rows_data"> Total: {{ totalRows }} </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th></th>
+          <th>Asset Number</th>
+          <th>Serial Number</th>
+          <th>Asset Name</th>
+          <th>Manufacturer</th>
+          <th>Model</th>
+          <th>Site</th>
+          <th>Department Name</th>
+          <th>Supplier Name</th>
+
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-asset>
+
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="asset"></p-tableCheckbox>
+          </td>
+          <td>{{asset.assetNumber}}</td>
+          <td>{{asset.assetSerialNo}}</td>
+          <td *ngIf="!!asset.modelDefinition">{{asset.modelDefinition.assetName}}</td>
+          <td *ngIf="!!asset.modelDefinition">{{asset.modelDefinition.manufacturerName}}</td>
+          <td *ngIf="!!asset.modelDefinition">{{asset.modelDefinition.modelName}}</td>
+          <td *ngIf="!!asset.site">{{asset.site.custName}}</td>
+          <td *ngIf="!!asset.department">{{asset.department.departmentName}}</td>
+          <td *ngIf="!!asset.supplier">{{asset.supplier.suppliername}}</td>
+
+
+
+
+
+        </tr>
+      </ng-template>
+
+    </p-table>
+    <p-paginator [rows]="searchFilter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+      [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    </p-paginator>
+
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button type="button" icon="pi pi-check" (click)="addSerialNumber()" label="Submit" styleClass="p-button-text">
+    </p-button>
+    <p-button icon="pi pi-times" (click)="showDialog=false" label="Cancel" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

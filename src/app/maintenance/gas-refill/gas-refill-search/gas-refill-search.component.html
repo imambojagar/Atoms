@@ -1,0 +1,298 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="  ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <p-toast></p-toast>
+            <!--begin Search Fields -->
+           <!--  <div class="mb-4 mb-xl-5">
+                <div class="card-title">
+                  <h2 class="d-flex align-items-center text-white"> Search </h2>
+                </div> -->
+
+              <div #drawerFilter  [ngClass]=" showmodal ? 'show' : ''"
+                  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                  <div class="offcanvas-header">
+                    <h1 class="offcanvas-title offcanvas-heading">Search Gas Refill</h1>
+                    <button type="button" class="btn-close" (click)="close_modal()"></button>
+                  </div>
+                  <div class="p-3">
+                    <div class="row">
+
+                      <form [formGroup]="searchForm">
+                        <div class="row box-gryco py-3">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="form-label">Gas Type</label>
+                            <p-dropdown [options]="GasTypes" optionLabel="name" formControlName="gasType" placeholder="Please select ..."></p-dropdown>
+                          </div>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="form-label">Cylinder Type</label>
+                            <p-dropdown [options]="sizeCylinders" optionLabel="name" formControlName="cylinderType" placeholder="Please select ..."></p-dropdown>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="form-label">Cylinder Size</label>
+                            <p-dropdown [options]="cylinderSizes" optionLabel="name" formControlName="cylinderSize" placeholder="Please select ..."></p-dropdown>
+                          </div>
+                          </div>
+
+                        <!--
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="form-label">Requsted Qty</label>
+                            <p-inputNumber mode="decimal" formControlName="requstedQty" inputId="requstedQty" placeholder="Please enter ..." [useGrouping]="false"></p-inputNumber>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="form-label">Deliverd Qty</label>
+                            <p-inputNumber mode="decimal" formControlName="deliverdQty" inputId="deliverdQty" placeholder="Please enter ..." [useGrouping]="false"></p-inputNumber>
+                          </div> -->
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="form-label">Assigned Employee</label>
+                            <p-dropdown [options]="assginedEmployees" optionLabel="userName" dataKey="userId" formControlName="assignedEmployee" placeholder="Please select ..."></p-dropdown>
+                          </div>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="form-label">Status</label>
+                            <p-dropdown [options]="statuses" optionLabel="name" optionValue="id" formControlName="status" placeholder="Please select ..."></p-dropdown>
+                          </div>
+                          </div>
+                          <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                            <div class="form-floating mb-2">
+                            <label class="form-label">Site</label>
+                            <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="site"
+                              [suggestions]="sites" field="custName" (completeMethod)="searchonSite($event)" dataKey="id"
+                              (onSelect)="onSelectSite($event)" (onClear)="clearSite()"></p-autoComplete>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="form-label">Department</label>
+                            <p-dropdown [options]="departments" optionLabel="departmentName" optionValue="id" formControlName="department" placeholder="Please select ..."></p-dropdown>
+                          </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
+
+                <!-- <div class="card-footer d-flex justify-content-end border-top py-6">
+                    <button type="submit" class="btn btn-primary" (click)="searchGasRefill()" [disabled]="" style="margin-right: 10px;">Search</button>
+                    <button type="submit" class="btn btn-light btn-active-light-primary me-2" (click)="reset()" [disabled]="">Reset</button>
+                </div> -->
+                <div class="fixed-bottom">
+                  <div class="row">
+                    <div class="col-12">
+                      <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="searchGasRefill()">Apply Filter</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+           <!--  </div> -->
+
+
+              <!-- <app-table [tableData]="tableConfig" (editRow)="editGazRefill($event)"
+                (paginate)="paginate($event)" (routeEvent)="route($event)" (addEvent)="Add()"  (exportEvent)="export()">
+              </app-table> -->
+              <div class="main">
+                <div class="container-fluid">
+                  <div class="contents ngprime-custom">
+                  <div class="row">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="row  mb-3 content-heading">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                          <div class="float-start main-heading">
+                            Gas Refill
+                          </div>
+                          <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                                src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                          <div class="row float-end">
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                              <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                    src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                            </div>
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                              <div class="form-floating float-start ">
+                                <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                  [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                  value="Type here">
+                                <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                                <label for="floatingName">Search</label>
+                                <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                            (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                              </div>
+                            </div>
+                            <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                              <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                  (click)="openModal()">Add </button></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <p-table #dt
+                        [value]="gasrefil"
+                        [rows]="10"
+                        [paginator]="false"
+                        [globalFilterFields]= "tableConfig.tableHeaders"
+                        [(selection)]="selectedNames"
+                        [rowHover]="true"
+                        dataKey="id"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [showCurrentPageReport]="true"
+                        sortMode="multiple"
+                        [rows]="searchFilter.pageSize"
+                        [lazy]="true"
+                        [scrollable]="true"
+                        [totalRecords]="totalRows"
+                        [tableStyle]="{'min-width': '75rem'}">
+
+                      <!-- <ng-template pTemplate="caption">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                          <h4 class="mt-3 inline main-heading">Gas Refill</h4>
+                          <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="export()">Export <img src="navbar/export.svg" alt=""></a>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                            <div class="p-input-icon-left ">
+                              <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                                <img src="navbar/filter.svg" alt="">
+                              </p-button>
+                            </div>
+                            <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                  <div class="form-floating float-end">
+                                    <input type="text"
+                                      pInputText
+                                      class="form-control border-0 header-search-background"
+                                      id="floatingSearchInput"
+                                      value="Type here"
+                                      placeholder="Type here" (click)="clearValue($event);">
+                                    <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                    <label for="floatingSearchInput">Search</label>
+                                  </div>
+                            </div>
+                            <div class="p-input-icon-left">
+                              <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                Add New
+                              </button>
+                            </div>
+                        </div>
+                      </div>
+                      </ng-template> -->
+                      <ng-template pTemplate="header">
+                      <tr>
+                        @for(headers of tableConfig.tableHeaders; track headers) {
+                          <!-- @if(headers == 'Action') {
+                            <th class="sticky-header" alignFrozen="right" pFrozenColumn >{{headers}}</th>
+                          } @else { -->
+                            <th class="text-center">{{headers}}</th>
+                        <!--  } -->
+                        }
+                      </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-gasrefil>
+
+                      <tr>
+                        <!-- <td><a class="link-info cursor-pointer" pRipple (click)="navToDetails(assets,0)">{{assets.id}}</a></td> -->
+
+                        <td class="text-center">{{gasrefil.Id}}</td>
+                        <td class="text-center">{{gasrefil.Title}}</td>
+                        <!-- <td>{{gasrefil.workordererialNo}}</td> -->
+                        <td class="text-center">{{gasrefil.AssignedEmployee}}</td>
+                        <td class="text-center">{{gasrefil.Status}}</td>
+                        <td class="text-center">{{gasrefil.Comments}}</td>
+
+                      <!--  <td class="val13">{{gasrefil.assetndcode}}</td> -->
+                        <td  class="text-center">
+                          <div class="">
+                            <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                              (click)="navToView(gasrefil,0)" >
+                              <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                            </button>
+                          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                            (click)="navToDetails(gasrefil,1)" canUpdate></button>
+
+                          <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                            (click)="deleteAsset(gasrefil)" canDelete></button> -->
+                          </div>
+                        </td>
+                      </tr>
+                      </ng-template>
+                      </p-table>
+                      <p-paginator [rows]="searchFilter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+
+<app-gas-refill-management  [showmodal]="addTransferLoaded" [edit_asset_id]="gas_order_edit_id" (openModals)="openModal()"></app-gas-refill-management>
+<app-gas-refill-view   [showmodal]="ViewRefilTransferLoaded" [edit_asset_id]="gas_order_edit_id" (openModals)="openModal()"></app-gas-refill-view>
+<div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="ViewRefilTransferLoaded" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="showmodal" class="offcanvas-backdrop fade show"></div>
+
+
+
+<!-- <p-dialog header="Gas Refill Comments" [(visible)]="showDialog" [modal]="true"
+    [style]="{width :'60vw',height:'60hw'}" [maximizable]="true" [draggable]="false" [resizable]="false"> -->
+
+<div #drawerFilter  [ngClass]=" showDialog ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Gas Refill</h1>
+    <button type="button" class="btn-close" (click)="close_dialog()"></button>
+  </div>
+    <div class="row py-3">
+        <form [formGroup]="commentForm">
+            <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+                <label class="form-label">Comment</label>
+                <textarea id="comment" formControlName="comment" type="text" pInputTextarea
+                class="form-control form-control-lg form-control-solid" ></textarea>
+            </div>
+            <div class="card-footer d-flex justify-content-start ">
+                <button type="button" class="btn btn-primary" (click)="saveComment()">Save</button>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="row py-3" *ngFor="let comment of comments">
+        <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+            <label class="form-label">Created By : {{comment.createdBy.userName}}</label>
+        </div>
+        <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+            <label class="form-label">Created Date : {{comment.createdOn | date:'short'}}</label>
+        </div>
+        <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+            <label class="form-label">Comment : {{comment.comment}}</label>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<!-- </p-dialog> -->

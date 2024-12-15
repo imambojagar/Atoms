@@ -1,0 +1,229 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Create Recurring Task</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="">
+        <!-- <div *ngIf="!lastNumber" class="text-center">
+          <i class="fa fa-spinner fa-spin"></i>
+        </div> -->
+
+        <form [formGroup]="addRecurrentForm" (ngSubmit)="addRecurrentSubmit()" > <!-- </form>*ngIf="lastNumber"> -->
+          <div class="mb-4 mb-xl-4 form-scroller">
+            <!-- <div class="card-header bg-primary">
+              <div class="card-title">
+                <h2 class="d-flex align-items-center text-white">Create Recurring Task</h2>
+              </div>
+            </div> -->
+            <div class="pt-2">
+              <div class="row py-3 box-gryco">
+                <!-- Start Content -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Task No</label>
+                      <input [readOnly]="true" id="title" [value]="'RT-'+thisYear+'-'+lastNumber" type="text"  pInputText  class="form-control " />
+                    </div>
+                  </div>
+                </div>
+                <!-- End Content -->
+            </div>
+
+              <p-tabView>
+                <p-tabPanel header="Task Info.">
+                  <div class="row py-3 box-gryco">
+                    <!-- Start Content -->
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <label class="form-label">Task Type</label>
+                            <p-dropdown [options]="taskTypeList" optionLabel="name" optionValue="id" formControlName="taskTypeId"
+                              class="dropdown" (onChange)="changeTask($event)" placeholder="select"></p-dropdown>
+                      </div> 
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <label class="form-label">Frequency<small class="text-danger">*</small></label>
+                            <p-dropdown [options]="frequentList" optionLabel="name" optionValue="id" formControlName="frequesntId"
+                            class="dropdown" (onChange)="changeFrequent($event)" placeholder="select"></p-dropdown>
+                        </div>
+                      </div>
+                      
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="is2PerDay">
+                      <div class="form-floating mb-2">
+                        <label class="form-label">First Date<small class="text-danger">*</small></label>
+                        <p-calendar formControlName="firstDate" [showIcon]="true" [showButtonBar]="true" [showTime]="true"
+                          [dateFormat]="'dd/mm/yy'" [required]="is2PerDay? false: true" [readonlyInput]="true" [showOnFocus]="false">
+                        </p-calendar>
+                      </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="is2PerDay">
+                      <div class="form-floating mb-2">
+                          <label class="form-label">Second Date<small class="text-danger">*</small></label>
+                        <p-calendar formControlName="secondDate" [showIcon]="true" [showButtonBar]="true" [showTime]="true"
+                          [dateFormat]="'dd/mm/yy'" [required]="is2PerDay? false: true" [readonlyInput]="true" [showOnFocus]="false">
+                        </p-calendar>
+                      </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <label class="form-label">Renewed</label>
+                            <p-dropdown [options]="renewedList" optionLabel="name" optionValue="value" formControlName="renewed"
+                              class="dropdown" (onChange)="changeRenewed($event)" placeholder="select"></p-dropdown>
+                          </div>
+                      </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <label class="form-label">Site<small class="text-danger">*</small></label>
+                          <p-autoComplete [delay]="1000" (completeMethod)="siteSearch($event)" [suggestions]="siteList" formControlName="siteId"
+                            field="custName" dataKey="id" (onSelect)="changeSite($event)" [required]="true">
+                          </p-autoComplete>
+                        </div>
+                      </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!is2PerDay">
+                      <div class="form-floating mb-2">
+                        <label class="form-label">Date<small class="text-danger">*</small></label>
+                        <p-calendar formControlName="date" [required]="is2PerDay? true:false " [showIcon]="true"
+                          [showButtonBar]="true" [dateFormat]="'dd/mm/yy'" [showTime]="true" [showOnFocus]="false">
+                        </p-calendar>
+                      </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!imEngineer">
+                      <div class="form-floating mb-2">
+                      <label class="form-label">Assigned Engineer </label> <label class="form-label" *ngIf="is2PerDay">1</label>
+                      <p-dropdown [options]="assignedEmpList" optionLabel="userName" optionValue="userId"
+                        formControlName="engineerUser1Id" class="dropdown"
+                        placeholder="select"></p-dropdown>
+                      </div>
+                      <!-- <input type="text" formControlName="userName"  pInputText  class="form-control " [readOnly]="true"> -->
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!imEngineer && is2PerDay">
+                      <div class="form-floating mb-2">
+                        <label class="form-label">Assigned Engineer 2</label>
+                        <p-dropdown [options]="assignedEmpList" optionLabel="userName" optionValue="userId"
+                          formControlName="engineerUser2Id" class="dropdown"
+                          placeholder="select"></p-dropdown>
+                      </div>
+                        <!-- <input type="text" formControlName="userName"  pInputText  class="form-control " [readOnly]="true"> -->
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                      <label class="form-label">Comment</label>
+                          <textarea formControlName="comment"  pInputText  class="form-control "area></textarea>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row py-3  box-gryco mt-4" *ngIf="isDay">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <p-checkbox class="d-flex" formControlName='sunday' [value]="false" [binary]="true" (onChange)="setCheckboxSunday($event)"
+                        inputId="binary"
+                          label="Sunday"></p-checkbox>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <p-checkbox class="d-flex" formControlName='monday' [value]="false" [binary]="true" (onChange)="setCheckboxMonday($event)"
+                        inputId="binary"
+                          label="Monday"></p-checkbox>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <p-checkbox class="d-flex" formControlName='tuesday' [value]="false" [binary]="true" (onChange)="setCheckboxTuesday($event)"
+                        inputId="binary"
+                          label="Tuesday"></p-checkbox>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <p-checkbox class="d-flex" formControlName='wednesday' [value]="false" [binary]="true" (onChange)="setCheckboxWednesday($event)"
+                        inputId="binary"
+                          label="Wednesday"></p-checkbox>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <p-checkbox class="d-flex" formControlName='thursday' [value]="false" [binary]="true" (onChange)="setCheckboxThursday($event)"
+                        inputId="binary"
+                          label="Thursday"></p-checkbox>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <p-checkbox class="d-flex" formControlName='friday' [value]="false" [binary]="true" (onChange)="setCheckboxFriday($event)"
+                        inputId="binary"
+                          label="Friday"></p-checkbox>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                          <p-checkbox class="d-flex" formControlName='saturday' [value]="false" [binary]="true" (onChange)="setCheckboxSaturday($event)"
+                        inputId="binary"
+                          label="Saturday"></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Content -->
+                </p-tabPanel>
+
+                <p-tabPanel header="Medical Gas Room">
+                  <div class="row py-3  box-gryco">
+                    <div class="col-md-3" >
+                      <!-- *ngIf="showRoom =='true'" -->
+                      <div class="form-floating mb-2">
+                        <label class="form-label">Room ID</label>
+                        <p-autoComplete [delay]="1000" formControlName="roomName" [suggestions]="roomIdList" (onSelect)="changeRoom($event)"
+                          (completeMethod)="roomIdFilter($event)" field="roomId" placeholder="Room ID" [readonly]="showRoom">
+                        </p-autoComplete>
+                      </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="roomModel?.customerName">
+                      <div class="form-floating mb-2">
+                        <label class="form-label">Site</label>
+                        <input type="text"  pInputText  class="form-control " [value]="roomModel.customerName" readonly>
+                      </div>
+                    </div>
+                  </div>
+                </p-tabPanel>
+              </p-tabView>
+
+
+              <!-- <div class="card-footer d-flex justify-content-end border-top py-6">
+                <button type="button" class="btn btn-primary col-lg-2" (click)="addRecurrentSubmit()"><i *ngIf="isSaving"
+                    class="pi pi-spin pi-spinner"></i>Save</button>
+
+                <button type="button" class="btn btn-light btn-active-light-primary me-2 col-lg-2" BackButton> Cancel
+                </button>
+              </div> -->
+          </div> 
+        </form>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="addRecurrentSubmit()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <app-assets-table-lookup [showDialog]="showDialog" (onSelect)="onCloseDialog($event)"
+  (onHideDialog)="onHide($event)"></app-assets-table-lookup> -->
+
+
+   <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

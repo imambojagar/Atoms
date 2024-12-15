@@ -1,0 +1,243 @@
+<p-toast></p-toast>
+<div class="view-data-header">
+    <div class="card flex justify-content-center mb-5">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+    </div>
+    <app-search-component (OnSearch)="search()" (OnReset)="Reset()">
+        <div class="card-body pt-5">
+            <form [formGroup]="searchForm">
+                <div class="row py-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Asset Number</label>
+                        <p-autoComplete [delay]="1000" formControlName="assetId" [suggestions]="assetNumberList"
+                            (onSelect)="filter.assetId=$event.id" (completeMethod)="assetNumberFilter($event)"
+                            field="assetNumber"></p-autoComplete>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Asset Serial Number</label>
+                        <p-autoComplete [delay]="1000" formControlName="assetId" [suggestions]="serialList"
+                            (onSelect)="filter.assetId=$event.id" (completeMethod)="serialNumberFilter($event)"
+                            field="assetSerialNo"></p-autoComplete>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Asset Name</label>
+                        <p-autoComplete [delay]="1000" formControlName="assetName" [suggestions]="AssetNames" field="assetname"
+                            (completeMethod)="getAssetNames($event)" dataKey="id" (onSelect)="bindAssetName($event)"
+                            placeholder="Please enter Asset Name"></p-autoComplete>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">PPM Schedule</label>
+                        <p-autoComplete [delay]="1000" formControlName="planNo" [suggestions]="schduleList"
+                            (onSelect)="filter.planNo=$event.planNo" (completeMethod)="ppmScheduleFilter($event)"
+                            field="planNo"></p-autoComplete>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Model</label>
+                        <p-autoComplete [delay]="1000" formControlName="modelId" [suggestions]="models"
+                            (onSelect)="filter.modelId=$event.modelId" (completeMethod)="modelFilter($event)"
+                            field="modelName"></p-autoComplete>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Manufacturer</label>
+                        <p-autoComplete [delay]="1000" formControlName="manufacturerId" [suggestions]="manfactus"
+                            (onSelect)="filter.manufacturerId=$event.id" (completeMethod)="manufaturerFilter($event)"
+                            field="taxonomyName"></p-autoComplete>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Supplier</label>
+                        <p-autoComplete [delay]="1000" formControlName="supplierId" [suggestions]="suppliers"
+                            (onSelect)="filter.supplierId=$event.id" (completeMethod)="searchSupplier($event)"
+                            field="suppliername"></p-autoComplete>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Department</label>
+                        <p-autoComplete [delay]="1000" formControlName="departmentId" [suggestions]="departments"
+                            (onSelect)="filter.departmentId=$event.id" (completeMethod)="deptFilter($event)"
+                            field="departmentName"></p-autoComplete>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Floor</label>
+                        <p-dropdown [options]="floorList" optionLabel="name" optionValue="id" formControlName="floorId"
+                            class="dropdown" (onChange)="filter.floorId=$event.value" placeholder="select"></p-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Building</label>
+                        <p-dropdown [options]="buildingList" optionLabel="name" optionValue="id"
+                            formControlName="buildingId" class="dropdown" (onChange)="filter.buildingId=$event.value"
+                            placeholder="select"></p-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Site</label>
+                        <p-autoComplete [delay]="1000" formControlName="siteId" [suggestions]="siteList"
+                            (onSelect)="filter.siteId=$event.id" (completeMethod)="siteNumberFilter($event)"
+                            field="custName"></p-autoComplete>
+                    </div>
+                    <!--                     <div class="col-md-3">
+                        <label class="form-label">Rooms</label>
+                        <p-dropdown [options]="roomList" optionLabel="name" optionValue="id"
+                            formControlName="roomId" class="dropdown"
+                            (onChange)="filter.buildingId=$event.value"
+                            placeholder="select"></p-dropdown>
+                    </div> -->
+                    <div class="col-md-3">
+                        <label class="form-label">Expected Date From</label>
+                        <p-calendar formControlName="expectedDateFrom" (onSelect)="filter.expectedDateFrom=$event"
+                            dateFormat="yy/mm/dd" dataType="string" placeholder="Expected Date From" [showIcon]="true"
+                            [showButtonBar]="true" [showOnFocus]="false"></p-calendar>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Expected Date To</label>
+                        <p-calendar formControlName="expectedDateTo" (onSelect)="filter.expectedDateTo=$event"
+                            dateFormat="yy/mm/dd" dataType="string" placeholder="Expected Date To" [showIcon]="true"
+                            [showButtonBar]="true" [showOnFocus]="false"></p-calendar>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">PPM Frequency</label>
+                        <p-dropdown placeholder="Select" formControlName="timePeriodId" [options]="period"
+                            optionLabel="name" optionValue="id" (onChange)="filter.timePeriodId=$event.value"
+                            class="dropdown">
+                        </p-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Type of Service</label>
+                        <p-dropdown [options]="TypeService" placeholder="Select" formControlName="typeOfServiceId"
+                            (onChange)="filter.typeOfServiceId=$event.value" optionLabel="name" optionValue="id">
+                        </p-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Assigned To</label>
+                        <p-dropdown [options]="assigned" placeholder="Select" formControlName="assignedToId"
+                            (onChange)="filter.assignedToId=$event.value" optionLabel="name" optionValue="id">
+                        </p-dropdown>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" *ngIf="false">
+                        <label class="form-label">Asset Group</label>
+                        <p-dropdown [options]="AssetGroups" optionLabel="name" formControlName="assetGroup" [hidden]="true"
+                            class="dropdown" placeholder="select"></p-dropdown>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </app-search-component>
+</div>
+
+<div class="view-name-def-header card">
+    <p-table #dt [value]="ppms" styleClass="p-datatable-striped p-datatable-gridlines" [loading]="loading"
+        [rows]="filter.pageSize" [tableStyle]="{'min-width': '180rem'}" [lazy]="true" [totalRecords]="totalRows"
+        [rowHover]="false" dataKey="id">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <div class="card-header bg-primary">
+                    <div class="card-title">
+                        <span class="text-white"> PPM Table <br>
+                            <span class="total_rows_data"> Total: {{totalRows}} </span>
+                        </span>
+                    </div>
+                    <div class="card-title table-btns">
+                        <a [routerLink]="['/maintenance/ppm/add-control']" class="nav-link" canAdd>
+                            <button pButton pRipple label="Add" class="btn btn-light-primary me-2 mr-2"> </button>
+                        </a>
+                        <button pRipple (click)="export()" class="btn btn-light-primary me-2">Export</button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="text-align: center;">PPM Schedule</th>
+                <th style="text-align: center;">Asset Number</th>
+                <th style="text-align: center;">Asset Serial Number</th>
+                <th style="text-align: center;">Asset Name</th>
+                <th style="text-align: center;">Model</th>
+                <th style="text-align: center;">Manufacturer</th>
+                <th style="text-align: center;">Supplier</th>
+                <th style="text-align: center;">Department</th>
+                <th style="text-align: center;">Site</th>
+                <th style="text-align: center;">Assigned To</th>
+                <th style="text-align: center;">PPM Frequency</th>
+                <th style="text-align: center;">From Date</th>
+                <th style="text-align: center;">To Date</th>
+                <th style="text-align: center;">PPM Type</th>
+                <th style="text-align: center;">Due Date</th>
+                <th>Auto Renew</th>
+                <th>Renewal Date</th>
+                <th>Renewed</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ppm>
+
+
+            <tr>
+                <td><a class="link-info" pRipple (click)="navToDetails(ppm,0)">{{ppm.planNo}}</a></td>
+                <td>
+                    <ul *ngFor="let asset of ppm.ppmAssets" style="list-style: none;">
+                        <li>{{asset.assetNumber}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul *ngFor="let asset of ppm.ppmAssets" style="list-style: none;">
+                        <li>{{asset.assetSerialNo}}</li>
+                    </ul>
+                </td>
+
+                <td>
+                    <ul *ngFor="let asset of ppm.ppmAssets" style="list-style: none;">
+                        <li>{{asset.assetName}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul *ngFor="let asset of ppm.ppmAssets">
+                        <li> {{asset.modelName}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul *ngFor="let asset of ppm.ppmAssets">
+                        <li>{{asset.manufacturerName}}</li>
+                    </ul>
+                </td>
+                <td>{{ppm.supplierName}}</td>
+                <td>
+                    <ul *ngFor="let asset of ppm.ppmAssets">
+                        <li>{{asset.departmentName}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul *ngFor="let asset of ppm.ppmAssets" style="list-style: none;">
+                        <li>{{asset.siteName}}</li>
+                    </ul>
+                </td>
+                <td>{{ppm.assignedToName}}</td>
+                <td>{{ppm.timePeriodName}}</td>
+                <td>{{ppm.fromDate |date :'d/M/y'}}</td>
+                <td>{{ppm.toDate |date :'d/M/y'}}</td>
+                <td>{{ppm.typeOfServiceName}}</td>
+                <!-- <td *ngIf="ppm.renewed==false">{{ppm.nextPPMsPlan |date :'d/M/y'}}</td>
+                <td *ngIf="ppm.renewed==true">{{ppm.renewalDate |date :'d/M/y'}} </td> -->
+                <td>{{ppm.nextDate|date:'d/M/y'}}</td>
+                <td *ngIf="ppm.autoRenew==false">No</td>
+                <td *ngIf="ppm.autoRenew==true">Yes</td>
+                <td>{{ppm.renewalDate |date:'d/M/y'}}</td>
+                <td *ngIf="ppm.renewed==false">No</td>
+                <td *ngIf="ppm.renewed==true">Yes</td>
+                <td class="action-width">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                        (click)="navToDetails(ppm,1)" canUpdate></button>
+
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                        (click)="deletePpm(ppm)" canDelete></button>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+    <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+</div>
+<div class="saveButton">
+    <button pButton type="button" label="Back" BackButton class="p-button-info col-lg-1"></button>
+</div>
+
+
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

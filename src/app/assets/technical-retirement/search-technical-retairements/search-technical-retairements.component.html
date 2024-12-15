@@ -1,0 +1,129 @@
+<!--  <app-search-component (OnSearch)="search()" (OnReset)="Reset()"> (onSelect)="filter.siteId=$event.id" !-->
+<div #drawerFilter [ngClass]=" showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Technical Retirement</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="card-body pt-5">
+        <form [formGroup]="searchForm">
+          <div class="row box-gryco py-3">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+
+                  <p-autoComplete [delay]="1000" formControlName="siteId" [suggestions]="siteList"
+                    (completeMethod)="siteNumberFilter($event)" (onSelect)="selecteSite($event)"
+                    field="custName"></p-autoComplete><label class="form-label">Site</label>
+                </span>
+
+                <!--  <p-autoComplete [delay]="1000" formControlName="siteId" [suggestions]="siteList"
+                                (onSelect)="filter.siteId=$event.value.id" (completeMethod)="siteNumberFilter($event)"
+                                field="custName"></p-autoComplete> -->
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+
+                  <p-autoComplete [delay]="1000" [suggestions]="assetNumbs" formControlName="assetId"
+                    field="assetNumber" (completeMethod)="selectAssetNum($event)"
+                    (onSelect)="selectAsset($event, 'asset')"></p-autoComplete><label class="form-label">Asset
+                    Number</label>
+
+                </span>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+
+                  <p-autoComplete [delay]="1000" [suggestions]="assetNames" field="modelDefinition.assetName"
+                    formControlName="assetId" (completeMethod)="selectAssetName($event)"
+                    (onSelect)="selectAsset($event, 'asset')"></p-autoComplete> <label class="form-label">Asset
+                    Name</label>
+                </span>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+
+                  <p-autoComplete [delay]="1000" formControlName="assetId" [suggestions]="serialList"
+                    (onSelect)="selectAsset($event, 'asset')" (completeMethod)="serialNumberFilter($event)"
+                    field="assetSerialNo"></p-autoComplete> <label class="form-label">Asset S.N</label></span>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+                  <p-dropdown [options]="departmentList" optionLabel="departmentName" optionValue="id"
+                    formControlName="departmentId" class="dropdown" (onChange)="filter.departmentId=$event.value"
+                    placeholder="select"></p-dropdown> <label class="form-label">Department</label>
+                </span>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+                  <p-calendar formControlName="retirementDateFrom" (onSelect)="filter.retirementDateFrom=$event"
+                    dateFormat="yy/mm/dd" dataType="string" [showIcon]="true" [showButtonBar]="true"
+                    [showOnFocus]="false"></p-calendar><label class="form-label">Retirement Date From</label>
+                </span>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+                  <p-calendar formControlName="retirementDateTo" (onSelect)="filter.retirementDateTo=$event"
+                    dateFormat="yy/mm/dd" dataType="string" [showIcon]="true" [showButtonBar]="true"
+                    [showOnFocus]="false"></p-calendar> <label class="form-label">Retirement Date To</label>
+                </span>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+
+                  <p-dropdown [options]="reasonsOptions" optionLabel="name" optionValue="id" formControlName="reasonId"
+                    class="dropdown" (onChange)="filter.reasonId=$event.value" placeholder="select"></p-dropdown> <label
+                    class="form-label">Retirement Types</label></span>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="false">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+
+                  <p-dropdown placeholder="Search Asset Group" [options]="assetGroupsList"
+                    (onChange)="filter.assetGroup=$event.value" [hidden]="true" optionLabel="name" optionValue="id"
+                    formControlName="assetGroup"></p-dropdown> <label class="form-label">Asset Group</label></span>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <span class="p-float-label">
+
+                  <p-autoComplete [delay]="1000" formControlName="supplier" [suggestions]="supplierList"
+                    (onSelect)="selectAsset($event, 'suplier')" (completeMethod)="supplierFilter($event)"
+                    field="suppliername" placeholder="Supplier"></p-autoComplete> <label
+                    class="form-label">Supplier</label></span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button"
+            (click)="searchTechre()">Apply Filter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

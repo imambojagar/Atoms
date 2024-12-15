@@ -1,0 +1,170 @@
+<form [formGroup]="serviceRequestFormService.maintenanceForm">
+       <div class="row py-3">
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+            <div class="form-floating mb-2">
+              <label class="form-label "> Status<small class="text-danger">*</small></label>
+              <p-dropdown [options]="serviceRequestFormService.statuses" optionLabel="name" formControlName="status"
+                  class="dropdown" placeholder="select"></p-dropdown>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> Call's last Situation</label>
+            <p-dropdown [options]="serviceRequestFormService.callsLastSituations" optionLabel="name"
+                formControlName="callsLastSituation" class="dropdown" placeholder="select"></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> Repair Location</label>
+            <p-dropdown [options]="serviceRequestFormService.repairLocations" optionLabel="name"
+                formControlName="repairLocation" class="dropdown" placeholder="select"></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> Fault description</label>
+            <textarea id="faultDescription" formControlName="faultDescription"
+                placeholder="Enter fault Description" pInputTextarea></textarea>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label> Work Performed</label>
+            <textarea id="workPerformed" formControlName="workPerformed"
+                placeholder="Enter work Performed" pInputTextarea></textarea>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label ">Cause</label>
+            <textarea id="cause" formControlName="cause"  placeholder="Enter cause"
+                pInputTextarea></textarea>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label ">Comment</label>
+            <textarea id="comment" formControlName="comment"
+                placeholder="Enter comment" pInputTextarea></textarea>
+          </div>
+        </div>
+       </div>
+
+    <h5>Spare parts needed</h5>
+    <hr>
+    <ng-container formArrayName="spareForm">
+        <ng-container *ngFor="let stageForm of serviceRequestFormService.spareForm.controls; let i = index">
+            <div class="add-more-value-border formline d-flex align-items-end" [formGroupName]="i">
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                  <div class="form-floating mb-2">
+                    <label class="form-label "> Part No</label>
+                    <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="partNo"
+                        [suggestions]="serviceRequestFormService.partNos" field="partNo"
+                        (completeMethod)="serviceRequestFormService.gePartNoData($event)"
+                        (onSelect)="serviceRequestFormService.gePartNoData($event)"></p-autoComplete>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                  <div class="form-floating mb-2">
+                    <label class="form-label "> Description</label>
+                    <input id="description" formControlName="description" type="text" pInputText />
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                  <div class="form-floating mb-2">
+                    <label class="form-label "> Qty</label>
+                    <input id="qty" formControlName="qty" type="text" pInputText />
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                  <div class="form-floating mb-2">
+                    <label class="form-label "> Unit Price</label>
+                    <input id="unitPrice" formControlName="unitPrice" type="text" pInputText />
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                  <div class="form-floating mb-2">
+                    <label class="form-label "> Currency</label>
+                    <p-dropdown placeholder="--Select--" formControlName="currency"
+                        [options]="assetFormService.Currencies" optionLabel="name" class="dropdown">
+                    </p-dropdown>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                  <div class="form-floating mb-2">
+                    <label class="form-label "> Quotation Type</label>
+                    <p-dropdown placeholder="--Select--" formControlName="quotationType"
+                        [options]="serviceRequestFormService.quotationTypes" optionLabel="name"
+                        class="dropdown"></p-dropdown>
+                  </div>
+                </div>
+
+
+
+                <div class="add-more-value-button field ms-4 mb-4">
+                    <button pButton type="button" (click)="serviceRequestFormService.addspareForm()"
+                        [disabled]="!serviceRequestFormService.spareForm.controls[i].valid"
+                        class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                    <button pButton type="button" (click)="serviceRequestFormService.removespareForm(i)"
+                        [disabled]="!serviceRequestFormService.spareForm.controls[i].valid"
+                        class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash" [disabled]="i<=0"> </button>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <hr>
+       <div class="row py-3">
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> Start Date From</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="startDateFrom" dateFormat="yy-mm-dd"></p-calendar>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> Start Date To</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="startDateTo" dateFormat="yy-mm-dd"></p-calendar>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> Return To Service Date From</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="returnToServiceDateFrom" dateFormat="yy-mm-dd"></p-calendar>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> Return To Service Date To</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="returnToServiceDateTo" dateFormat="yy-mm-dd"></p-calendar>
+
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> End Of Work From</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="startDateFrom" dateFormat="yy-mm-dd"></p-calendar>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label "> End Of Work To</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="startDateTo" dateFormat="yy-mm-dd"></p-calendar>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label  class="form-label "> Total Cost</label>
+            <input id="totalCost" formControlName="totalCost" type="text" pInputText />
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label  class="form-label "> Quote Amount</label>
+            <input id="quoteAmount" formControlName="quoteAmount" type="text" pInputText />
+          </div>
+        </div>
+      </div>
+</form>

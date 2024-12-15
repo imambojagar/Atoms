@@ -1,0 +1,74 @@
+<!-- <div class="matero-container-wrap"
+     [ngClass]="{
+        'matero-sidenav-collapsed': options.sidenavCollapsed && options.navPos !== 'top',
+        'matero-navbar-side': options.navPos === 'side',
+        'matero-navbar-top': options.navPos === 'top',
+        'matero-header-above': options.headerPos === 'above',
+        'matero-header-fixed': options.headerPos === 'fixed',
+        'matero-header-white': themeColor !== 'dark'
+      }"
+  [dir]="options.dir">
+  @if (options.showHeader && options.headerPos === 'above') {
+    <app-header
+      [showBranding]="true">
+    </app-header>
+  }
+
+
+
+
+  <mat-sidenav-container class="matero-container" autosize autoFocus>
+      <app-sidebar  #sidenav  [showToggle]="!isOver"
+        [showUser]="!!options.showUserPanel"
+        [showHeader]="options.headerPos !== 'above'"
+        [isExpanded]="sidebarExpanded"
+        (toggleSidebar)="sidebarExpanded = !sidebarExpanded">
+      </app-sidebar>
+
+
+       <mat-drawer-container class="example-container" autosize  >
+        <div class="matero-content-wrap main-content" [class.sidebarExpanded]="sidebarExpanded" >
+
+          @if (options.showHeader && options.headerPos !== 'above') {
+            <app-header
+              [showToggle]="!options.sidenavCollapsed && options.navPos !== 'top'"
+              [showBranding]="options.navPos === 'top'"
+              [isExpanded]="sidebarExpanded"
+              [isInProgress]="isInProgress"
+              (toggleSidebar)="sidebarExpanded = !sidebarExpanded">
+            </app-header>
+            <div [hidden]="!isInProgress" class="col-md-2 col-sm-2">
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+          }
+
+          <div class="matero-content" id="maincontent">
+            <router-outlet (progressBar)="setProgressBar($event)" (breadcurmb)="setBreadCrumb($event)"></router-outlet>
+          </div>
+        </div>
+      </mat-drawer-container>
+  </mat-sidenav-container>
+</div> -->
+
+    <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+      <app-sidebar  #sidenav  [showToggle]="!isOver"
+        [showUser]="!!options.showUserPanel"
+        [showHeader]="options.headerPos !== 'above'"
+        [isExpanded]="sidebarExpanded"
+        (toggleSidebar)="sidebarExpanded = !sidebarExpanded">
+      </app-sidebar>
+    </div>
+
+      <div class="header  align-items-center">
+        <app-header
+          [showToggle]="!options.sidenavCollapsed && options.navPos !== 'top'"
+          [showBranding]="options.navPos === 'top'"
+          [isExpanded]="sidebarExpanded"
+          [isInProgress]="isInProgress"
+          (toggleSidebar)="sidebarExpanded = !sidebarExpanded">
+        </app-header>
+      </div>
+
+      <div class="content-wrap">
+        <router-outlet (progressBar)="setProgressBar($event)" (breadcurmb)="setBreadCrumb($event)"></router-outlet>
+      </div>

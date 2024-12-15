@@ -1,0 +1,167 @@
+<form [formGroup]="assetFormService.economicdataForm">
+
+  <h3>Price</h3>
+  <hr>
+
+  <div class="row py-2">
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+
+
+        <span class="p-float-label">
+          <p-inputNumber formControlName="purchasingPrice" mode="decimal" [useGrouping]="false"
+            (onInput)="assetFormService.calcNBVEvent($event.value)">
+          </p-inputNumber> <label class="form-label"> Purchasing Price</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+
+        <input id="nbv" formControlName="nbv" class="form-control header-search-background" type="text" pInputText
+          readonly />
+        <label class="form-label"> NBV</label>
+      </div>
+    </div>
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+
+
+        <p-dropdown placeholder="--Select--" formControlName="currency" [options]="assetFormService.Currencies"
+          optionLabel="name" class="dropdown"><label class="pb-1 form-label">Currency</label>
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+
+        <input formControlName="testsDay" class="form-control header-search-background" type="text" pInputText /><label
+          class="form-label">Tests/day</label>
+
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+
+        <input formControlName="marketPrice" type="text" class="form-control header-search-background" pInputText />
+        <label class="form-label">Market Price</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row py-3">
+
+    <h3>Purchase Order Details</h3>
+    <hr>
+    <div>
+      <div class="row py-3">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="poDate"
+              dateFormat="yy-mm-dd"></p-calendar> <label class="form-label"> PO Date</label>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+
+            <input id="poNo" formControlName="poNo" class="form-control header-search-background" type="text"
+              pInputText /><label class="form-label"> Po No</label>
+          </div>
+        </div>
+
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+
+            <input id="invoiceNumber" formControlName="invoiceNumber" class="form-control header-search-background"
+              type="text" pInputText /><label class="form-label"> Invoice Number</label>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="invoiceDate"
+              dateFormat="yy-mm-dd"></p-calendar>
+            <label class="form-label"> Invoice Date</label>
+          </div>
+        </div>
+
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+            <p-inputNumber formControlName="lastPOPrice" mode="decimal" [useGrouping]="false">
+            </p-inputNumber>
+            <label class="form-label"> Last PO Price</label>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="internalPODate"
+              dateFormat="yy-mm-dd"></p-calendar> <label class="form-label">Internal PO Date</label>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+
+            <input id="InternalPoNo" formControlName="internalPONo" class="form-control header-search-background"
+              type="text" pInputText /><label class="form-label">Internal Po No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Origin</h3>
+    <hr>
+    <div>
+
+      <div class="row py-3">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+
+            <p-calendar [showIcon]="true" [showOnFocus]="false" id="replacementDate" formControlName="replacementDate"
+              dateFormat="yy-mm-dd"></p-calendar> <label for="replacementDate" class="form-label"> Replacement
+              Date</label>
+          </div>
+        </div>
+        <!-- Edit Mode -->
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!assetFormService.isAddMode">
+          <div class="form-floating mb-2">
+
+            <input id="originDepartment" value="{{assetFormService.originDepartment}}" type="text"
+              class="form-control header-search-background" pInputText readonly /> <label for="originDepartment"
+              class="pb-1 form-label">Origin Department</label>
+          </div>
+        </div>
+        <!-- TO DO :: -->
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!assetFormService.isAddMode">
+          <div class="form-floating mb-2">
+
+            <input id="originSite" value="{{assetFormService.originSite}}" type="text"
+              class="form-control header-search-background" pInputText readonly /><label class="pb-1 form-label">Origin
+              Site</label>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+
+            <span class="p-float-label">
+              <p-inputNumber mode="decimal" formControlName="budgetYear" id="budgetYear" inputId="budgetYear"
+                [useGrouping]="false">
+              </p-inputNumber> <label for="budgetYear" class="pb-1 form-label">Budget Year</label></span>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="form-floating mb-2">
+
+            <p-dropdown placeholder="--Select--" formControlName="commissioningStatus"
+              [options]="assetFormService.commissioningStatuses" optionLabel="name" class="dropdown">
+            </p-dropdown> <label class="pb-1 form-label">Commissioning Status</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</form>

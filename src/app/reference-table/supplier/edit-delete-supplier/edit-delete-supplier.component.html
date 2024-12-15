@@ -1,0 +1,581 @@
+<div
+  #drawerAdd
+  [ngClass]="showEditModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Edit Supplier</h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_edit_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <!-- ========== -->
+        <p-tabView [(activeIndex)]="tabIndex" (onChange)="handleChange()">
+          <!-- <p-tabPanel header="Edit" leftIcon="pi pi-file-edit"> -->
+          <form [formGroup]="supplierForm">
+            <div class="row form-scroller mb-4">
+              <div class="row box-gryco">
+                <!-- <div class="card card-flush mb-6 mb-xl-9"> -->
+                <!-- <div class="card-header bg-primary"> -->
+                <!-- <div class="card-title">
+                  <h2 class="d-flex align-items-center text-white">
+                    Update Supplier
+                  </h2>
+                </div> -->
+                <!-- </div> -->
+
+                <!-- <div class="card-body pt-5"> -->
+                <div class="row py-3">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <input
+                        id="suppliername"
+                        formControlName="suppliername"
+                        type="text"
+                        pInputText
+                        [required]="true"
+                        class="form-control"
+                        placeholder="Supplier Name"
+                      />
+
+                      <label class="form-label">Supplier Name</label>
+                      <small
+                        class="p-error block"
+                        *ngIf="
+                          supplierForm.get('suppliername')?.invalid &&
+                          supplierForm.get('suppliername')?.dirty
+                        "
+                      >
+                      </small>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        formControlName="code"
+                        pInputText
+                        [readonly]="true"
+                        class="form-control"
+                        placeholder="Supplier Code"
+                      />
+                      <label class="form-label">Supplier Code</label>
+                    </div>
+                  </div>
+                </div>
+                <!-- </div> -->
+                <!-- </div> -->
+
+                <!-- <p-tabView> -->
+                <!-- <p-tabPanel header="Supplier Info"> -->
+                <!-- <div class="card card-flush mb-6 mb-xl-9"> -->
+                <!-- <div class="card-body pt-5"> -->
+                <div class="col-12">
+                  <h3 class="section-heading">Supplier Information</h3>
+                </div>
+                <div class="row py-3">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    formArrayName="suppTCodes"
+                  >
+                    <div class="form-floating mb-2">
+                      <div
+                        [formGroupName]="i"
+                        *ngFor="code; of: suppTCodesControl(); index as i"
+                      >
+                        <input
+                          formControlName="codeValue"
+                          type="text"
+                          pInputText
+                          class="form-control"
+                          placeholder="{{ codeNames[i] }}"
+                          style="height: 65px"
+                        />
+                        <input formControlName="supplierId" type="hidden" />
+                        <input formControlName="id" type="hidden" />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <input
+                        id="website"
+                        formControlName="website"
+                        type="text"
+                        pInputText
+                        class="form-control"
+                        placeholder="Supplier Website"
+                      />
+                      <label class="form-label">Supplier Website</label>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <input
+                        id="email"
+                        formControlName="email"
+                        type="email"
+                        pKeyFilter="email"
+                        pInputText
+                        class="form-control"
+                        placeholder="Supplier Email"
+                      />
+                      <label class="form-label">Supplier Email</label>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <p-dropdown
+                        [options]="statusList"
+                        optionLabel="name"
+                        optionValue="id"
+                        formControlName="suppStatusId"
+                        class="dropdown"
+                        (onChange)="changeStatus($event)"
+                        placeholder="select"
+                      ></p-dropdown>
+                      <label class="form-label">Supplier Status</label>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <p-dropdown
+                        [options]="cityList"
+                        optionLabel="name"
+                        optionValue="id"
+                        formControlName="cityId"
+                        class="dropdown"
+                        (onChange)="changeCity($event)"
+                        placeholder="select"
+                      ></p-dropdown>
+                      <label class="form-label">Supplier City</label>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <p-inputNumber
+                        mode="decimal"
+                        formControlName="zipcode"
+                        inputId="zipcode"
+                        [useGrouping]="false"
+                        placeholder="Zip Code"
+                      >
+                      </p-inputNumber>
+                      <label class="form-label">Zip Code</label>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating my-2">
+                      <textarea
+                        id="comment"
+                        formControlName="comment"
+                        placeholder="Please enter your comment for the supplier"
+                        pInputTextarea
+                        class="form-control"
+                      ></textarea>
+
+                      <label class="form-label">Comment</label>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Attachment</label>
+                      <app-attachments
+                        (onUploaded)="ready($event)"
+                        formArrayName="attachments"
+                        [attachments]="attachmentName"
+                      >
+                      </app-attachments>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 add-more-value-div my-1"
+                    formArrayName="addresses"
+                  >
+                    <div class="form-floating mb-2">
+                      <div
+                        *ngFor="let address of addressControls(); let i = index"
+                        class="p-inputgroup my-2"
+                        style="display: flex; align-items: center; gap: 10px"
+                      >
+                        <div
+                          [formGroupName]="i"
+                          class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10"
+                          style="height: 65px"
+                        >
+                          <input
+                            formControlName="address"
+                            type="text"
+                            pInputText
+                            class="form-control w-100"
+                            placeholder="Address"
+                            style="height: 65px"
+                          />
+                          <input type="hidden" formControlName="id" />
+                          <input type="hidden" formControlName="supplierId" />
+                        </div>
+
+                        <!-- Delete button positioned next to the input -->
+                        <div
+                          class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"
+                        >
+                          <p-button
+                            icon="pi pi-trash"
+                            severity="danger"
+                            [rounded]="true"
+                            [outlined]="true"
+                            (click)="removeAddress(i)"
+                            [disabled]="i == 0"
+                          ></p-button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-1"
+                  >
+                    <button
+                      class="atoms-button-outline-dashed me-auto"
+                      (click)="addMoreAddress()"
+                    >
+                      + Add more
+                    </button>
+                  </div>
+
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 add-more-value-div"
+                    formArrayName="faxes"
+                  >
+                    <div class="form-floating mb-2">
+                      <div
+                        *ngFor="let fax of faxControl(); let i = index"
+                        class="p-inputgroup my-2"
+                        style="display: flex; align-items: center; gap: 10px"
+                      >
+                        <div
+                          [formGroupName]="i"
+                          class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10"
+                          style="height: 65px"
+                        >
+                          <input
+                            formControlName="fax"
+                            type="text"
+                            pInputText
+                            class="form-control w-100"
+                            placeholder="Fax Number"
+                            style="height: 65px"
+                          />
+                          <input type="hidden" formControlName="id" />
+                          <input type="hidden" formControlName="supplierId" />
+                          <input
+                            type="hidden"
+                            pInputText
+                            class="input-field-add-more-value"
+                          />
+                        </div>
+
+                        <!-- Delete button positioned next to the input -->
+                        <div
+                          class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"
+                        >
+                          <p-button
+                            icon="pi pi-trash"
+                            severity="danger"
+                            [rounded]="true"
+                            [outlined]="true"
+                            (click)="removeFax(i)"
+                            [disabled]="i == 0"
+                          ></p-button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-1"
+                  >
+                    <button
+                      class="atoms-button-outline-dashed me-auto"
+                      (click)="addMoreFax()"
+                    >
+                      + Add more
+                    </button>
+                  </div>
+
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 add-more-value-div mt-4"
+                    formArrayName="telephones"
+                  >
+                    <div class="form-floating mb-2">
+                      <div
+                        *ngFor="let phone of telephoneControl(); let i = index"
+                        class="p-inputgroup my-2"
+                        style="display: flex; align-items: center; gap: 10px"
+                      >
+                        <div
+                          [formGroupName]="i"
+                          class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10"
+                          style="height: 65px"
+                        >
+                          <p-inputNumber
+                            mode="decimal"
+                            [useGrouping]="false"
+                            formControlName="telephone"
+                            type="text"
+                            placeholder="Telephone Number"
+                          ></p-inputNumber>
+                          <input type="hidden" formControlName="id" />
+                          <input type="hidden" formControlName="supplierId" />
+                        </div>
+
+                        <!-- Delete button positioned next to the input -->
+                        <div
+                          class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"
+                        >
+                          <p-button
+                            icon="pi pi-trash"
+                            severity="danger"
+                            [rounded]="true"
+                            [outlined]="true"
+                            (click)="removeTelephone(i)"
+                            [disabled]="i == 0"
+                          ></p-button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-1"
+                  >
+                    <button
+                      class="atoms-button-outline-dashed me-auto"
+                      (click)="addMoreTelephone()"
+                    >
+                      + Add more
+                    </button>
+                  </div>
+                </div>
+                <!-- </div> -->
+                <!-- </div> -->
+                <!-- </p-tabPanel> -->
+
+                <!-- <p-tabPanel header="Supplier Contacts"> -->
+                <div class="col-12">
+                  <h3 class="section-heading">Supplier Contacts</h3>
+                </div>
+                <div formArrayName="suppPersons">
+                  <!-- <div class="card card-flush mb-6 mb-xl-9"> -->
+                  <!-- <div class="card-body pt-5"> -->
+                  <div class="">
+                    <div *ngFor="let person of personsControl(); let i = index">
+                      <fieldset
+                        class="row py-3 formline certificate add-more-value-border"
+                        [formGroupName]="i"
+                      >
+                        <div
+                          class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                        >
+                          <div class="form-floating mb-2">
+                            <input
+                              id="personName"
+                              formControlName="personName"
+                              type="text"
+                              pInputText
+                              class="form-control"
+                              placeholder="Engineer Supplier Name"
+                            />
+                            <label class="form-label"
+                              >Engineer Supplier Name</label
+                            >
+                          </div>
+                        </div>
+                        <div
+                          class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                        >
+                          <div class="form-floating mb-2">
+                            <p-dropdown
+                              [options]="roleList"
+                              optionLabel="name"
+                              optionValue="id"
+                              formControlName="personRoleId"
+                              class="dropdown"
+                              (onChange)="changeRole($event, i)"
+                              placeholder="select"
+                            ></p-dropdown>
+                            <label class="form-label">Role</label>
+                          </div>
+                        </div>
+                        <div
+                          class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                        >
+                          <div class="form-floating mb-2">
+                            <input
+                              id="contact"
+                              formControlName="contact"
+                              type="text"
+                              pInputText
+                              class="form-control"
+                              placeholder="Contact"
+                            />
+                            <label class="form-label">Contact</label>
+                          </div>
+                        </div>
+
+                        <div
+                          class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                        >
+                          <div class="form-floating mb-2">
+                            <input
+                              id="email"
+                              formControlName="email"
+                              type="email"
+                              pKeyFilter="email"
+                              pInputText
+                              class="form-control"
+                              placeholder="Email"
+                            />
+                            <label class="form-label">Email</label>
+                          </div>
+                        </div>
+                        <div
+                          class="col-md-6 col-xl-3 col-xxl-3 mb-3 ms-4 add-more-value-button"
+                        >
+                          <button
+                            pButton
+                            type="button"
+                            (click)="addMorePersons()"
+                            class="p-button-rounded p-button-info mr-2"
+                            icon="pi pi-plus"
+                          ></button>
+                          <button
+                            pButton
+                            type="button"
+                            (click)="removePerson(i)"
+                            class="p-button-rounded mr-2 p-button-danger"
+                            icon="pi pi-trash"
+                            [disabled]="i <= 0"
+                          ></button>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                  <!-- </div> -->
+                </div>
+                <!-- </p-tabPanel> -->
+                <!-- </p-tabView> -->
+
+                <!-- <div class="card card-flush mb-6 mb-xl-9"> -->
+                <!-- <div class="card-body pt-5"> -->
+                <div class="row py-3" [ngClass]="{ disableDiv: true }">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Created ON </label>
+                      <span *ngIf="createdOn != null">
+                        <input
+                          type="text"
+                          pInputText
+                          placeholder="{{ createdOn | date : 'medium' }}"
+                          class="form-control"
+                          style="height: 65px;"
+                        />
+                      </span>
+                      <span *ngIf="createdOn == null">
+                        <input
+                          type="text"
+                          pInputText
+                          placeholder="None"
+                          class="form-control"
+                          style="height: 65px;"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Modified ON </label>
+                      <span *ngIf="modifiedOn != null">
+                        <input
+                          type="text"
+                          pInputText
+                          placeholder="{{ modifiedOn | date : 'medium' }}"
+                          class="form-control"
+                          style="height: 65px;"
+                        />
+                      </span>
+                      <span *ngIf="modifiedOn == null">
+                        <input
+                          type="text"
+                          pInputText
+                          placeholder=" "
+                          class="form-control"
+                          style="height: 65px;"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- </div> -->
+                <!-- </div> -->
+              </div>
+            </div>
+          </form>
+          <!-- </p-tabPanel> -->
+        </p-tabView>
+        <!-- ++++++++++ -->
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="updateSupplier()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+  </div>
+</div>

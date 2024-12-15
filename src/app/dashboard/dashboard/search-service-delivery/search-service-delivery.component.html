@@ -1,0 +1,82 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 "
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Service Request</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+
+
+
+    <p-toast></p-toast>
+
+
+
+
+    <form [formGroup]="searchForm">
+      <div class="row box-gryco">
+
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+          <div class="field col-12 md-col-4">
+            <span class="p-float-label">
+              <!-- Autocomplete input -->
+              <p-autoComplete [delay]="1000" formControlName="assetNumber" [suggestions]="asset_Numbers"
+                field="assetNumber" (completeMethod)="getAssetsDataByAssetNumber($event.query)"
+                (onSelect)="selectAsset($event)"></p-autoComplete>
+              <label for="floatingModel">Asset Number</label>
+            </span>
+          </div>
+        </div>
+
+
+
+
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+          <div class="field col-12 md-col-4">
+            <span class="p-float-label">
+              <!-- Autocomplete input -->
+              <p-autoComplete [delay]="1000" formControlName="assetSerialNo" [suggestions]="Asset_SNs"
+                field="assetSerialNo" (completeMethod)="selectAssetSN($event)" dataKey="id" (onSelect)="bind($event )"
+                (onClear)="AssetClear()"></p-autoComplete>
+              <label for="floatingModel">Asset SN</label>
+            </span>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+          <div class="field col-12 md-col-4">
+            <span class="p-float-label">
+              <!-- Autocomplete input -->
+              <p-autoComplete [delay]="1000" formControlName="site" [suggestions]="Sites" field="custName"
+                (completeMethod)="onSelectContractor($event)" (onSelect)="onSelectContractor($event)"></p-autoComplete>
+              <label for="floatingModel">Site</label>
+            </span>
+          </div>
+
+        </div>
+
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="field col-12 md-col-4">
+            <span class="p-float-label">
+              <!-- Autocomplete input -->
+              <p-autoComplete [delay]="1000" formControlName="workOrderNo" [suggestions]="WorkOrders"
+                field="workOrderNo" (completeMethod)="GetWorkOrderAutoComplete($event.query)"
+                (onSelect)="GetWorkOrderAutoComplete($event.value)"></p-autoComplete>
+              <label for="floatingModel">Service Request NO.</label>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="fixed-bottom">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+          (click)="Search()">{{'Apply Filter'}}</button>
+      </div>
+    </div>
+  </div>
+</div>

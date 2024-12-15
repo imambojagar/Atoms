@@ -1,0 +1,37 @@
+<form *ngIf="transactionHistory">
+    <div class="row py-3 box-gryco">
+
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+                <label class="" for="createdByName">Created By</label>
+                <input [(ngModel)]="transactionHistory.createdByName" type="text" pInputText
+                    class="form-control header-search-background" readonly name="createdByName"
+                    [ngModelOptions]="{standalone: true}" />
+            </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+                <label class="" for="createdDate">Created Date</label>
+                <input [(ngModel)]="transactionHistory.createdDate" type="text" pInputText
+                    class="form-control header-search-background" readonly name="createdDate"
+                    [ngModelOptions]="{standalone: true}" />
+            </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+                <label class="" for="modifiedByName">Modified By</label>
+                <input [(ngModel)]="transactionHistory.modifiedByName" type="text" pInputText
+                    class="form-control header-search-background" readonly name="modifiedByName"
+                    [ngModelOptions]="{standalone: true}" />
+            </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+                <label class="" for="modifiedDate">Modified Date</label>
+                <input [(ngModel)]="transactionHistory.modifiedDate" type="text" pInputText
+                    class="form-control header-search-background" readonly name="modifiedDate"
+                    [ngModelOptions]="{standalone: true}" />
+            </div>
+        </div>
+    </div>
+</form>

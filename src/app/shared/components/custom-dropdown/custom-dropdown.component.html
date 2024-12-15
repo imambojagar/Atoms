@@ -1,0 +1,29 @@
+<div class="d-flex ps-0">
+  <li class="header-icon dib ps-2 custom-dropdown-container">
+     <span class="user-avatar custom-table-dropdown">{{dropdownText}} <i class="fa fa-angle-down"></i></span>
+     <div class="drop-down-table dropdown-profile">
+         <div class="dropdown-content-body">
+           <div class="ms-4 mt-4">
+             <h5>{{dropdownText}}</h5>
+           </div>
+             <ul>
+                @for (items of listitems; track items) {
+                 <li (click)="selectItem(items)" class="border-0 drop-down-list">
+                   <a><span>{{items.name}}</span></a>
+                 </li>
+                 @if(items.subcontent) {
+                   @for (subitems of items.subcontent; track subitems) {
+                     <li class="mt-4 pb-4 logout">
+                           <a>
+                             <span>{{subitems.name}}</span>
+                           </a>
+                     </li>
+                   }
+                 }
+               }
+             </ul>
+         </div>
+     </div>
+   </li>
+ </div>
+ 

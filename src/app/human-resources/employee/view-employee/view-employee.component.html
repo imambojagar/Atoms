@@ -1,0 +1,730 @@
+<div
+  #drawerAdd
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <!-- <h1 class="offcanvas-title offcanvas-heading" *ngIf="inAddMode && status == 'add'">
+      Add Employee
+    </h1> -->
+    <h1 class="offcanvas-title offcanvas-heading">View Employee</h1>
+    <!-- <h1 class="offcanvas-title offcanvas-heading" *ngIf="inEditMode && status == 'edit'">
+      Edit Employee
+    </h1> -->
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="employeeForm" *ngIf="model">
+          <div class="row form-scroller mb-4">
+            <div class="row">
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                [ngClass]="{ disableDiv: inViewMode }"
+              >
+                <!-- <div class="card-header bg-primary"> -->
+                <!-- <div class="card-title"> -->
+                <h1 class="offcanvas-title offcanvas-heading mb-4">
+                  {{ "Account Information" | tr : PAGE_TITLE | translate }}
+                </h1>
+                <!-- </div> -->
+                <!-- </div> -->
+                <!-- <div class="card-body pt-5"> -->
+                <div class="row py-3 box-gryco">
+                  <!-- Employee Name -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    *ngIf="!(inAddMode && status == 'add')"
+                  >
+                    <p class="viewp-text">
+                      <strong
+                        >{{
+                          "Employee Name" | tr : PAGE_TITLE | translate
+                        }}:</strong
+                      >
+                      <span class="viewspan-text">{{
+                        employeeForm.value.userName
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Username (in add mode) -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    *ngIf="inAddMode && status == 'add'"
+                  >
+                    <p class="viewp-text">
+                      <strong
+                        >{{ "Username" | tr : PAGE_TITLE | translate }}:</strong
+                      >
+                      <span class="viewspan-text">{{
+                        employeeForm.value.userName
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Email Address -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      <strong
+                        >{{
+                          "E-mail address" | tr : PAGE_TITLE | translate
+                        }}:</strong
+                      >
+                      <span class="viewspan-text">{{
+                        employeeForm.value.email
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Password (in add mode) -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    *ngIf="inAddMode && status == 'add'"
+                  >
+                    <p class="viewp-text">
+                      <strong
+                        >{{ "Password" | tr : PAGE_TITLE | translate }}:</strong
+                      >
+                      <span class="viewspan-text">********</span>
+                      <!-- Masked password for security -->
+                    </p>
+                  </div>
+
+                  <!-- Confirm Password (in add mode) -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    *ngIf="inAddMode && status == 'add'"
+                  >
+                    <p class="viewp-text">
+                      <strong
+                        >{{
+                          "Confirm Password" | tr : PAGE_TITLE | translate
+                        }}:</strong
+                      >
+                      <span class="viewspan-text">********</span>
+                      <!-- Masked password for security -->
+                    </p>
+                  </div>
+
+                  <div class="row py-3">
+                    <!-- State (Radio buttons) -->
+                    <div class="field">
+                      <div class="d-flex">
+                        <div class="radio-padding radio-state">
+                          <p class="viewp-text">
+                            <strong
+                              >{{
+                                "Blocked" | tr : PAGE_TITLE | translate
+                              }}:</strong
+                            >
+                            <span class="viewspan-text">{{
+                              !employeeForm.value.isActive
+                                ? "Blocked"
+                                : "Active"
+                            }}</span>
+                          </p>
+                        </div>
+                        <div class="radio-padding radio-state">
+                          <p class="viewp-text">
+                            <strong
+                              >{{
+                                "Active" | tr : PAGE_TITLE | translate
+                              }}:</strong
+                            >
+                            <span class="viewspan-text">{{
+                              employeeForm.value.isActive ? "Active" : "Blocked"
+                            }}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Roles -->
+                    <!-- <div class="pt-5" *ngIf="rolesList">
+                      <div class="row py-3">
+                        <div
+                          class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                          *ngFor="let role of rolesList"
+                        >
+                          <p class="viewp-text">
+                            <strong
+                              >{{
+                                role.name | tr : PAGE_TITLE | translate
+                              }}:</strong
+                            >
+                            <span class="viewspan-text">
+                              {{
+                                employeeForm.value.fullRoles &&
+                                employeeForm.value.fullRoles.includes(role)
+                                  ? "Selected"
+                                  : "Not Selected"
+                              }}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <label class="form-label pt-5">{{
+                      "Roles" | tr : PAGE_TITLE | translate
+                    }}</label>
+                    <div class="pt-3" *ngIf="rolesList">
+                      <div class="row py-3">
+                        <div
+                          class="col-md-6 col-xl-3 col-xxl-3 mb-3"
+                          *ngFor="let role of rolesList"
+                        >
+                          <p-checkbox
+                            class="d-flex"
+                            [value]="role"
+                            formControlName="fullRoles"
+                            (onChange)="
+                              onChangeCheckbox(role);
+                              changeSupervisorsListDependingOnRoleValue()
+                            "
+                            label="{{
+                              role.name | tr : PAGE_TITLE | translate
+                            }}"
+                            [disabled]="true"
+                          ></p-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                </div>
+
+                <!--Start Employee Information-->
+                <div
+                  class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                  [ngClass]="{ disableDiv: inViewMode }"
+                >
+                  <!-- <div class="card-header bg-primary"> -->
+                  <!-- <div class="card-title"> -->
+                  <h1 class="offcanvas-title offcanvas-heading mb-4">
+                    {{ "Employee Information" | tr : PAGE_TITLE | translate }}
+                  </h1>
+                  <!-- </div> -->
+                  <!-- </div> -->
+
+                  <div class="pt-2 box-gryco">
+                    <div class="row py-3">
+                      <!-- Employee ID -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Employee ID" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.employeeId
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Department -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Department" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">
+                            {{ employeeForm.value.departmentIds }}
+                          </span>
+                        </p>
+                      </div>
+
+                      <!-- Supervisor -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Supervisor" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.supervisorId?.userName
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Qualifications -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Qualifications" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.qualification?.name
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Years of Experience -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Years of Experience"
+                                | tr : PAGE_TITLE
+                                | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.yearsOfExpirence
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Extension Number -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Extension number" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.extensionNo
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Mobile Number -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Mobile number" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.mobileNumber
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Phone Number -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Phone number" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.phoneNumber
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Home Address -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Home Address" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.homeAddress
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Modility -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Modility" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.modility?.name
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Sub-Modility -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Sub-Modility" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.subModility?.name
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Service Team -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Service Team" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.serviceTeam?.name
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Modility Risk -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Modility Risk" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.modilityRisk?.name
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Skill Level -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Skill Level" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.skillLevel?.name
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Joining Date -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Joining date" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.joiningDate | date : "yyyy-MM-dd"
+                          }}</span>
+                        </p>
+                      </div>
+
+                      <!-- Status -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      >
+                        <p class="viewp-text">
+                          <strong
+                            >{{
+                              "Status" | tr : PAGE_TITLE | translate
+                            }}:</strong
+                          >
+                          <span class="viewspan-text">{{
+                            employeeForm.value.status
+                          }}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <!-- <div class="card-header bg-primary"> -->
+                    <!-- <div class="card-title"> -->
+                    <!-- <h1 class="offcanvas-title offcanvas-heading mb-4">
+                      {{ "Certifications" | tr : PAGE_TITLE | translate }}
+                    </h1> -->
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    <!-- <div class="pt-5 box-gryco">
+                      <div formArrayName="userCertifications">
+                        <div class="w-25">
+                          <button
+                            *ngIf="!(inViewMode && status == 'view')"
+                            pButton
+                            pRipple
+                            type="button"
+                            (click)="addMoreCertificates()"
+                            icon="pi pi-plus"
+                            class="p-button-primary button-minus-plus site-add-btn"
+                          ></button>
+                        </div>
+                        <div
+                          *ngFor="
+                            let certificate of certificationsControl();
+                            let i = index
+                          "
+                        >
+                          <fieldset
+                            [formGroupName]="i"
+                            class="formline add-more-value-border certificate"
+                          >
+                            <div class="pt-3">
+                              <div class="row py-3">
+                                <div
+                                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                                >
+                                  <p class="viewp-text">
+                                    <strong
+                                      >{{
+                                        "Training Certificate Exp. date"
+                                          | tr : PAGE_TITLE
+                                          | translate
+                                      }}:</strong
+                                    >
+                                    <span class="viewspan-text">{{
+                                      certificate.expireDate
+                                        | date : "dd/MM/yyyy"
+                                    }}</span>
+                                  </p>
+                                  <small
+                                    class="d-block fst-italic text-black-50"
+                                    >Format: 18/12/2022</small
+                                  >
+                                </div>
+                                <div
+                                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                                >
+                                  <p class="viewp-text">
+                                    <strong
+                                      >{{
+                                        "Name" | tr : PAGE_TITLE | translate
+                                      }}:</strong
+                                    >
+                                    <span class="viewspan-text">{{
+                                      certificate.name
+                                    }}</span>
+                                  </p>
+                                </div>
+                                <div
+                                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                                >
+                                  <p class="viewp-text">
+                                    <strong
+                                      >{{
+                                        "Model Definitions"
+                                          | tr : PAGE_TITLE
+                                          | translate
+                                      }}:</strong
+                                    >
+                                    <span class="viewspan-text">{{
+                                      certificate.modelDefinitionId1
+                                        ?.modelDefCode || "N/A"
+                                    }}</span>
+                                  </p>
+                                </div>
+                                <div
+                                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3 add-attachment w-25"
+                                >
+                                  <p class="viewp-text">
+                                    <strong
+                                      >{{
+                                        "Attachment"
+                                          | tr : PAGE_TITLE
+                                          | translate
+                                      }}:</strong
+                                    >
+                                    <span
+                                      *ngIf="certficateImg[i]"
+                                      class="viewspan-text"
+                                    >
+                                      <a
+                                        href="{{ certficateImg[i] }}"
+                                        class="text-primary"
+                                        target="_blank"
+                                      >
+                                        {{
+                                          "Preview Attachment"
+                                            | tr : PAGE_TITLE
+                                            | translate
+                                        }}
+                                      </a>
+                                    </span>
+                                    <span
+                                      *ngIf="!certficateImg[i]"
+                                      class="viewspan-text"
+                                      >No Attachment</span
+                                    >
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div class="col-12">
+                      <h2 class="offcanvas-title offcanvas-heading mb-4">
+                        {{ "Certifications" | tr : PAGE_TITLE | translate }}
+                      </h2>
+                    </div>
+                    <div
+                      class="pt-5 box-gryco"
+                      formArrayName="userCertifications"
+                    >
+                      <div
+                        *ngFor="
+                          let certificate of certificationsControl();
+                          let i = index
+                        "
+                      >
+                        <fieldset
+                          [formGroupName]="i"
+                          class="formline add-more-value-border certificate"
+                        >
+                          <div class="card-body pt-3">
+                            <div class="row py-3">
+                              <div
+                                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                              >
+                                <label class="form-label">{{
+                                  "Training Certificate Exp. date"
+                                    | tr : PAGE_TITLE
+                                    | translate
+                                }}</label>
+                                <p class="viewp-text">
+                                  {{
+                                    certificate.expireDate | date : "dd/MM/yyyy"
+                                  }}
+                                </p>
+                              </div>
+
+                              <div
+                                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                              >
+                                <label class="form-label">{{
+                                  "Name" | tr : PAGE_TITLE | translate
+                                }}</label>
+                                <p class="viewp-text">{{ certificate.name }}</p>
+                              </div>
+
+                              <div
+                                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                              >
+                                <label class="form-label">{{
+                                  "Model Definitions"
+                                    | tr : PAGE_TITLE
+                                    | translate
+                                }}</label>
+                                <p class="viewp-text">
+                                  {{
+                                    certificate.modelDefinitionId1
+                                      ?.modelDefCode || "No model defined"
+                                  }}
+                                </p>
+                              </div>
+
+                              <div
+                                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3 add-attachment w-25"
+                              >
+                                <label class="form-label">{{
+                                  "Attachment" | tr : PAGE_TITLE | translate
+                                }}</label>
+                                <p class="viewp-text">
+                                  <a
+                                    *ngIf="certficateImg[i]"
+                                    [href]="certficateImg[i]"
+                                    class="text-primary"
+                                    target="_blank"
+                                  >
+                                    {{
+                                      "Preview Attachment"
+                                        | tr : PAGE_TITLE
+                                        | translate
+                                    }}
+                                  </a>
+                                  <span *ngIf="!certficateImg[i]">{{
+                                    "No attachment"
+                                      | tr : PAGE_TITLE
+                                      | translate
+                                  }}</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div
+                  class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                  *ngIf="!(inAddMode && status == 'add')"
+                >
+                  <div class="pt-5">
+                    <div class="row py-3" [ngClass]="{ disableDiv: true }">
+                      <div class="pt-5">
+                        <app-transaction-history
+                          *ngIf="transactionHistory"
+                          [transactionHistory]="transactionHistory"
+                        ></app-transaction-history>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <!--End Employee Information-->
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

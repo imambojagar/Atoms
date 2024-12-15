@@ -1,0 +1,562 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class=" ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+          <div class="view-data-header">
+          <!-- <div class="card flex justify-content-center mb-5">
+            <p-breadcrumb [model]="items"></p-breadcrumb>
+          </div> -->
+
+         <!-- <app-search-component (OnSearch)="Search(); searchIsClicked = true" (OnReset)="Reset();searchIsClicked = false"> -->
+          <div #drawerFilter  [ngClass]=" showmodal ? 'show' : ''"
+                   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+            <div class="offcanvas-header">
+                <h1 class="offcanvas-title offcanvas-heading">Search Ordering Cylinders/LOX</h1>
+                <button type="button" class="btn-close" (click)="close_modal()"></button>
+            </div>
+            <div class="p-3">
+              <div class="row">
+                <div class="pt-2">
+                  <form [formGroup]="orderFG">
+                    <div class="row box-gryco py-3">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label class="">Site</label>
+                        <p-autoComplete [delay]="1000" formControlName="site" [suggestions]="sitesList"
+                          (onSelect)="this.filter.customerId =$event.value.id; siteName = $event.value.custName"
+                          (completeMethod)="customerIdFilter($event)" field="custName" placeholder="Search By Site">
+                        </p-autoComplete>
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="siteName">
+                        <div class="form-floating mb-2">
+                        <label class="">Date</label>
+                        <p-calendar formControlName="date" (onSelect)="filter.date= date($event)" dateFormat="yy/mm/dd"
+                          dataType="string" placeholder="Date of Order {{siteName}}" [showIcon]="true" [showButtonBar]="true" [showOnFocus]="false">
+                        </p-calendar>
+                        </div>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                        <label class="" for="backUpStatusId">Current Status</label>
+                        <p-dropdown [options]="backupStatusList" optionLabel="name" optionValue="id"
+                          formControlName="backUpStatusId" class="dropdown"
+                          (onChange)="filter.backUpStatusId = orderFG.value.backUpStatusId" placeholder="Select Current Status">
+                        </p-dropdown>
+                      </div>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                        <label class="" for="nextBackUpStatusId">Next Step</label>
+                        <p-dropdown [options]="nextBackupStatusList" optionLabel="name" optionValue="id"
+                          formControlName="nextBackUpStatusId" class="dropdown"
+                          (onChange)="setNextBackupStatus($event); filter.nextStepId = orderFG.value.nextBackUpStatusId"
+                          placeholder="Select Next Step"></p-dropdown>
+                        </div>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label class="">PR Number</label>
+                        <input type="text" formControlName="prNumber" (ngModelChange)="filter.prNumber = orderFG.value.prNumber"
+                          pInputText class="form-control" placeholder="Search PR">
+                          </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label class="">PO Number</label>
+                        <input type="text" formControlName="poNumber"
+                          (ngModelChange)="filter.poNumber = orderFG.value.poNumber; searchIsClicked= false" pInputText class="form-control"
+                          placeholder="Search PO">
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label class="">Invoice Number</label>
+                        <input type="text" formControlName="invoiceNumber"
+                          (ngModelChange)="filter.invoiceNumber = orderFG.value.invoiceNumber; searchIsClicked= false" pInputText class="form-control"
+                          placeholder="Search Invoice Number">
+                      </div>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label class="">Delivery Date</label>
+                        <p-calendar formControlName="deliveryDate" (onSelect)="filter.deliveryDate= date($event)"
+                          dateFormat="yy/mm/dd" dataType="string" [showIcon]="true" [showButtonBar]="true"
+                          placeholder="Select Date" [showOnFocus]="false"></p-calendar>
+                      </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="fixed-bottom">
+                <div class="row">
+                  <div class="col-12">
+                    <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="Search()">Applay Filter</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </app-search-component> -->
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row  mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Ordering Cylinders/LOX
+                        </div>
+                        <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                              src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                        <div class="row float-end">
+                          <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                            <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                  src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                          </div>
+                          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                            <div class="form-floating float-start ">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here">
+                              <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                              <label for="floatingName">Search</label>
+                              <!--  <input pInputText class="form-control" type="text" [(ngModel)]="searchValue"
+                          (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                (click)="openModal()">Add </button></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                <!-- Tabel Data -->
+                  <p-table #dt
+                    [value]="orders"
+                    [(selection)]="selectedRows"
+                    [rows]="filter.pageSize"
+                    [lazy]="true"
+                    [rowHover]="false"
+                    dataKey="id"
+                    [totalRecords]="totalRows"
+                    [tableStyle]="{'min-width': '75rem'}" >
+                    <!-- <ng-template pTemplate="caption">
+                      <div class="flex align-items-center justify-content-between">
+                        <div class="card-header">
+                          <div class="card-title">
+                            <span class="text-white">
+                              Ordering Cylinders/LOX <br>
+                              <span class="total_rows_data"> Total: {{totalRows}} </span>
+                            </span>
+                          </div>
+                          <div class="card-title table-btns">
+                            <button *ngIf="(orderFG.value.poNumber || orderFG.value.invoiceNumber) && searchIsClicked" pButton pRipple
+                              icon="pi pi-book" class="p-button-rounded p-button-success me-2"
+                              (click)="displayPrint = true; poSummition()" pTooltip="Print contract"
+                              tooltipPosition="bottom"></button>
+
+                            <a [routerLink]="['/maintenance/ordering-cylinders-lox/add-control']" class="nav-link" canAdd>
+                              <button pButton pRipple label="Add" class="btn btn-light-primary me-2 mr-2"> </button>
+                            </a>
+
+                            <button (click)="export()" pRipple class="btn btn-light-primary me-2">Export</button>
+
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template> -->
+
+                    <!-- <ng-template pTemplate="caption">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                          <h4 class="mt-3 inline main-heading">Ordering Cylinders/LOX</h4>
+                          <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="export()">Export <img src="navbar/export.svg" alt=""></a>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                            <div class="p-input-icon-left ">
+                              <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                                <img src="navbar/filter.svg" alt="">
+                              </p-button>
+                            </div>
+                            <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                  <div class="form-floating float-end">
+                                    <input type="text"
+                                      pInputText class="form-control"
+                                      class="form-control border-0 header-search-background"
+                                      id="floatingSearchInput"
+                                      value="Type here"
+                                      placeholder="Type here" (click)="clearValue($event);">
+                                    <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                    <label for="floatingSearchInput">Search</label>
+                                  </div>
+                            </div>
+                            <div class="p-input-icon-left">
+                              <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                Add New
+                              </button>
+
+                              <button *ngIf="(orderFG.value.poNumber || orderFG.value.invoiceNumber) && searchIsClicked" pButton pRipple
+                                icon="pi pi-book" class="p-button-rounded p-button-success me-2" (click)="displayPrint = true; poSummition()" pTooltip="Print contract"
+                                tooltipPosition="bottom"></button>
+                            </div>
+                        </div>
+                      </div>
+                    </ng-template> -->
+
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th *ngIf="isMultiupdate" class="text-center">
+                          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th class="text-center">Site</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">Assigned Employee</th>
+                        <th class="text-center">Current Status</th>
+                        <th class="text-center">Next Step</th>
+                        <th class="text-center">PR</th>
+                        <th class="text-center">PO</th>
+                        <th class="text-center">Invoice</th>
+                        <th class="sticky-header text-center">Action</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-order>
+                      <tr>
+                        <td *ngIf="isMultiupdate">
+                          <p-tableCheckbox [value]="order">
+                          </p-tableCheckbox>
+                        </td>
+                        <!-- <td class="text-center"><a class="link-info" (click)="navToDetails(order,0)">{{order.customerName}}</a></td> -->
+                        <td>{{order.customerName}}</td>
+                        <td class="text-center">{{order.date | date}}</td>
+                        <td class="text-center">{{order.userName}}</td>
+                        <td class="text-center">{{order.backUpStatusName}}</td>
+                        <ng-container *ngIf="order.nextBackUpStatusName === 'Receive Delivery';then rd else other">
+                        </ng-container>
+                        <ng-template #rd>
+                          <td class="text-center"><a class="text-primary link-to-route"
+                              (click)="navToDetailsFromRD(order,1,true); routingId=order.id">{{order.nextBackUpStatusName}}</a>
+                            <i *ngIf="order.id === routingId" class="pi pi-spin pi-spinner"></i>
+                          </td>
+                        </ng-template>
+                        <ng-template #other>
+                          <td class="text-center">{{order.nextBackUpStatusName}}</td>
+                        </ng-template>
+                        <td class="text-center">{{order.prNumber}}</td>
+                        <td class="text-center">{{order.poNumber}}</td>
+                        <td class="text-center">{{order.invoiceNumber}}</td>
+                        <td class="text-center sticky-header">
+                          <div class="d-flex">
+                            <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                              (click)="navToView(order,0)" >
+                              <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                            </button>
+                              <button *ngIf="isPRFupdate || isClosed" pButton pRipple icon="pi pi-book"
+                                class="p-button-rounded p-button-success me-2"
+                                (click)="displayPrint = true; selectedToBePrinte = order; cylinders =order; calculateTotal(order.supplierId)"
+                                pTooltip="Print contract" tooltipPosition="bottom"></button>
+
+                              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info me-2"
+                                (click)="navToDetails(order,1)" canUpdate></button>
+
+                              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                            (click)="deleteOrder(order)" canDelete></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+
+                  </p-table>
+                  <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                  </p-paginator>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multiupdate Form -->
+          <div *ngIf="isPRupdate || isPOupdate || isInvoiceupdate || isPRFupdate || isPCDupdate">
+            <div class="card card-flush mb-6 mb-xl-9">
+              <div class="card-header bg-primary">
+                <div class="card-title">
+                  <h2 *ngIf="isPRupdate" class="d-flex align-items-center text-white">Update PR</h2>
+                  <h2 *ngIf="isPOupdate" class="d-flex align-items-center text-white">Update PO</h2>
+                  <h2 *ngIf="isInvoiceupdate" class="d-flex align-items-center text-white">Update Invoice</h2>
+                  <h2 *ngIf="isPRFupdate" class="d-flex align-items-center text-white">Update PRF</h2>
+                  <h2 *ngIf="isPCDupdate" class="d-flex align-items-center text-white">Update PCD</h2>
+                </div>
+              </div>
+              <div class="card-body pt-5">
+                <form [formGroup]="multiUpdateForm">
+
+                  <div *ngIf="isPRupdate" class="row py-3">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating mb-2">
+                        <label class=" ">PR Number</label>
+                        <input type="text" formControlName="pr" pInputText class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <app-attachments (onUploaded)="ready($event,'PRAttachement')"></app-attachments>
+                    </div>
+                    <!-- Inputes Here -->
+                    <div class="saveButton">
+                      <button type="button" (click)="multiUpdate('pr')" label="Save" class="p-button-info col-lg-2" pButton>
+                        <i *ngIf="isSaving" class="pi pi-spin pi-spinner"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div *ngIf="isPOupdate" class="row py-3">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating mb-2">
+                      <label class=" ">PO Number</label>
+                      <input type="text" formControlName="po" pInputText class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <app-attachments (onUploaded)="ready($event,'PoAttachement')"></app-attachments>
+                    </div>
+                    <!-- Inputes Here -->
+                    <div class="saveButton">
+                      <button type="button" (click)="multiUpdate('po')" label="Save" class="p-button-info col-lg-2" pButton>
+                        <i *ngIf="isSaving" class="pi pi-spin pi-spinner"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div *ngIf="isInvoiceupdate" class="row py-3">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating mb-2">
+                      <label class=" ">Invoice Number</label>
+                      <input type="text" formControlName="invoiceNumber" pInputText class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <label class=" ">From</label>
+                      <p-calendar formControlName="invoiceFrom" [showIcon]="true" [showButtonBar]="true"
+                        [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar>
+                      <label class=" ">To</label>
+                      <p-calendar formControlName="invoiceTo" [showIcon]="true" [showButtonBar]="true"
+                        [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <app-attachments (onUploaded)="ready($event,'invoiceAttachement')"></app-attachments>
+                    </div>
+                    <!-- Inputes Here -->
+                    <div class="saveButton">
+                      <button type="button" (click)="multiUpdate('inv')" label="Save" class="p-button-info col-lg-2" pButton>
+                        <i *ngIf="isSaving" class="pi pi-spin pi-spinner"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div *ngIf="isPRFupdate" class="row py-3">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating mb-2">
+                      <label class=" ">PRF Approval</label>
+                      <p-dropdown [options]="YesOrNo" optionLabel="label" optionValue="value" formControlName="prfApproved"
+                        class="dropdown"></p-dropdown>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <app-attachments (onUploaded)="ready($event,'prfAttachement')"></app-attachments>
+                    </div>
+                    <!-- Inputes Here -->
+                    <div class="saveButton">
+                      <button type="button" (click)="multiUpdate('prf')" label="Save" class="p-button-info col-lg-2" pButton>
+                        <i *ngIf="isSaving" class="pi pi-spin pi-spinner"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div *ngIf="isPCDupdate" class="row py-3">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating mb-2">
+                        <label class=" ">PCD Subbmition Date</label>
+                        <p-calendar formControlName="pcdSubmissionDate" [showIcon]="true" [showButtonBar]="true"
+                          [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar>
+                      </div>
+                    </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                        <app-attachments (onUploaded)="ready($event,'pcdAttachmentUrl')"></app-attachments>
+                      </div>
+                    <!-- Inputes Here -->
+                    <div class="saveButton">
+                      <button type="button" (click)="multiUpdate('pcd')" label="Save" class="p-button-info col-lg-2" pButton>
+                        <i *ngIf="isSaving" class="pi pi-spin pi-spinner"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<app-ordering-cylinders-lox-control [showmodal]="addTransferLoaded" [edit_asset_id]="service_request_edit_id" [indexs]="editIndex" (openModals)="openModal()"></app-ordering-cylinders-lox-control>
+<app-ordering-cylinders-lox-view-details-control [showmodal]="viewCylinderTransferLoaded" [edit_asset_id]="service_request_edit_id" [indexs]="editIndex" (openModals)="openViewModal()"></app-ordering-cylinders-lox-view-details-control>
+<div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="viewCylinderTransferLoaded" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="showmodal" class="offcanvas-backdrop fade show"></div>
+
+
+ <!-- Print contract Dialog -->
+  <!-- <p-dialog header="Contract" [visible]="displayPrint  && showPrint" [modal]="true" [style]="{width: '60vw'}"
+    [maximizable]="true" [draggable]="false" [resizable]="false"> -->
+
+    <div #drawerFilter  [ngClass]=" displayPrint ? 'show' : ''"
+        class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+      <div class="offcanvas-header">
+          <h1 class="offcanvas-title offcanvas-heading">Search Ordering Cylinders/LOX</h1>
+          <button type="button" class="btn-close" (click)="close_displayPrint()"></button>
+      </div>
+
+      <div id="htmlToBePrinted" class="d-flex flex-wrap" *ngIf="selectedToBePrinte && priceRef"
+        [style]="{display:'flex', flexDirection:'column' ,justifyContent: 'center', alignItems: 'center'}">
+        <div class="text-center">
+          <img src="../../../../../assets/media/atoms-logo-trans.png" width="100">
+        </div>
+        <div class="text-center">
+          <p class="title"><span class="fw-bold">MG</span> PAYMENT RELEASE FORM</p>
+          <h1>{{selectedToBePrinte.customerName}}</h1>
+        </div>
+        <div>
+          <span class="fs-5 fw-bold">Date: </span><span>{{selectedToBePrinte.date | date: 'MMM d, y'}}</span>
+        </div>
+        <div class="text-center">
+          <table class="tg">
+            <thead>
+              <tr>
+                <th class="top-left" colspan="5"></th>
+                <th class="tg-73oq" colspan="2">Invoice period</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tg-0pky" colspan="2">Contract No.</td>
+                <td class="tg-0pky">PO No.</td>
+                <td class="tg-0pky">Invoice No.</td>
+                <td class="tg-0pky" style="width: 20%">Supplier ID</td>
+                <td class="tg-0pky" style="width: 15%">From</td>
+                <td class="tg-0pky" style="width: 15%">To</td>
+              </tr>
+              <tr>
+                <td class="tg-0pky" colspan="2">{{selectedToBePrinte.contactNumber}}</td>
+                <td class="tg-0pky">{{selectedToBePrinte.poNumber}}</td>
+                <td class="tg-0pky">{{selectedToBePrinte.invoiceNumber}}</td>
+                <td class="tg-0pky">{{selectedToBePrinte.supplierName}}</td>
+                <td class="tg-0pky">{{selectedToBePrinte.invoiceFrom | date: 'MMM d, y'}}</td>
+                <td class="tg-0pky">{{selectedToBePrinte.invoiceTo | date: 'MMM d, y'}}</td>
+              </tr>
+              <tr>
+                <td class="tg-0pky" style="width: 5%">Item No.</td>
+                <td class="tg-0lax" colspan="3">Item Description</td>
+                <td class="tg-0pky">Unit Price (SAR)</td>
+                <td class="tg-0pky">Quantity</td>
+                <td class="tg-0pky">Net Price (SAR)</td>
+              </tr>
+              <ng-container *ngIf="cylinders">
+                <tr *ngFor="let item of cylindersArr; let i =index">
+                  <ng-container *ngIf="itemsNoArray[i] !== 0">
+                    <td class="tg-0pky">
+                      {{itemsNoArray[i]}}
+                    </td>
+                  </ng-container>
+                  <td class="tg-0lax text-break" colspan="3"
+                    *ngIf="cylinders[item.control]> 0 && cylinders[item.control]">
+                    <ng-container>
+                      <span class="fw-bold">Refill {{item.prfLabel | uppercase }}</span>
+                    </ng-container>
+                  </td>
+                  <td class="tg-0pky" *ngIf="cylinders[item.control]> 0 && cylinders[item.control]">
+                    {{priceRef[item.control.replace('Recieved', '' )] | currency:'symbol':''}}
+                  </td>
+                  <td class="tg-0pky" *ngIf="cylinders[item.control]> 0 && cylinders[item.control]">
+                    {{cylinders[item.control]}}
+                  </td>
+                  <td class="tg-0pky" *ngIf="cylinders[item.control]> 0 && cylinders[item.control]">
+                    {{cylinders[item.control] * priceRef[item.control.replace('Recieved', '' )] | currency:'symbol':''}}
+                  </td>
+                </tr>
+                <ng-container></ng-container>
+              </ng-container>
+              <ng-container *ngIf="cylinders.loX1Volume">
+                <tr *ngIf="selectedToBePrinte.loX1Volume">
+                  <td class="tg-0pky">{{itemsNoArray[itemsNoArray.length - 2]}}</td>
+                  <td class="tg-0pky" colspan="3"><span class="fw-bold">Refill LIQUID O2/ Gallon</span></td>
+                  <td class="tg-0pky">{{priceRef.loX1Volume | currency:'symbol':''}}</td>
+                  <td class="tg-0pky">{{selectedToBePrinte.loX1Volume}}</td>
+                  <td class="tg-0pky">{{selectedToBePrinte.loX1Volume * priceRef.loX1Volume | currency:'symbol':''}}</td>
+                </tr>
+              </ng-container>
+
+              <tr>
+                <td class="tg-0pky fw-bold" colspan="6">****VAT 15%****</td>
+                <td class="tg-0pky fw-bold">{{vatPrice| currency:'symbol':''}}</td>
+              </tr>
+              <tr>
+                <td class="tg-0pky" colspan="6">Total</td>
+                <td class="tg-0pky">{{totalAfterVat| currency:'symbol':''}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="signature-line">
+          <div class="signature fs-3 fw-bold">
+            <div class="text-center">
+              <p>Reviewed by</p>
+              <p>____________________</p>
+            </div>
+          </div>
+          <div class="signature fs-3 fw-bold">
+            <div class="text-center">
+              <p>Approved by</p>
+              <p>____________________</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <h1 class="fw-bold">FLOW Medical</h1>
+        </div>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class=" card card-flush ">
+          <div class="card-footer d-flex justify-content-end border-top ">
+            <p-button [icon]="'pi '+this.isPrinting" (click)="printContract()" label="Print"
+              styleClass="btn btn-primary col-lg-2"></p-button>
+          </div>
+        </div>
+      </ng-template>
+  </div>
+
+  <!-- </p-dialog> -->
+
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

@@ -1,0 +1,65 @@
+<div #drawer
+[ngClass]=" showmodal ? 'show' : ''"
+ class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4" id="r-step-1" aria-modal="true" role="dialog">
+<div class="offcanvas-header">
+  <!-- <h1 class="offcanvas-title offcanvas-heading">Add New Asset</h1> -->
+  <h1 class="offcanvas-title offcanvas-heading" *ngIf="isAddMode"> Create Asset Group </h1>
+  <h1 class="offcanvas-title offcanvas-heading" *ngIf="isEditMode"> Edit Asset Group </h1>
+  <h1 class="offcanvas-title offcanvas-heading" *ngIf="isViewMode"> View Asset Group </h1>
+  <button type="button" class="btn-close" (click)="close_modal()"></button>
+</div>
+
+<div class="p-2 ngprime-custom">
+  <p-toast></p-toast>
+  <div class="row  form-scroller">
+
+      <!--beginbreadcrumb-->
+      <!-- <div class="card flex justify-content-center mb-5">
+          <p-breadcrumb [model]="items"></p-breadcrumb>
+      </div> -->
+      <!--endbreadcrumb-->
+
+
+      <!--begin Search Fields -->
+      <div class="card card-flush mb-6 mb-xl-9">
+
+          <!-- <div class="card-header bg-primary">
+              <div class="card-title">
+                  <h2 class="d-flex align-items-center text-white" *ngIf="isAddMode">Create Asset Group</h2>
+                  <h2 class="d-flex align-items-center text-white" *ngIf="isViewMode">View Asset Group</h2>
+                  <h2 class="d-flex align-items-center text-white" *ngIf="isEditMode">Edit Asset Group</h2>
+              </div>
+          </div> -->
+
+          <div class="card-body pt-5">
+              <form [formGroup]="assetGroupForm">
+                  <div class="row py-3">
+                      <div class="col-md-6 col-xl-4 col-xxl-4 mb-5">
+                          <label class="form-label">Asset Group Name<small class="text-danger">*</small>
+                          </label>
+                          <input formControlName="name" type="text" pInputText />
+                      </div>
+                      <div class="col-md-6 col-xl-4 col-xxl-4 mb-5">
+                          <label class="form-label">Asset Group Code
+                          </label>
+                          <input formControlName="code" type="text" pInputText />
+                      </div>
+                  </div>
+
+              </form>
+          </div>
+
+          <div class="formline3">
+              <div class="saveButton">
+                  <button *ngIf="isAddMode" pButton type="submit" (click)="save()" label="Save"
+                      class="p-button-info col-lg-2 me-3"></button>
+                  <button *ngIf="isEditMode" pButton type="submit" (click)="save()" label="Update"
+                      class="p-button-info col-lg-2 me-3"></button>
+                  <button *ngIf="isEditMode" pButton type="button" (click)="delete()" label="Delete"
+                      class="p-button-danger col-lg-2"></button>
+                  <button pButton BackButton type="button" label="Back" class="p-button-cancel col-lg-2"></button>
+              </div>
+          </div>
+      </div>
+
+      <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <response_1698827273144 Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>response_1698827273144</Alias>
+        <HeadersString />
+        <Key />
+        <Name>response_1698827273144</Name>
+        <PathData>C:\Users\karthick.rajendran\Desktop\response_1698827273144.json</PathData>
+      </response_1698827273144>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>userName,System.String</value>
+          <value>dashboard4Periods,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>13f3e533e1a0496ab888be1e23913e3d</Key>
+        <Name>root</Name>
+        <NameInSource>response_1698827273144.root</NameInSource>
+      </root>
+      <root_dashboard4Periods Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_dashboard4Periods</Alias>
+        <Columns isList="true" count="3">
+          <value>periodName,System.String</value>
+          <value>periodCount,System.Decimal</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>9e4049d2a3c14fe79ee3c66cb2eddb4e</Key>
+        <Name>root_dashboard4Periods</Name>
+        <NameInSource>response_1698827273144.root_dashboard4Periods</NameInSource>
+      </root_dashboard4Periods>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <root Ref="5" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>c62a588076194c6a84c20e1cfc497a56</Key>
+        <Name>root</Name>
+        <NameInSource>root_dashboard4Periods</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>dashboard4Periods</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>38235cbef588410081b27ef649ca28fd</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="6" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <Mission_Critical_Workorder_Per_Engineer Ref="7" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,0,1200,600</ClientRectangle>
+          <Columns isList="true" count="1">
+            <Item7 Ref="8" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_dashboard4Periods.periodName</Expression>
+              <Key>d6e88b60683a41fb8528d9a5e7a123e6</Key>
+              <Label>Duration Periods</Label>
+              <Size Ref="9" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="10" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item7>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>de515c77db464327ac4ed27035bb1a29</Guid>
+          <Margin>3,3,3,3</Margin>
+          <Name>Mission_Critical_Workorder_Per_Engineer</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <PivotTableConditions isList="true" count="0" />
+          <Rows isList="true" count="1">
+            <Item8 Ref="11" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root.userName</Expression>
+              <Key>b4f17fe7584a4eae916ef8405ff43984</Key>
+              <Label>User Name</Label>
+              <Size Ref="12" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="13" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item8>
+          </Rows>
+          <Summaries isList="true" count="1">
+            <Item9 Ref="14" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotSummary" isKey="true">
+              <Expression>Sum(root_dashboard4Periods.periodCount)</Expression>
+              <Key>45512a551c754e11b21aa848639b53f9</Key>
+              <Label>periodCount</Label>
+              <Size Ref="15" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item9>
+          </Summaries>
+          <Title Ref="16" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Mission Critical Workorder Per Engineer</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+        </Mission_Critical_Workorder_Per_Engineer>
+      </Components>
+      <DashboardWatermark Ref="17" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>84a77c1153d1426395c436645f8387b1</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>11/1/2023 11:53:27 AM</ReportChanged>
+  <ReportCreated>11/1/2023 11:46:01 AM</ReportCreated>
+  <ReportFile>C:\Users\karthick.rajendran\Desktop\Report atoms\workorderengineer.mrt</ReportFile>
+  <ReportGuid>77f75ac0f2d44f00b879f5cc4e26b9b7</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

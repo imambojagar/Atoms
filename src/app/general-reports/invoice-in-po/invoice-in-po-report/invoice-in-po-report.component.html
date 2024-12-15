@@ -1,0 +1,137 @@
+<!--beginbreadcrumb-->
+<div class="card flex justify-content-center mb-5">
+  <p-breadcrumb [model]="items"></p-breadcrumb>
+</div>
+<!--endbreadcrumb-->
+
+<!--begin Search Fields -->
+<div class="card card-flush mb-6 mb-xl-9">
+  <div class="card-header bg-primary">
+    <div class="card-title">
+      <h2 class="d-flex align-items-center text-white">Check Quotations Cost & Purchase Order </h2>
+    </div>
+  </div>
+
+  <div class="card-body pt-5">
+    <form [formGroup]="searchForm">
+
+
+      <div class="row py-3">
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+         <label class="form-label ">Call</label>
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="call"
+            [suggestions]="callId" field="callNo" (completeMethod)="selectCallId($event)" dataKey="id"
+            (onSelect)="bindCallId($event )" (onClear)="clearCallId()"></p-autoComplete>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label " for="site">Site:</label>
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="site"
+            [suggestions]="Sites" field="custName" dataKey="id" (completeMethod)="onSelectContractor($event)"
+            (onSelect)="bindContractor($event)" (onClear)="clearContractor()"></p-autoComplete>
+
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+         <label class="form-label ">Asset S.N</label>
+
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="assetNumber"
+            [suggestions]="Asset_SNs" field="assetSerialNo" (completeMethod)="selectAssetSN($event)" dataKey="id"
+            (onSelect)="bind($event )" (onClear)="AssetClear()"></p-autoComplete>
+        </div>
+
+
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+         <label class="form-label ">Invoice paid
+          </label>
+
+          <p-dropdown [options]="Invoicepaid" optionLabel="name" dataKey="userId" formControlName="invoicePaid"
+            class="dropdown" placeholder="select"></p-dropdown>
+
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+         <label class="form-label ">PO Number
+          </label>
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="poNumber"
+            [suggestions]="poNumbers" field="assetSerialNo" (completeMethod)="selectAssetSN($event)" dataKey="id"
+            (onSelect)="bind($event )" (onClear)="AssetClear()"></p-autoComplete>
+
+        </div>
+        <!--    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                     <label class="form-label ">Organization</label>
+                      <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0"
+                      formControlName="organization" [suggestions]="organizations" field="assetSerialNo"
+                      (completeMethod)="selectAssetSN($event)" dataKey="id" (onSelect)="bind($event )"
+                      (onClear)="AssetClear()"></p-autoComplete>
+                    
+                    </div> -->
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+         <label class="form-label "> Invoice Issue Date Operator</label>
+          <!-- TO DO:: -->
+          <p-dropdown [options]="Operator_Dates" optionLabel="name" optionValue="value"
+            formControlName="invoiceIssueDateOperator" class="dropdown" placeholder="select"></p-dropdown>
+          <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="invoiceIssueDateOperator" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+          <small class="d-block fst-italic text-black-50">Format: 18/12/2022</small>
+        </div>
+        <ng-container
+          *ngIf="(searchForm.get('invoiceIssueDateOperator')?.value==7)||(searchForm.get('invoiceIssueDateOperator')?.value==8) else elseTemp">
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+           <label class="form-label "> Invoice Issue Date From</label>
+
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="invoiceIssuekDateFrom" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+            <small class="d-block fst-italic text-black-50">Format: 18/12/2022</small>
+
+          </div>
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+           <label class="form-label "> Invoice Issue Date To</label>
+
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="invoiceIssuekDateTo" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+            <small class="d-block fst-italic text-black-50">Format: 18/12/2022</small>
+
+          </div>
+
+
+        </ng-container>
+
+        <ng-template #elseTemp>
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+           <label class="form-label "> Invoice Issue Date </label>
+
+            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="invoiceIssuekDateFrom" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+            <small class="d-block fst-italic text-black-50">Format: 18/12/2022</small>
+
+          </div>
+        </ng-template>
+
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+         <label class="form-label ">Invoice no</label>
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="invoiceNo"
+            [suggestions]="invoicenos" field="assetSerialNo" (completeMethod)="selectAssetSN($event)" dataKey="id"
+            (onSelect)="bind($event )" (onClear)="AssetClear()"></p-autoComplete>
+
+        </div>        
+
+      </div>
+
+    </form>
+    <div class="card-footer d-flex justify-content-end border-top py-6">
+      <button pButton type="submit" label="Search" class="p-button-info col-lg-2" (click)="searchInvoices()"
+        [disabled]=""></button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<app-table [tableData]="tableConfig" (paginate)="paginate($event)" (routeEvent)="route($event)"
+  (editRow)="editInvoice($event)">
+</app-table>
+
+
+
+
+
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

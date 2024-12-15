@@ -1,0 +1,256 @@
+<form [formGroup]="serviceRequestFormService.callInfoForm">
+
+  <div class="col-12">
+    <h3 class="section-heading">Requestor info</h3>
+  </div>
+  <div class="row box-gryco" [ngClass]="{'disableDiv': true}">
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p class="viewp-text">User Created by: <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.callCreatedBy }}</span></p>
+      </div>
+    </div>
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="d-flex">
+        <div class="form-floating mb-2 me-4">
+          <p class="viewp-text">Requested Date: <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.requestedDate | date: 'yyyy-MM-dd' }}</span></p>
+        </div>
+        <div class="form-floating mb-2">
+          <p class="viewp-text">Requested Time: <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.requestedTime | date: 'shortTime' }}</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="col-12">
+      <h3 class="section-heading">Asset Info</h3>
+    </div>
+    <div formArrayName="assets">
+      <ng-container *ngFor="let stageForm of serviceRequestFormService.assets.controls; let i = index">
+        <div class="row box-gryco">
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [ngClass]="{'disableDiv': !serviceRequestFormService.isAddMode}">
+            <div class="form-floating mb-2">
+              <p class="viewp-text">Asset Number: <span class="viewspan-text">{{ stageForm.value.assetNumber }}</span></p>
+              <!-- Removed p-autoComplete and input -->
+            </div>
+            <!-- Removed the Add Asset button for read-only view -->
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+              <p class="viewp-text">Serial Number: <span class="viewspan-text">{{ stageForm.value.assetSerialNo }}</span></p>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+              <p class="viewp-text">Asset Name: <span class="viewspan-text">{{ stageForm.value.assetName }}</span></p>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+              <p class="viewp-text">Model: <span class="viewspan-text">{{ stageForm.value.model }}</span></p>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+              <p class="viewp-text">Manufacturer: <span class="viewspan-text">{{ stageForm.value.manufacturer }}</span></p>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+              <p class="viewp-text">Site: <span class="viewspan-text">{{ stageForm.value.site }}</span></p>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+              <p class="viewp-text">Department: <span class="viewspan-text">{{ stageForm.value.department }}</span></p>
+            </div>
+          </div>
+
+          <!-- Removed Add and Remove buttons for read-only view -->
+
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="col-12">
+      <h3 class="section-heading">Contact</h3>
+    </div>
+    <div formArrayName="callSiteContactPerson" [ngClass]="{'disableDiv': serviceRequestFormService.isViewMode == true}">
+      <ng-container *ngFor="let contact of serviceRequestFormService.callSiteContactPerson.controls; let i = index">
+        <div class="d-flex align-items-end" [formGroupName]="i">
+          <div class="row py-3">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p class="viewp-text">Employee Id: <span class="viewspan-text">{{ contact.value.employeeCode }}</span></p>
+                <!-- Removed p-autoComplete for readonly view -->
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p class="viewp-text">Name: <span class="viewspan-text">{{ contact.value.name }}</span></p>
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p class="viewp-text">Telephone: <span class="viewspan-text">{{ contact.value.telephone }}</span></p>
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p class="viewp-text">Job: <span class="viewspan-text">{{ contact.value.job }}</span></p>
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p class="viewp-text">Email: <span class="viewspan-text">{{ contact.value.email }}</span></p>
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p class="viewp-text">Extension: <span class="viewspan-text">{{ contact.value.land }}</span></p>
+              </div>
+            </div>
+
+            <!-- Remove Add and Remove buttons for read-only view -->
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 end-align" *ngIf="!serviceRequestFormService.isViewMode">
+              <!-- Removed buttons in view mode -->
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="col-12">
+      <h3 class="section-heading">Request Info</h3>
+    </div>
+    <div class="row py-3 box-gryco">
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="form-floating mb-2">
+          <p class="viewp-text">Equipment Status:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.defectType?.name }}</span>
+          </p>
+          <p class="viewp-text" *ngIf="!serviceRequestFormService.FMLookup">Job Status:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.defectType?.name }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="form-floating mb-2">
+          <p class="viewp-text" *ngIf="this.serviceRequestFormService.FMLookup">Urgent:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.priority?.name }}</span>
+          </p>
+          <p class="viewp-text" *ngIf="!this.serviceRequestFormService.FMLookup">Job Priority:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.priority?.name }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [ngClass]="{'disableDiv': serviceRequestFormService.isNurse == true}">
+        <div class="form-floating mb-2">
+          <p class="viewp-text" *ngIf="this.serviceRequestFormService.FMLookup">Requested Through:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.requestedThrough?.name }}</span>
+          </p>
+          <p class="viewp-text" *ngIf="!this.serviceRequestFormService.FMLookup">Source:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.requestedThrough?.name }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [ngClass]="{'disableDiv': serviceRequestFormService.isNurse == true}">
+        <div class="form-floating mb-2">
+          <p class="viewp-text" *ngIf="this.serviceRequestFormService.FMLookup">Type Of Request:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.typeofRequest?.name }}</span>
+          </p>
+          <p class="viewp-text" *ngIf="!this.serviceRequestFormService.FMLookup">Cost Code Name:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.typeofRequest?.name }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="this.serviceRequestFormService.FMLookup && serviceRequestFormService.showSafety == 'true'">
+        <div class="form-floating mb-2">
+          <p class="viewp-text">Electrical Safety Test:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.Safety?.name }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="this.serviceRequestFormService.FMLookup">
+        <div class="form-floating mb-2">
+          <p class="viewp-text">Loan Availability:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.loanAvailablity?.name }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="loanAvaliblity?.value?.value == 1">
+        <div class="form-floating mb-2">
+          <p class="viewp-text">Loan Asset Number:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.assetLoan?.assetNumber }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!this.serviceRequestFormService.FMLookup">
+        <div class="form-floating mb-2">
+          <p class="viewp-text">Problem Description:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.problemDescription?.name }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="form-floating mb-2">
+          <p class="viewp-text" *ngIf="this.serviceRequestFormService.FMLookup">Comments:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.callComments }}</span>
+          </p>
+          <p class="viewp-text" *ngIf="!this.serviceRequestFormService.FMLookup">Long Description:
+            <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.callComments }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!serviceRequestFormService.isAddMode">
+      <div class="col-12">
+        <h3 class="section-heading">Employees Info</h3>
+      </div>
+      <div class="row box-gryco">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [ngClass]="{'disableDiv': serviceRequestFormService.isEngineer || serviceRequestFormService.isNurse}">
+          <div class="form-floating mb-2">
+            <label class="form-label">Assigned Employee</label>
+            <p class="viewp-text">
+              Assigned Employee:
+              <span class="viewspan-text">{{ serviceRequestFormService.callInfoForm.value.assignedEmployee?.userName }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="!serviceRequestFormService.isAddMode">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+            <button  (click)="downloadFile()" class="btn btn-blue text-white " >Voice Note</button>
+            <!-- <p-fileUpload mode="basic" name="demo[]" url="http//localhost3000/comments" accept="image/*"
+                [maxFileSize]="1000000" (onUpload)="onUpload($event)" chooseIcon="pi pi-upload" [auto]="true"
+                chooseLabel="Upload File"></p-fileUpload>
+            <p style="color: gray;">The maximum upload size is 20 MB</p> -->
+            <!-- <input id="voiceNote" formControlName="voiceNote" type="file" pInputText class="form-control" /> -->
+        </div>
+    </div>
+</form>

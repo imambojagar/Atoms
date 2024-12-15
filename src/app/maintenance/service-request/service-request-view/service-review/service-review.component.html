@@ -1,0 +1,36 @@
+<form [formGroup]="serviceRequestFormService.serviceReviewForm">
+    <div class="row py-3">
+      <!-- Call Status -->
+      <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+        <label class="form-label">Call Status<small class="text-danger">*</small></label>
+        <p class="viewp-text">
+          Call Status: 
+          <span class="viewspan-text">{{ serviceRequestFormService.serviceReviewForm.value.status?.name }}</span>
+        </p>
+      </div>
+  
+      <!-- Call Review -->
+      <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+        <label class="form-label">Call Review</label>
+        <p class="viewp-text">
+          Call Review: 
+          <span class="viewspan-text">{{ serviceRequestFormService.serviceReviewForm.value.callReview?.name }}</span>
+        </p>
+      </div>
+  
+      <!-- Review Comments (Visible if condition is true) -->
+      <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="serviceRequestFormService.viewComment == 'true'">
+        <label class="form-label">Review Comments</label>
+        <p class="viewp-text">
+          Review Comments: 
+          <span class="viewspan-text">{{ serviceRequestFormService.serviceReviewForm.value.reviewComment }}</span>
+        </p>
+      </div>
+  
+      <!-- Table Component (if applicable) -->
+      <app-table [tableData]="tableConfig" [hidePagination]="true" (routeEvent)="route($event)">
+      </app-table>
+  
+    </div>
+  </form>
+  

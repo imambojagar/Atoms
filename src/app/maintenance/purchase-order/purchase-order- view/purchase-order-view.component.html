@@ -1,0 +1,142 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading" >View Purchase Orders </h1>
+      <button type="button" class="btn-close" (click)="close_modal()"></button>
+    </div>
+    <div class="p-3">
+      <div class="row">
+          <p-toast></p-toast>
+
+          <div class="card-header card-header-stretch overflow-auto">
+              <ul class="nav nav-stretch nav-line-tabs fw-bold border-transparent flex-nowrap" role="tablist">
+                  <li class="nav-item">
+                      <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'BasicInformation' }"
+                          (click)="setActiveTab('BasicInformation')" role="tab">
+                          Basic Information
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'MaintenanceInformation' }"
+                          (click)="setActiveTab('MaintenanceInformation')" role="tab">
+                          Maintenance Information
+                      </a>
+                  </li>
+              </ul>
+          </div>
+          <form [formGroup]="purchaseOrderForm">
+              <!-- begin::Body -->
+              <div class="row">
+                  <div class="tab-content pt-3 box-gryco">
+                      <!-- begin::Sidebar -->
+                      <div class="tab-pane" [ngClass]="{ active: activeTab === 'BasicInformation' }">
+                          <div class="row py-3">
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{'Asset Number'}}: <span class="viewspan-text">{{purchaseOrderForm.value.assetNumber}}</span></p>
+                              </div>
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{'Asset Serial No'}}: <span class="viewspan-text">{{purchaseOrderForm.value.assetNo}}</span></p>
+                              </div>
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{'Asset Name'}}: <span class="viewspan-text">{{purchaseOrderForm.value.assetName}}</span></p>
+                              </div>
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{'Call No'}}: <span class="viewspan-text">{{purchaseOrderForm.value.callNo}}</span></p>
+                              </div>
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{'Quotation No'}}: <span class="viewspan-text">{{purchaseOrderForm.value.quotationNo}}</span></p>
+                              </div>
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{isPR !== 'PR' ? 'PO number' : 'PR number'}}: <span class="viewspan-text">{{purchaseOrderForm.value.importCodeNo}}</span></p>
+                              </div>
+                          </div>
+                          <div class="row py-3">
+                              <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                                  <p class="viewp-text">{{isPR !== 'PR' ? 'Purchase Order Date' : 'Purchase Request Date'}}: <span class="viewspan-text">{{purchaseOrderForm.value.purchaseOrderDate}}</span></p>
+                              </div>
+                              <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3" *ngIf="isPR !== 'PR'">
+                                  <p class="viewp-text">{{'PO Estimated delivery date'}}: <span class="viewspan-text">{{purchaseOrderForm.value.deadlineDate}}</span></p>
+                              </div>
+                              <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3" *ngIf="isPR !== 'PR'">
+                                  <p class="viewp-text">{{'Dismissal Notice Date'}}: <span class="viewspan-text">{{purchaseOrderForm.value.dismissalNoticeDate}}</span></p>
+                              </div>
+                          </div>
+                          <div class="row py-3">
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{'Call Last Situation'}}: <span class="viewspan-text">{{purchaseOrderForm.value.callLastSituationId}}</span></p>
+                              </div>
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{'Start of work'}}: <span class="viewspan-text">{{purchaseOrderForm.value.startofWorkTime}}</span></p>
+                              </div>
+                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <p class="viewp-text">{{'End of work'}}: <span class="viewspan-text">{{purchaseOrderForm.value.endofWorkNewTime}}</span></p>
+                              </div>
+                          </div>
+                          <div class="mt-6 mb-6 mb-xl-9">
+                              <div class="col-12">
+                                  <h5 class="section-heading">Spare Parts</h5>
+                              </div>
+                              <div class="pt-4">
+                                  <div formArrayName="purchaseOrderSpareParts">
+                                      <div *ngFor="let info of getControls('purchaseOrderSpareParts'); let i=index" class="formline add-more-value-border add-more-values margin-bottom-add-more">
+                                          <div [formGroupName]="i" class="d-flex">
+                                              <fieldset class="formline">
+                                                  <div class="row py-3 box-gryco">
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Part No'}}: <span class="viewspan-text">{{info.get('partId')?.value?.partNo}}</span></p>
+                                                      </div>
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Part Name'}}: <span class="viewspan-text">{{info.get('description')?.value}}</span></p>
+                                                      </div>
+                                                      <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                                                          <p class="viewp-text">{{'Part Status'}}: <span class="viewspan-text">{{info.get('partStatusId')?.value}}</span></p>
+                                                      </div>
+                                                      <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                                                          <p class="viewp-text">{{'Currency'}}: <span class="viewspan-text">{{info.get('currencyId')?.value}}</span></p>
+                                                      </div>
+                                                  </div>
+                                                  <div class="row py-3">
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Quantity Requested'}}: <span class="viewspan-text">{{info.get('quantityRequested')?.value}}</span></p>
+                                                      </div>
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Unit Price'}}: <span class="viewspan-text">{{info.get('unitPrice')?.value}}</span></p>
+                                                      </div>
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Discount'}}: <span class="viewspan-text">{{info.get('discount')?.value}}</span></p>
+                                                      </div>
+                                                  </div>
+                                              </fieldset>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end::Sidebar -->
+
+                      <!-- begin::Header -->
+                      <div class="tab-pane" [ngClass]="{ active: activeTab === 'MaintenanceInformation'}">
+                          <div class="row py-3 box-gryco">
+                              <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                                  <p class="viewp-text">{{'Component To Be Fixed'}}: <span class="viewspan-text">{{purchaseOrderForm.value.componentToBeFixedId}}</span></p>
+                              </div>
+                              <div class="row py-3">
+                                  <div class="col-md-4 col-lg-14 col-xl-4 col-xxl-4 ">
+                                      <p class="viewp-text">{{'Work Performed'}}: <span class="viewspan-text">{{purchaseOrderForm.value.workPerformed}}</span></p>
+                                  </div>
+                                  <div class="col-md-4 col-lg-14 col-xl-4 col-xxl-4">
+                                      <p class="viewp-text">{{'Observation'}}: <span class="viewspan-text">{{purchaseOrderForm.value.observation}}</span></p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end::Header -->
+                  </div>
+              </div>
+          </form>
+      </div>
+    </div>
+     <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+  </div>

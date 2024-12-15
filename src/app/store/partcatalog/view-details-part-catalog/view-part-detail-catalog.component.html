@@ -1,0 +1,126 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+ class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading"> View Part Catalog</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+
+  <div class="p-3">
+    <div class="row">
+      <form [formGroup]="partCatalogForm">
+        <div class="pt-2">
+          <div class="row box-gryco">
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Part Number: <span class="viewspan-text">{{ partCatalogForm.value.partNumber }}</span></p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Part Name: <span class="viewspan-text">{{ partCatalogForm.value.partName }}</span></p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Oracle Code: <span class="viewspan-text">{{ partCatalogForm.value.oracleCode }}</span></p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Part Type: <span class="viewspan-text">{{ partCatalogForm.value.partType }}</span></p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">End of Support Date: <span class="viewspan-text">{{ partCatalogForm.value.endSupportText }}</span></p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Warranty Methods: <span class="viewspan-text">{{ partCatalogForm.value.warranty }}</span></p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Initials: <span class="viewspan-text">{{ partCatalogForm.value.initials }}</span></p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">PO Number: <span class="viewspan-text">{{ partCatalogForm.value.poNumber }}</span></p>
+            </div>
+
+          </div>
+
+          <!-- Model Info -->
+          <div formArrayName="modelInfo" *ngFor="let info of modelControl(); let i = index" [formGroupName]="i">
+            <fieldset *ngIf="info.value.id != ''">
+              <div class="row py-3">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Asset Model: <span class="viewspan-text">{{ info.value.assetModelName }}</span></p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Manufacturer: <span class="viewspan-text">{{ info.value.manufact }}</span></p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Inventory Info -->
+          <div formArrayName="inventory" *ngFor="let info of inventoryControl(); let i = index" [formGroupName]="i">
+            <fieldset *ngIf="info.value.id != ''">
+              <div class="row py-3 box-gryco mt-4">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Client Part: <span class="viewspan-text">{{ info.value.clientPartName }}</span></p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Current Stock: <span class="viewspan-text">{{ info.value.currentStock }}</span></p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Store: <span class="viewspan-text">{{ info.value.storeName }}</span></p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Balance Price: <span class="viewspan-text">{{ info.value.balancePrice }}</span></p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Stock Value: <span class="viewspan-text">{{ info.value.stockValue }}</span></p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Unit Price: <span class="viewspan-text">{{ info.value.unitPrice }}</span></p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Maximum Quantity, Threshold, etc. -->
+          <div class="row py-3 box-gryco">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Maximum Quantity: <span class="viewspan-text">{{ partCatalogForm.value.maximumQuantity }}</span></p>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Threshold: <span class="viewspan-text">{{ partCatalogForm.value.threshold }}</span></p>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">Requisitioned: <span class="viewspan-text">{{ partCatalogForm.value.requisitioned }}</span></p>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">On Reserve: <span class="viewspan-text">{{ partCatalogForm.value.onReserve }}</span></p>
+            </div>
+          </div>
+
+          <!-- Supplier Info -->
+          <div formArrayName="supplier" *ngFor="let info of supplierControl(); let i = index" [formGroupName]="i">
+            <fieldset>
+              <div class="row py-3 box-gryco">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Supplier: <span class="viewspan-text">{{ info.value.supplierName }}</span></p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Supplier Price: <span class="viewspan-text">{{ info.value.supplierPrice }}</span></p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Status_x0020_Table Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>Status Table</Alias>
+        <HeadersString />
+        <Key />
+        <Name>Status Table</Name>
+        <PathData>C:\Users\karthick.rajendran\Desktop\Report atoms\Status Table.json</PathData>
+      </Status_x0020_Table>
+    </Databases>
+    <DataSources isList="true" count="4">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>siteName,System.String</value>
+          <value>periods,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>0f89472a0f464b80a7ea3a24c1c5e5b9</Key>
+        <Name>root</Name>
+        <NameInSource>Status Table.root</NameInSource>
+      </root>
+      <root_periods Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_periods</Alias>
+        <Columns isList="true" count="3">
+          <value>periodName,System.String</value>
+          <value>jobTypeDto,System.String</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>c1fbb4e6f0114e988ebff5159eeccd7b</Key>
+        <Name>root_periods</Name>
+        <NameInSource>Status Table.root_periods</NameInSource>
+      </root_periods>
+      <root_periods_jobTypeDto Ref="5" type="DataTableSource" isKey="true">
+        <Alias>root_periods_jobTypeDto</Alias>
+        <Columns isList="true" count="3">
+          <value>jobTypeName,System.String</value>
+          <value>serviceRequestStatusTableCallLastSituationDtos,System.String</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>d1f32a96a45048219072b5edbe14ffa3</Key>
+        <Name>root_periods_jobTypeDto</Name>
+        <NameInSource>Status Table.root_periods_jobTypeDto</NameInSource>
+      </root_periods_jobTypeDto>
+      <root_periods_jobTypeDto_serviceRequestStatusTableCallLastSituationDtos Ref="6" type="DataTableSource" isKey="true">
+        <Alias>root_periods_jobTypeDto_serviceRequestStatusTableCallLastSituationDtos</Alias>
+        <Columns isList="true" count="3">
+          <value>callLastSituationName,System.String</value>
+          <value>callLastSituationCount,System.Decimal</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>2bbe03da8f12468ebea781df68da36fd</Key>
+        <Name>root_periods_jobTypeDto_serviceRequestStatusTableCallLastSituationDtos</Name>
+        <NameInSource>Status Table.root_periods_jobTypeDto_serviceRequestStatusTableCallLastSituationDtos</NameInSource>
+      </root_periods_jobTypeDto_serviceRequestStatusTableCallLastSituationDtos>
+    </DataSources>
+    <Relations isList="true" count="3">
+      <root Ref="7" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>c9bb1c24c4284ab9bfc9185ddb0382e0</Key>
+        <Name>root</Name>
+        <NameInSource>root_periods</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>periods</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+      <root_periods Ref="8" type="DataRelation" isKey="true">
+        <Alias>root_periods</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="5" />
+        <Dictionary isRef="1" />
+        <Key>b5c3eb2f3efd48919fcff4d9257f5c89</Key>
+        <Name>root_periods</Name>
+        <NameInSource>root_periods_jobTypeDto</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>jobTypeDto</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </root_periods>
+      <root_periods_jobTypeDto Ref="9" type="DataRelation" isKey="true">
+        <Alias>root_periods_jobTypeDto</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="6" />
+        <Dictionary isRef="1" />
+        <Key>60501c6e99c34f2197baebb753f8248f</Key>
+        <Name>root_periods_jobTypeDto</Name>
+        <NameInSource>root_periods_jobTypeDto_serviceRequestStatusTableCallLastSituationDtos</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>serviceRequestStatusTableCallLastSituationDtos</value>
+        </ParentColumns>
+        <ParentSource isRef="5" />
+      </root_periods_jobTypeDto>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>5f8ad4ed19c84b3097eeac9db517b736</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="10" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <PivotTable1 Ref="11" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,0,1220,520</ClientRectangle>
+          <Columns isList="true" count="2">
+            <Item11 Ref="12" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_periods_jobTypeDto.jobTypeName</Expression>
+              <Key>09471e9cd0f54ac4a33b500af32b71e5</Key>
+              <Label>JobType</Label>
+              <Size Ref="13" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="14" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item11>
+            <Item12 Ref="15" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_periods_jobTypeDto_serviceRequestStatusTableCallLastSituationDtos.callLastSituationName</Expression>
+              <Key>2a0d24cadc2b4ccead1afab8dac58c23</Key>
+              <Label>Call Last Situation</Label>
+              <Size Ref="16" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="17" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item12>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>07d783197bed4948b758038cfad3bf4d</Guid>
+          <Margin>3,3,3,3</Margin>
+          <Name>PivotTable1</Name>
+          <Page isRef="10" />
+          <Parent isRef="10" />
+          <PivotTableConditions isList="true" count="0" />
+          <Rows isList="true" count="2">
+            <Item13 Ref="18" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root.siteName</Expression>
+              <Key>08c9469ddda949e9b213922264817661</Key>
+              <Label>Site Name</Label>
+              <Size Ref="19" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="20" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item13>
+            <Item14 Ref="21" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root_periods.periodName</Expression>
+              <Key>e3a702c78288401c8a686bf9b2054e1a</Key>
+              <Label>Duration Periods</Label>
+              <Size Ref="22" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="23" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item14>
+          </Rows>
+          <Summaries isList="true" count="1">
+            <Item15 Ref="24" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotSummary" isKey="true">
+              <Expression>Sum(root_periods_jobTypeDto_serviceRequestStatusTableCallLastSituationDtos.callLastSituationCount)</Expression>
+              <Key>abb9222aa6cb485d8aa588b65e25d138</Key>
+              <Label>callLastSituationCount</Label>
+              <Size Ref="25" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item15>
+          </Summaries>
+          <Title Ref="26" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Status Table Report</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+        </PivotTable1>
+      </Components>
+      <DashboardWatermark Ref="27" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>de937d132af94a0c9bce6ce23813a57f</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>10/26/2023 9:17:15 AM</ReportChanged>
+  <ReportCreated>10/26/2023 8:52:47 AM</ReportCreated>
+  <ReportFile>C:\Users\karthick.rajendran\Desktop\statustablereport.mrt</ReportFile>
+  <ReportGuid>65300afb8d2a4da69e5f27cab73d4ab2</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

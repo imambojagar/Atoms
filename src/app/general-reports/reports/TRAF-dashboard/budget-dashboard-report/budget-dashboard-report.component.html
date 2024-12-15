@@ -1,0 +1,39 @@
+<div style="display: flex;">
+    <p-panel header="Budget Conversion Rate">
+        <div id="viewerContent" style="min-height:500px ; min-width:800px"></div>
+    </p-panel>
+    <p-divider type="solid" layout="vertical"></p-divider>
+    <p-panel header="Budget Value">
+        <div class="row py-3">
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Year</label>
+                <p-dropdown [options]="years" placeholder="Select" placeholder="{{budgetYear}}"
+                    (onChange)="changeYear($event)" optionLabel="name" optionValue="id"></p-dropdown>
+            </div>
+        </div>
+        <div class="row py-3">
+            <div id="budgetValueContent" style="min-height:500px ; min-width:800px"></div>
+        </div>
+    </p-panel>
+
+
+</div>
+<p-divider type="solid" layout="horizontal"></p-divider>
+<div style="display: flex;">
+    <p-panel header="Budget Conversion Rate & PR Conversion Rate ">
+        <div id="PRContent" style="min-height:500px ; min-width:800px"></div>
+    </p-panel>
+    <p-divider type="solid" layout="vertical"></p-divider>
+    <p-panel header="Branches Budget Surplus">
+        <div class="row py-3">
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Year</label>
+                <p-dropdown [options]="years" placeholder="Select" placeholder="{{surplusBudgetYear}}"
+                    (onChange)="changeYearSurplus($event)" optionLabel="name" optionValue="id"></p-dropdown>
+            </div>
+        </div>
+        <div class="row py-3">
+            <div id="SurplusContent" style="min-height:500px ; min-width:800px"></div>
+        </div>
+    </p-panel>
+</div>

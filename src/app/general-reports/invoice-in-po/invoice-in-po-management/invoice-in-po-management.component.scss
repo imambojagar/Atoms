@@ -1,0 +1,44 @@
+.disableDiv{
+    pointer-events:none;
+}
+
+.divMinWidth { min-width: 100%; }
+
+div {
+    margin-block: 20px;
+  }
+  
+  .card{
+    width: 83rem;
+    margin-bottom: 2em;
+  }
+  .field{
+    margin: 10px;
+  }
+ 
+
+  .formline{  
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+    margin-inline: 20px;
+   
+  }
+
+  .formline2{  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:left;
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+    margin-inline: 20px;
+   
+  }
+
+ 
+
+  

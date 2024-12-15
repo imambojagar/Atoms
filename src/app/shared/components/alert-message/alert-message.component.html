@@ -1,0 +1,19 @@
+<div
+  class="alert justify-content-center"
+  [ngClass]="[alertService.alertClass, alertService.isVisible ? 'visible' : '']"
+>
+  <span class="close" (click)="alertService.isVisible = false">&times;</span>
+  <span class="alert-message-success-text">
+    <i
+      class="fa"
+      [ngClass]="[
+        alertService.alertIcon,
+        alertService.alertIconClass,
+        'text-white',
+        'justify-content-center',
+        'align-content-center'
+      ]"
+    ></i>
+    {{ alertService.alertText }}
+  </span>
+</div>

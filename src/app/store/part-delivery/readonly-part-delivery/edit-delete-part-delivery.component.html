@@ -1,0 +1,183 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+ class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom"
+    id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading"> Update Part Catalog</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+    <p-toast></p-toast>
+    <div class="">
+      <!-- <p-tabView [(activeIndex)]="tabIndex"> -->
+        <!-- <p-tabPanel header="View" leftIcon="pi pi-file" *ngIf="isDisplayView">
+          <p-fieldset legend="Request info">
+            <div class="card-body pt-5">
+              <form [formGroup]="addPartDeliveryForm">
+                <div class="row py-3">
+                  <div class="saveButton" *ngIf="ParentWOId>0">
+                    <div class="saveButton">
+                      <div *ngFor="let step of steps;let i=index" style="float: left; ">
+                        <button pButton type="button" label="{{step.name}}" class="p-button-success" *ngIf="step.processed"
+                          (click)="clickStep(step)"></button>
+                        <button pButton type="button" label="{{step.name}}" class="p-button-info" *ngIf="!step.processed"
+                          (click)="clickStep(step)"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="assetname">Date</label>
+                    <input type="text" formControlName="date" pInputText [readonly]="true" />
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="assetName">Asset Name</label>
+                    <input [value]="assetName" formControlName="assetName" pInputText inputId="assetname" [readonly]="true" />
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="assetNumber">Asset Number</label>
+                    <input [value]="assetNumber" formControlName="assetNumber" pInputText inputId="assetNumber" [readonly]="true" />
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="assetSN">Asset S.N</label>
+                    <input [value]="assetSN" formControlName="assetSN" pInputText inputId="assetSN" [readonly]="true" />
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="callId">Call Id</label>
+                    <p-autoComplete [delay]="1000"  [field]="'name'" (completeMethod)="getCallIds($event)"
+                    [suggestions]="callIdsAutoComplete" [readonly]="true" formControlName="callIdValue"></p-autoComplete>
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">Po.No.</label>
+                    <p-autoComplete [delay]="1000" (completeMethod)="getPoNos($event)" [field]="'name'" [readonly]="true"
+                    [suggestions]="poNoAutCompleteSource" formControlName="poNoValue"></p-autoComplete>
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="model">Model</label>
+                    <input id="model" formControlName="model" type="text" [readonly]="true" pInputText />
+                  </div>
+
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="site">Site</label>
+                    <input formControlName="customerName" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="relatedEmp">Related Emp</label>
+                    <input formControlName="relatedEmpName" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="statusWorkflow">Status Workflow Approval</label>
+                    <input formControlName="statusWorkflow" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="approvalComment">Approval Comment</label>
+                    <input formControlName="approvalComment" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                      <label class="form-label" for="statusPermission">Status of Permission</label>
+                      <input formControlName="statusPermission" [readonly]="true" pInputText />
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="note">Note</label>
+                    <input formControlName="note" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                </div>
+                <div formArrayName="spareParts" *ngFor=" let info of getControlsFor('spareParts'); let i=index">
+                  <fieldset class="formline" [formGroupName]="i" *ngIf="info.value.id != ''">
+                    <div class="row py-3">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="submodility">Part No :</label>
+                        <input formControlName="partName" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="submodility">Description :</label>
+                        <input formControlName="description" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="submodility">Quantity :</label>
+                        <input formControlName="qty" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!isNeedSpare">
+                        <div class="form-floating mb-2">
+                        <label class="form-label" for="submodility">Installed Quantity :</label>
+                        <input formControlName="installedQty" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!isNeedSpare">
+                        <div class="form-floating mb-2">
+                        <label class="form-label" for="submodility">Return Quantity :</label>
+                        <input formControlName="returnedQty" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="submodility">Expexcted Date :</label>
+                        <input formControlName="expectedDate" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </form>
+            </div>
+          </p-fieldset>
+        </p-tabPanel> -->
+
+        <!-- <p-tabPanel header="Edit" leftIcon="pi pi-file-edit" *ngIf="isDisplayEdit"> -->
+          <add-part-delivery *ngIf="partDeliveryModel != null" 
+            [edit_asset_id]="edit_asset_id" [deposite]="deposite" 
+            [queryData] = "queryData"
+            [addPartDeliveryForm]="addPartDeliveryForm"
+            [model]="partDeliveryModel"></add-part-delivery>
+
+          <div class="">
+            <fieldset class="row py-3" [ngClass]="{'disableDiv': true}">
+              <div class="box-gryco pt-4" >
+                <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+              </div>
+            </fieldset>
+          </div>
+        <!-- </p-tabPanel> -->
+      <!-- </p-tabView> -->
+
+      <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+    </div>
+</div>
+

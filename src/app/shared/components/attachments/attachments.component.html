@@ -1,0 +1,44 @@
+<div>
+  <div *ngFor="let item of attachments; let i = index">
+    <!-- <a href="#" onclick="downloadFile(item)" class="saveButton" target="_blank">
+      Preview Attachment
+    </a> -->
+
+    <table *ngIf="hasDelete">
+      <td>
+        <a (click)="downloadFile(item)" class="saveButton" target="_blank">{{ item | tr : "attachment" |
+          translate }}
+        </a>
+      </td>
+      <td>
+        <a (click)="deleteFile(i)">{{ "X" }} </a>
+      </td>
+    </table>
+
+    <a (click)="downloadFile(item)" class="saveButton" target="_blank" *ngIf="!hasDelete">{{ item | tr :
+      "attachment" | translate }}
+    </a>
+  </div>
+  <input type="file" #fileInput style="display: none" (change)="uploadFile($event)" />
+  <ng-container *ngIf="showButton">
+    <!-- <div *ngIf="!canNotUploadFile" (click)="fileInput.click()" label="{{'Upload New' | tr:'attachment' | translate}}" [loading]="isUploading"
+      loadingIcon="pi pi-spin pi-spinner" class="p-button-info col-lg-2" pButton style="cursor: pointer;">
+    </div> -->
+
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="browse-file" *ngIf="!canNotUploadFile" (click)="fileInput.click()">
+        <div class="drop_box">
+          <input type="file" hidden="" accept=".doc,.docx,.pdf" id="fileID" style="display: none" />
+          <button class="browse-btn">
+            <i class="fa fa-paperclip" aria-hidden="true"></i>
+            {{ "Upload New" | tr : "attachment" | translate }}
+          </button>
+
+          <p class="text-center">
+            The maximum file size: 30 MB. Allowed files are:Pdf,JPG,.docx,PNG
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

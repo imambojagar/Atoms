@@ -1,0 +1,38 @@
+<p-toast position="bottom-right"></p-toast>
+<div #reject [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container ngprime-custom"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Feedback</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-floating mb-2">
+          <!-- Use ngModel instead of formControlName -->
+          <p-dropdown [options]="rejectionReasons" class="dropdown" placeholder="select" optionValue="id"
+            optionLabel="name" [(ngModel)]="model.rejectionReason" name="rejectionReason">
+            <!-- Name attribute for template-driven form -->
+          </p-dropdown>
+          <label for="floatingSelect">Rejection Reason</label>
+        </div>
+      </div>
+      <div class="col-12 mb-3">
+        <div class="form-floating mb-2">
+          <textarea type="text" pInputText [(ngModel)]="model.feedback"
+            class="form-control header-search-background icon-padding" id="floatingComment"
+            placeholder="FrontEnd_CallCenter" value=""></textarea>
+          <label for="floatingComment">Feedback</label>
+        </div>
+      </div>
+
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <!-- Call save method on form submission -->
+            <button class="btn btn-blue text-white border-r10 float-end" type="button" (click)="save()">Reject</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

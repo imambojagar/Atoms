@@ -1,0 +1,12 @@
+.btn-dark:hover {
+    background-color: #fff !important;
+    color: #424242 !important;
+    border-color: #424242 !important;
+  }
+  .modal-title {
+    color: #6b6f82 !important;
+  }
+  
+  .modal-body {
+    color: #6b6f82 !important;
+  }

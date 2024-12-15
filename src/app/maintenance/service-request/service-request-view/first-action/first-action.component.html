@@ -1,0 +1,69 @@
+<form [formGroup]="serviceRequestFormService.firsActionForm">
+  <div class="row py-3">
+    <!-- First Action Status -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">First Action Status<small class="text-danger">*</small></label>
+        <p class="viewp-text">
+          First Action Status: 
+          <span class="viewspan-text">{{ serviceRequestFormService.firsActionForm.value.firstActionStatus?.name }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Start Date -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="serviceRequestFormService.FMfirstAction">
+      <div class="form-floating mb-2">
+        <label class="form-label">Start Date</label>
+        <p class="viewp-text">
+          Start Date: 
+          <span class="viewspan-text">{{ serviceRequestFormService.firsActionForm.value.startDate | date:'dd/MM/yyyy HH:mm' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- End Date -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="serviceRequestFormService.FMfirstAction">
+      <div class="form-floating mb-2">
+        <label class="form-label">End Date</label>
+        <p class="viewp-text">
+          End Date: 
+          <span class="viewspan-text">{{ serviceRequestFormService.firsActionForm.value.endDate | date:'dd/MM/yyyy HH:mm' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Working Hours -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="serviceRequestFormService.FMfirstAction">
+      <div class="form-floating mb-2">
+        <label class="form-label">Working Hours</label>
+        <p class="viewp-text">
+          Working Hours: 
+          <span class="viewspan-text">{{ serviceRequestFormService.firsActionForm.value.workingHours }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Visit Date -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="serviceRequestFormService.isShowVisitDate">
+      <div class="form-floating mb-2">
+        <label class="form-label">Visit Date</label>
+        <p class="viewp-text">
+          Visit Date: 
+          <span class="viewspan-text">{{ serviceRequestFormService.firsActionForm.value.visitDate | date:'yy-MM-dd HH:mm' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Comments</label>
+        <p class="viewp-text">
+          Comments: 
+          <span class="viewspan-text">{{ serviceRequestFormService.firsActionForm.value.comments }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</form>

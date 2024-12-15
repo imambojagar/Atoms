@@ -1,0 +1,157 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="custom-card ">
+          <div class="row bd-highlight mt-2">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 flex-grow-1 bd-highlight mt-4">
+                <div class="d-flex">
+                  <h5 class="card-title">Work Order List</h5>
+                  <div class="addlink ps-4 mt-3">
+                    <!-- <input id="upload" class="upload-file" type="file"> -->
+                    <a href="#" id="upload_link" class="color-secondary">Export
+                      <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 1.33338V10.6671L6.92308 12V0L0 1.33338ZM4.37908 8.34461L3.57369 6.822C3.54323 6.76523 3.51185 6.66092 3.47908 6.50908H3.46662C3.45138 6.58062 3.41538 6.68954 3.35862 6.83538L2.55046 8.34461H1.29554L2.78538 6.00738L1.42246 3.66969H2.70369L3.372 5.07138C3.42415 5.18215 3.47077 5.31369 3.51231 5.46554H3.52523C3.55154 5.37415 3.60046 5.23846 3.672 5.058L4.41508 3.66923H5.58831L4.18661 5.98708L5.62754 8.34415L4.37908 8.34461Z" fill="#4A8DB7"/>
+                      </svg>
+                    </a>
+                  </div>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+              <div class="float-end pb-4 pt-4">
+                <!-- <ng-template #popContent>Hello, <b>{{name}}</b>!</ng-template> -->
+                <ng-template #popContent>
+                  <div class="custom-popover">
+                    <div class="pb-2">
+                      <div class="popover-label">Last updated by:</div>
+                      <div class="popover-heading">Mohammad Hussain </div>
+                    </div>
+                    <div class=" ">
+                      <div  class="popover-label">Data Modified:</div>
+                      <div class="popover-heading">Current Situation: Under Repair Internal </div>
+                    </div>
+                  </div>
+                </ng-template>
+                <button
+                    type="button"
+                    class="round-button"
+                    [ngbPopover]="popContent"
+                    placement="left"
+                    triggers="mouseover"
+                    >
+                  <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24.2241 5.31552L25.403 5.31636L25.4041 3.73459L21.7839 3.73196L21.3169 7.37933L22.8861 7.58019L23.0407 6.37273C24.5813 8.42305 25.4161 10.9037 25.418 13.5119C25.4203 16.6946 24.183 19.6858 21.9339 21.9345C19.6869 24.1812 16.6988 25.4182 13.5189 25.4181H13.5099C10.3263 25.4158 7.33229 24.174 5.07938 21.9214C2.82641 19.6689 1.58435 16.6753 1.58203 13.4922C1.57971 10.3095 2.81707 7.31821 5.06614 5.06951C8.44045 1.69578 13.4873 0.663818 17.9235 2.44049L18.5118 0.972156C13.4868 -1.0404 7.77015 0.128881 3.94754 3.95101C1.39926 6.49882 -0.00263301 9.88769 3.71265e-06 13.4933C0.00264043 17.0986 1.40922 20.4889 3.96062 23.04C6.51201 25.591 9.90294 26.9974 13.5087 27H13.5188C17.1211 26.9999 20.5068 25.5984 23.0525 23.0531C25.6007 20.5053 27.0026 17.1164 27 13.5108C26.9978 10.51 26.0222 7.6585 24.2241 5.31552Z" fill="#767676"/>
+                    <path d="M13.5 5.27637C8.96379 5.27637 5.27344 8.96619 5.27344 13.5019C5.27344 18.0376 8.96379 21.7274 13.5 21.7274C18.0362 21.7274 21.7266 18.0376 21.7266 13.5019C21.7266 8.96619 18.0362 5.27637 13.5 5.27637ZM16.8908 14.2929H12.709V10.1116H14.291V12.7109H16.8908V14.2929Z" fill="#767676"/>
+                    </svg>
+                </button>
+                <button color="primary" class="round-button">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.3173 13.0881C16.2148 11.7491 16.7392 10.1379 16.7392 8.40591C16.7392 3.77089 12.9846 0 8.36958 0C3.75457 0 0 3.77089 0 8.40587C0 13.0408 3.75461 16.8118 8.36963 16.8118C10.1282 16.8118 11.7614 16.2638 13.1099 15.3296L19.7804 22L22 19.7708L15.3173 13.0881ZM8.36963 14.4508C5.05815 14.4508 2.36397 11.745 2.36397 8.41911C2.36397 5.09329 5.05811 2.38747 8.36963 2.38747C11.6811 2.38747 14.3753 5.09329 14.3753 8.41916C14.3753 11.745 11.6811 14.4508 8.36963 14.4508Z" fill="#767676"/>
+                    </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="qipsa-section-bg p-2 mt-2">
+                  <div class="chapter-inner-box p-1 mb-2">
+                    <table mat-table [dataSource]="dataSource" class="table-responsive">
+
+                      <!-- Position Column -->
+                      <ng-container matColumnDef="sn">
+                        <th mat-header-cell *matHeaderCellDef> S.N. </th>
+                        <td mat-cell *matCellDef="let element"> {{element.sn}} </td>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="assetname">
+                        <th mat-header-cell *matHeaderCellDef> Asset Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.assetname}} </td>
+                      </ng-container>
+
+                      <!-- Weight Column -->
+                      <ng-container matColumnDef="manufacturer">
+                        <th mat-header-cell *matHeaderCellDef> Manufacturer/Model </th>
+                        <td mat-cell *matCellDef="let element"> {{element.manufacturer}} </td>
+                      </ng-container>
+
+                      <!-- Symbol Column -->
+                      <ng-container matColumnDef="site">
+                        <th mat-header-cell *matHeaderCellDef> Site </th>
+                        <td mat-cell *matCellDef="let element"> {{element.site}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="situation">
+                        <th mat-header-cell *matHeaderCellDef> Situation </th>
+                        <td mat-cell *matCellDef="let element"> {{element.situation}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="totalworkinghours">
+                        <th mat-header-cell *matHeaderCellDef> Total Working Hours </th>
+                        <td mat-cell *matCellDef="let element"> {{element.totalworkinghours}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="currentsituation">
+                        <th mat-header-cell *matHeaderCellDef> Current Situation </th>
+                        <td mat-cell *matCellDef="let element"> {{element.currentsituation}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="nextstep">
+                        <th mat-header-cell *matHeaderCellDef> Next Step </th>
+                        <td mat-cell *matCellDef="let element">
+                          <div class="addlink">
+                            <app-custom-dropdown
+                              [listitems]="listData"
+                              [dropdownText]="dropdownText"
+                              (selectItems)="selectedItems($event)">
+                            </app-custom-dropdown>
+                            <!-- <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M4.49999 5C4.33869 5 4.17741 4.93998 4.05443 4.82018L0.184628 1.0486C-0.0615425 0.808678 -0.0615425 0.419689 0.184628 0.179867C0.430698 -0.0599556 0.829741 -0.0599556 1.07593 0.179867L4.49999 3.51717L7.92406 0.179983C8.17023 -0.0598391 8.56923 -0.0598391 8.81528 0.179983C9.06157 0.419806 9.06157 0.808794 8.81528 1.04871L4.94554 4.8203C4.8225 4.94011 4.66122 5 4.49999 5Z" fill="#4A8DB7"/>
+                            </svg> -->
+                        </div>
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element">
+                          <button color="primary" class="edit_round_button">
+                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g opacity="0.5">
+                              <path d="M12.5703 13.9872C12.3589 14.1985 12.0976 14.3599 11.8145 14.4543L9.07994 15.3658C8.88258 15.4316 8.67676 15.465 8.46853 15.465C7.95201 15.465 7.46642 15.2639 7.10123 14.8987C6.57997 14.3773 6.40105 13.6192 6.63416 12.9199L7.54569 10.1855C7.64001 9.90227 7.80157 9.64085 8.01277 9.42966L13.919 3.52344H2.36328C1.06017 3.52344 0 4.5836 0 5.88672V19.6367C0 20.9398 1.06017 22 2.36328 22H16.1133C17.4164 22 18.4766 20.9398 18.4766 19.6367V8.08096L12.5703 13.9872Z" fill="#163A51"/>
+                              <path d="M8.92453 10.3407C8.85376 10.4114 8.80048 10.4977 8.76886 10.5926L7.85732 13.3271C7.7801 13.5587 7.84039 13.814 8.013 13.9867C8.18564 14.1593 8.44096 14.2196 8.67256 14.1423L11.4071 13.2308C11.5021 13.1992 11.5883 13.1459 11.659 13.0752L19.7107 5.02355L16.9762 2.28906L8.92453 10.3407Z" fill="#163A51"/>
+                              <path d="M20.4693 0.314628C20.0498 -0.104876 19.3697 -0.104876 18.9502 0.314628L17.8867 1.37806L20.6212 4.11259L21.6847 3.04916C22.1042 2.62965 22.1042 1.9495 21.6847 1.53L20.4693 0.314628Z" fill="#163A51"/>
+                              </g>
+                            </svg>
+                          </button>
+                        </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                  </div>
+              </div>
+                <div class="mt-4">
+                  <div class="d-flex pull-right">
+                    <div class="pagination-label">
+                      <label>Showing 1 to {{recordsperPage}} of {{numbeOfRecords}}</label>
+                    </div>
+                    <mat-paginator
+                      #paginator
+                      appBubblePagination
+                      [appCustomLength]="numbeOfRecords"
+                      [pageSize]="recordsperPage"
+                      [pageSizeOptions]="pageSizeOptions"
+                      [length]="numbeOfRecords" >
+                    </mat-paginator>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

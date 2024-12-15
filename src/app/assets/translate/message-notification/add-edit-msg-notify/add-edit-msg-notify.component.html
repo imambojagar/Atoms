@@ -1,0 +1,157 @@
+<p-toast></p-toast>
+<div class="">
+
+  <div class="card flex justify-content-center mb-5">
+    <p-breadcrumb [model]="items"></p-breadcrumb>
+  </div>
+
+  <div class="card card-flush mb-6 mb-xl-9">
+    <div class="card-header bg-primary">
+      <div class="card-title" [hidden]="isAddMode==false">
+        <h2 class="d-flex align-items-center text-white">Create Message Notifications</h2>
+
+      </div>
+      <div class="card-title" [hidden]="isAddMode==true">
+        <h2 class="d-flex align-items-center text-white">Update Message Notifications </h2>
+      </div>
+    </div>
+    <p-tabView [(activeIndex)]="tabIndex">
+      <p-tabPanel header="View" class="view-data-li" leftIcon="pi pi-file" *ngIf="!isAddMode">
+        <form [formGroup]="msgsForm" class="add-content-type">
+          <div class="card card-flush">
+            <div class="card-body pt-5">
+              <div class="row py-3">
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Code</label>
+                  <input formControlName="code" pInputText [readOnly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Name</label>
+                  <input formControlName="name" pInputText [readOnly]="true" />
+                </div>
+              </div>
+              <div class="row py-3">
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Title</label>
+                  <input formControlName="title" type="text" pInputText [readOnly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" formArrayName="translations">
+                  <div [formGroupName]="i" *ngFor="let code of langsControl(); index as i">
+
+                    <label class="form-label">{{languageName[i]}}</label>
+                    <input formControlName="titleValue" type="text" pInputText [readOnly]="true"  />
+                    <input formControlName="messageId" type="hidden" />
+                    <input formControlName="id" type="hidden" />
+                    <input formControlName="langId" type="hidden" />
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Text</label>
+                  <input formControlName="text" type="text" pInputText [readOnly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" formArrayName="translations">
+                  <div [formGroupName]="i" *ngFor="let code of langsControl(); index as i">
+
+                    <label class="form-label">{{languageName[i]}}</label>
+                    <input formControlName="textValue" type="text" pInputText [readOnly]="true"  />
+                    <input formControlName="messageId" type="hidden" />
+                    <input formControlName="id" type="hidden" />
+                    <input formControlName="langId" type="hidden" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="card card-flush mb-6 mb-xl-9" *ngIf="!isAddMode">
+            <div class="card-body pt-5">
+              <!-- <div class="row py-3" [ngClass]="{'disableDiv': true}">
+                <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+              </div> -->
+            </div>
+          </div>
+
+        </form>
+      </p-tabPanel>
+
+      <p-tabPanel [header]="isAddMode ? 'Add' : 'Edit' " leftIcon="pi pi-file-edit">
+
+        <form [formGroup]="msgsForm" (ngSubmit)="onSubmit()" class="add-content-type">
+          <div class="card">
+            <div class="card card-flush mb-6 mb-xl-9">
+
+              <div class="card-body pt-5">
+                <div class="row py-3">
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">Code</label>
+                    <input formControlName="code" pInputText [readOnly]="true" />
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">Name</label>
+                    <input formControlName="name" pInputText [readOnly]="true" />
+                  </div>
+                </div>
+                <div class="row py-3">
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">Title</label>
+                    <input formControlName="title" type="text" pInputText [readOnly]="true" />
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" formArrayName="translations">
+                    <div [formGroupName]="i" *ngFor="let code of langsControl(); index as i">
+
+                      <label class="form-label">{{languageName[i]}}</label>
+                      <input formControlName="titleValue" type="text" pInputText />
+                      <input formControlName="messageId" type="hidden" />
+                      <input formControlName="id" type="hidden" />
+                      <input formControlName="langId" type="hidden" />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">Text</label>
+                    <input formControlName="text" type="text" pInputText [readOnly]="true" />
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" formArrayName="translations">
+                    <div [formGroupName]="i" *ngFor="let code of langsControl(); index as i">
+
+                      <label class="form-label">{{languageName[i]}}</label>
+                      <input formControlName="textValue" type="text" pInputText />
+                      <input formControlName="messageId" type="hidden" />
+                      <input formControlName="id" type="hidden" />
+                      <input formControlName="langId" type="hidden" />
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="card card-flush mb-6 mb-xl-9" *ngIf="!isAddMode">
+                <div class="card-body pt-5">
+                 <!--  <div class="row py-3" [ngClass]="{'disableDiv': true}">
+                    <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="formline3" *ngIf="!isAddMode">
+                <div class="saveButton">
+                  <button pButton type="submit" (submit)="onSubmit()" label="Update" class="p-button-info col-lg-2"
+                    canUpdate></button>
+                  <button pButton type="button" (click)="delete()" label="Delete" class="p-button-danger col-lg-2"
+                    canDelete></button>
+
+                  <button pButton type="button" label="Back" BackButton class="p-button-info col-lg-2"></button>
+                </div>
+              </div>
+              <div class="formline3" *ngIf="isAddMode">
+                <div class="saveButton">
+                  <button pButton type="submit" (submit)="onSubmit()" label="Save"
+                    class="p-button-info col-lg-2"></button>
+                  <button pButton type="button" (click)="cancel()" label="Cancel"
+                    class="p-button-cancel col-lg-2"></button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </p-tabPanel>
+    </p-tabView>

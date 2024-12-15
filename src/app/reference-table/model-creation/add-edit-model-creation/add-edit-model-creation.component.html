@@ -1,0 +1,195 @@
+<div
+  #drawerFilter
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="isAddMode">
+      Create Model
+    </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="!isAddMode">
+      Edit Model
+    </h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div
+        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-3"
+      >
+        <form [formGroup]="modelForm" id="modelCreationForm">
+          <div class="row form-scroller mb-4">
+            <div class="row box-gryco">
+              <!-- <p-tabView> -->
+              <!-- <p-tabPanel header="Request Info"> -->
+              <div class="col-12">
+                <h3 class="section-heading">Request Information</h3>
+              </div>
+              <!-- <div class="request"> -->
+              <!-- <div class="card-body pt-5"> -->
+              <div class="row py-3">
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <input
+                      type="text"
+                      pInputText
+                      class="form-control"
+                      placeholder="User Name"
+                      formControlName="userName"
+                    />
+                    <label class="form-label"> User Name </label>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <!-- <p-dropdown
+                      formControlName="assignOriginId"
+                      [options]="assignOrigins"
+                      optionLabel="name"
+                      (onChange)="changeOrigin($event)"
+                    ></p-dropdown> -->
+                    <p-dropdown
+                      formControlName="assignOriginId"
+                      [options]="assignOrigins"
+                      optionLabel="name"
+                      optionValue="id"
+                      placeholder="Select Origin"
+                    ></p-dropdown>
+
+                    <label class="form-label"> Assign Origin </label>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <input
+                      type="text"
+                      pInputText
+                      class="form-control"
+                      placeholder="Model"
+                      formControlName="model"
+                    />
+                    <label class="form-label"> Model </label>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <input
+                      type="text"
+                      pInputText
+                      class="form-control"
+                      placeholder="Manufacturer"
+                      formControlName="manufacturer"
+                    />
+                    <label class="form-label"> Manufacturer </label>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <input
+                      type="text"
+                      pInputText
+                      class="form-control"
+                      placeholder="Name"
+                      formControlName="name"
+                    />
+                    <label class="form-label"> Name </label>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <input
+                      type="text"
+                      pInputText
+                      class="form-control"
+                      placeholder="Supplier"
+                      formControlName="supplier"
+                    />
+                    <label class="form-label"> Supplier </label>
+                  </div>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <div class="form-floating mb-2">
+                    <input
+                      type="text"
+                      pInputText
+                      class="form-control"
+                      placeholder="Remarks"
+                      formControlName="remarks"
+                    />
+                    <label class="form-label"> Remarks </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2 mb-3"
+                  >
+                    <label class="form-label"> Attachments </label>
+                    <app-attachments
+                      [attachments]="attachments"
+                      (onUploaded)="attachmentUploaded($event)"
+                    ></app-attachments>
+                  </div>
+                </div>
+              </div>
+              <!-- </div> -->
+              <!-- </div> -->
+              <!-- </p-tabPanel> -->
+              <!-- </p-tabView> -->
+            </div>
+            <div class="mt-2" *ngIf="!isAddMode">
+              <app-transaction-history
+                *ngIf="transactionHistory"
+                [transactionHistory]="transactionHistory"
+              ></app-transaction-history>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button
+            *ngIf="isAddMode"
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="save()"
+          >
+            Save
+          </button>
+          <button
+            *ngIf="!isAddMode"
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="save()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+  </div>
+</div>

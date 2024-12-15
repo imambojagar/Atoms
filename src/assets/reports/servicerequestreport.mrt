@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <ServiceRequestReport Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>ServiceRequestReport</Alias>
+        <HeadersString />
+        <Key />
+        <Name>ServiceRequestReport</Name>
+        <PathData>C:\Users\karthick.rajendran\Desktop\ServiceRequestReport.json</PathData>
+      </ServiceRequestReport>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="41">
+          <value>callNo,System.String</value>
+          <value>equipmentStatusName,System.String</value>
+          <value>engineerName,System.String</value>
+          <value>techComment,System.String</value>
+          <value>assetNumber,System.String</value>
+          <value>assetName,System.String</value>
+          <value>model,System.String</value>
+          <value>sn,System.String</value>
+          <value>manufacturer,System.String</value>
+          <value>supplier,System.String</value>
+          <value>callDate,System.String</value>
+          <value>callHour,System.String</value>
+          <value>startDate,System.String</value>
+          <value>startHour,System.String</value>
+          <value>endDate,System.String</value>
+          <value>endHour,System.String</value>
+          <value>rt,System.String</value>
+          <value>returnToService,System.String</value>
+          <value>edd,System.String</value>
+          <value>assetPO,System.String</value>
+          <value>callComment,System.String</value>
+          <value>totalCost,System.String</value>
+          <value>vendor,System.String</value>
+          <value>department,System.String</value>
+          <value>site,System.String</value>
+          <value>purchasedPrice,System.String</value>
+          <value>installationDate,System.String</value>
+          <value>endOfWarranty,System.String</value>
+          <value>faultDescription,System.String</value>
+          <value>solutionAndCause,System.String</value>
+          <value>category,System.String</value>
+          <value>assetTypeAndMissionCritical,System.String</value>
+          <value>woAssetType,System.String</value>
+          <value>typeOfRequest,System.String</value>
+          <value>failureReason,System.String</value>
+          <value>serviceRequestStatus,System.String</value>
+          <value>prAndPO,System.String</value>
+          <value>callLastSituation,System.String</value>
+          <value>woStatusDuration,System.String</value>
+          <value>woStatusExceeded,System.String</value>
+          <value>durationDays,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>7032f011cdf140999fc1772cbfb46127</Key>
+        <Name>root</Name>
+        <NameInSource>ServiceRequestReport.root</NameInSource>
+      </root>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>7a3eb7720811444cac1ea4f786aa955e</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="4" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <Table1 Ref="5" type="Stimulsoft.Dashboard.Components.Table.StiTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>-60,60,16320,660</ClientRectangle>
+          <Columns isList="true" count="41">
+            <Item5 Ref="6" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.callNo</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>8b0161ce6f7d49d588b52228d7c7c4df</Key>
+              <Label>Wo Number</Label>
+              <Size Ref="7" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item5>
+            <Item6 Ref="8" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.equipmentStatusName</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>e3fd2206ce6d430f9ec1d2aabafa58a8</Key>
+              <Label>Equipement Status</Label>
+              <Size Ref="9" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item6>
+            <Item7 Ref="10" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.engineerName</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>dd7127fab23d46c08c6167d309948238</Key>
+              <Label>Ce Name</Label>
+              <Size Ref="11" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item7>
+            <Item8 Ref="12" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.techComment</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>925bcb11996b41e18426d5568aa44dd6</Key>
+              <Label>Tech Comment</Label>
+              <Size Ref="13" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item8>
+            <Item9 Ref="14" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.assetNumber</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>a169e446030d407fa0d90c92587272e4</Key>
+              <Label>Asset Number</Label>
+              <Size Ref="15" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item9>
+            <Item10 Ref="16" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.assetName</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>3508b955937d47d096873ffca78093b2</Key>
+              <Label>Asset Name</Label>
+              <Size Ref="17" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item10>
+            <Item11 Ref="18" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.model</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>3978c15467bc4ffdba5795010ac25186</Key>
+              <Label>Model</Label>
+              <Size Ref="19" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item11>
+            <Item12 Ref="20" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.sn</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>3435b79e1e8e43f49222cd2e2438d64b</Key>
+              <Label>Sn</Label>
+              <Size Ref="21" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item12>
+            <Item13 Ref="22" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.manufacturer</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>79bcdf91c1af427a845c3887cb9cf791</Key>
+              <Label>Manufacturer</Label>
+              <Size Ref="23" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item13>
+            <Item14 Ref="24" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.supplier</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>8bba3772b0434f509b4df0997c61dd73</Key>
+              <Label>Supplier</Label>
+              <Size Ref="25" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item14>
+            <Item15 Ref="26" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.callDate</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>2f9ef14dc9a4478997ac5dc9834a40bc</Key>
+              <Label>Call Date</Label>
+              <Size Ref="27" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item15>
+            <Item16 Ref="28" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.callHour</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>2c9d5faeabbb462ab3529306ef748dac</Key>
+              <Label>Call Hour</Label>
+              <Size Ref="29" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item16>
+            <Item17 Ref="30" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.startDate</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>cb2ad88f0b934e2ca52ea19d4729299c</Key>
+              <Label>Start Date</Label>
+              <Size Ref="31" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item17>
+            <Item18 Ref="32" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.startHour</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>a907aa14d159430d99cd7ebc503ab838</Key>
+              <Label>Start Hour</Label>
+              <Size Ref="33" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item18>
+            <Item19 Ref="34" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.endDate</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>47daa8d6661e4f938df1c1820dfe469d</Key>
+              <Label>End Date</Label>
+              <Size Ref="35" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item19>
+            <Item20 Ref="36" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.endHour</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>62e75201b9894d4297f0195e34cab1c1</Key>
+              <Label>End Hour</Label>
+              <Size Ref="37" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item20>
+            <Item21 Ref="38" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.rt</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>9f277f8c9ce64086a87bf6b5b57f5764</Key>
+              <Label>Rt</Label>
+              <Size Ref="39" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item21>
+            <Item22 Ref="40" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.returnToService</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>6b628e44945a4d0793e58ddbe543fd3d</Key>
+              <Label>Return To Service</Label>
+              <Size Ref="41" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item22>
+            <Item23 Ref="42" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.edd</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>e1b28ed3e9b64ddda4005ef4462a37c5</Key>
+              <Label>Edd</Label>
+              <Size Ref="43" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item23>
+            <Item24 Ref="44" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.assetPO</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>5bb70f464322432a83b78809e66e67eb</Key>
+              <Label>Asset Po</Label>
+              <Size Ref="45" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item24>
+            <Item25 Ref="46" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.callComment</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>2780ef9b283d436297ceb84653c3ae78</Key>
+              <Label>Call Comment</Label>
+              <Size Ref="47" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item25>
+            <Item26 Ref="48" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.totalCost</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>955b3087ff18414b9039073efb5e552e</Key>
+              <Label>Total External Cost</Label>
+              <Size Ref="49" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item26>
+            <Item27 Ref="50" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.vendor</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>b6714f8023234a7284c21d0278901bd0</Key>
+              <Label>Vendor</Label>
+              <Size Ref="51" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item27>
+            <Item28 Ref="52" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.department</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>77ad8ec9aa774535b54e467ba974cb09</Key>
+              <Label>Department</Label>
+              <Size Ref="53" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item28>
+            <Item29 Ref="54" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.site</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>a56f495e0552468784f85f2b770341b4</Key>
+              <Label>Site</Label>
+              <Size Ref="55" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item29>
+            <Item30 Ref="56" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.purchasedPrice</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>18b590434f63487c97d5f65c4740dd21</Key>
+              <Label>Purchased Price</Label>
+              <Size Ref="57" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item30>
+            <Item31 Ref="58" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.installationDate</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>d6c40a2d2cb84fcba7d2aa1cacacef92</Key>
+              <Label>Installation Date</Label>
+              <Size Ref="59" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item31>
+            <Item32 Ref="60" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.endOfWarranty</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>c03a13e1d63a490b860cfa926de4839e</Key>
+              <Label>End Of Warranty</Label>
+              <Size Ref="61" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item32>
+            <Item33 Ref="62" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.faultDescription</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>b6d490520e8c4b209701b5f8050587cb</Key>
+              <Label>Failure Type</Label>
+              <Size Ref="63" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item33>
+            <Item34 Ref="64" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.solutionAndCause</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>6661430d1ff24967b3708de0b7b7a915</Key>
+              <Label>Cause</Label>
+              <Size Ref="65" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item34>
+            <Item35 Ref="66" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.category</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>ab0d195e8d3d460a9fae11d404eabe55</Key>
+              <Label>Category</Label>
+              <Size Ref="67" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item35>
+            <Item36 Ref="68" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.assetTypeAndMissionCritical</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>50ddf6476ad44b2aa4f9098bb15318cb</Key>
+              <Label>Origin</Label>
+              <Size Ref="69" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item36>
+            <Item37 Ref="70" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.woAssetType</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>6d7ac7830dfe4dfeb2b1cf7c144e35ce</Key>
+              <Label>Wo Asset Type</Label>
+              <Size Ref="71" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item37>
+            <Item38 Ref="72" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.typeOfRequest</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>30abd4e3f2844107b3f5d0f92c13bac4</Key>
+              <Label>Type Of Request</Label>
+              <Size Ref="73" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item38>
+            <Item39 Ref="74" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.failureReason</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>7df141df504a4f52b0195ddb3b5700c8</Key>
+              <Label>Failure Reason</Label>
+              <Size Ref="75" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item39>
+            <Item40 Ref="76" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.serviceRequestStatus</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>76461ca6b4c54f119d5b710cfdda6b36</Key>
+              <Label>Service Request Status</Label>
+              <Size Ref="77" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item40>
+            <Item41 Ref="78" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.prAndPO</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>d70fd2256ee7417382867ad663f58bb4</Key>
+              <Label>Pr And Po Number </Label>
+              <Size Ref="79" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item41>
+            <Item42 Ref="80" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.callLastSituation</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>047ba31ea5c1494f8ff2f6b85bc66919</Key>
+              <Label>Call Last Situation</Label>
+              <Size Ref="81" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item42>
+            <Item43 Ref="82" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.woStatusDuration</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>6e5d562cb0f340ceb7016153f87afb67</Key>
+              <Label>Wo Status Duration</Label>
+              <Size Ref="83" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item43>
+            <Item44 Ref="84" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.woStatusExceeded</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>1e708f303b494ce5b0310c39f751e76b</Key>
+              <Label>Wo Status Exceeded</Label>
+              <Size Ref="85" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item44>
+            <Item45 Ref="86" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.durationDays</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>c89c2580efa34fed8f4e29f64d70b0ce</Key>
+              <Label>Duration Days</Label>
+              <Size Ref="87" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item45>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,10</Font>
+          <FooterFont>Arial,10</FooterFont>
+          <FooterForeColor>Transparent</FooterForeColor>
+          <ForeColor>Transparent</ForeColor>
+          <Guid>efd83c1b8f4f4cde9720932a75c6190b</Guid>
+          <HeaderFont>Arial,10</HeaderFont>
+          <HeaderForeColor>Transparent</HeaderForeColor>
+          <Margin>3,3,3,3</Margin>
+          <Name>Table1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <SizeMode>Fit</SizeMode>
+          <TableConditions isList="true" count="0" />
+          <Title Ref="88" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Service Request Report</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+        </Table1>
+      </Components>
+      <DashboardWatermark Ref="89" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>cdd5413ed3f84abfb0a2e34f4d6cd4e4</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>10/24/2023 3:09:51 PM</ReportChanged>
+  <ReportCreated>10/10/2023 12:13:22 PM</ReportCreated>
+  <ReportFile>C:\Users\karthick.rajendran\Desktop\servicerequestreport.mrt</ReportFile>
+  <ReportGuid>f0e5f290a906448ea95da6d195c226eb</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

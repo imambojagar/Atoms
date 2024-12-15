@@ -1,0 +1,117 @@
+<p-toast></p-toast>
+<div class="view-data-header">
+  <div class="view-name-def-header view-data-header">
+    <div class="card flex justify-content-center mb-5">
+      <p-breadcrumb [model]="items"></p-breadcrumb>
+    </div>
+   <!--  <app-search-component (OnSearch)="search()" (OnReset)="Reset()">
+      <div class="card-body pt-5">
+        <form [formGroup]="searchForm">
+          <div class="row py-3">
+            <div class="col-md-3">
+              <label class="form-label">Title</label>
+              <p-autoComplete [delay]="1000" [suggestions]="titleList" formControlName="title" (onSelect)="filter.title=$event.title"
+                (completeMethod)="titleFilter($event)" field="title"></p-autoComplete>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Name</label>
+              <p-autoComplete [delay]="1000" [suggestions]="namesList" formControlName="name" (onSelect)="filter.name=$event.name"
+                (completeMethod)="nameFilter($event)" field="name"></p-autoComplete>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Text</label>
+              <p-autoComplete [delay]="1000" [suggestions]="textsList" formControlName="text" (onSelect)="filter.text=$event.text"
+                (completeMethod)="textFilter($event)" field="text"></p-autoComplete>
+            </div>
+          </div>
+        </form>
+      </div>
+    </app-search-component> -->
+
+
+    <div class="view-name-def-header card">
+      <p-table #dt [value]="msgs" styleClass="p-datatable-striped p-datatable-gridlines" [loading]="loading"
+        [rows]="filter.pageSize" [tableStyle]="{'min-width': '75rem'}" [lazy]="true" [totalRecords]="totalRows"
+        [rowHover]="false" dataKey="id">
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            <div class="card-header bg-primary">
+              <div class="card-title">
+                <span class="text-white"> Message Notifications Table <br>
+                  <span class="total_rows_data"> Total: {{totalRows}} </span>
+                </span>
+              </div>
+              <div class="card-title table-btns">
+                <!-- <a [routerLink]="['/systemsettings/translate/msg-notification/add-control']"
+                                    class="nav-link" canAdd>
+                                    <button pRipple class="btn btn-light-primary me-2 mr-2"> Add</button>
+                                </a> -->
+              </div>
+
+
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+
+          <tr>
+            <th rowspan="2" class="text-center">Code</th>
+            <th rowspan="2" class="text-center">Name</th>
+            <th class="text-center">Text
+          <tr class="d-flex gap-3 justify-content-around align-items-center mt-2">
+            <th *ngFor="let lang of languagesList">
+              {{lang.name}}</th>
+          </tr>
+          </th>
+          <th class="text-center">Title
+            <tr class="d-flex gap-3 justify-content-around align-items-center mt-2">
+              <th *ngFor="let lang of languagesList">
+                {{lang.name}}</th>
+            </tr>
+          </th>
+
+
+          <th class="text-center" rowspan="2">Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-msg>
+          <tr>
+
+            <td><a class="link-info" pRipple (click)="navToDetails(msg,0)">{{msg.code}}</a></td>
+
+            <td>{{msg.name}}</td>
+
+            <td class="text-center">
+          <tr class="d-flex gap-3 justify-content-around align-items-center">
+            <td *ngFor="let row of msg.translations">
+              {{row.textValue}}
+            </td>
+          </tr>
+          </td>
+          <td class="text-center">
+            <tr class="d-flex gap-3 justify-content-around align-items-center">
+              <td *ngFor="let row of msg.translations">
+                {{row.titleValue}}
+              </td>
+            </tr>
+          </td>
+
+          <td class="action-width">
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+              (click)="navToDetails(msg,1)" canUpdate></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger" (click)="delete(msg)"
+              canDelete></button>
+          </td>
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+    </div>
+
+
+
+    <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

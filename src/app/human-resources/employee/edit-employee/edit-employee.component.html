@@ -1,0 +1,1015 @@
+<div
+  #drawerAdd
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="inAddMode">
+      Add Employee
+    </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="inEditMode">
+      Edit Employee
+    </h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <p-tabView
+          [(activeIndex)]="tabIndex"
+          (onChange)="changeTabIndex($event)"
+        >
+        <form [formGroup]="employeeForm">
+          <div class="row form-scroller mb-4">
+            <div class="row box-gryco">
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                [ngClass]="{ disableDiv: inViewMode }"
+              >
+                <h1 class="offcanvas-title offcanvas-heading mb-4">
+                  {{ "Account Information" | tr : PAGE_TITLE | translate }}
+                </h1>
+                <div class="row py-3">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    *ngIf="!inAddMode"
+                  >
+                    <div class="form-floating mb-2">
+                      <input
+                        id="usernameView"
+                        pInputText
+                        formControlName="userName"
+                        [readonly]="true"
+                        type="username"
+                        class="form-control"
+                        placeholder="Employee Name"
+                      />
+                      <label class="form-label" for="usernameView">{{
+                        "Employee Name" | tr : PAGE_TITLE | translate
+                      }}</label>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    *ngIf="inAddMode"
+                  >
+                    <div class="form-floating mb-2">
+                      <input
+                        id="username"
+                        pInputText
+                        formControlName="userName"
+                        [required]="inAddMode"
+                        class="form-control"
+                        placeholder="Username"
+                        type="username"
+                        name="userName"
+                      /><label class="form-label" for="username"
+                        >{{ "Username" | tr : PAGE_TITLE | translate }}
+                        <small class="text-danger">*</small></label
+                      >
+                      <small
+                        class="p-error block"
+                        *ngIf="
+                          employeeForm.get('userName')?.invalid &&
+                          employeeForm.get('userName')?.dirty
+                        "
+                      >
+                        {{
+                          "Username is required" | tr : PAGE_TITLE | translate
+                        }}
+                      </small>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <input
+                        id="email"
+                        (keyup)="emailValidation()"
+                        pInputText
+                        formControlName="email"
+                        [required]="inAddMode"
+                        class="form-control"
+                        placeholder="E-mail address"
+                        type="email"
+                        name="email"
+                      />
+                      <label class="form-label" for="email"
+                        >{{ "E-mail address" | tr : PAGE_TITLE | translate }}
+                        <small class="text-danger">*</small></label
+                      >
+                      <small
+                        class="p-error d-block"
+                        *ngIf="
+                          employeeForm.get('email')?.invalid &&
+                          employeeForm.get('email')?.dirty
+                        "
+                      >
+                        {{ "E-mail is required" | tr : PAGE_TITLE | translate }}
+                      </small>
+                      <small class="text-danger" [hidden]="showMessage">{{
+                        "Please enter a valid email"
+                          | tr : PAGE_TITLE
+                          | translate
+                      }}</small>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    *ngIf="inAddMode"
+                  >
+                    <div class="form-group">
+                      <div class="form-floating mb-2">
+                        <div>
+                          <p-password
+                            formControlName="password"
+                            [toggleMask]="true"
+                            (ngModelChange)="confirmPasswordMatch()"
+                            [required]="inAddMode"
+                            placeholder="Password"
+                          >
+                            <label class="form-label" for="password"
+                              >{{ "Password" | tr : PAGE_TITLE | translate }}
+                              <small class="text-danger">*</small></label
+                            >
+                            <ng-template pTemplate="header">
+                              <h6>
+                                {{
+                                  "Pick a password"
+                                    | tr : PAGE_TITLE
+                                    | translate
+                                }}
+                              </h6>
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                              <p-divider></p-divider>
+                              <p class="p-mt-2">
+                                {{
+                                  "Suggestions" | tr : PAGE_TITLE | translate
+                                }}
+                              </p>
+                              <ul class="p-pl-2 p-ml-2 p-mt-0">
+                                <li>
+                                  {{
+                                    "At least one lowercase"
+                                      | tr : PAGE_TITLE
+                                      | translate
+                                  }}
+                                </li>
+                                <li>
+                                  {{
+                                    "At least one uppercase"
+                                      | tr : PAGE_TITLE
+                                      | translate
+                                  }}
+                                </li>
+                                <li>
+                                  {{
+                                    "At least one numeric"
+                                      | tr : PAGE_TITLE
+                                      | translate
+                                  }}
+                                </li>
+                                <li>
+                                  {{
+                                    "At least one special charachter"
+                                      | tr : PAGE_TITLE
+                                      | translate
+                                  }}
+                                </li>
+                                <li>
+                                  {{
+                                    "Minimum 8 characters"
+                                      | tr : PAGE_TITLE
+                                      | translate
+                                  }}
+                                </li>
+                              </ul>
+                            </ng-template>
+                          </p-password>
+                        </div>
+                        <small
+                          *ngIf="
+                            employeeControls['password'].touched &&
+                            employeeControls['password'].errors &&
+                            employeeControls['password'].errors['required']
+                          "
+                          class="text-danger"
+                        >
+                          {{
+                            "Password is required" | tr : PAGE_TITLE | translate
+                          }}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    *ngIf="inAddMode"
+                  >
+                    <div class="form-group">
+                      <div class="form-floating mb-2">
+                        <p-password
+                          match="password"
+                          formControlName="cPassword"
+                          [toggleMask]="true"
+                          [required]="inAddMode"
+                          [feedback]="false"
+                          (ngModelChange)="confirmPasswordMatch()"
+                          placeholder="Confirm Password"
+                        ></p-password>
+                        <label class="form-label" for="cPassword"
+                          >{{ "Confirm Password" | tr : "user" | translate }}
+                          <small class="text-danger">*</small></label
+                        >
+                        <div
+                          *ngIf="
+                            employeeControls['cPassword'].touched &&
+                            employeeControls['cPassword'].invalid
+                          "
+                          class="text-danger"
+                        >
+                          <div
+                            *ngIf="
+                              employeeControls['cPassword'].errors &&
+                              employeeControls['cPassword'].errors['required']
+                            "
+                            class="text-danger"
+                          >
+                            {{
+                              "Confirm Password is required"
+                                | tr : PAGE_TITLE
+                                | translate
+                            }}
+                          </div>
+                        </div>
+                        <div>
+                          <small
+                            *ngIf="
+                              employeeControls['cPassword'].errors &&
+                              employeeControls['cPassword'].errors['mismatch']
+                            "
+                            class="block text-danger"
+                          >
+                            {{
+                              "Password does not match"
+                                | tr : PAGE_TITLE
+                                | translate
+                            }}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row py-3">
+                  <div class="field">
+                    <label class="form-label" for="isActive">{{
+                      "State" | tr : PAGE_TITLE | translate
+                    }}</label>
+                    <div class="form-check d-flex">
+                      <div class="radio-padding radio-state">
+                        <input
+                          formControlName="isActive"
+                          class="form-check-input"
+                          type="radio"
+                          name="isActive"
+                          id="blocked"
+                          [value]="false"
+                          [checked]="!this.employeeForm.value.isActive"
+                          style="cursor: pointer"
+                        />
+                        <label class="text-primary fw-bold" for="blocked">{{
+                          "Blocked" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                      <div class="radio-padding radio-state mx-4">
+                        <input
+                          formControlName="isActive"
+                          class="form-check-input"
+                          type="radio"
+                          name="isActive"
+                          id="active"
+                          [value]="true"
+                          [checked]="this.employeeForm.value.isActive"
+                          style="cursor: pointer"
+                        />
+                        <label class="text-primary fw-bold" for="active">{{
+                          "Active" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <label class="form-label pt-5">{{
+                    "Roles" | tr : PAGE_TITLE | translate
+                  }}</label>
+                  <div class="pt-3" *ngIf="rolesList">
+                    <div class="row py-3">
+                      <div
+                        class="col-md-6 col-xl-3 col-xxl-3 mb-3"
+                        *ngFor="let role of rolesList"
+                      >
+                        <p-checkbox
+                          class="d-flex"
+                          [value]="role"
+                          formControlName="fullRoles"
+                          (onChange)="
+                            onChangeCheckbox(role);
+                            changeSupervisorsListDependingOnRoleValue()
+                          "
+                          label="{{ role.name | tr : PAGE_TITLE | translate }}"
+                        ></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                [ngClass]="{ disableDiv: inViewMode }"
+              >
+                <h1 class="offcanvas-title offcanvas-heading my-3">
+                  {{ "Employee Information" | tr : PAGE_TITLE | translate }}
+                </h1>
+
+                <div class="pt-5">
+                  <div class="row py-3">
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="employeeId"
+                          formControlName="employeeId"
+                          type="text"
+                          pInputText
+                          [required]="inAddMode"
+                          class="form-control"
+                          placeholder="Employee ID"
+                          type="employeeId"
+                          name="employeeId"
+                        />
+                        <label class="form-label" for="employeeId"
+                          >{{ "Employee ID" | tr : PAGE_TITLE | translate
+                          }}<small *ngIf="!inViewMode" class="text-danger"
+                            >*</small
+                          ></label
+                        >
+                        <small
+                          class="p-error block"
+                          *ngIf="
+                            employeeForm.get('employeeId')?.invalid &&
+                            employeeForm.get('employeeId')?.dirty
+                          "
+                        >
+                          {{
+                            "Employee ID is required"
+                              | tr : PAGE_TITLE
+                              | translate
+                          }}
+                        </small>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-multiSelect *ngIf="!inViewMode" [options]="DepartmentList" optionLabel="name" optionValue="id"
+              formControlName="departmentIds" emptyFilterMessage="Please Search on a Department"></p-multiSelect>
+                        <label class="form-label">{{
+                          "Department" | tr : PAGE_TITLE | translate
+                        }}</label>
+                        <!-- <div *ngIf="inViewMode">
+                          <input
+                            *ngFor="let dept of this.model.departments"
+                            class="mb-3"
+                            [value]="dept.departmentName"
+                            type="text"
+                            [readOnly]="true"
+                            pInputText
+                          />
+                        </div> -->
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          formControlName="supervisorId"
+                          [options]="selectedEmployeesList"
+                          optionLabel="userName"
+                          optionValue="userId"
+                          [filter]="true"
+                          filterBy="userName"
+                          [showClear]="true"
+                          placeholder="Select Manager"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Supervisor" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="qualification"
+                          [options]="qualfilcations"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Qualifcations" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          type="number"
+                          formControlName="yearsOfExpirence"
+                          pInputText
+                          class="form-control"
+                          placeholder="Years of Experiance"
+                        />
+                        <label class="form-label">{{
+                          "Years of Experiance" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="extensionNo"
+                          formControlName="extensionNo"
+                          type="text"
+                          name="Extension number"
+                          pInputText
+                          class="form-control"
+                          placeholder="Extension number"
+                        />
+
+                        <label class="form-label" for="extensionNo">{{
+                          "Extension number" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="mobileNumber"
+                          formControlName="mobileNumber"
+                          type="text"
+                          name="Mobile number"
+                          pInputText
+                          class="form-control"
+                          placeholder="Mobile number"
+                        />
+                        <label class="form-label" for="mobileNumber">{{
+                          "Mobile number" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="phoneNumber"
+                          formControlName="phoneNumber"
+                          type="number"
+                          name="Phone"
+                          pInputText
+                          class="form-control"
+                          placeholder="Phone number"
+                        />
+                        <label class="form-label" for="phoneNumber">{{
+                          "Phone number" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="homeAddress"
+                          formControlName="homeAddress"
+                          type="text"
+                          name="Adress"
+                          pInputText
+                          class="form-control"
+                          placeholder="Home Address"
+                        />
+                        <label class="form-label" for="homeAddress">{{
+                          "Home Address" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div formArrayName="userCodes">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                        [formGroupName]="i"
+                        *ngFor="let code of userCodes(); index as i"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="codeValue"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Oracle Code"
+                          />
+                          <label class="form-label">{{
+                            codeName[i] | tr : PAGE_TITLE | translate
+                          }}</label>
+                          <input formControlName="userId" type="hidden" />
+                          <input formControlName="id" type="hidden" />
+                          <input formControlName="codeTypeId" type="hidden" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="modility"
+                          [options]="modility"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Modility" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="subModility"
+                          [options]="subModility"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Sub-Modility" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="serviceTeam"
+                          [options]="serviceTeam"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Service Team" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="modilityRisk"
+                          [options]="modilityRisk"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Modility Risk" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="skillLevel"
+                          [options]="skillLevel"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Skill Level" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-calendar
+                          formControlName="joiningDate"
+                          [showIcon]="true"
+                          [showButtonBar]="true"
+                          [dateFormat]="'dd/mm/yy'"
+                          [showOnFocus]="false"
+                        ></p-calendar>
+                        <label class="form-label">{{
+                          "Joining date" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-multiSelect
+                          *ngIf="!inViewMode"
+                          [options]="customersList"
+                          optionLabel="custName"
+                          optionValue="id"
+                          (onFilter)="searchCustomer($event)"
+                          formControlName="customersId"
+                          (onChange)="onCustomerChange($event)"
+                          emptyFilterMessage="Please Search on a Site"
+                          placeholder="--Select--"
+                        ></p-multiSelect>
+                        <label class="form-label"
+                          >{{ "Site" | tr : PAGE_TITLE | translate
+                          }}<small *ngIf="!inViewMode" class="text-danger"
+                            >*</small
+                          ></label
+                        >
+                        <div *ngIf="inViewMode">
+                          <input
+                            *ngFor="let site of this.model.userCustomers"
+                            class="mb-3"
+                            [value]="site.customerName"
+                            type="text"
+                            [readOnly]="true"
+                            pInputText
+                          />
+                        </div>
+                        <small
+                          class="p-error block"
+                          *ngIf="
+                            employeeForm.get('customersId')?.hasError &&
+                            employeeForm.get('customersId')?.dirty
+                          "
+                        >
+                          {{ "Site is required" | tr : PAGE_TITLE | translate }}
+                        </small>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <label class="form-label"
+                          >{{ "Asset Groups" | tr : PAGE_TITLE | translate }}
+                          <small *ngIf="!inViewMode" class="text-danger"
+                            >*</small
+                          ></label
+                        >
+
+                        <p-multiSelect
+                          *ngIf="!inViewMode"
+                          [options]="assetGroupsList"
+                          optionLabel="name"
+                          optionValue="id"
+                          (onFilter)="searchAssetGroup($event)"
+                          formControlName="assetGroupsId"
+                          emptyFilterMessage="Please Search on a Asset Group"
+                          placeholder="--Select--"
+                        ></p-multiSelect>
+
+                        <div *ngIf="inViewMode">
+                          <input
+                            *ngFor="
+                              let assetGroup of this.model.userAssetGroups
+                            "
+                            class="mb-3"
+                            [value]="assetGroup.assetGroupName"
+                            type="text"
+                            [readOnly]="true"
+                            pInputText
+                          />
+                        </div>
+
+                        <small
+                          class="p-error block"
+                          *ngIf="
+                            employeeForm
+                              .get('assetGroupsId')
+                              ?.hasError('required') &&
+                            employeeForm.get('assetGroupsId')?.dirty &&
+                            !inViewMode
+                          "
+                        >
+                          {{
+                            "Asset Groups is required"
+                              | tr : PAGE_TITLE
+                              | translate
+                          }}
+                        </small>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                    >
+                      <div class="form-floating mb-2">
+                        <app-attachments
+                          (onUploaded)="attachmentReady($event)"
+                          [attachments]="photoName"
+                          [showButton]="!inViewMode"
+                        ></app-attachments>
+                        <label class="form-label">{{
+                          "Employee Photo" | tr : PAGE_TITLE | translate
+                        }}</label>
+                        <p
+                          *ngIf="
+                            inViewMode && (photoName.length === 0 || !photoName)
+                          "
+                          class="fw-bold"
+                        >
+                          No Profile Photo Avaliable
+                        </p>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      *ngIf="!inEditMode"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="languageId"
+                          [options]="langagesList"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Language" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                >
+                  <h1 class="offcanvas-title offcanvas-heading my-3">
+                    {{ "Certifications" | tr : PAGE_TITLE | translate }}
+                  </h1>
+                  <div class="pt-3">
+                    <div formArrayName="userCertifications">
+                      <div class="w-25">
+                        <button
+                          *ngIf="!inViewMode"
+                          pButton
+                          pRipple
+                          type="button"
+                          (click)="addMoreCertificates()"
+                          icon="pi pi-plus"
+                          class="p-button-primary button-minus-plus site-add-btn"
+                        ></button>
+                      </div>
+
+                      <div
+                        *ngFor="
+                          let certificate of certificationsControl();
+                          let i = index
+                        "
+                      >
+                        <fieldset
+                          [formGroupName]="i"
+                          class="formline add-more-value-border certificate"
+                        >
+                          <div class="pt-3">
+                            <div class="row py-3">
+                              <div
+                                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2"
+                              >
+                                <div class="form-floating mb-2">
+                                  <p-calendar
+                                    formControlName="expireDate"
+                                    [showIcon]="true"
+                                    [showButtonBar]="true"
+                                    [dateFormat]="'dd/mm/yy'"
+                                    [showOnFocus]="false"
+                                    placeholder="Training Certificate Exp. date"
+                                  ></p-calendar>
+                                  <label class="form-label">{{
+                                    "Training Certificate Exp. date"
+                                      | tr : PAGE_TITLE
+                                      | translate
+                                  }}</label>
+                                  <small
+                                    class="d-block fst-italic text-black-50"
+                                    >Formate: 18/12/2022</small
+                                  >
+                                </div>
+                              </div>
+
+                              <div
+                                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2"
+                              >
+                                <div class="form-floating mb-2">
+                                  <input
+                                    type="text"
+                                    formControlName="name"
+                                    pInputText
+                                    class="form-control"
+                                    placeholder="Name"
+                                  />
+                                  <label class="form-label">{{
+                                    "Name" | tr : PAGE_TITLE | translate
+                                  }}</label>
+                                </div>
+                              </div>
+                              <div
+                                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2"
+                              >
+                                <div class="form-floating mb-2">
+                                  <p-autoComplete
+                                    [delay]="1000"
+                                    class="input-field-add-more-value border rounded-0"
+                                    dataKey="id"
+                                    formControlName="modelDefinitionId1"
+                                    (onSelect)="bindModelSave($event, i)"
+                                    [suggestions]="ModelDefinitions"
+                                    (completeMethod)="selectModelsSave($event)"
+                                    field="modelDefCode"
+                                    (onClear)="clearModelSave(i)"
+                                    placeholder="Model Definitions"
+                                  ></p-autoComplete>
+                                  <label class="form-label">{{
+                                    "Model Definitions"
+                                      | tr : PAGE_TITLE
+                                      | translate
+                                  }}</label>
+                                </div>
+                              </div>
+                              <div
+                                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3 add-attachment w-25"
+                              >
+                                <div class="form-floating mb-2">
+                                  <app-attachments
+                                    (onUploaded)="cerAttachmentReady($event, i)"
+                                  ></app-attachments>
+                                  <label class="form-label">{{
+                                    "Attachment" | tr : PAGE_TITLE | translate
+                                  }}</label>
+                                  <a
+                                    *ngIf="certficateImg[i]"
+                                    [href]="certficateImg[i]"
+                                    class="text-primary"
+                                    target="_blank"
+                                  >
+                                    {{
+                                      "Preview Attachment"
+                                        | tr : PAGE_TITLE
+                                        | translate
+                                    }}</a
+                                  >
+                                </div>
+                              </div>
+
+                              <div
+                                *ngIf="!inViewMode"
+                                class="add-more-value-button field ms-4 mb-4"
+                              >
+                                <button
+                                  pButton
+                                  type="button"
+                                  (click)="addMoreCertificates()"
+                                  class="p-button-rounded p-button-info me-2"
+                                  icon="pi pi-plus"
+                                ></button>
+                                <button
+                                  pButton
+                                  type="button"
+                                  (click)="removeCertificate(i)"
+                                  class="p-button-rounded mr-2 p-button-danger"
+                                  icon="pi pi-trash"
+                                ></button>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                *ngIf="!inAddMode"
+              >
+                <div class="pt-5">
+                  <div class="row py-3" [ngClass]="{ disableDiv: true }">
+                    <div class="pt-5">
+                      <app-transaction-history
+                        *ngIf="transactionHistory"
+                        [transactionHistory]="transactionHistory"
+                      ></app-transaction-history>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        </p-tabView>
+
+        
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="save()"
+            *ngIf="inAddMode"
+          >
+            Save
+          </button>
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="save()"
+            *ngIf="inEditMode"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+  </div>
+</div>

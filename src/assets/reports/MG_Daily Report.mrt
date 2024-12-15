@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <MG_x0020_Daily_x0020_Report_x0020_V2 Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>MG Daily Report V2</Alias>
+        <HeadersString />
+        <Key />
+        <Name>MG Daily Report V2</Name>
+        <PathData>D:\Reports Schema\MG Daily Report V2.json</PathData>
+      </MG_x0020_Daily_x0020_Report_x0020_V2>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="87">
+          <value>id,System.Decimal</value>
+          <value>title,System.String</value>
+          <value>taskTypeId,System.Decimal</value>
+          <value>frequesntId,System.Decimal</value>
+          <value>renewed,System.Boolean</value>
+          <value>statusId,System.String</value>
+          <value>date,System.DateTime</value>
+          <value>startDate,System.DateTime</value>
+          <value>endDate,System.DateTime</value>
+          <value>workingHours,System.Decimal</value>
+          <value>siteId,System.Decimal</value>
+          <value>taskType,System.String</value>
+          <value>frequesnt,System.String</value>
+          <value>status,System.String</value>
+          <value>userId,System.String</value>
+          <value>userName,System.String</value>
+          <value>siteName,System.String</value>
+          <value>comment,System.String</value>
+          <value>createdOn,System.DateTime</value>
+          <value>modifiedOn,System.DateTime</value>
+          <value>roomTemperature,System.Boolean</value>
+          <value>roomHumidity,System.Boolean</value>
+          <value>valvesStatus,System.Boolean</value>
+          <value>alarmsCheck,System.Boolean</value>
+          <value>leakageCheck,System.Boolean</value>
+          <value>firstDate,System.String</value>
+          <value>secondDate,System.String</value>
+          <value>roomId,System.String</value>
+          <value>o2ManifoldMainOut,System.Boolean</value>
+          <value>o2ManifoldRightBank,System.Boolean</value>
+          <value>o2ManifoldLeftBank,System.Boolean</value>
+          <value>o2ManifoldEmergency,System.Boolean</value>
+          <value>n2OMainout,System.Boolean</value>
+          <value>n2ORightBank,System.Boolean</value>
+          <value>n2OLeftBank,System.Boolean</value>
+          <value>n2OEmergencyBank,System.Boolean</value>
+          <value>medicalAirMainOut,System.Boolean</value>
+          <value>medicalAirRightBank,System.Boolean</value>
+          <value>medicalAirLeftBank,System.Boolean</value>
+          <value>medicalAirEmergencyBank,System.Boolean</value>
+          <value>cO2MainOut,System.Boolean</value>
+          <value>cO2RightBank,System.Boolean</value>
+          <value>cO2LeftBank,System.Boolean</value>
+          <value>cO2EmergencyBank,System.Boolean</value>
+          <value>n2MainOut,System.Boolean</value>
+          <value>n2RightBank,System.Boolean</value>
+          <value>n2LeftBank,System.Boolean</value>
+          <value>n2EmergencyBank,System.Boolean</value>
+          <value>loX1Volume,System.Decimal</value>
+          <value>loX2Volume,System.String</value>
+          <value>loX1Pressure,System.Boolean</value>
+          <value>loX2Pressure,System.Boolean</value>
+          <value>compressorsCheckforAnyUnusualNoise,System.Boolean</value>
+          <value>compressorsOutputPressure,System.Boolean</value>
+          <value>compressorsMedicalAirLinePressure7To8Bar,System.Boolean</value>
+          <value>compressorsMedicalAirLinePressure4To5Bar,System.Boolean</value>
+          <value>dryersCheckforAlarmOrUnusualNoise,System.Boolean</value>
+          <value>vacuumPumpCheckOilLeakage,System.Boolean</value>
+          <value>vacuumPumpCheckForAnyUnusualNoise,System.Boolean</value>
+          <value>vacuumPumpPressure,System.Boolean</value>
+          <value>agssCheckForAnyAlarm,System.Boolean</value>
+          <value>agssCheckManualOperation,System.Boolean</value>
+          <value>agssCheckAndCleanFilter,System.Boolean</value>
+          <value>o2KTypeEmpty,System.Decimal</value>
+          <value>o2MTypeEmpty,System.String</value>
+          <value>o2ETypeEmpty,System.Decimal</value>
+          <value>o2DTypeEmpty,System.String</value>
+          <value>makTypeEmpty,System.Decimal</value>
+          <value>maeTypeEmpty,System.String</value>
+          <value>n2OKTypeEmpty,System.Decimal</value>
+          <value>n2OETypeEmpty,System.Decimal</value>
+          <value>cO2ETypeEmpty,System.String</value>
+          <value>cO2KTypeEmpty,System.String</value>
+          <value>parentId,System.Decimal</value>
+          <value>isChild,System.Boolean</value>
+          <value>mixtureMTypeEmpty,System.String</value>
+          <value>n2KTypeEmpty,System.Decimal</value>
+          <value>pftMixEmpty,System.String</value>
+          <value>pftHeliumEmpty,System.Decimal</value>
+          <value>liquidNitrogenLarge121LEmpty,System.String</value>
+          <value>liquidNitrogenMedium50LEmpty,System.Decimal</value>
+          <value>liquidNitrogenSmall30LEmpty,System.String</value>
+          <value>taskStatusName,System.String</value>
+          <value>taskStatusId,System.Decimal</value>
+          <value>nitricoxidE11PPM,System.String</value>
+          <value>nitricoxidE25PPM,System.String</value>
+          <value>period,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>cb91d6ec6c944231ba71d46bf65c6611</Key>
+        <Name>root</Name>
+        <NameInSource>MG Daily Report V2.root</NameInSource>
+      </root>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <UserFunctions isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>147a76d2cd7040ec97217f2d04827a36</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="4" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="3">
+        <Table1 Ref="5" type="Stimulsoft.Dashboard.Components.Table.StiTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,0,1200,310</ClientRectangle>
+          <Columns isList="true" count="17">
+            <Item5 Ref="6" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.roomId</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>325886ac4e7e417d81848de9ac11f7d7</Key>
+              <Label>MG Room</Label>
+              <Size Ref="7" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item5>
+            <Item6 Ref="8" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.period</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>f3c5cabc7d30477dac75b06ddcab2e4e</Key>
+              <Label>period</Label>
+              <Size Ref="9" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item6>
+            <Item7 Ref="10" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.roomTemperature</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>5e08efa3307d48fd8f94fc4fa36e08d2</Key>
+              <Label>Room Temperature</Label>
+              <Size Ref="11" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat Ref="12" type="BooleanFormat" isKey="true">
+                <NullDisplay> </NullDisplay>
+                <StringFormat />
+              </TextFormat>
+            </Item7>
+            <Item8 Ref="13" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.roomHumidity</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>39d903c187a94afab179089b4aeb3158</Key>
+              <Label>Room Humidity</Label>
+              <Size Ref="14" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item8>
+            <Item9 Ref="15" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.valvesStatus</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>1b1f8aa6c3ca4bdcba8d8f38f0643446</Key>
+              <Label>Valves Status</Label>
+              <Size Ref="16" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item9>
+            <Item10 Ref="17" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.alarmsCheck</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>05276fa2014d49828fcfad41b0e4586c</Key>
+              <Label>Alarms Check</Label>
+              <Size Ref="18" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item10>
+            <Item11 Ref="19" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.leakageCheck</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>1289d909465945d3be818ef6f7b62a4a</Key>
+              <Label>Leakage Check</Label>
+              <Size Ref="20" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item11>
+            <Item12 Ref="21" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.o2ManifoldMainOut</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>6a4b9a125e91480ba955ad1ab41a8456</Key>
+              <Label>O2Manifold Main-Out</Label>
+              <Size Ref="22" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item12>
+            <Item13 Ref="23" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.o2ManifoldRightBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>21841413d4ff41f6b05c0cda2a93d939</Key>
+              <Label>O2Manifold Right-Bank</Label>
+              <Size Ref="24" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item13>
+            <Item14 Ref="25" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.o2ManifoldLeftBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>82a0405dbe0d4bf6846047a41f382949</Key>
+              <Label>O2Manifold Left-Bank</Label>
+              <Size Ref="26" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item14>
+            <Item15 Ref="27" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.o2ManifoldEmergency</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>1a9b1113f9cf4d6587d1092c54e91fa6</Key>
+              <Label>O2Manifold Emergency</Label>
+              <Size Ref="28" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item15>
+            <Item16 Ref="29" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.n2OMainout</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>aa413a8a745f4707b0b7f9048b589138</Key>
+              <Label>N2O Mainout</Label>
+              <Size Ref="30" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item16>
+            <Item17 Ref="31" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.n2ORightBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>6de5c7661e014ff9a45b23f4d80709a6</Key>
+              <Label>N2O Right Bank</Label>
+              <Size Ref="32" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item17>
+            <Item18 Ref="33" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.n2OLeftBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>ff4f60f5fc24490cab9079b0b1e0934c</Key>
+              <Label>N2O Left Bank</Label>
+              <Size Ref="34" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item18>
+            <Item19 Ref="35" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.n2OEmergencyBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>227091b58f1c4e519da9c8ada1798421</Key>
+              <Label>N2O Emergency Bank</Label>
+              <Size Ref="36" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item19>
+            <Item20 Ref="37" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.medicalAirMainOut</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>9c63dcf1a14a4d8c9442341a9c5410ff</Key>
+              <Label>Medical Air Main-Out</Label>
+              <Size Ref="38" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item20>
+            <Item21 Ref="39" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.medicalAirRightBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>c70dd0e21b2c4519909fc8cbf07635d4</Key>
+              <Label>Medical Air Right Bank</Label>
+              <Size Ref="40" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item21>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,10</Font>
+          <FooterFont>Arial,10</FooterFont>
+          <FooterForeColor>Transparent</FooterForeColor>
+          <ForeColor>Transparent</ForeColor>
+          <Guid>dd5737660e0441c483b08f6b83626952</Guid>
+          <HeaderFont>Arial,10</HeaderFont>
+          <HeaderForeColor>Transparent</HeaderForeColor>
+          <Margin>3,3,3,3</Margin>
+          <Name>Table1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <TableConditions isList="true" count="0" />
+          <Title Ref="41" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+        </Table1>
+        <Table2 Ref="42" type="Stimulsoft.Dashboard.Components.Table.StiTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,320,1200,280</ClientRectangle>
+          <Columns isList="true" count="16">
+            <Item23 Ref="43" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.roomId</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>465d17d219c643dfa1900e341ab9803f</Key>
+              <Label>MG Room</Label>
+              <Size Ref="44" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item23>
+            <Item24 Ref="45" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.period</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>db4ee1c04d3c4a58bb5faa9f3d1a4a43</Key>
+              <Label>Period</Label>
+              <Size Ref="46" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item24>
+            <Item25 Ref="47" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.medicalAirLeftBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>34652d61bc224b08b1e0d3c75259508c</Key>
+              <Label>Medical Air Left Bank</Label>
+              <Size Ref="48" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item25>
+            <Item26 Ref="49" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.medicalAirEmergencyBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>9f808c6f1a7e424a9e4504f5478cf35e</Key>
+              <Label>Medical Air Emergency Bank</Label>
+              <Size Ref="50" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item26>
+            <Item27 Ref="51" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.cO2MainOut</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>9ea456f685ef4910867c0227eba45a99</Key>
+              <Label>CO2 Main Out</Label>
+              <Size Ref="52" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item27>
+            <Item28 Ref="53" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.cO2RightBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>2d9e3f8ae110411484d88f834a426199</Key>
+              <Label>CO2 Right Bank</Label>
+              <Size Ref="54" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item28>
+            <Item29 Ref="55" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.cO2LeftBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>27fd01ef34034dc6be7d46042bd87d2c</Key>
+              <Label>CO2 Left Bank</Label>
+              <Size Ref="56" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item29>
+            <Item30 Ref="57" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.cO2EmergencyBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>0dafb573b2ed4485bf7a1821ee4aff22</Key>
+              <Label>CO2 Emergency Bank</Label>
+              <Size Ref="58" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item30>
+            <Item31 Ref="59" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.n2MainOut</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>3cda25708b5b42159fda6f3d1dbc501d</Key>
+              <Label>N2 Main Out</Label>
+              <Size Ref="60" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item31>
+            <Item32 Ref="61" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.n2RightBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>22dbc7c968e14feeb8b22d2295169d50</Key>
+              <Label>N2 Right Bank</Label>
+              <Size Ref="62" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item32>
+            <Item33 Ref="63" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.n2LeftBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>9d0d1ff3e291467690665ee8f028ddcb</Key>
+              <Label>N2 Left Bank</Label>
+              <Size Ref="64" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item33>
+            <Item34 Ref="65" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.n2EmergencyBank</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>2c6855e2d1cc4843a8a5d110eadcd002</Key>
+              <Label>N2 Emergency Bank</Label>
+              <Size Ref="66" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item34>
+            <Item35 Ref="67" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.loX1Volume</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <HorAlignment>Right</HorAlignment>
+              <Key>ed9d95ba9af247f5a5e219ea91371a42</Key>
+              <Label>LOX1 Volume</Label>
+              <Size Ref="68" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat Ref="69" type="NumberFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+              </TextFormat>
+            </Item35>
+            <Item36 Ref="70" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.loX2Volume</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>15dca46533864252b2db6577b2b50059</Key>
+              <Label>LOX2 Volume</Label>
+              <Size Ref="71" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item36>
+            <Item37 Ref="72" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.loX1Pressure</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>fe0c6a3e764c4812af248284775d2628</Key>
+              <Label>LOX1 Pressure</Label>
+              <Size Ref="73" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item37>
+            <Item38 Ref="74" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.loX2Pressure</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>9d6c5cfeca07453aaac0bddac00b0509</Key>
+              <Label>LOX2 Pressure</Label>
+              <Size Ref="75" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item38>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,10</Font>
+          <FooterFont>Arial,10</FooterFont>
+          <FooterForeColor>Transparent</FooterForeColor>
+          <ForeColor>Transparent</ForeColor>
+          <Guid>a8964cf6e389446a9dc8810e523be78e</Guid>
+          <HeaderFont>Arial,10</HeaderFont>
+          <HeaderForeColor>Transparent</HeaderForeColor>
+          <Margin>3,3,3,3</Margin>
+          <Name>Table2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <TableConditions isList="true" count="0" />
+          <Title Ref="76" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+        </Table2>
+        <Table3 Ref="77" type="Stimulsoft.Dashboard.Components.Table.StiTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,620,1200,280</ClientRectangle>
+          <Columns isList="true" count="13">
+            <Item40 Ref="78" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.roomId</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>6c4e7316a22344dcab78aba848293661</Key>
+              <Label>MG Room</Label>
+              <Size Ref="79" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item40>
+            <Item41 Ref="80" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.period</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>825a97245e114a22bac1773d8f157266</Key>
+              <Label>Period</Label>
+              <Size Ref="81" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item41>
+            <Item42 Ref="82" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.compressorsCheckforAnyUnusualNoise</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>676cc8277b3a4635a7c5ece6e42ff9de</Key>
+              <Label>Compressors Check for Any Unusual Noise</Label>
+              <Size Ref="83" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item42>
+            <Item43 Ref="84" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.compressorsOutputPressure</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>1c43063d1bdf44f4a5f653e7f0188ff4</Key>
+              <Label>Compressors Output Pressure</Label>
+              <Size Ref="85" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item43>
+            <Item44 Ref="86" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.compressorsMedicalAirLinePressure7To8Bar</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>aa897584aa1644ca9e2da884088e0ff9</Key>
+              <Label>Compressors Medical Air Line Pressure 7To8 Bar</Label>
+              <Size Ref="87" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item44>
+            <Item45 Ref="88" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.compressorsMedicalAirLinePressure4To5Bar</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>bf830111d0c64dadbbcbabb8d242eedf</Key>
+              <Label>Compressors Medical Air Line Pressure 4To5 Bar</Label>
+              <Size Ref="89" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item45>
+            <Item46 Ref="90" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.dryersCheckforAlarmOrUnusualNoise</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>9f74e5205c854b7fa87ca24799d9f0f7</Key>
+              <Label>Dryers Check for Alarm Or Unusual Noise</Label>
+              <Size Ref="91" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item46>
+            <Item47 Ref="92" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.vacuumPumpCheckOilLeakage</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>7042eb5923d24f4f86c8051d17c82267</Key>
+              <Label>Vacuum Pump Check Oil Leakage</Label>
+              <Size Ref="93" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item47>
+            <Item48 Ref="94" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.vacuumPumpCheckForAnyUnusualNoise</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>4d6bdbd686944a3485d556979ba61617</Key>
+              <Label>Vacuum Pump Check For Any Unusual Noise</Label>
+              <Size Ref="95" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item48>
+            <Item49 Ref="96" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.agssCheckAndCleanFilter</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>bfa68892920843fdb3da79c64e7276fd</Key>
+              <Label>Agss Check And Clean Filter</Label>
+              <Size Ref="97" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item49>
+            <Item50 Ref="98" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.agssCheckManualOperation</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>4750659e82254275a1c72fa02e0500de</Key>
+              <Label>Agss Check Manual Operation</Label>
+              <Size Ref="99" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item50>
+            <Item51 Ref="100" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.agssCheckForAnyAlarm</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>bda6b12819ac4718b2b54fa4c1199fb0</Key>
+              <Label>Agss Check For Any Alarm</Label>
+              <Size Ref="101" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item51>
+            <Item52 Ref="102" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root.vacuumPumpPressure</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>01407498378340f1972193e6d8949cb7</Key>
+              <Label>Vacuum Pump Pressure</Label>
+              <Size Ref="103" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat isRef="12" />
+            </Item52>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,10</Font>
+          <FooterFont>Arial,10</FooterFont>
+          <FooterForeColor>Transparent</FooterForeColor>
+          <ForeColor>Transparent</ForeColor>
+          <Guid>703b0af422b64390a58087a385917a09</Guid>
+          <HeaderFont>Arial,10</HeaderFont>
+          <HeaderForeColor>Transparent</HeaderForeColor>
+          <Margin>3,3,3,3</Margin>
+          <Name>Table3</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <TableConditions isList="true" count="0" />
+          <Title Ref="104" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+        </Table3>
+      </Components>
+      <DashboardWatermark Ref="105" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>dd41da4a19684f6d91134275b858b607</Guid>
+      <Height>750</Height>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Mohamed Alaa</ReportAuthor>
+  <ReportChanged>3/13/2024 2:50:51 PM</ReportChanged>
+  <ReportCreated>3/13/2024 1:37:46 PM</ReportCreated>
+  <ReportFile>D:\Reports\MG_Daily Report.mrt</ReportFile>
+  <ReportGuid>975cf5e0452a4c9f9b707571d10050cd</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2024.1.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

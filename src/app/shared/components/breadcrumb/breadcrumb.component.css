@@ -1,0 +1,32 @@
+.matero-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  list-style: none;
+}
+
+.matero-breadcrumb-item {
+  line-height: 18px;
+  text-transform: capitalize;
+}
+.matero-breadcrumb-item > * {
+  vertical-align: middle;
+}
+.matero-breadcrumb-item > a.link {
+  color: currentColor;
+  text-decoration: none;
+}
+.matero-breadcrumb-item > a.link:hover {
+  color: currentColor;
+  text-decoration: underline;
+}
+.matero-breadcrumb-item > .chevron {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}/*# sourceMappingURL=breadcrumb.component.css.map */

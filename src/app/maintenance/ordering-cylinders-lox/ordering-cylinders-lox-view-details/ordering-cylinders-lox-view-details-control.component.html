@@ -1,0 +1,239 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1  class="offcanvas-title offcanvas-heading">View Ordering Cylinders/LOX</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+
+      <!-- <ng-template #formTemplate> -->
+        <div class="mb-2 mb-xl-4">
+          <div class="pt-2">
+            <div *ngIf="!model" class="d-flex justify-content-center align-items-center">
+              <i class="pi pi-spin pi-spinner"></i>
+            </div>
+            <!-- General Info -->
+             <form [formGroup]="orderForm" (ngSubmit)="save()" *ngIf="model">
+              <div class="row py-3 box-gryco" [ngClass]="{'disableDiv': inViewMode}">
+
+                <!-- Request Status -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!inAddMode">
+                  <p class="viewp-text">{{'Request Status'}}: <span class="viewspan-text">{{orderForm.value.backUpStatusName}}</span></p>
+                </div>
+
+                <!-- Next Step -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!inAddMode">
+                  <p class="viewp-text">{{'Next Step'}}: <span class="viewspan-text">{{orderForm.value.nextBackUpStatusName}}</span></p>
+                </div>
+
+                <!-- Assigned Employee -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Assigned Employee'}}: <span class="viewspan-text">{{orderForm.value.userName}}</span></p>
+                </div>
+
+                <!-- Contact Number -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Contact No.'}}: <span class="viewspan-text">{{orderForm.value.contactNumber}}</span></p>
+                </div>
+
+                <!-- Supplier -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Supplier'}}: <span class="viewspan-text">{{orderForm.value.supplierName}}</span></p>
+                </div>
+
+                <!-- Delivery Date -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Delivery Date'}}: <span class="viewspan-text">{{model.deliveryDate | date: 'd-MM-yyyy'}}</span></p>
+                </div>
+
+                <!-- Supplier Email -->
+                <div class="row" formArrayName="suppliersMails">
+                  <div *ngFor="let mail of supplierMailControl().controls; let i=index"
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <p class="viewp-text">{{'Supplier E-mail'}}: <span class="viewspan-text">{{mail.value}}</span></p>
+                  </div>
+                </div>
+
+                <!-- PR Number -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!inAddMode && orderForm.value.prNumber">
+                  <p class="viewp-text">{{'PR Number'}}: <span class="viewspan-text">{{orderForm.value.prNumber}}</span></p>
+                  <a *ngIf="prAttachmentUrl" (click)="downloadFile(prAttachmentUrl)">Preview PR Attachment</a>
+                </div>
+
+                <!-- PO Number -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!inAddMode && orderForm.value.poNumber">
+                  <p class="viewp-text">{{'PO Number'}}: <span class="viewspan-text">{{orderForm.value.poNumber}}</span></p>
+                  <a *ngIf="poAttachmentUrl" (click)="downloadFile(poAttachmentUrl)">Preview PO Attachment</a>
+                </div>
+
+                <!-- Invoice Number -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!inAddMode && orderForm.value.invoiceNumber">
+                  <p class="viewp-text">{{'Invoice Number'}}: <span class="viewspan-text">{{orderForm.value.invoiceNumber}}</span></p>
+                  <a *ngIf="invoiceAttachmentUrl" (click)="downloadFile(invoiceAttachmentUrl)">Preview Invoice Attachment</a>
+                </div>
+
+                <!-- Invoice From and To -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!inAddMode && orderForm.value.invoiceNumber">
+                  <p class="viewp-text">{{'From'}}: <span class="viewspan-text">{{model.invoiceFrom | date: 'd-MM-yyyy'}}</span></p>
+                  <p class="viewp-text">{{'To'}}: <span class="viewspan-text">{{model.invoiceTo | date: 'd-MM-yyyy'}}</span></p>
+                </div>
+
+                <!-- PRF Approved -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!inAddMode && orderForm.value.invoiceNumber">
+                  <p class="viewp-text">{{'PRF Approve'}}: <span class="viewspan-text">{{model.prfApproved == true ? 'Yes' : model.prfApproved == false ? 'No' : ''}}</span></p>
+                  <a *ngIf="prfAttachmentUrl" (click)="downloadFile(prfAttachmentUrl)">Preview PRF Attachment</a>
+                </div>
+
+                <!-- PCD Submission Date -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!inAddMode && orderForm.value.pcdSubmissionDate">
+                  <p class="viewp-text">{{'PCD Submission Date'}}: <span class="viewspan-text">{{model.pcdSubmissionDate | date: 'd-MM-yyyy'}}</span></p>
+                </div>
+
+                <!-- Cylinder Radio Button -->
+                <div class="radio-padding radio-padding-display d-flex radio-state gap-3">
+                  <div *ngFor="let opt of options" class="p-field-checkbox d-flex gap-2">
+                    <p-radioButton [inputId]="opt.key" name="isCylinder" [value]="opt.value" formControlName="isCylinder"
+                      (onClick)="getSelectedoption($event)" [disabled]="true"></p-radioButton>
+                    <label [for]="opt.key">{{opt.name}}</label>
+                  </div>
+                </div>
+
+                <!-- Site -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Site'}}: <span class="viewspan-text">{{orderForm.value.customerName}}</span></p>
+                </div>
+
+                <!-- Date -->
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Date'}}: <span class="viewspan-text">{{model.date | date: 'd-MM-yyyy'}}</span></p>
+                </div>
+
+              </div>
+            </form>
+
+            <!-- Cylinders & LOX-->
+            <p-tabView>
+              <!-- Cylinders -->
+              <p-tabPanel *ngIf="checked" header="Cylinders">
+                <div *ngIf="!isLoading && !foundCylinderChildren" class="d-flex justify-content-center align-items-center">
+                  <h3>No Cylinders Found</h3>
+                </div>
+                <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center">
+                  <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+                </div>
+                <div *ngIf="selectedASite" class="d-flex justify-content-center align-items-center">
+                  <h3>Please select Site and Date</h3>
+                </div>
+
+                <form [formGroup]="backupForm" (ngSubmit)="save()" *ngIf="model" #cylindersDiv>
+                  <div *ngIf="cylinderPercentage" class="row py-3" [ngClass]="{'disableDiv': inViewMode}">
+                    <ng-container *ngFor="let item of cylindersArr; let i = index">
+                      <ng-container
+                        *ngIf="cylinderPercentage[item.control.replace('Recieved', 'PR')] > 0 || model[item.control.replace('Recieved', '')] > 0">
+                        <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+                          <label class="form-label">
+                            <span>{{item.label}}</span> RQ
+                            {{cylinderPercentage[item.control.replace('Recieved', 'PR')] + "%"}}
+                          </label>
+                          <p class="viewp-text">{{item.label}}: <span class="viewspan-text">{{cylinderPercentage[item.control.replace('Recieved', 'PR')] + "%"}}</span></p>
+                        </div>
+                      </ng-container>
+
+                      <ng-container
+                        *ngIf="!item.control.includes('liquidNitrogen') && model[item.control.replace('Recieved', '')] > 0 && !inAddMode">
+                        <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+                          <label class="form-label" [for]="item">{{item.receivedLabel}}</label>
+                          <p class="viewp-text">{{item.receivedLabel}}: <span class="viewspan-text">{{model[item.control.replace('Recieved', '')]}}</span></p>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+
+                    <ng-container
+                      *ngIf="(model['liquidNitrogenSmall30LEmpty'] > 0 || model['liquidNitrogenMedium50LEmpty'] > 0 || model['liquidNitrogenLarge121LEmpty'] > 0) && !inAddMode">
+                      <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+                        <label class="form-label">Liquid Nitrogen Received Volume(Gallon)</label>
+                        <p class="viewp-text">Liquid Nitrogen Received Volume(Gallon): <span class="viewspan-text">{{model['liquidNitrogenSmall30LEmptyRecieved']}}</span></p>
+                      </div>
+                    </ng-container>
+                  </div>
+                </form>
+              </p-tabPanel>
+
+              <!-- LOX -->
+              <p-tabPanel *ngIf="!checked" header="LOX">
+                <div *ngIf="!isLoading && !foundLoxChildren" class="d-flex justify-content-center align-items-center">
+                  <h3>No LOX Found</h3>
+                </div>
+                <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center">
+                  <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+                </div>
+                <div *ngIf="selectedASite" class="d-flex justify-content-center align-items-center">
+                  <h3>Please select Site and Date</h3>
+                </div>
+
+                <form [formGroup]="LOXForm">
+                  <div #loxDiv *ngIf="!selectedASite" class="d-flex justify-content-around gap-5 py-3" [ngClass]="{'disableDiv': inViewMode}">
+
+                    <div class="d-flex flex-column text-center" *ngIf="LOXForm.value?.lox1VolumeRq">
+                      <h3 class="text-primary">LOX 1 Volume</h3>
+                      <div class="fu-progress">
+                        <div class="fu-inner">
+                          <div class="fu-percent percent">
+                            <span>{{LOXForm.value?.lox1VolumeRq}}</span>%
+                          </div>
+                          <div class="water"></div>
+                          <div class="glare"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-column text-center" *ngIf="LOXForm.value?.lox2VolumeRq">
+                      <h3 class="text-primary">LOX 2 Volume</h3>
+                      <div class="fu-progress">
+                        <div class="fu-inner">
+                          <div class="fu-percent percent">
+                            <span>{{LOXForm.value?.lox2VolumeRq}}</span>%
+                          </div>
+                          <div class="water"></div>
+                          <div class="glare"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mt-3" *ngIf="(model.lox2VolumeRq || model.lox1VolumeRq) && !inAddMode">
+                    <label class="form-label ms-2" for="loX1Volume">LOX Received (Gallon)</label>
+                    <p class="viewp-text">LOX Received (Gallon): <span class="viewspan-text">{{model.loX1Volume}}</span></p>
+                  </div>
+                </form>
+              </p-tabPanel>
+
+            </p-tabView>
+            <hr>
+            <!-- Attachment -->
+            <form [formGroup]="attachForm" (ngSubmit)="save()" *ngIf="model">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <label class="form-label">Upload Delivery Note<small class="text-danger" *ngIf="!inViewMode && inRD">*</small></label>
+
+                <!-- Display the label and value -->
+                <p class="viewp-text">Upload Delivery Note:
+                  <span class="viewspan-text">
+                    {{attachmentNames.length > 0 ? attachmentNames.join(', ') : 'No Attachment Available'}}
+                  </span>
+                </p>
+              </div>
+            </form>
+
+
+          </div>
+
+
+        </div>
+      <!-- </ng-template> -->
+    </div>
+  </div>
+     <!--  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

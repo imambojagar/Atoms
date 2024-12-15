@@ -1,0 +1,160 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Asset Transfer List</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form">
+        <form [formGroup]="addAssetForm">
+          <div class="row">
+            <div class="col-12">
+              <h3 class="section-heading">Asset Info</h3>
+            </div>
+
+            <div class="row box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Asset Number' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.assetNumber }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Asset SN' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.assetSerialNo }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Asset Name' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.assetName }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Model' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.modelName }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Manufacturer' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.manufacturerName }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Supplier' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.supplierName }}</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Transfer Asset Info</h3>
+            </div>
+
+            <div class="row box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Destination Site' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.destSiteIdString }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Building' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.destBuildingId }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Floor' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.destFloorId }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Department' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.destDepartmentId }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Room' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.senderRoom }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Comment' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.comment }}</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Asset Sender Info</h3>
+            </div>
+
+            <div class="row box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Sender Client' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.senderSiteName }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Sender Building' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.senderBuildingName }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Sender Floor' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.senderFloorName }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">
+                  {{ 'Sender Department' }}:
+                  <span class="viewspan-text">{{ addAssetForm.value.senderDepartmentName }}</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Attachment</h3>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">
+                {{ 'Files' }}:
+                <span class="viewspan-text">{{ senderFileList | json }}</span>
+              </p>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="submitForm()">Save</button>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <app-assets-table-lookup [showDialog]="showDialog" (onSelect)="onCloseDialog($event)"
+  (onHideDialog)="onHide($event)"></app-assets-table-lookup>
+
+
+   <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

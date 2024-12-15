@@ -1,0 +1,174 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+ class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading"> Add Part Delivery</h1>
+      <button type="button" class="btn-close" (click)="close_modal()"></button>
+    </div>
+
+    <p-toast></p-toast>
+    <!-- <div class="card flex justify-content-center mb-5">
+      <p-breadcrumb [model]="items"></p-breadcrumb>
+    </div> -->
+    <div class="p-3">
+      <div class="row">
+            <p-toast></p-toast>
+            <form [formGroup]="addCatalogForm" (ngSubmit)="savePartCatalog()" class="add-content-type">
+              <div class="form-scroller">
+                <div class="mb-2 mb-xl-2">
+                  <div class="box-gryco pt-2">
+                    <div class="row py-3">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label >Part Number</label>
+                          <input
+                            id="partNumber"
+                            formControlName="partNumber"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Enter Part Number"
+                            [required]="true"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label >Part Name(e)</label>
+                          <input
+                            id="partName"
+                            formControlName="partName"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Enter Part Name"
+                            [required]="true"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p-tabView>
+                  <p-tabPanel header="Item information">
+                    <div class="box-gryco pt-2">
+                      <div class="row py-3">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label >Oracle Code</label>
+                            <input
+                              id="oracleCode"
+                              formControlName="oracleCode"
+                              type="text"
+                              pInputText
+                              class="form-control"
+                              placeholder="Enter Oracle Code"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label >Part Type</label>
+                            <p-dropdown
+                              [options]="partType"
+                              optionLabel="name"
+                              optionValue="id"
+                              formControlName="partType"
+                              class="dropdown"
+                              placeholder="Select Part Type"
+                              (onChange)="changePartType($event)"
+                            ></p-dropdown>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <span class="p-float-label">
+                            <p-autoComplete
+                              [delay]="1000"
+                              [suggestions]="manufacturer"
+                              field="taxonomyName"
+                              formControlName="manufacturerId"
+                              class="dropdown"
+                              (completeMethod)="completeManufacturer($event)"
+                              (onChange)="changeManufactureId($event)"
+                              [required]="true"
+                            ></p-autoComplete>
+                            <label for="manufacturerId">Manufacturer</label>
+                          </span>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label >End of Support Date</label>
+                            <p-calendar
+                              [showIcon]="true"
+                              [showOnFocus]="false"
+                              formControlName="endSupport"
+                              dateFormat="dd/mm/yy"
+                              placeholder="Select End Support Date"
+                            ></p-calendar>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label >Warranty Months</label>
+                            <p-dropdown
+                              [options]="warranty"
+                              optionLabel="name"
+                              optionValue="id"
+                              formControlName="warranty"
+                              class="dropdown"
+                              placeholder="Select Warranty"
+                              (onChange)="changeWarranty($event)"
+                            ></p-dropdown>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label >Initials</label>
+                            <input
+                              id="initials"
+                              formControlName="initials"
+                              type="text"
+                              pInputText
+                              class="form-control"
+                              placeholder="Enter Initials"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label >PO Number</label>
+                            <p-inputNumber
+                              mode="decimal"
+                              formControlName="poNumber"
+                              inputId="poNumber"
+                              [useGrouping]="false"
+                              placeholder="Enter PO Number"
+                            ></p-inputNumber>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </p-tabPanel>
+                </p-tabView>
+              </div>
+            </form>
+            
+
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="savePartCatalog()">Save</button>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+      <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+
+
+
+      <ng-template #addNewStockInformation>
+        <button pButton type="button" (click)="addMoreinventory()" class="p-button-rounded p-button-info mr-2"
+          icon="pi pi-plus">
+        </button>
+      </ng-template>
+</div>

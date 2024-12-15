@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-12">
+        <div class="fv-row" [formGroup]="registryFilesForm">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <div class="card card-flush mt-6 mb-6 mb-xl-9">
+                        <div class="card-body pt-4">
+                            <div formArrayName="registryFiles">
+                                <div *ngFor=" let info of registryFilesFormArray().controls; let i = index"
+                                    class="formline add-more-value-border add-more-values margin-bottom-add-more">
+                                    <div [formGroupName]="i" class="d-flex">
+                                        <fieldset class="formline">
+                                            <div class="row py-3">
+                                                <div class="col-md-12 col-sm-12 col-xl-12 col-xxl-12">
+                                                    <input type="text" formControlName="fileName" name="fileName"
+                                                        style="border: none"
+                                                        class="form-control form-control-sm d-flex align-items-center"
+                                                        readonly />
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xl-4 col-xxl-4">
+                                                    <label class="fs-6 fw-bold form-label"></label>
+                                                    <label
+                                                        class="form-check form-switch form-check-custom form-check-solid"><input
+                                                            formControlName="available" name="available"
+                                                            class="form-check-input" type="checkbox"
+                                                            (change)="checkFileAvailable($event, i)" value="1" /><span
+                                                            class="form-check-label fw-bold text-gray-400">Available</span></label>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xl-4 col-xxl-4">
+                                                    <label class="fs-6 fw-bold form-label"> </label>
+                                                    <label
+                                                        class="form-check form-switch form-check-custom form-check-solid"><input
+                                                            formControlName="notAvailable" name="notAvailable"
+                                                            class="form-check-input"
+                                                            (change)="checkFileNonAvailable($event, i)" type="checkbox"
+                                                            value="1" /><span
+                                                            class="form-check-label fw-bold text-gray-400">Not
+                                                            Available</span></label>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xl-4 col-xxl-4">
+                                                    <label class="fs-6 fw-bold form-label"> </label>
+                                                    <label
+                                                        class="form-check form-switch form-check-custom form-check-solid"><input
+                                                            formControlName="notRequired" name="notRequired"
+                                                            class="form-check-input" type="checkbox"
+                                                            (change)="checkFileRequired($event, i)" value="1" /><span
+                                                            class="form-check-label fw-bold text-gray-400">Not
+                                                            Required</span></label>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="button" class="btn btn-primary mt-8 ml-6" (click)="closeRegistryFilesModel()">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary mt-8 ml-6" (click)="save()">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

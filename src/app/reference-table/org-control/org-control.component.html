@@ -1,0 +1,570 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                  >
+                    <div class="row mb-3 content-heading">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3"
+                      >
+                        <div class="float-start main-heading">
+                          Organizations Control Table
+                        </div>
+                        <div class="float-start export-icon mt-3">
+                          <a class="m-5" (click)="export()"
+                            >Export
+                            <img src="assets/img/dashboard/excel.svg" alt=""
+                          /></a>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"
+                      >
+                        <div class="row float-end">
+                          <div
+                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3"
+                          >
+                            <!-- <div class="float-end filter-icon h-100">
+                              <a (click)="toggleFilter()"
+                                ><img
+                                  src="assets/img/dashboard/filter.svg"
+                                  alt=""
+                              /></a>
+                            </div> -->
+                          </div>
+                          <div
+                            class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3"
+                          >
+                            <div class="form-floating float-start">
+                              <input
+                                type="text"
+                                class="form-control input-field icon-padding"
+                                id="floatingName"
+                                [(ngModel)]="searchValue"
+                                (input)="applyGlobalFilter($event)"
+                                placeholder="Search"
+                                value="Type here"
+                              />
+                              <a>
+                                <img
+                                  class="float-end search-icon"
+                                  src="assets/img/dashboard/search.svg"
+                                  alt=""
+                              /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div
+                            class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3"
+                          >
+                            <div class="d-grid">
+                              <button
+                                class="btn btn-blue text-white border-r10"
+                                type="button"
+                                (click)="toggleAdd()"
+                              >
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <p-table
+                        [value]="orgsList"
+                        [rows]="10"
+                        [showCurrentPageReport]="true"
+                        [totalRecords]="totalRows"
+                        dataKey="id"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        #dt
+                      >
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th class="text-center">Organization Name</th>
+                            <th class="text-center">Organization Code</th>
+                            <th class="text-center">Postal Code</th>
+                            <th class="text-center">From Date</th>
+                            <th class="text-center">To Date</th>
+                            <th class="text-center">Location</th>
+                            <th class="text-center">City</th>
+                            <th class="text-center">Country</th>
+                            <th class="text-center">Action</th>
+                          </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-org>
+                          <tr>
+                            <td class="text-center">{{ org.name }}</td>
+                            <td class="text-center">{{ org.orgCode }}</td>
+                            <td class="text-center">{{ org.orgPostalCode }}</td>
+                            <td class="text-center">
+                              {{ org.fromDate | date }}
+                            </td>
+                            <td class="text-center">{{ org.toDate | date }}</td>
+                            <td class="text-center">{{ org.location }}</td>
+                            <td class="text-center">{{ org.cityName }}</td>
+                            <td class="text-center">{{ org.countryName }}</td>
+                            <td
+                              class="sticky-header"
+                              alignFrozen="right"
+                              pFrozenColumn
+                              [frozen]="balanceFrozen"
+                            >
+                              <div class="d-flex justify-content-center">
+                                <p-button
+                                  icon="pi pi-pencil"
+                                  class="mr-2"
+                                  [rounded]="true"
+                                  [outlined]="true"
+                                  severity="success"
+                                  (click)="showUpdateDialog(org.id)"
+                                  canUpdate
+                                />
+
+                                <p-button
+                                  icon="pi pi-trash"
+                                  severity="danger"
+                                  [rounded]="true"
+                                  [outlined]="true"
+                                  (click)="onDelete(org)"
+                                  canDelete
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                      <p-paginator
+                        [rows]="filter.pageSize"
+                        [totalRecords]="totalRows"
+                        (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                      ></p-paginator>
+                      <!-- =================== -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          #drawerAdd
+          [ngClass]="showAddModal ? 'show' : ''"
+          class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+          id="r-step-1"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div class="offcanvas-header">
+            <h1 class="offcanvas-title offcanvas-heading">Add Organization</h1>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="close_add_modal()"
+            ></button>
+          </div>
+          <div class="p-3">
+            <div class="row">
+              <p-toast></p-toast>
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3"
+              >
+                <!-- ========== -->
+                <form [formGroup]="orgForm">
+                  <div class="row mb-4">
+                    <div class="row box-gryco">
+                      <!-- <div class="row py-3"> -->
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="name"
+                            id="name"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Organization Name"
+                          />
+                          <label class="form-label">Organization Name</label>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="orgCode"
+                            id="orgCode"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Organization Code"
+                          />
+                          <label class="form-label">Organization Code</label>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="orgPostalCode"
+                            id="orgPostalCode"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Postal Code"
+                          />
+                          <label class="form-label">Postal Code</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="location"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Location"
+                          />
+                          <label class="form-label">Location</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-dropdown
+                            [options]="cityList"
+                            optionLabel="name"
+                            optionValue="id"
+                            formControlName="cityId"
+                            class="dropdown"
+                            (onChange)="changeCity($event)"
+                            placeholder="select"
+                          ></p-dropdown>
+                          <label class="form-label">City</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-dropdown
+                            placeholder="select"
+                            formControlName="countryId"
+                            [options]="countryList"
+                            optionLabel="name"
+                            optionValue="id"
+                            (onChange)="changeCountry($event)"
+                            class="dropdown"
+                          >
+                          </p-dropdown>
+                          <label class="form-label">Country</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <!-- <p-calendar
+                      formControlName="fromDate"
+                      [dateFormat]="'dd/mm/yy'"
+                      [showIcon]="true"
+                      [showButtonBar]="true"
+                      appendTo="body"
+                      [showOnFocus]="false"
+                    ></p-calendar> -->
+
+                          <p-calendar
+                            formControlName="fromDate"
+                            dateFormat="dd/mm/yy"
+                            [showIcon]="true"
+                            [showOnFocus]="false"
+                            placeholder="From Date"
+                          ></p-calendar>
+                          <label class="form-label">From Date</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <!-- <p-calendar
+                      formControlName="toDate"
+                      [dateFormat]="'dd/mm/yy'"
+                      [showIcon]="true"
+                      [showButtonBar]="true"
+                      appendTo="body"
+                      [showOnFocus]="false"
+                    ></p-calendar> -->
+                          <p-calendar
+                            formControlName="toDate"
+                            dateFormat="dd/mm/yy"
+                            [showIcon]="true"
+                            [showOnFocus]="false"
+                            placeholder="To Date"
+                          ></p-calendar>
+                          <label class="form-label">To Date</label>
+                        </div>
+                      </div>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+                </form>
+                <!-- ++++++++++ -->
+              </div>
+            </div>
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                    type="button"
+                    (click)="onAdd()"
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+          </div>
+        </div>
+
+        <div
+          #drawerEdit
+          [ngClass]="showEditModal ? 'show' : ''"
+          class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+          id="r-step-1"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div class="offcanvas-header">
+            <h1 class="offcanvas-title offcanvas-heading">
+              Update Organization
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="close_edit_modal()"
+            ></button>
+          </div>
+          <div class="p-3">
+            <div class="row">
+              <p-toast></p-toast>
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3"
+              >
+                <!-- ========== -->
+                <form [formGroup]="orgForm">
+                  <div class="row mb-4">
+                    <div class="row box-gryco">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="name"
+                            id="nameU"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Organization Name"
+                          />
+                          <label class="form-label">Organization Name</label>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="orgCode"
+                            id="orgCodeU"
+                            [readOnly]="true"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Organization Code"
+                          />
+                          <label class="form-label">Organization Code</label>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="orgPostalCode"
+                            id="orgPostalCodeU"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Postal Code"
+                          />
+                          <label class="form-label">Postal Code</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <input
+                            formControlName="location"
+                            id="location"
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="Location"
+                          />
+                          <label class="form-label">Location</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-dropdown
+                            [options]="cityList"
+                            optionLabel="name"
+                            optionValue="id"
+                            formControlName="cityId"
+                            class="dropdown"
+                            (onChange)="changeCity($event)"
+                            placeholder="select"
+                          ></p-dropdown>
+                          <label class="form-label">City</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-dropdown
+                            placeholder="select"
+                            formControlName="countryId"
+                            [options]="countryList"
+                            optionLabel="name"
+                            optionValue="id"
+                            (onChange)="changeCountry($event)"
+                            class="dropdown"
+                          >
+                          </p-dropdown>
+                          <label class="form-label">Country</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <!-- <p-calendar
+                  formControlName="fromDate"
+                  [dateFormat]="'dd/mm/yy'"
+                  [showIcon]="true"
+                  [showButtonBar]="true"
+                  appendTo="body"
+                  [showOnFocus]="false"
+                ></p-calendar> -->
+                          <p-calendar
+                            formControlName="fromDate"
+                            dateFormat="dd/mm/yy"
+                            [showIcon]="true"
+                            [showOnFocus]="false"
+                            placeholder="From Date"
+                          ></p-calendar>
+                          <label class="form-label">From Date</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <!-- <p-calendar
+                  formControlName="toDate"
+                  [dateFormat]="'dd/mm/yy'"
+                  [showIcon]="true"
+                  [showButtonBar]="true"
+                  appendTo="body"
+                  [showOnFocus]="false"
+                ></p-calendar> -->
+                          <p-calendar
+                            formControlName="toDate"
+                            dateFormat="dd/mm/yy"
+                            [showIcon]="true"
+                            [showOnFocus]="false"
+                            placeholder="To Date"
+                          ></p-calendar>
+                          <label class="form-label">To Date</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card-body pt-5">
+                      <app-transaction-history
+                        *ngIf="transactionHistory"
+                        [transactionHistory]="transactionHistory"
+                      ></app-transaction-history>
+                    </div>
+                  </div>
+                </form>
+                <!-- ++++++++++ -->
+              </div>
+            </div>
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                    type="button"
+                    (click)="onUpdate()"
+                  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+          </div>
+        </div>
+
+        <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+
+<div
+  *ngIf="showAddModal"
+  class="offcanvas-backdrop fade show"
+  (click)="toggleAdd()"
+></div>
+<div
+  *ngIf="showEditModal"
+  class="offcanvas-backdrop fade show"
+  (click)="toggleEdit()"
+></div>

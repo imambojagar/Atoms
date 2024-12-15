@@ -1,0 +1,63 @@
+
+<form [formGroup]="serviceRequestFormService.firsActionForm">
+
+  <div class="row py-3">
+
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label ">First Action Status<small class="text-danger">*</small></label>
+        <p-dropdown [options]="serviceRequestFormService.firstActionStatuses" optionLabel="name" formControlName="firstActionStatus"
+                    class="dropdown" placeholder="select" (onChange)="serviceRequestFormService.onSelectFirstStatus($event)"></p-dropdown>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="serviceRequestFormService.FMfirstAction">
+      <div class="form-floating mb-2">
+      <label class="form-label">Start Date</label>
+        <p-calendar formControlName="startDate" (onSelect)="serviceRequestFormService.selectStartDate($event)" (onBlur)="serviceRequestFormService.selectStartDate($event)"
+                    (ngModelChange)="serviceRequestFormService.calculateTime()" [minDate]="serviceRequestFormService.minDateVal"
+                    [showTime]="true" [dateFormat]="'dd/mm/yy'" hourFormat="12"
+                    [showIcon]="true" [showButtonBar]="true" [showOnFocus]="false">
+        </p-calendar>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5"  *ngIf="serviceRequestFormService.FMfirstAction">
+      <div class="form-floating mb-2">
+        <label class="form-label">End Date</label>
+        <p-calendar formControlName="endDate" (onSelect)="serviceRequestFormService.selectEndDate($event)" (onBlur)="serviceRequestFormService.selectStartDate($event)"
+                    (ngModelChange)="serviceRequestFormService.calculateTime()"
+                    [showTime]="true" [dateFormat]="'dd/mm/yy'" hourFormat="12"
+                    [showIcon]="true" [showButtonBar]="true" [showOnFocus]="false">
+        </p-calendar>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5"  *ngIf="serviceRequestFormService.FMfirstAction">
+      <div class="form-floating mb-2">
+      <label class="form-label">Working Hours</label>
+      <p-inputNumber mode="decimal" [readonly]="true" formControlName="workingHours" [useGrouping]="false"></p-inputNumber>
+    </div>
+    </div>
+
+
+
+
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="serviceRequestFormService.isShowVisitDate">
+      <div class="form-floating mb-2">
+       <label class="form-label "> Visit Date</label>
+       <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="visitDate" dateFormat="yy-mm-dd" [minDate]="serviceRequestFormService.minDate" dataType="string" [showTime]="true">
+       </p-calendar>
+       </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+       <label class="form-label "> Comments</label>
+       <textarea id="comments" formControlName="comments" placeholder="Enter  Comments" pInputTextarea></textarea>
+    </div>
+    </div>
+
+  </div>
+
+</form>

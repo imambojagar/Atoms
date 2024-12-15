@@ -1,0 +1,85 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+
+          <p-toast></p-toast>
+
+
+
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row  mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          End-User Evaluations List
+                        </div>
+                        <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                              src="assets/img/dashboard/excel.svg" alt=""></a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="table-responsive table-bg">
+                    <p-table #dt [value]="demos" [(selection)]="selectedRow"
+                      styleClass="p-datatable-striped p-datatable-gridlines" [rows]="filter.pageSize"
+                      [tableStyle]="{'min-width': '75rem'}" [loading]="loading" [lazy]="true" [rowHover]="false"
+                      dataKey="id" [totalRecords]="totalRows">
+
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th class="text-center">Evaluation ID</th>
+                          <th class="text-center">Request Id</th>
+                          <th class="text-center">Employee Name</th>
+                          <th class="text-center">Employee Department</th>
+                          <th class="text-center">Asset</th>
+                          <th class="text-center">Action</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-demo>
+                        <tr>
+                          <td class="text-center">{{demo.id}}</td>
+                          <td class="text-center">
+                            {{demo.demoRequestId}}
+                          </td>
+                          <td class="text-center">{{demo.employeeName}}</td>
+                          <td class="text-center">{{demo.employeeDepartmentName}}</td>
+                          <td class="text-center">{{demo.assetName}}</td>
+                          <td class="text-center">
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info me-2"
+                              (click)="navTo('',demo)" canUpdate></button>
+
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                              (click)="deleteDemoEval(demo)" canDelete></button>
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                    </p-table>
+                  </div>
+                  <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@if(url=='evaluation/edit-control'){
+<app-demo-req-control [showmodal]="url=='evaluation/edit-control'" [mode]="'evaluation'" (openModals)="closeModal()"
+  [inEvaluationForm]="true"></app-demo-req-control>
+<div class="offcanvas-backdrop fade show" (click)="closeModal()"></div>}
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

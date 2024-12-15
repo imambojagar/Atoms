@@ -1,0 +1,416 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 " id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='Add'">New Asset Delivery</h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='Edit'">Edit Asset Delivery</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+        <p-toast></p-toast>
+        <!-- <p-header class="header">
+            <h5 *ngIf="typeScreen=='Add'">New Asset Delivery</h5>
+            <h5 *ngIf="typeScreen=='View'">View Asset Delivery</h5>
+            <h5 *ngIf="typeScreen=='Edit'">Edit Asset Delivery</h5>
+        </p-header> -->
+          <div class="row  form-scroller">
+            <form [formGroup]="assetForm">
+                <div class="box-gryco">
+                  <div class="col-12">
+                    <h4 class="section-heading"> Purchase Order </h4>
+                  </div>
+
+                    <div class="row py-3 " [ngClass]="{'disableDiv': typeScreen=='Edit'}">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [ngClass]="{'disableDiv': typeScreen=='Edit'}">
+                          <div class="form-floating mb-2">
+                            <label class="">Site</label>
+                            <p-dropdown [options]="sites" placeholder="Please select" formControlName="operatingUnit"
+                                (onChange)="changeSite($event)" optionLabel="oU_NAME" optionValue="orG_ID"
+                                [style]="{'width':'100%'}" [filter]="true" filterBy="oU_NAME" [showClear]="true">
+                            </p-dropdown>
+                          </div>
+                            <div *ngIf=" assetForm.get('operatingUnit')?.hasError('required') && assetForm.get('operatingUnit')?.touched "
+                                class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+                        </div>
+
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [ngClass]="{'disableDiv': typeScreen=='Edit'}">
+                          <div class="d-flex">
+                            <div class="form-floating mb-2 w-100">
+                              <label class="">PO Number</label>
+                              <input id="mm" type="text" formControlName="poNumber" pInputText class="form-control" readonly />
+                            </div>
+                              <button type="button" (click)="openDialogPO()" pButton class="p-button m-2 "
+                                  icon="pi pi-external-link"></button>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="">Status</label>
+                            <input type="text" formControlName="status" name="status"
+                                class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..." />
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row py-3" [ngClass]="{'disableDiv': typeScreen=='Edit'}">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                            <label class="">Supplier</label>
+                            <input type="text" formControlName="supplier" name="supplier"
+                                class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..." />
+                        </div>
+                        </div>
+                        <div class="ccol-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                              <label class="">Supplier Site</label>
+                              <input type="text" formControlName="site" name="site"
+                                  class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..." />
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                            <label class="">Buyer</label>
+                            <input type="text" formControlName="buyer" name="buyer"
+                                class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..." />
+                        </div>
+                        </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-floating mb-2">
+                              <label class="">Type</label>
+                              <input type="text" formControlName="type" name="type"
+                                  class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..." />
+                          </div>
+                        </div>
+
+                    </div>
+                    <div class="row py-3" [ngClass]="{'disableDiv': typeScreen=='Edit'}">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                            <label class="">Total</label>
+                            <input type="text" formControlName="total" name="total"
+                                class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..." />
+                            </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label class="">Total Delivery Amount</label>
+                            <input type="text" formControlName="totalDeliveryAmount" name="totalDeliveryAmount"
+                                  class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..." />
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [ngClass]="{'disableDiv': typeScreen=='Edit'}">
+                            <div class="form-floating mb-2">
+                              <label class="">Warranty Period</label>
+                              <input type="number" formControlName="warrantyPeriod" name="warrantyPeriod"
+                                  class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                           <div *ngIf=" assetForm.get('warrantyPeriod')?.hasError('required') && assetForm.get('warrantyPeriod')?.touched "
+                                class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+                        </div>
+                        <!-- <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                           <div class="form-floating mb-2">
+                            <label class="">Complete</label>
+                            <input type="number" formControlName="complete" name="warrantyPeriod" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                        </div> -->
+                    </div>
+                    <div class="row py-3" [ngClass]="{'disableDiv': typeScreen=='Edit'}">
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 ">
+                           <div class="form-floating mb-2">
+                              <label class="">Remark</label>
+                              <textarea formControlName="remark" name="remark"
+                                  class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..."
+                                  rows="2"></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 ">
+                          <div class="form-floating mb-2">
+                            <label class="">Payment Terms</label>
+                            <textarea formControlName="paymentTerms" name="paymentTerms" required
+                                class="form-control form-control-lg form-control-solid" readonly placeholder="Enter ..."
+                                rows="2"></textarea>
+                          </div>
+                        </div>
+                    </div>
+
+
+                   <!--  <div class=" d-flex justify-content-end border-top py-6" *ngIf="typeScreen!='Edit'">
+                        <button type="button" type="button" (click)="save()" class="btn btn-primary me-2"> <ng-container> <span
+                                    class="indicator-label">Save</span> </ng-container> </button>
+                        <button BackButton type="button" (click)="cancel()" class="btn btn-light btn-active-light-primary me-2">
+                            <ng-container> <span class="indicator-label">Cancel</span> </ng-container> </button>
+                    </div> -->
+
+                    <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12" *ngIf="typeScreen=='Edit'">
+                        <p-table #dt [value]="deliveryNumbers" selectionMode="single" [(selection)]="isChecked" [lazy]="true"
+                             [tableStyle]="{width: '100%'}"
+                            (onRowSelect)="onRowSelect($event)" [lazy]="true" [rowHover]="false">
+                            <ng-template pTemplate="caption">
+                                <div class="lookup-table flex align-items-center justify-content-between">
+                                    <div class="">
+                                        <div class="card-title">
+                                            <span class="text-white">Deliveries Table</span>
+                                        </div>
+                                        <div class="card-title table-btns">
+                                            <button pButton pRipple label="Add" class="btn btn-light-primary me-2"
+                                                (click)="addNewDelivery()"></button>
+                                            <button pButton pRipple label="Cancel" class="btn btn-light-primary me-2"
+                                                (click)="cancelDelivery()"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 4rem">#</th>
+                                    <th>Delivery Number</th>
+                                    <th>Status</th>
+                                    <th>Delivery Amount</th>
+                                    <th>Invoice Amount</th>
+                                    <th>View History</th>
+                                    <th>View Registry Files</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-delivery>
+                                <tr>
+                                    <td>
+                                        <p-tableRadioButton [value]="delivery"></p-tableRadioButton>
+                                    </td>
+                                    <td>{{delivery.number}}</td>
+                                    <td>{{delivery.status}}</td>
+                                    <td>{{delivery.deliveryAmount}}</td>
+                                    <td>{{delivery.invoiceAmount}}</td>
+                                    <td><a (click)="viewHistory(delivery.id)">View History</a></td>
+                                    <td><a (click)="viewRegistryFiles(delivery.id)">View Registry Files</a></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <h4 class="section-heading"> Delivery </h4>
+                  </div>
+
+                  <div class="box-gryco mt-2">
+                    <div class="">
+                        <div class="">
+                            <div class="card-title" *ngIf="changeStatusText!=''">
+                                <h2 class="d-flex align-items-center"> <button pButton pRipple
+                                        label="{{changeStatusText}}" class="btn btn-light me-2"
+                                        (click)="UpdateDeliveryStatus()"></button> </h2>
+                            </div>
+                        </div>
+                        <div class="" [formGroup]="deliveryForm" [ngClass]="{'disableDiv': disableTab=='true'}">
+                            <div class="stepper stepper-links d-flex  pt-2" id="kt_create_account_stepper">
+                                <div class="stepper-nav mb-2">
+                                    <div class="stepper-item"
+                                        [ngClass]="{ current: currentStep$.value === 1, completed: currentStep$.value > 1 }">
+                                        <h4 class="stepper-title">Delivery Inspection</h4>
+                                    </div>
+                                    <div class="stepper-item"
+                                        [ngClass]="{ current: currentStep$.value === 2, completed: currentStep$.value > 2 }">
+                                        <h4 class="stepper-title">Technical Inspection</h4>
+                                    </div>
+                                    <div class="stepper-item"
+                                        [ngClass]="{ current: currentStep$.value === 3, completed: currentStep$.value > 3 }">
+                                        <h4 class="stepper-title">End User Acceptance</h4>
+                                    </div>
+
+                                    <div class="stepper-item"
+                                        [ngClass]="{ current: currentStep$.value === 4, completed: currentStep$.value > 4 }">
+                                        <h4 class="stepper-title">Technical Acceptance</h4>
+                                    </div>
+
+                                    <div class="stepper-item"
+                                        [ngClass]="{ current: currentStep$.value === 5, completed: currentStep$.value > 5 }">
+                                        <h4 class="stepper-title">Final Acceptance</h4>
+                                    </div>
+
+                                    <!-- <div class="stepper-item" [ngClass]="{ current: currentStep$.value === 5 }">
+                                    <h4 class="stepper-title">Completed</h4>
+                                </div> -->
+                                </div>
+
+                                <form class="w-100 pt-4 pb-4" noValidate id="kt_create_account_form">
+                                    <div class="current">
+                                        <ng-container *ngIf="currentStep$.value === 1">
+                                            <app-step11 class="w-100" [technicalInspection]="deliveryInspactionData"
+                                                (sendContinueCurrentPage)="nextStep($event)"
+                                                (sendBackCurrentPage)="prevStep()"></app-step11>
+                                        </ng-container>
+                                        <ng-container *ngIf="currentStep$.value === 2">
+                                            <app-technical-inspection class="w-100"
+                                                [technicalInspection]="technicalInspectionData"
+                                                (sendContinueCurrentPage)="nextStep($event)"
+                                                (sendBackCurrentPage)="prevStep()"></app-technical-inspection>
+                                        </ng-container>
+                                        <ng-container *ngIf="currentStep$.value === 3">
+                                            <app-step2 class="w-100" [endUserAcceptanceData]="endUserAcceptanceData"
+                                                [lineList]="lineList" (sendContinueCurrentPage)="nextStep($event)"
+                                                (sendBackCurrentPage)="prevStep($event)"></app-step2>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="currentStep$.value === 4">
+                                            <app-step3 class="w-100" [technicalAcceptanceInput]="technicalAcceptanceData"
+                                                (sendContinueCurrentPage)="nextStep($event)"
+                                                (sendBackCurrentPage)="prevStep()"></app-step3>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="currentStep$.value === 5">
+                                            <app-step4 class="w-100" [finalAcceptanceInput]="finalAcceptanceData"
+                                                (sendBackCurrentPage)="prevStep()"></app-step4>
+                                        </ng-container>
+                                        <div class=" pt-4"   *ngIf="typeScreen!='Add'">
+                                            <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                                        </div>
+                                        <!--
+                                    <ng-container *ngIf="currentStep$.value === 5">
+                                        <app-step5 class="w-100" [updateParentModel]="updateAssetDelivery" [defaultValues]="assetdelivery$.value"></app-step5>
+                                    </ng-container> -->
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+            </form>
+
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="save()">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+    </div>
+  </div>
+</div>
+
+
+<div #drawer [ngClass]=" showmodal1 ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 " id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Add New Nomenclature</h1>
+    <button type="button" class="btn-close" (click)="close_modelfd()"></button>
+  </div>
+     <div class="row">
+        <!-- <app-search-component (OnSearch)="searchPODialog()" (OnReset)="resetPODialog()"> -->
+            <form [formGroup]="dialogPOForm">
+                <div class="row py-1">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                      <div class="form-floating mb-2">
+                        <label class="form-label ">PO Number</label>
+                        <input type="text" class="form-control form-control-lg form-control-solid"
+                            formControlName="poNumber" pInputText />
+                      </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="searchPODialog()">Apply Filter</button>
+                </div>
+              </div>
+            </div>
+        <!-- </app-search-component> -->
+    </div>
+    <div>
+        <p-table #dt [value]="poNumbers" [lazy]="true" styleClass="p-datatable-striped p-datatable-gridlines"
+            [rows]="filterPO.pageSize" [tableStyle]="{width :'60vw'}" [lazy]="true" [totalRecords]="totalPORows"
+            [rowHover]="false" dataKey="pO_HEADER_ID">
+            <ng-template pTemplate="caption">
+                <div>
+                    PO Numbers Table <br>
+                    <span class="total_rows_data"> Total: {{ totalPORows }} </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>PO Number</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-po>
+
+                <tr (click)="selectRowPO(po.pO_HEADER_ID,po.pO_NUMBER)">
+                    <td>{{po.pO_NUMBER}}</td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        <p-paginator [rows]="filterPO.pageSize" [totalRecords]="totalPORows" (onPageChange)="paginatePO($event)"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="showDialogPO=false" label="Cancel" styleClass="p-button-text"></p-button>
+    </ng-template>
+</div>
+
+<!-- <p-dialog header="View History" [(visible)]="showDialogHistory" [modal]="true" [style]="{width :'60vw',height:'60hw'}
+    " [maximizable]="true" [draggable]="false" [resizable]="false"> -->
+<div #drawer  [ngClass]=" showmodal2 ? 'show' : ''"
+    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 " id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">Add New Nomenclature</h1>
+      <button type="button" class="btn-close" (click)="close_models()"></button>
+    </div>
+    <div>
+        <p-table #dt [value]="viewHistories" [lazy]="true" styleClass="p-datatable-striped p-datatable-gridlines"
+            [tableStyle]="{width :'60vw'}" [lazy]="true" [rowHover]="false">
+            <ng-template pTemplate="caption">
+                <div>
+                    View History Table <br>
+
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Date</th>
+                    <th>Status Name</th>
+                    <th>Created By</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-history>
+
+                <tr>
+                    <td>{{history.createdDate}}</td>
+                    <td>{{history.statusName}}</td>
+                    <td>{{history.createdByName}}</td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+    </div>
+
+    <ng-template pTemplate="footer">
+
+        <p-button icon="pi pi-times" (click)="showDialogHistory=false" label="Cancel"
+            styleClass="p-button-text"></p-button>
+    </ng-template>
+</div>
+
+<!-- <p-dialog header="Registry Files" [(visible)]="showDialogRegistryFiles" [modal]="true"
+    [style]="{width :'60vw',height:'60hw',  overflow:'scroll'}" [maximizable]="true" [draggable]="false"
+    [resizable]="false"> -->
+<div #drawer  [ngClass]=" showmodal3 ? 'show' : ''"
+    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 " id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">Add New Nomenclature</h1>
+      <button type="button" class="btn-close" (click)="close_modalas()"></button>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-registry-files-model [registryFilesInput]="registryFiles"
+                (closeModel)="closeRegistryFilesModel()"></app-registry-files-model>
+        </div>
+    </div>
+</div>
+<!-- </p-dialog> -->

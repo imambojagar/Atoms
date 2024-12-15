@@ -1,0 +1,152 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="custom-card ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <div #drawerFilter1 [ngClass]=" showmodal ? 'show' : ''"
+              class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1"
+              aria-modal="true" role="dialog">
+              <div class="offcanvas-header">
+                <h1 class="offcanvas-title offcanvas-heading">Search Asset</h1>
+                <button type="button" class="btn-close" (click)="close_modal()"></button>
+              </div>
+              <div class="p-3">
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+                    <form [formGroup]="searchForm">
+                      <div class="row py-3">
+                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                          <label class="form-label">API Director ID</label>
+                          <p-dropdown [options]="directorList" placeholder="Select" formControlName="apiDirectorId"
+                            optionLabel="userName" optionValue="userId"
+                            (onChange)="filter.apiDirectorId=$event.value"></p-dropdown>
+                        </div>
+                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                          <label class="form-label">Assessor Team Leader</label>
+                          <p-dropdown [options]="teamLeaderList" placeholder="Select"
+                            formControlName="assessorTeamLeaderId" optionLabel="userName" optionValue="userId"
+                            (onChange)="filter.assessorTeamLeaderId=$event.value"></p-dropdown>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+
+                  <div class="fixed-bottom">
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button"
+                          (click)="search()">Apply
+                          Filter</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p-table #dt [value]="managers" styleClass="p-datatable-striped p-datatable-gridlines" [loading]="loading"
+              [rows]="filter.pageSize" [tableStyle]="{'min-width': '75rem'}" [lazy]="true" [totalRecords]="totalRows"
+              [rowHover]="false" dataKey="id">
+
+              <ng-template pTemplate="caption">
+                <div class="row ">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                    <h4 class="mt-3 inline main-heading">Assiggned Managers Table</h4>
+                    <!-- <a class="ps-4 mt-4 exportfile" (click)="export()">Export <img src="navbar/export.svg" alt=""></a> -->
+                  </div>
+                  <div
+                    class="col-lg-6 col-md-12 col-sm-12 col-12 text-right d-flex align-items-center justify-content-end">
+                    <!-- <h5 class="m-0">Manage assets</h5> -->
+                    <div class="p-input-icon-left">
+                      <p-button [outlined]="false" class="header-icon-background header-icon"
+                        (click)="openFilterModal()"> <img src="navbar/filter.svg" alt="">
+                      </p-button>
+                    </div>
+                    <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                      <div class="form-floating">
+                        <input type="text" pInputText class="form-control border-0 header-search-background"
+                          [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" id="floatingSearchInput"
+                          value="Type here" placeholder="Type here">
+                        <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                        <label for="floatingSearchInput">Serch</label>
+                      </div>
+                    </div>
+                    <div class="p-input-icon-left float-end">
+                      <button class="btn btn-blue text-white border-0 p-4" (click)="openaddmodel()">
+                        Add
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>ID</th>
+                  <th>Assessor Team Leader</th>
+                  <th>Api Director</th>
+                  <th>Site</th>
+                  <th>Role</th>
+                  <th>Employee ID</th>
+                  <th>Actions</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-manager>
+
+
+                <tr>
+                  <td>{{manager.id}}</td>
+                  <td> <a class="link-info" pRipple
+                      (click)="navToDetails(manager,0)">{{manager.assessorTeamLeaderName}}</a>
+                  </td>
+                  <td>{{manager.apiDirectorName}}</td>
+                  <td>
+                    <ul *ngFor="let site of manager.sites">
+                      <li>{{site.siteName}}</li>
+                    </ul>
+
+                  </td>
+                  <td>
+                    <ul *ngFor="let site of manager.sites">
+                      <li>{{site.roleName}}</li>
+                    </ul>
+
+                  </td>
+                  <td>
+                    <ul *ngFor="let site of manager.sites">
+                      <li>{{site.employeeName}}</li>
+                    </ul>
+
+                  </td>
+
+                  <td class="action-width">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                      (click)="navToDetails(manager,1)" canUpdate></button>
+
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                      (click)="delete(manager)" canDelete></button>
+                  </td>
+                </tr>
+              </ng-template>
+
+            </p-table>
+            <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+
+  <div *ngIf="showmodal" class="offcanvas-backdrop fade show" (click)="close_modal()"></div>
+
+  <div *ngIf="addmodel" class="offcanvas-backdrop fade show" (click)="close_modal_add()"></div>
+  <app-add-manager-assigned *ngIf="!editModeId" [showmodal]="addmodel"
+    (openModals)="close_modal_add()"></app-add-manager-assigned>
+  <app-add-manager-assigned [showmodal]="addmodel" (openModals)="close_modal_add()" *ngIf="editModeId"
+    [editModelobject]="editModeId"></app-add-manager-assigned>

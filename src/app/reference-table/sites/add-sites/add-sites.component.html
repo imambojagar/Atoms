@@ -1,0 +1,909 @@
+<div
+  #drawerFilter
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="status == 'add'">
+      Create Site
+    </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="status == 'edit'">
+      Edit Site
+    </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="status == 'view'">
+      View Site
+    </h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <!-- <ng-template #ViewOrEditTemplate> -->
+        <p-tabView
+          [(activeIndex)]="tabIndex"
+          (onChange)="changeTabIndex($event)"
+        >
+          <!-- <p-tabPanel
+              header="{{ 'View' | tr : 'site' | translate }}"
+              leftIcon="pi pi-file"
+            > -->
+          <!-- <h1 class="offcanvas-title offcanvas-heading">View Sites</h1>
+            <ng-container *ngTemplateOutlet="formTemplate"></ng-container> -->
+          <!-- </p-tabPanel> -->
+
+          <!-- <p-tabPanel
+              header="{{ 'Edit' | tr : 'site' | translate }}"
+              leftIcon="pi pi-file-edit"
+            > -->
+          <!-- <h1 class="offcanvas-title offcanvas-heading">Edit Sites</h1>
+            <ng-container *ngTemplateOutlet="formTemplate"></ng-container> -->
+          <!-- </p-tabPanel> -->
+          <form [formGroup]="frmCustomer" *ngIf="model">
+            <!-- <div class="card card-flush mb-6 mb-xl-9"> -->
+            <div class="row form-scroller mb-4">
+              <div class="row box-gryco">
+                <div class="card-body pt-4">
+                  <div class="row py-3" [ngClass]="{ disableDiv: inViewMode }">
+                    <div
+                      class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="customerNameEdit"
+                          type="text"
+                          formControlName="custName"
+                          pInputText
+                          class="form-control"
+                          placeholder="Site Name"
+                        />
+                        <label class="form-label" for="customerNameEdit"
+                          >{{ "Site Name" | tr : PAGE_TITLE | translate }} -
+                          {{ currentUserLanguage }}</label
+                        >
+                      </div>
+                    </div>
+                    <div
+                      *ngIf="!inViewMode"
+                      class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <label class="form-label"></label>
+                        <button
+                          type="button"
+                          (click)="openDialog()"
+                          pButton
+                          class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                          icon="pi pi-external-link"
+                          label="Languages"
+                        ></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3>{{ "Site Info" | tr : PAGE_TITLE | translate }}</h3>
+                  <hr />
+
+                  <div class="row py-3">
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                      *ngIf="!inAddMode"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="custCode"
+                          type="text"
+                          formControlName="customerCode"
+                          pInputText
+                          inputId="customerCode"
+                          [readonly]="true"
+                        />
+                        <label class="form-label" for="custCode">{{
+                          "Site Code" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="assignedEmployeeId"
+                          [options]="assignedEmp"
+                          optionLabel="userName"
+                          optionValue="userId"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Assigned Employee" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="custCategoryId"
+                          [options]="custCat"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Site categorization" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="custGroupId"
+                          [options]="group"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "Group" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="cityId"
+                          [options]="city"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label">{{
+                          "City" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <p-dropdown
+                          placeholder="--Select--"
+                          formControlName="organizationId"
+                          [options]="orgList"
+                          optionLabel="name"
+                          optionValue="id"
+                          class="dropdown"
+                        >
+                        </p-dropdown>
+                        <label class="form-label" for="org">{{
+                          "Organisation" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="operatingUnitNumber"
+                          type="text"
+                          formControlName="operatingUnitNumber"
+                          pInputText
+                          class="form-control"
+                          placeholder="Operating Unit Number"
+                        />
+                        <label class="form-label" for="operatingUnitNumber">{{
+                          "Operating Unit Number" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <input
+                          id="operatingUnitName"
+                          type="text"
+                          formControlName="operatingUnitName"
+                          pInputText
+                          class="form-control"
+                          placeholder="Operating Unit Name"
+                        />
+                        <label class="form-label" for="operatingUnitName">{{
+                          "Operating Unit Name" | tr : PAGE_TITLE | translate
+                        }}</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3>{{ "Building " | tr : PAGE_TITLE | translate }}</h3>
+                  <button
+                    *ngIf="!inViewMode"
+                    type="button"
+                    class="btn btn-primary mt-2"
+                    (click)="showBuildingDialog()"
+                  >
+                    {{ "Add Building" | tr : PAGE_TITLE | translate }}
+                  </button>
+                  <hr />
+                  <div class="row py-3">
+                    <div formArrayName="buildings">
+                      <p-accordion
+                        id="accordionSites"
+                        [multiple]="true"
+                        [activeIndex]="[0]"
+                      >
+                        <div
+                          *ngFor="
+                            let building of buildings.controls;
+                            let buildingIndex = index
+                          "
+                        >
+                          <div [formGroupName]="buildingIndex" class="">
+                            <p-accordionTab class="card" header="">
+                              <ng-template pTemplate="header">
+                                <div class="col-10 flex align-items-center">
+                                  <input
+                                    [id]="'BuildingName' + buildingIndex"
+                                    type="text"
+                                    class="vertical-align-middle"
+                                    formControlName="clientBuildingName"
+                                    style="
+                                      background: #3da5e5;
+                                      border: hidden;
+                                      font-size: large;
+                                    "
+                                  />
+                                </div>
+                                <p-button
+                                  *ngIf="!inViewMode"
+                                  class="col-1"
+                                  (click)="showFloorDialog(buildingIndex)"
+                                  icon="pi pi-plus"
+                                  pTooltip="Add Floor"
+                                  tooltipPosition="top"
+                                ></p-button>
+                                <button
+                                  *ngIf="!inViewMode"
+                                  pButton
+                                  pRipple
+                                  icon="pi pi-trash"
+                                  class="p-button-rounded p-button-danger"
+                                  type="button"
+                                  (click)="removeBuilding(buildingIndex)"
+                                  tooltipPosition="top"
+                                  pTooltip="Delete Building"
+                                ></button>
+                              </ng-template>
+                              <ng-template pTemplate="content">
+                                <div class="row justify-content-md-center py-3">
+                                  <div class="col-11 accordion-margin">
+                                    <p-accordion
+                                      id="accordionfloor"
+                                      [multiple]="true"
+                                      class="accordion-floor-color"
+                                    >
+                                      <div
+                                        formArrayName="floors"
+                                        class="formline"
+                                      >
+                                        <div
+                                          *ngFor="
+                                            let floor of floors(buildingIndex)
+                                              .controls;
+                                            let floorIndex = index
+                                          "
+                                        >
+                                          <div [formGroupName]="floorIndex">
+                                            <p-accordionTab
+                                              class="card"
+                                              header=""
+                                            >
+                                              <ng-template pTemplate="header">
+                                                <div class="col-lg-10">
+                                                  <input
+                                                    [id]="
+                                                      'FloorName' + floorIndex
+                                                    "
+                                                    type="text"
+                                                    class="vertical-align-middle"
+                                                    formControlName="clientFloorName"
+                                                    style="
+                                                      background: #3da5e5;
+                                                      border: hidden;
+                                                    "
+                                                  />
+                                                </div>
+                                                <p-button
+                                                  *ngIf="!inViewMode"
+                                                  class="col-1"
+                                                  (click)="
+                                                    showDepartmentDialog(
+                                                      buildingIndex,
+                                                      floorIndex
+                                                    )
+                                                  "
+                                                  icon="pi pi-plus"
+                                                  pTooltip="Add Department"
+                                                  tooltipPosition="top"
+                                                ></p-button>
+                                                <button
+                                                  *ngIf="!inViewMode"
+                                                  pButton
+                                                  pRipple
+                                                  icon="pi pi-trash"
+                                                  class="p-button-rounded p-button-danger"
+                                                  type="button"
+                                                  (click)="
+                                                    removeFloor(
+                                                      buildingIndex,
+                                                      floorIndex
+                                                    )
+                                                  "
+                                                  pTooltip="Delete Floor"
+                                                  tooltipPosition="top"
+                                                ></button>
+                                              </ng-template>
+                                              <ng-template pTemplate="content">
+                                                <div
+                                                  class="row justify-content-md-center py-3"
+                                                >
+                                                  <div
+                                                    class="col-lg-11 accordion-margin"
+                                                  >
+                                                    <p-accordion
+                                                      id="accordionfloor"
+                                                      [multiple]="true"
+                                                      class="accordion-department-color"
+                                                    >
+                                                      <div
+                                                        formArrayName="departments"
+                                                        class="formline"
+                                                      >
+                                                        <div
+                                                          *ngFor="
+                                                            let department of departmentsArray(
+                                                              buildingIndex,
+                                                              floorIndex
+                                                            ).controls;
+                                                            let departmentIndex = index
+                                                          "
+                                                        >
+                                                          <div
+                                                            [formGroupName]="
+                                                              departmentIndex
+                                                            "
+                                                          >
+                                                            <p-accordionTab
+                                                              class="card"
+                                                              header=""
+                                                              style="
+                                                                background: beige !important;
+                                                              "
+                                                            >
+                                                              <ng-template
+                                                                pTemplate="header"
+                                                              >
+                                                                <div
+                                                                  class="col-9 flex align-items-center"
+                                                                >
+                                                                  <input
+                                                                    [id]="
+                                                                      'DepartmentName' +
+                                                                      departmentIndex
+                                                                    "
+                                                                    type="text"
+                                                                    class="vertical-align-middle"
+                                                                    formControlName="departmentName"
+                                                                    style="
+                                                                      background: #3da5e5;
+                                                                      border: hidden;
+                                                                    "
+                                                                  />
+                                                                </div>
+                                                                <p-button
+                                                                  *ngIf="
+                                                                    !inViewMode
+                                                                  "
+                                                                  class="col-1"
+                                                                  (click)="
+                                                                    showRoomDialog(
+                                                                      buildingIndex,
+                                                                      floorIndex,
+                                                                      departmentIndex
+                                                                    )
+                                                                  "
+                                                                  icon="pi pi-plus"
+                                                                  pTooltip="Add Room"
+                                                                  tooltipPosition="top"
+                                                                ></p-button>
+                                                                <button
+                                                                  *ngIf="
+                                                                    !inViewMode
+                                                                  "
+                                                                  pButton
+                                                                  pRipple
+                                                                  icon="pi pi-trash"
+                                                                  class="p-button-rounded p-button-danger"
+                                                                  type="button"
+                                                                  (click)="
+                                                                    removeDepartment(
+                                                                      buildingIndex,
+                                                                      floorIndex,
+                                                                      departmentIndex
+                                                                    )
+                                                                  "
+                                                                  pTooltip="Delete Department"
+                                                                  tooltipPosition="top"
+                                                                ></button>
+                                                              </ng-template>
+                                                              <ng-template
+                                                                pTemplate="content"
+                                                              >
+                                                                <div
+                                                                  class="row py-3"
+                                                                >
+                                                                  <div
+                                                                    class="col-11 accordion-margin"
+                                                                  >
+                                                                    <p-accordion
+                                                                      id="accordionfloor"
+                                                                      [multiple]="
+                                                                        false
+                                                                      "
+                                                                      class="accordion-room-color"
+                                                                    >
+                                                                      <div
+                                                                        formArrayName="rooms"
+                                                                        class="formline"
+                                                                      >
+                                                                        <div
+                                                                          *ngFor="
+                                                                            let room of rooms(
+                                                                              buildingIndex,
+                                                                              floorIndex,
+                                                                              departmentIndex
+                                                                            )
+                                                                              .controls;
+                                                                            let roomIndex = index
+                                                                          "
+                                                                        >
+                                                                          <div
+                                                                            [formGroupName]="
+                                                                              roomIndex
+                                                                            "
+                                                                          >
+                                                                            <p-accordionTab
+                                                                              class="card"
+                                                                              header=""
+                                                                            >
+                                                                              <ng-template
+                                                                                pTemplate="header"
+                                                                              >
+                                                                                <div
+                                                                                  class="col-10 flex align-items-center"
+                                                                                >
+                                                                                  <input
+                                                                                    [id]="
+                                                                                      'RoomName' +
+                                                                                      roomIndex
+                                                                                    "
+                                                                                    type="text"
+                                                                                    class="vertical-align-middle"
+                                                                                    formControlName="roomName"
+                                                                                    style="
+                                                                                      background: #3da5e5;
+                                                                                      border: hidden;
+                                                                                    "
+                                                                                  />
+                                                                                </div>
+                                                                                <button
+                                                                                  *ngIf="
+                                                                                    !inViewMode
+                                                                                  "
+                                                                                  pButton
+                                                                                  pRipple
+                                                                                  icon="pi pi-trash"
+                                                                                  class="p-button-rounded p-button-danger"
+                                                                                  type="button"
+                                                                                  (click)="
+                                                                                    removeRoom(
+                                                                                      buildingIndex,
+                                                                                      floorIndex,
+                                                                                      departmentIndex,
+                                                                                      roomIndex
+                                                                                    )
+                                                                                  "
+                                                                                ></button>
+                                                                              </ng-template>
+                                                                              <ng-template
+                                                                                pTemplate="content"
+                                                                              >
+                                                                              </ng-template>
+                                                                            </p-accordionTab>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </p-accordion>
+                                                                  </div>
+                                                                </div>
+                                                              </ng-template>
+                                                            </p-accordionTab>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </p-accordion>
+                                                  </div>
+                                                </div>
+                                              </ng-template>
+                                            </p-accordionTab>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </p-accordion>
+                                  </div>
+                                </div>
+                              </ng-template>
+                            </p-accordionTab>
+                          </div>
+                        </div>
+                      </p-accordion>
+                    </div>
+                  </div>
+                  <hr />
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3 floor"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">{{
+                        "Attachment" | tr : PAGE_TITLE | translate
+                      }}</label>
+                      <app-attachments
+                        (onUploaded)="attachmentReady($event)"
+                        [attachments]="attachmentNames"
+                        formArrayName="attachments"
+                        [showButton]="!inViewMode"
+                      ></app-attachments>
+                      <p
+                        *ngIf="
+                          inViewMode &&
+                          (attachmentNames.length === 0 || !attachmentNames)
+                        "
+                        class="fw-bold"
+                      >
+                        No Attachments Avaliable
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    *ngIf="!inAddMode"
+                    class="row py-3"
+                    [ngClass]="{ disableDiv: true }"
+                  >
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <span *ngIf="createdOn != null">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="{{ createdOn | date : 'medium' }}"
+                          />
+                        </span>
+
+                        <label class="form-label"
+                          >{{ "Created ON" | tr : PAGE_TITLE | translate }}
+                        </label>
+                        <span *ngIf="createdOn == null">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="None"
+                            class="form-control"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                    >
+                      <div class="form-floating mb-2">
+                        <span *ngIf="modifiedOn != null">
+                          <input
+                            type="text"
+                            pInputText
+                            class="form-control"
+                            placeholder="{{ modifiedOn | date : 'medium' }}"
+                          />
+                        </span>
+
+                        <label class="form-label"
+                          >{{ "Modified ON" | tr : PAGE_TITLE | translate }}
+                        </label>
+                        <span *ngIf="modifiedOn == null">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder=" "
+                            class="form-control"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div
+                    class="fixed-bottom"
+                    [ngClass]="{ disableDiv: inViewMode }"
+                  >
+                    <div class="row">
+                      <div class="col-12">
+                        <button
+                          canUpdate
+                          *ngIf="id != 0"
+                          type="submit"
+                          class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                          (click)="save()"
+                        >
+                          {{ "Update" | tr : PAGE_TITLE | translate }}
+                        </button>
+                        <button
+                          *ngIf="id == 0"
+                          type="submit"
+                          class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                          (click)="save()"
+                        >
+                          {{ "Save" | tr : PAGE_TITLE | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <!-- </div> -->
+                <p-dialog
+                  header="Languages"
+                  [(visible)]="showDialog"
+                  (onShow)="onShowDialog()"
+                  (onHide)="onHide()"
+                  [modal]="true"
+                  [style]="{ width: '50vw', height: '60hw' }"
+                  [maximizable]="true"
+                  [draggable]="false"
+                  [resizable]="false"
+                >
+                  <div class="card-body pt-5">
+                    <div class="row py-3">
+                      <div
+                        formArrayName="translations"
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3"
+                      >
+                        <div class="form-floating mb-2">
+                          <div
+                            [formGroupName]="i"
+                            *ngFor="
+                              let lang of custNameLangs?.controls;
+                              index as i
+                            "
+                          >
+                            <ng-container
+                              *ngIf="
+                                currentUserLanguage !==
+                                lang?.get('langName')?.value
+                              "
+                            >
+                              <input
+                                type="text"
+                                formControlName="nameValue"
+                                pInputText
+                              />
+                              <input
+                                type="hidden"
+                                formControlName="id"
+                                pInputText
+                              />
+                              <input
+                                type="hidden"
+                                formControlName="customerId"
+                                pInputText
+                              />
+                              <input
+                                type="hidden"
+                                formControlName="langId"
+                                pInputText
+                              />
+
+                              <label class="form-label">{{
+                                lang?.get("langName")?.value
+                              }}</label>
+                            </ng-container>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template pTemplate="footer">
+                    <button
+                      class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                      type="button"
+                      (click)="showDialog = false"
+                    >
+                      Ok
+                    </button>
+                  </ng-template>
+                </p-dialog>
+
+                <p-dialog
+                  header="Add Building"
+                  [(visible)]="visibleBuildingModel"
+                  [style]="{ width: '50vw' }"
+                >
+                  <div class="flex py-2 justify-content-center">
+                    <form [formGroup]="frmBuilding">
+                      <p-dropdown
+                        appendTo="body"
+                        [options]="buildingsList"
+                        placeholder="Select a Building"
+                        optionLabel="name"
+                        formControlName="clientBuildingId"
+                        (onChange)="changeBuildingValue($event)"
+                      ></p-dropdown>
+                      <br />
+                      <hr />
+                      <button
+                        type="button"
+                        (click)="addBuilding($event)"
+                        class="btn btn-primary"
+                      >
+                        Add Building
+                      </button>
+                    </form>
+                  </div>
+                </p-dialog>
+                <p-dialog
+                  header="Add Floor"
+                  [(visible)]="visibleFloorModel"
+                  [style]="{ width: '50vw' }"
+                >
+                  <div class="flex py-2 justify-content-center">
+                    <form [formGroup]="frmFloor">
+                      <p-dropdown
+                        appendTo="body"
+                        [options]="floorsList"
+                        placeholder="Select a Floor"
+                        optionLabel="name"
+                        formControlName="floor"
+                      ></p-dropdown>
+                      <br />
+                      <hr />
+                      <button
+                        type="button"
+                        (click)="addFloor()"
+                        class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                      >
+                        Add Floor
+                      </button>
+                    </form>
+                  </div>
+                </p-dialog>
+                <p-dialog
+                  header="Add Department"
+                  [(visible)]="visibleDepartmentModel"
+                  [style]="{ width: '50vw' }"
+                >
+                  <div class="flex py-2 justify-content-center">
+                    <form [formGroup]="frmDepartment">
+                      <p-dropdown
+                        appendTo="body"
+                        [options]="depLookup"
+                        placeholder="Select a Department"
+                        optionLabel="departmentName"
+                        formControlName="department"
+                      ></p-dropdown>
+                      <br />
+                      <hr />
+                      <button
+                        type="button"
+                        (click)="addDepartment()"
+                        class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                      >
+                        Add Department
+                      </button>
+                    </form>
+                  </div>
+                </p-dialog>
+                <p-dialog
+                  header="Add Room"
+                  [(visible)]="visibleRoomModel"
+                  [style]="{ width: '50vw' }"
+                >
+                  <div class="flex py-2 justify-content-center">
+                    <form [formGroup]="frmRoom">
+                      <p-dropdown
+                        appendTo="body"
+                        [options]="roomsList"
+                        placeholder="Select a Room"
+                        optionLabel="name"
+                        formControlName="room"
+                      ></p-dropdown>
+                      <br />
+                      <hr />
+                      <button
+                        type="button"
+                        (click)="addRoom()"
+                        class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                      >
+                        Add Room
+                      </button>
+                    </form>
+                  </div>
+                </p-dialog>
+              </div>
+              <div class="my-3">
+                <app-transaction-history
+                *ngIf="transactionHistory"
+                [transactionHistory]="transactionHistory"
+              ></app-transaction-history>
+              </div>
+              
+            </div>
+          </form>
+        </p-tabView>
+        <ng-container *ngIf="!model; then loader"></ng-container>
+        <!-- </ng-template> -->
+
+        <!-- <ng-template #formTemplate> -->
+        <!-- </ng-template> -->
+
+        <ng-template #loader>
+          <app-skeleton-loader></app-skeleton-loader>
+        </ng-template>
+      </div>
+    </div>
+    <div class="fixed-bottom" [ngClass]="{ disableDiv: inViewMode }">
+      <div class="row">
+        <div class="col-12">
+          <button
+            canUpdate
+            *ngIf="id != 0"
+            type="submit"
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            (click)="save()"
+          >
+            {{ "Update" | tr : PAGE_TITLE | translate }}
+          </button>
+          <button
+            *ngIf="id == 0"
+            type="submit"
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            (click)="save()"
+          >
+            {{ "Save" | tr : PAGE_TITLE | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+  </div>
+</div>

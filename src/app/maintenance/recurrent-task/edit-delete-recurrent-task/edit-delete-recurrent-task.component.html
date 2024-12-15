@@ -1,0 +1,650 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Update Recurring Task</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <p-toast></p-toast>
+    <div class="row form-scroller">
+      <!-- <p-tabView [(activeIndex)]="tabIndex">  -->
+
+        <!-- <p-tabPanel header="Edit" leftIcon="pi pi-file-edit" *ngIf="showEditTab || !isChild"> -->
+
+          <form [formGroup]="addRecurrentForm" (ngSubmit)="updateRecurrentTask()" class="add-content-type">
+
+            <div class="mb-2 mb-xl-4">
+              <!-- <div class="card-header bg-primary">
+                <div class="card-title">
+                  <h2 class="d-flex align-items-center text-white">Update Recurring Task</h2>
+                </div>
+              </div> -->
+
+              <div class=" pt-2">
+                <div class="row box-gryco py-3">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2"> 
+                    <label class="form-label">Task No.</label>
+                    <input id="title" formControlName="title" type="text" pInputText  class="form-control  icon-padding" [readonly]="true" />
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p-tabView>
+              <p-tabPanel header="Task Info.">
+                <div class="mb-2 mb-xl-4">
+                  <div class="">
+                    <div class="row box-gryco py-3">
+                      <!-- Start Content -->
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Task Type</label>
+                        <p-dropdown [options]="taskTypeList" optionLabel="name" optionValue="id" formControlName="taskTypeId"
+                          class="dropdown" (onChange)="changeTask($event)" placeholder="select"></p-dropdown>
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Frequency</label>
+                        <input formControlName="frequesnt" type="text" [readonly]="true" pInputText  class="form-control  icon-padding" />
+                      </div>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Renewed</label>
+                        <p-dropdown [options]="renewedList" optionLabel="name" optionValue="value" formControlName="renewed"
+                          class="dropdown" (onChange)="changeRenewed($event)" placeholder="select"></p-dropdown>
+                      </div>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Status</label>
+                        <p-dropdown [options]="statusList" optionLabel="name" optionValue="id" formControlName="taskStatusId"
+                          class="dropdown" (onChange)="changeStatus($event)" placeholder="select"></p-dropdown>
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Site<span class="text-danger">*</span></label>
+                        <p-autoComplete [delay]="1000" (completeMethod)="siteSearch($event)" [suggestions]="siteList"
+                          formControlName="siteName" field="custName" dataKey="id" (onSelect)="changeSite($event)">
+                        </p-autoComplete>
+                      </div>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!is2PerDay || isChild">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Date</label>
+                        <p-calendar formControlName="date" [required]="is2PerDay? true:false " [showIcon]="true"
+                          [showButtonBar]="true" [dateFormat]="'dd/mm/yy'" [showTime]="true" [showOnFocus]="false">
+                        </p-calendar>
+                      </div>
+                      </div>
+
+                      <div *ngIf="is2PerDay && !isChild" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">First Date</label>
+                        <input type="text" pInputText  class="form-control  icon-padding" [value]="addRecurrentForm.value.firstDate.toUTCString().slice(0, 26)"
+                          [readonly]="true" />
+                      </div>
+                      </div>
+                      <div *ngIf="is2PerDay && !isChild" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Second Date</label>
+                        <input type="text" pInputText  class="form-control  icon-padding" [value]="addRecurrentForm.value.secondDate.toUTCString().slice(0, 26)"
+                          [readonly]="true" />
+                          </div>
+                      </div>
+
+                      <div *ngIf="isChild" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Start Date<span class="text-danger" *ngIf="isStartEndDateRequired">*</span></label>
+                        <p-calendar formControlName="startDate" (onSelect)="selectStartDate($event)" (onBlur)="selectStartDate($event)" [required]="isStartEndDateRequired"
+                          [showIcon]="true" [showButtonBar]="true" [dateFormat]="'dd/mm/yy'" [showTime]="true" [minDate]="minDateVal" [showOnFocus]="false">
+                        </p-calendar>
+                      </div>
+                      </div>
+                      <div *ngIf="isChild" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">End Date<span class="text-danger" *ngIf="isStartEndDateRequired">*</span></label>
+                        <p-calendar formControlName="endDate" (onSelect)="selectEndDate($event)" (onBlur)="selectEndDate($event)"  [required]="isStartEndDateRequired"
+                          [showIcon]="true" [showButtonBar]="true" [dateFormat]="'dd/mm/yy'" [showTime]="true" [showOnFocus]="false">
+                        </p-calendar>
+                      </div>
+                      </div>
+                      <div *ngIf="isChild" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Working Hours</label>
+                        <p-inputNumber [minFractionDigits]="0" [maxFractionDigits]="2" [readonly]="true" mode="decimal"
+                          formControlName="workingHours" inputId="workingHours" [useGrouping]="false">
+                        </p-inputNumber>
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Assigned Engineer<span *ngIf="!isChild">1</span> </label>
+                        <p-dropdown [readonly]="imEngineer" [options]="assignedEmpList" optionLabel="userName"
+                          optionValue="userId" formControlName="engineerUser1Id" class="dropdown" (onChange)="changeTeamLeader($event)"
+                          placeholder="select"></p-dropdown>
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!isChild">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Assigned Engineer 2</label>
+                        <p-dropdown [readonly]="imEngineer" [options]="assignedEmpList" optionLabel="userName"
+                          optionValue="userId" formControlName="engineerUser2Id" class="dropdown" (onChange)="changeTeamLeader($event)"
+                          placeholder="select"></p-dropdown>
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label">Comment</label>
+                        <textarea formControlName="comment" pInputText  class="form-control  icon-padding"area></textarea>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="row py-3" *ngIf="isDay  && !isChild">
+                      <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                        <p-checkbox class="d-flex" formControlName='sunday' [value]="false" [binary]="true" (onChange)="setCheckboxSunday($event)"
+                        inputId="binary"
+                          label="Sunday"></p-checkbox>
+                      </div>
+                      <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                        <p-checkbox class="d-flex" formControlName='monday' [value]="false" [binary]="true" (onChange)="setCheckboxMonday($event)"
+                        inputId="binary"
+                          label="Monday"></p-checkbox>
+                      </div>
+                      <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                        <p-checkbox class="d-flex" formControlName='tuesday' [value]="false" [binary]="true" (onChange)="setCheckboxTuesday($event)"
+                        inputId="binary"
+                          label="Tuesday"></p-checkbox>
+                      </div>
+                      <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                        <p-checkbox class="d-flex" formControlName='wednesday' [value]="false" [binary]="true" (onChange)="setCheckboxWednesday($event)"
+                        inputId="binary"
+                          label="Wednesday"></p-checkbox>
+                      </div>
+                      <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                        <p-checkbox class="d-flex" formControlName='thursday' [value]="false" [binary]="true" (onChange)="setCheckboxThursday($event)"
+                        inputId="binary"
+                          label="Thursday"></p-checkbox>
+                      </div>
+                      <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                        <p-checkbox class="d-flex" formControlName='friday' [value]="false" [binary]="true" (onChange)="setCheckboxFriday($event)"
+                        inputId="binary"
+                          label="Friday"></p-checkbox>
+                      </div>
+                      <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                        <p-checkbox class="d-flex" formControlName='saturday' [value]="false" [binary]="true" (onChange)="setCheckboxSaturday($event)"
+                        inputId="binary"
+                          label="Saturday"></p-checkbox>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+              </p-tabPanel>
+
+              <p-tabPanel header="Medical Gas Room">
+                <div class="row box-gryco py-3">
+                  <div class="col-md-3">
+                    <div class="form-floating mb-2"> 
+                    <label class="form-label">Room ID</label>
+                    <p-autoComplete [delay]="1000" formControlName="roomName" [suggestions]="roomIdList" (onSelect)="changeRoom($event)"
+                      (completeMethod)="roomIdFilter($event)" field="roomId" placeholder="Room ID">
+                    </p-autoComplete>
+                  </div>
+                  </div>
+                  <div class="col-md-3" *ngIf="roomModel?.customerName">
+                    <div class="form-floating mb-2"> 
+                    <label class="form-label">Site</label>
+                    <input type="text" pInputText  class="form-control  icon-padding" [value]="roomModel.customerName" readonly>
+                  </div>
+                  </div>
+
+                  <!-- <p-tabView *ngIf="roomModel && showCylinders"> -->
+                  <p-tabView *ngIf="roomModel">
+                    <p-tabPanel header="General Inspection">
+                      <div class="row box-gryco py-3">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="roomTemperature">Room Temperature [15-35°C]</label>
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="roomTemperature" class="dropdown" placeholder="select"></p-dropdown>
+                          <!-- <input id="roomTemperature" type="text" formControlName="roomTemperature" pInputText  class="form-control  icon-padding" /> -->
+                        </div>
+                        </div>
+
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="roomHumidity">Room Humidity &lt; 35%</label>
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="roomHumidity" class="dropdown" placeholder="select"></p-dropdown>
+                          <!-- <input id="roomHumidity" type="text" formControlName="roomHumidity" pInputText  class="form-control  icon-padding" /> -->
+                        </div>
+                        </div>
+
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="valvesStatus">Valves Status</label>
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="valvesStatus" class="dropdown" placeholder="select"></p-dropdown>
+                          <!-- <input id="valvesStatus" type="text" formControlName="valvesStatus" pInputText  class="form-control  icon-padding" /> -->
+                        </div>
+                        </div>
+
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="alarmsCheck">Alarms Check</label>
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="alarmsCheck" class="dropdown" placeholder="select"></p-dropdown>
+                          <!-- <input id="alarmsCheck" type="text" formControlName="alarmsCheck" pInputText  class="form-control  icon-padding" /> -->
+                        </div>
+                        </div>
+
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="leakageCheck">Leakage Check</label>
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="leakageCheck" class="dropdown" placeholder="select"></p-dropdown>
+                          <!-- <input id="leakageCheck" type="text" formControlName="leakageCheck" pInputText  class="form-control  icon-padding" /> -->
+                        </div>
+                        </div>
+                      </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Manifold" *ngIf="mainFold">
+                      <div class="row py-3" *ngIf="o2">
+                        <div class="col-md-12 col-xl-12 col-xxl-12 mb-3">
+                          <h1>Oxygen</h1>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel?.o2ManifoldMainOut">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="o2ManifoldMainOut">O<sub>2</sub> Manifold-Main Out</label>
+                          <!-- <input id="o2ManifoldMainOut" type="text" formControlName="o2ManifoldMainOut" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="o2ManifoldMainOut" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.o2ManifoldRightBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="o2ManifoldRightBank">O<sub>2</sub> Manifold-Right Bank</label>
+                          <!-- <input id="o2ManifoldRightBank" type="text" formControlName="o2ManifoldRightBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="o2ManifoldRightBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.o2ManifoldLeftBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="o2ManifoldLeftBank">O<sub>2</sub> Manifold-Left Bank</label>
+                          <!-- <input id="o2ManifoldLeftBank" type="text" formControlName="o2ManifoldLeftBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="o2ManifoldLeftBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.o2ManifoldEmergency">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="o2ManifoldEmergency">O<sub>2</sub> Manifold-Emergency</label>
+                          <!-- <input id="o2ManifoldEmergency" type="text" formControlName="o2ManifoldEmergency" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="o2ManifoldEmergency" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                      </div>
+
+                      <div class="row box-gryco py-3" *ngIf="n2o">
+                        <div class="col-md-12 col-xl-12 col-xxl-12 mb-3">
+                          <h1>N<sub>2</sub>O</h1>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.n2OMainout">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="n2OMainout">N<sub>2</sub>O Main OUT</label>
+                          <!-- <input id="n2OMainout" type="text" formControlName="n2OMainout" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="n2OMainout" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.n2ORightBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="n2ORightBank">N<sub>2</sub>O-Right Bank</label>
+                          <!-- <input id="n2ORightBank" type="text" formControlName="n2ORightBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="n2ORightBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.n2OLeftBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="n2OLeftBank">N<sub>2</sub>O-Left Bank</label>
+                          <!-- <input id="n2OLeftBank" type="text" formControlName="n2OLeftBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="n2OLeftBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.n2OEmergencyBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="n2OEmergencyBank">N<sub>2</sub>O-Emergency Bank</label>
+                          <!-- <input id="n2OEmergencyBank" type="text" formControlName="n2OEmergencyBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="n2OEmergencyBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                      </div>
+
+                      <div class="row box-gryco py-3" *ngIf="co2">
+                        <div class="col-md-12 col-xl-12 col-xxl-12 mb-3">
+                          <h1>CO<sub>2</sub></h1>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.cO2MainOut">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="cO2MainOut">CO<sub>2</sub> Main OUT</label>
+                          <!-- <input id="cO2MainOut" type="text" formControlName="cO2MainOut" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="cO2MainOut" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.cO2RightBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="cO2RightBank">CO<sub>2</sub> Right Bank</label>
+                          <!-- <input id="cO2RightBank" type="text" formControlName="cO2RightBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="cO2RightBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.cO2LeftBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="cO2LeftBank">CO<sub>2</sub> Left Bank</label>
+                          <!-- <input id="cO2LeftBank" type="text" formControlName="cO2LeftBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="cO2LeftBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.cO2EmergencyBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="cO2EmergencyBank">CO<sub>2</sub> Emergency Bank</label>
+                          <!-- <input id="cO2EmergencyBank" type="text" formControlName="cO2EmergencyBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="cO2EmergencyBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                      </div>
+
+                      <div class="row py-3" *ngIf="n2">
+                        <div class="col-md-12 col-xl-12 col-xxl-12 mb-3">
+                          <h1>N<sub>2</sub></h1>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.n2MainOut">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="n2MainOut">N<sub>2</sub> Main OUT</label>
+                          <!-- <input id="n2MainOut" type="text" formControlName="n2MainOut" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value" formControlName="n2MainOut"
+                            class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.n2RightBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="n2RightBank">N<sub>2</sub> Right Bank</label>
+                          <!-- <input id="n2RightBank" type="text" formControlName="n2RightBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="n2RightBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.n2LeftBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="n2LeftBank">N<sub>2</sub> Left Bank</label>
+                          <!-- <input id="n2LeftBank" type="text" formControlName="n2LeftBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="n2LeftBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.n2EmergencyBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="n2EmergencyBank">N<sub>2</sub> Emergency Bank</label>
+                          <!-- <input id="n2EmergencyBank" type="text" formControlName="n2EmergencyBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="n2EmergencyBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                      </div>
+
+                      <div class="row box-gryco py-3" *ngIf="medicalAir">
+                        <div class="col-md-12 col-xl-12 col-xxl-12 mb-3">
+                          <h1>Medical Air</h1>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.medicalAirMainOut">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="medicalAirMainOut">Medical Air Main OUT</label>
+                          <!-- <input id="medicalAirMainOut" type="text" formControlName="medicalAirMainOut" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="medicalAirMainOut" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.medicalAirRightBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="medicalAirRightBank">Medical Air Right Bank</label>
+                          <!-- <input id="medicalAirRightBank" type="text" formControlName="medicalAirRightBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="medicalAirRightBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.medicalAirLeftBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="medicalAirLeftBank">Medical Air Left Bank</label>
+                          <!-- <input id="medicalAirLeftBank" type="text" formControlName="medicalAirLeftBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="medicalAirLeftBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.medicalAirEmergencyBank">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="medicalAirEmergencyBank">Medical Air Emergency Bank</label>
+                          <!-- <input id="medicalAirEmergencyBank" type="text" formControlName="medicalAirEmergencyBank" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="medicalAirEmergencyBank" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                      </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="LOX" *ngIf="lox">
+                      <div class="row py-3" *ngIf="lox">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.loX1Volume">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="loX1Volume">LOX1 Volume</label>
+                          <input id="loX1Volume" type="number" formControlName="loX1Volume" pInputText  class="form-control  icon-padding" />
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.loX1Pressure">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="loX1Pressure">LOX1 Pressure</label>
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="loX1Pressure" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.loX2Volume">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="loX2Volume">LOX2 Volume</label>
+                          <input id="loX2Volume" type="number" formControlName="loX2Volume" pInputText  class="form-control  icon-padding" />
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.loX2Pressure">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="loX2Pressure">LOX2 Pressure</label>
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="loX2Pressure" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                      </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Plant Room" *ngIf="plantRoom">
+                      <div class="row py-3" *ngIf="plantRoom">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.compressorsCheckforAnyUnusualNoise">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="compressorsCheckforAnyUnusualNoise">Compressors Check for any
+                            Unusual Noise</label>
+                          <!-- <input id="compressorsCheckforAnyUnusualNoise" type="text" formControlName="compressorsCheckforAnyUnusualNoise" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="compressorsCheckforAnyUnusualNoise" class="dropdown"
+                            placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.compressorsOutputPressure">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="compressorsOutputPressure">Compressors Output Pressure(10-13
+                            bar)</label>
+                          <!-- <input id="compressorsOutputPressure" type="text" formControlName="compressorsOutputPressure" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="compressorsOutputPressure" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                          *ngIf="roomModel.compressorsMedicalAirLinePressure7To8Bar">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="compressorsMedicalAirLinePressure7To8Bar">Compressors Medical
+                            Air line Pressure(7-8
+                            bar)</label>
+                          <!-- <input id="compressorsMedicalAirLinePressure7To8Bar" type="text" formControlName="compressorsMedicalAirLinePressure7To8Bar" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="compressorsMedicalAirLinePressure7To8Bar" class="dropdown"
+                            placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                          *ngIf="roomModel.compressorsMedicalAirLinePressure4To5Bar">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="compressorsMedicalAirLinePressure4To5Bar">Compressors Medical
+                            Air line Pressure(4-5
+                            bar)</label>
+                          <!-- <input id="compressorsMedicalAirLinePressure4To5Bar" type="text" formControlName="compressorsMedicalAirLinePressure4To5Bar" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="compressorsMedicalAirLinePressure4To5Bar" class="dropdown"
+                            placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.dryersCheckforAlarmOrUnusualNoise">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="dryersCheckforAlarmOrUnusualNoise">Dryers Check for
+                            Alarm/Unusual Noise</label>
+                          <!-- <input id="dryersCheckforAlarmOrUnusualNoise" type="text" formControlName="dryersCheckforAlarmOrUnusualNoise" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="dryersCheckforAlarmOrUnusualNoise" class="dropdown"
+                            placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.vacuumPumpCheckOilLeakage">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="vacuumPumpCheckOilLeakage">Vacuum Pump Check Oil
+                            Leakage</label>
+                          <!-- <input id="vacuumPumpCheckOilLeakage" type="text" formControlName="vacuumPumpCheckOilLeakage" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="vacuumPumpCheckOilLeakage" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>,
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.vacuumPumpCheckForAnyUnusualNoise">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="vacuumPumpCheckForAnyUnusualNoise">Vacuum Pump Check for any
+                            Unusual Noise</label>
+                          <!-- <input id="vacuumPumpCheckForAnyUnusualNoise" type="text" formControlName="vacuumPumpCheckForAnyUnusualNoise" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="vacuumPumpCheckForAnyUnusualNoise" class="dropdown"
+                            placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.vacuumPumpPressure">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="vacuumPumpPressure">Vacuum Pump Pressure (-0.9 / -0.6
+                            bar)</label>
+                          <!-- <input id="vacuumPumpPressure" type="text" formControlName="vacuumPumpPressure" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="vacuumPumpPressure" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.agssCheckForAnyAlarm">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="agssCheckForAnyAlarm">AGSS Check for any Alarm</label>
+                          <!-- <input id="agssCheckForAnyAlarm" type="text" formControlName="agssCheckForAnyAlarm" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="agssCheckForAnyAlarm" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.agssCheckManualOperation">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="agssCheckManualOperation">AGSS Check Manual Operation</label>
+                          <!-- <input id="agssCheckManualOperation" type="text" formControlName="agssCheckManualOperation" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="agssCheckManualOperation" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="roomModel.agssCheckAndCleanFilter">
+                          <div class="form-floating mb-2"> 
+                          <label class="form-label ms-2" for="agssCheckAndCleanFilter">AGSS Check & Clean Filter</label>
+                          <!-- <input id="agssCheckAndCleanFilter" type="text" formControlName="agssCheckAndCleanFilter" pInputText  class="form-control  icon-padding" /> -->
+                          <p-dropdown [options]="testCheck" optionLabel="name" optionValue="value"
+                            formControlName="agssCheckAndCleanFilter" class="dropdown" placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                      </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Backup Cylinders" *ngIf="backupCylinders">
+
+                      <div class="row box-gryco py-3">
+                        <ng-container *ngFor="let item of cylindersArr; let i =index">
+                          <ng-container *ngIf="roomModel[item.control.replace('Recieved', '')]">
+                            <div class="col-md-6 col-xl-3 col-xxl-2 mb-3">
+                              <div class="form-floating mb-2"> 
+                              <label class="form-label"
+                                [for]="item.control.replace('Recieved', '')"><span>{{item.label}}</span> Type Empty </label>
+                              <input [id]="item.control.replace('Recieved', '')" type="text"
+                                [formControlName]="item.control.replace('Recieved', '')" pInputText  class="form-control  icon-padding" />
+                            </div>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                    </p-tabPanel>
+                  </p-tabView>
+                </div>
+              </p-tabPanel>
+
+
+            </p-tabView>
+            <div class="mb-2 mb-xl-4">
+              <div class=" pt-2">
+                <div class="row py-3" [ngClass]="{'disableDiv': true}">
+                  <!-- <div class="card-body pt-5" >
+                    <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                  </div> -->
+                </div>
+
+                <!-- <div class="saveButton">
+                  <button canUpdate type="button" class="btn btn-primary" (click)="updateRecurrentTask()"><i *ngIf="isSaving"
+                      class="pi pi-spin pi-spinner"></i> Update</button>
+
+                  <button canDelete type="button" class="btn btn-danger" (click)="deleteRecurrentTask()"> Delete </button>
+                  <button type="button" label="Cancel" class="p-button-cancel col-lg-2" BackButton pButton></button>
+                </div> -->
+              </div>
+            </div>
+          </form>
+        <!-- </p-tabPanel> -->
+      <!-- </p-tabView> -->
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button" (click)="updateRecurrentTask()">{{'Save'}}</button>
+          <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{'Cancel'| tr:PAGE_TITLE| translate}}</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

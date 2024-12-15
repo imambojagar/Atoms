@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Alert_x0020_Report Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>Alert Report</Alias>
+        <HeadersString />
+        <Key />
+        <Name>Alert Report</Name>
+        <PathData>C:\Users\karthick.rajendran\Desktop\Report atoms\Alert Report.json</PathData>
+      </Alert_x0020_Report>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>siteName,System.String</value>
+          <value>periods,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>778c7423391e4b41a689ef52af0915b7</Key>
+        <Name>root</Name>
+        <NameInSource>Alert Report.root</NameInSource>
+      </root>
+      <root_periods Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_periods</Alias>
+        <Columns isList="true" count="3">
+          <value>periodName,System.String</value>
+          <value>periodCount,System.Decimal</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>258ece2412e54f64af3f5666c6aed174</Key>
+        <Name>root_periods</Name>
+        <NameInSource>Alert Report.root_periods</NameInSource>
+      </root_periods>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <root Ref="5" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>2a8122bc5e5248bf8509abf98dee12ac</Key>
+        <Name>root</Name>
+        <NameInSource>root_periods</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>periods</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>30b6f1afa5784689b336037a13864e07</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="6" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <PivotTable1 Ref="7" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,0,1200,540</ClientRectangle>
+          <Columns isList="true" count="1">
+            <Item7 Ref="8" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_periods.periodName</Expression>
+              <Key>f96c45de4650442cad3c74ce5f8ca242</Key>
+              <Label>Duration Periods</Label>
+              <Size Ref="9" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="10" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item7>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>0ca2869965f64fcba1789f227f55be7f</Guid>
+          <Margin>3,3,3,3</Margin>
+          <Name>PivotTable1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <PivotTableConditions isList="true" count="0" />
+          <Rows isList="true" count="1">
+            <Item8 Ref="11" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root.siteName</Expression>
+              <Key>001562697bab4d1c9b65713797cccddf</Key>
+              <Label>Site Name</Label>
+              <Size Ref="12" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="13" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item8>
+          </Rows>
+          <Summaries isList="true" count="0" />
+          <Title Ref="14" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Alerts Report</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+        </PivotTable1>
+      </Components>
+      <DashboardWatermark Ref="15" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>59fa67e03a82452b9eff9760c6f084ec</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>1/15/2024 4:40:59 PM</ReportChanged>
+  <ReportCreated>10/26/2023 11:08:19 AM</ReportCreated>
+  <ReportFile>C:\Users\Nextwo\Desktop\alerrtreport1111.mrt</ReportFile>
+  <ReportGuid>219590e910cd42babbf13f7b9ad4b09d</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

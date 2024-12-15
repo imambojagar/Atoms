@@ -1,0 +1,247 @@
+<form [formGroup]="serviceRequestFormService.maintenanceForm">
+  <div class="row py-3">
+    <!-- Status -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Status<small class="text-danger">*</small></label>
+        <p class="viewp-text">
+          Status: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.status?.name }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Call's Last Situation -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Call's Last Situation</label>
+        <p class="viewp-text">
+          Call's Last Situation: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.callsLastSituation?.name }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Repair Location -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Repair Location</label>
+        <p class="viewp-text">
+          Repair Location: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.repairLocation?.name }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Fault Description -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Fault Description</label>
+        <p class="viewp-text">
+          Fault Description: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.faultDescription }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Work Performed -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label>Work Performed</label>
+        <p class="viewp-text">
+          Work Performed: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.workPerformed }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Cause -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Cause</label>
+        <p class="viewp-text">
+          Cause: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.cause }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Comment -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Comment</label>
+        <p class="viewp-text">
+          Comment: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.comment }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <h5>Spare parts needed</h5>
+  <hr>
+  <ng-container formArrayName="spareForm">
+    <ng-container *ngFor="let stageForm of serviceRequestFormService.spareForm.controls; let i = index">
+      <div class="add-more-value-border formline d-flex align-items-end" [formGroupName]="i">
+        
+        <!-- Part No -->
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label">Part No</label>
+            <p class="viewp-text">
+              Part No: 
+              <span class="viewspan-text">{{ stageForm.value.partNo }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label">Description</label>
+            <p class="viewp-text">
+              Description: 
+              <span class="viewspan-text">{{ stageForm.value.description }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label">Qty</label>
+            <p class="viewp-text">
+              Qty: 
+              <span class="viewspan-text">{{ stageForm.value.qty }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Unit Price -->
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label">Unit Price</label>
+            <p class="viewp-text">
+              Unit Price: 
+              <span class="viewspan-text">{{ stageForm.value.unitPrice }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Currency -->
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label">Currency</label>
+            <p class="viewp-text">
+              Currency: 
+              <span class="viewspan-text">{{ stageForm.value.currency?.name }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Quotation Type -->
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <div class="form-floating mb-2">
+            <label class="form-label">Quotation Type</label>
+            <p class="viewp-text">
+              Quotation Type: 
+              <span class="viewspan-text">{{ stageForm.value.quotationType?.name }}</span>
+            </p>
+          </div>
+        </div>
+        
+      </div>
+    </ng-container>
+  </ng-container>
+  <hr>
+
+  <div class="row py-3">
+    <!-- Start Date From -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Start Date From</label>
+        <p class="viewp-text">
+          Start Date From: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.startDateFrom | date:'yy-MM-dd' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Start Date To -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Start Date To</label>
+        <p class="viewp-text">
+          Start Date To: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.startDateTo | date:'yy-MM-dd' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Return To Service Date From -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Return To Service Date From</label>
+        <p class="viewp-text">
+          Return To Service Date From: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.returnToServiceDateFrom | date:'yy-MM-dd' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Return To Service Date To -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Return To Service Date To</label>
+        <p class="viewp-text">
+          Return To Service Date To: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.returnToServiceDateTo | date:'yy-MM-dd' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- End Of Work From -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">End Of Work From</label>
+        <p class="viewp-text">
+          End Of Work From: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.endOfWorkFrom | date:'yy-MM-dd' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- End Of Work To -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">End Of Work To</label>
+        <p class="viewp-text">
+          End Of Work To: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.endOfWorkTo | date:'yy-MM-dd' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Total Cost -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Total Cost</label>
+        <p class="viewp-text">
+          Total Cost: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.totalCost }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Quote Amount -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <div class="form-floating mb-2">
+        <label class="form-label">Quote Amount</label>
+        <p class="viewp-text">
+          Quote Amount: 
+          <span class="viewspan-text">{{ serviceRequestFormService.maintenanceForm.value.quoteAmount }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</form>

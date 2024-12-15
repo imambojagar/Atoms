@@ -1,0 +1,29 @@
+body {
+  margin-top: 20px;
+  background-color: #f2f3f8;
+}
+
+input, label {
+  display: flex;
+  flex-direction: column;
+}
+
+.certificate .field {
+  width: 14% !important;
+}
+
+.p-inputgroup > div {
+  display: flex;
+}
+
+.header h6 {
+  background-color: lightblue;
+}
+
+.span-color {
+  color: red;
+}
+
+.block-label {
+  display: block;
+}/*# sourceMappingURL=edit-delete-ppm-entry.component.css.map */

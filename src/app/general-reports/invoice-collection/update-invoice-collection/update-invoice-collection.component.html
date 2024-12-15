@@ -1,0 +1,374 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+ class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading"> Add Part Delivery</h1>
+      <button type="button" class="btn-close" (click)="close_modal()"></button>
+    </div>  
+    <div class="p-3">
+      <div class="row">    
+        <p-toast></p-toast>
+        <!-- <div class="card flex justify-content-center mb-5">
+          <p-breadcrumb [model]="items"></p-breadcrumb>
+        </div> -->
+      </div>
+    </div>
+
+
+    <p-tabView [(activeIndex)]="tabIndex">
+      <p-tabPanel header="View" class="view-data-li" leftIcon="pi pi-file ">
+        <div class="">
+          <p-fieldset legend="Invoice Contract Info">
+            <form [formGroup]="invoiceCollectionForm">
+              <div class="pt-2">
+                <div class="row py-3">
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2"> 
+                      <label class="form-label">Invoice Id</label>
+                      <input type="text" formControlName="id" pInputText [readonly]="true" />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2"> 
+                    <label class="form-label" for="Sites">Assets</label>
+                    <div *ngFor="let assetName of assetNameList">
+                      <input class="sites-more-input" id="assetName" type="text" pInputText [value]="assetName"
+                        [readonly]="true" />
+                    </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2"> 
+                    <label class="form-label" for="Sites">Sites</label>
+                    <div *ngFor="let site of sitesList; let i=index">
+                      <input class="sites-more-input" id="sites" type="text" pInputText [value]="site" [readonly]="true" />
+                    </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2"> 
+                    <label class="form-label">Invoice Paid</label>
+                    <input formControlName="isPaid" type="text" [readonly]="true" pInputText />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2"> 
+                    <label class="form-label">Expected Date Provide Invoice</label>
+                    <input placeholder="{{invoiceCollectionForm.value.expectedDate}}" type="text" [readonly]="true"
+                      pInputText />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Actual Date</label>
+                    <input placeholder="{{invoiceCollectionForm.value.actualDate}}" type="text" [readonly]="true"
+                      pInputText />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Edited Price</label>
+                    <input formControlName="editedPrice" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">Sales Tax</label>
+                    <input formControlName="salesTax" type="text" [readonly]="true" pInputText />
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Tax Ats</label>
+                    <input formControlName="taxAts" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Delay Fine</label>
+                    <input formControlName="delayFine" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Check Number</label>
+                    <input formControlName="checkNumber" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Sales Order Number</label>
+                    <input formControlName="salesOrderNumber" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Requested By</label>
+                    <input formControlName="userName" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Contract Number</label>
+                    <input formControlName="contractNumber" type="text" pInputText [readonly]="true" />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Amount</label>
+                    <p-inputNumber mode="decimal" [readonly]="true" formControlName="amount" inputId="amount"
+                      [useGrouping]="false">
+                    </p-inputNumber>
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Deduction Insurance</label>
+                    <input formControlName="deductionInsurance" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Deduction Taxes</label>
+                    <input formControlName="deductionTaxes" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Deductions</label>
+                    <input formControlName="deductions" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Visit Cost</label>
+                    <p-inputNumber mode="decimal" formControlName="visitCost" inputId="visitCost" [readonly]="true"
+                      [useGrouping]="false">
+                    </p-inputNumber>
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Payment Method</label>
+                    <input type="text" [value]="paymentMethod +' Months'" [readonly]="true" pInputText>
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">  
+                    <label class="form-label">Number Of Emergency Visits</label>
+                    <p-inputNumber mode="decimal" formControlName="numberOfEmergencyVisits" [readonly]="true"
+                      inputId="numberOfEmergencyVisits" [useGrouping]="false">
+                    </p-inputNumber>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </p-fieldset>
+        </div>
+        <div class="card">
+          <fieldset class="row py-3" [ngClass]="{'disableDiv': true}">
+            <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+          </fieldset>
+        </div>
+        <div class="formline3">
+          <div class="saveButton">
+            <button pButton BackButton type="button" label="Back" class="p-button-info col-lg-2"></button>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Edit">
+        <form [formGroup]="invoiceCollectionForm" (ngSubmit)="updateInvoice()">
+          <div class="card card-flush mb-6 mb-xl-9">
+            <div class="card-header bg-primary">
+              <div class="card-title">
+                <h2 class="d-flex align-items-center text-white">Invoices Info.</h2>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-5">
+            <div class="row py-3">
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Invoice Id</label>
+                <input formControlName="id" type="text" pInputText [readonly]="true" />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Assets</label>
+                <div *ngFor="let assetName of assetNameList">
+                  <input class="sites-more-input" type="text" pInputText [value]="assetName" [readonly]="true" />
+                </div>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Sites</label>
+                <div *ngFor="let site of sitesList; let i=index">
+                  <input class="sites-more-input" id="Sites" type="text" pInputText [value]="site" [readonly]="true" />
+                </div>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Invoice Paid</label>
+                <p-dropdown [options]="invoicePaid" optionLabel="name" optionValue="id" formControlName="isPaid"
+                  placeholder="None">
+                </p-dropdown>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Expected Date Provide Invoice</label>
+                <input formControlName="expectedDateView" type="text" [readonly]="true" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Actual Date</label>
+                <p-calendar formControlName="actualDate" [required]="true" [showIcon]="true" [showButtonBar]="true"
+                  [dateFormat]="'dd/mm/yy'" [showOnFocus]="false">
+                </p-calendar>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Edited Price</label>
+                <p-inputNumber mode="decimal" formControlName="editedPrice" inputId="editedPrice" [useGrouping]="false">
+                </p-inputNumber>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Sales Tax</label>
+                <input id="salesTax" formControlName="salesTax" type="text" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Tax Ats</label>
+                <input id="taxAts" formControlName="taxAts" type="text" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Delay Fine</label>
+                <input id="delay" formControlName="delayFine" type="text" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Check Number</label>
+                <input id="checkNumber" formControlName="checkNumber" type="text" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Sales Order Number</label>
+                <input id="salesOrderNumber" formControlName="salesOrderNumber" type="text" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Requested By</label>
+                <p-dropdown formControlName="userId" [options]="requestedEmp" optionLabel="userName" optionValue="userId"
+                  class="dropdown" placeholder="select"></p-dropdown>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Contract Number</label>
+                <input id="contractNumber" formControlName="contractNumber" type="text" pInputText [readonly]="true" />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Amount</label>
+                <p-inputNumber mode="decimal" formControlName="amount" inputId="amount" [useGrouping]="false">
+                </p-inputNumber>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Deduction Insurrance</label>
+                <input id="deductionInsurrance" formControlName="deductionInsurance" type="text" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Deduction Taxes</label>
+                <input id="deductionTaxes" formControlName="deductionTaxes" type="text" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Deductions</label>
+                <input id="deductions" formControlName="deductions" type="text" pInputText />
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Visit Cost</label>
+                <p-inputNumber mode="decimal" formControlName="visitCost" inputId="visitCost" [useGrouping]="false">
+                </p-inputNumber>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Payment Method</label>
+                <input type="text" [value]="paymentMethod +' Months'" [readonly]="true" pInputText>
+              </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+               <div class="form-floating mb-2">
+                <label class="form-label">Number Of Emergency Visits</label>
+                <p-inputNumber mode="decimal" formControlName="numberOfEmergencyVisits" inputId="numberOfEmergencyVisits"
+                  [useGrouping]="false">
+                </p-inputNumber>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-5">
+            <fieldset class="row py-3" [ngClass]="{'disableDiv': true}">
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 disable-field">
+                <label class="form-label">Created ON</label>
+                <span *ngIf="createdOn!=null">
+                  <input type="text" pInputText placeholder="{{createdOn|date :'medium'}}" />
+                </span>
+                <span *ngIf="createdOn==null">
+                  <input type="text" pInputText placeholder="None" />
+                </span>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 disable-field">
+                <label class="form-label">Modified ON</label>
+                <span *ngIf="modifiedOn!=null">
+                  <input type="text" pInputText placeholder="{{modifiedOn|date :'medium'}}" />
+                </span>
+                <span *ngIf="modifiedOn==null">
+                  <input type="text" pInputText />
+                </span>
+              </div>
+            </fieldset>
+            
+          </div>
+          
+          <!-- <div class="formline">
+            <div class="saveButton">
+              <button pButton type="submit" (submit)="updateInvoice()" label="Update" class="p-button-info col-lg-2"
+                canUpdate></button>
+              <button pButton BackButton type="button" label="Back" class="p-button-cancel col-lg-2"></button>
+            </div>
+          </div> -->
+        </form>
+        <div class="fixed-bottom">
+          <div class="row">
+            <div class="col-12">
+              <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="updateInvoice()">Apply Filter</button>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+
+    <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+</div>

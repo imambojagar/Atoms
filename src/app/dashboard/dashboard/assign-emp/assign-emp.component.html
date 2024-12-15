@@ -1,0 +1,44 @@
+<p-toast position="bottom-right"></p-toast>
+<div #assignemp [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container" id="r-step-1"
+  aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Assign Engineer</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-floating mb-3">
+          <!-- Use ngModel instead of formControlName -->
+          <p-dropdown [options]="assignedEmployees" class="dropdown" placeholder="select" optionLabel="userName"
+            (onChange)="selectEng($event)" dataKey="userId" [(ngModel)]="model.assignedEmployee"
+            name="assignedEmployee">
+            <!-- Name attribute for template-driven form -->
+          </p-dropdown>
+          <label for="floatingSelect">Engineer Name</label>
+        </div>
+      </div>
+      <div class="col-12 mb-3">
+        <div class="form-floating">
+          <!-- Use ngModel for template-driven form -->
+          <!-- <input type="text" class="form-control input-field icon-padding" id="floatingName" placeholder="Engineer ID"
+            [disabled]="true" [(ngModel)]="model.employeeId" name="engineerId"> -->
+          <p-dropdown [options]="assignedEmployees" class="dropdown" placeholder="select" optionLabel="employeeId"
+            (onChange)="selectEngId($event)" dataKey="userId" [(ngModel)]="model.employeeId"
+            name="assignedEmployee"></p-dropdown>
+          <!-- Name attribute is required for ngModel -->
+          <label for="floatingName">Engineer ID</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <!-- Call save method on form submission -->
+          <button class="btn btn-blue text-white border-r10 float-end" type="button" (click)="save()">Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

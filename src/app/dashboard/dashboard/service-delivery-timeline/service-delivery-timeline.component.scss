@@ -1,0 +1,89 @@
+/* Completed */
+.completed1 {
+  background-color: #BBE6C2;
+  /* Soft green */
+  color: #54C166;
+  /* Darker green for text */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+
+/* Closed */
+.closed1 {
+  background-color: rgba(225, 227, 230, 1);
+  /* Light gray-blue */
+  color: rgba(181, 185, 193, 1);
+  /* Slate blue for text */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+
+/* Rejected */
+.rejected1 {
+  background-color: #B3B3B3;
+  /* Light gray */
+  color: #000000;
+  /* Very dark gray (almost black) */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Open */
+.open1 {
+  background-color: #B6C3EF;
+  /* Light blue */
+  color: rgba(72, 104, 215, 1);
+  /* Medium blue */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: block;
+  align-items: center;
+
+  width: 125px;
+}
+
+/* New */
+.new1 {
+  background-color: #B1DBF5;
+  /* Lighter blue */
+  color: #3DA5E5;
+  /* Deeper blue for text */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+
+/* Overdue */
+.overdue1 {
+  background-color: #FBB0B0;
+  /* Pale yellow */
+  color: #FFC945;
+  /* Deep gold */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* In Progress */
+.in-progress1 {
+  background-color: rgba(237, 220, 176, 1);
+  /* Warm beige */
+  color: #D3A73A;
+  /* Deep brown */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: block;
+  align-items: center;
+  width: 125px;
+}

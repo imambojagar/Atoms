@@ -1,0 +1,106 @@
+<div #drawerFilter
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Recurrent</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="searchForm">
+          <div class="row py-3 box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"*ngIf="false">
+                <div class="form-floating mb-2">
+                  <label for="floatingAssetGroup" class="select-label">Asset Group</label>
+                  <p-dropdown [options]="AssetGroups" optionLabel="name" formControlName="assetGroup" [hidden]="true"
+                       class="header-search-background" id="floatingAssetGroup" placeholder="Select Asset Group"></p-dropdown>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <label for="floatingAssetNumber" class="select-label">Asset Number</label>
+                  <p-autoComplete [delay]="1000" [suggestions]="assetNumberList" formControlName="assetId"
+
+                      (completeMethod)="assetNumberFilter($event)"
+                      class="header-search-background"
+                      field="assetNumber" id="floatingAssetNumber"></p-autoComplete>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <label for="floatingAssetSN" class="select-label">Asset S.N</label>
+                  <p-autoComplete [delay]="1000" [suggestions]="serialList" formControlName="assetId"
+                       (completeMethod)="selectAssetSN($event)"
+                      class="header-search-background"
+                      field="assetSerialNo" id="floatingAssetSN"></p-autoComplete>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <label for="floatingModel" class="select-label">Title</label>
+                  <p-autoComplete [delay]="1000" formControlName="transferCode" [suggestions]="titleList"
+                      class="header-search-background"
+
+                      (completeMethod)="titleFilter($event)" field="transferCode"></p-autoComplete>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <label for="floatingModel" class="select-label">Site</label>
+                  <p-autoComplete [delay]="1000" formControlName="destSiteId" class="header-search-background" [suggestions]="siteList"
+
+                      (completeMethod)="siteNumberFilter($event)" field="custName"></p-autoComplete>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <label for="floatingModel" class="select-label">Building</label>
+                  <p-dropdown [options]="buildingList" optionLabel="name"  optionValue="id"
+                      formControlName="destBuildingId" class="header-search-background"
+                      (onChange)="filter.destBuildingId=$event.value"
+                      placeholder="select"></p-dropdown>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <label for="floatingModel" class="select-label">Floor</label>
+                  <p-dropdown [options]="floorList" optionLabel="name" optionValue="id"
+                      formControlName="destFloorId" class="header-search-background"
+                      (onChange)="filter.destFloorId=$event.value" placeholder="select"></p-dropdown>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <label for="floatingDepartment" class="select-label">Department</label>
+                  <p-dropdown [options]="departmentList" optionLabel="departmentName" optionValue="id"
+                      formControlName="destDepartmentId" class="header-search-background"
+                      (onChange)="filter.destDepartmentId=$event.value"
+                      placeholder="select" id="floatingDepartment"></p-dropdown>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <label for="floatingAssetRoom" class="select-label">Room</label>
+                  <input formControlName="destRoom" type="text"
+                    class="form-control header-search-background icon-padding"
+                    (keyup)="onInput($event)" pInputText  id="floatingAssetRoom"/>
+                </div>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="search()">Apply Filter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

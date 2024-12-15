@@ -1,0 +1,41 @@
+<form [formGroup]="searchForm" *ngIf="assetGroupName=='FM' || assetGroupName=='Both'">
+    <div class="row py-3">
+        <div class="col-md-4">
+            <label class="form-label">Sites</label>
+            <p-multiSelect [options]="sites" formControlName="sites"
+                                    dataKey="id" defaultLabel="Select" 
+                                    optionLabel="name"
+                                    (onChange)="onChangeChart1And2($event)"
+                                    class="multiselect-custom" >
+                                </p-multiSelect>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Periods</label>
+            <p-multiSelect [options]="periods" formControlName="periods"
+                                    dataKey="id" defaultLabel="Select" 
+                                    optionLabel="name"
+                                    (onChange)="onChangeChart1And2($event)"
+                                    class="multiselect-custom" >
+                                </p-multiSelect>
+        </div> 
+        <div class="col-md-4">
+            <label class="form-label">Call Last Situation</label>
+            <p-multiSelect [options]="situations" formControlName="situations"
+                                    dataKey="id" defaultLabel="Select" 
+                                    optionLabel="name"
+                                    (onChange)="onChangeChart1And2($event)"
+                                    class="multiselect-custom" >
+                                </p-multiSelect>
+        </div> 
+    </div>
+</form>
+<div class="col-md-12 col-12" *ngIf="assetGroupName=='FM' || assetGroupName=='Both'">
+    <div id="chart1" style="position: relative;z-index: 50;">
+        Loading...
+    </div>
+</div>
+<div class="col-md-12 col-12" *ngIf="assetGroupName=='FM' || assetGroupName=='Both'" >
+    <div id="chart2" style="position: relative;z-index: 49;">
+        Loading...
+    </div>
+</div>

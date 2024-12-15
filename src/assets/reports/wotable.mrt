@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <WOTable Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>WOTable</Alias>
+        <HeadersString />
+        <Key />
+        <Name>WOTable</Name>
+        <PathData>C:\Users\karthick.rajendran\Desktop\Report atoms\WOTable.json</PathData>
+      </WOTable>
+    </Databases>
+    <DataSources isList="true" count="5">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>siteName,System.String</value>
+          <value>periods,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>b487301950054a1d9936e6e5962db0c0</Key>
+        <Name>root</Name>
+        <NameInSource>WOTable.root</NameInSource>
+      </root>
+      <root_periods Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_periods</Alias>
+        <Columns isList="true" count="4">
+          <value>periodName,System.String</value>
+          <value>periodCount,System.Decimal</value>
+          <value>statuses,System.String</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>20be954fc20448aa882583190e07be29</Key>
+        <Name>root_periods</Name>
+        <NameInSource>WOTable.root_periods</NameInSource>
+      </root_periods>
+      <root_periods_statuses Ref="5" type="DataTableSource" isKey="true">
+        <Alias>root_periods_statuses</Alias>
+        <Columns isList="true" count="4">
+          <value>statusName,System.String</value>
+          <value>statusCount,System.Decimal</value>
+          <value>transactions,System.String</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>b3b8e5594e1744789b44f870df91ddf8</Key>
+        <Name>root_periods_statuses</Name>
+        <NameInSource>WOTable.root_periods_statuses</NameInSource>
+      </root_periods_statuses>
+      <root_periods_statuses_transactions Ref="6" type="DataTableSource" isKey="true">
+        <Alias>root_periods_statuses_transactions</Alias>
+        <Columns isList="true" count="4">
+          <value>transactionName,System.String</value>
+          <value>transactionCount,System.Decimal</value>
+          <value>equipmentStatus,System.String</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>416b3207a78f4c568aeedf8f6a07bf12</Key>
+        <Name>root_periods_statuses_transactions</Name>
+        <NameInSource>WOTable.root_periods_statuses_transactions</NameInSource>
+      </root_periods_statuses_transactions>
+      <root_periods_statuses_transactions_equipmentStatus Ref="7" type="DataTableSource" isKey="true">
+        <Alias>root_periods_statuses_transactions_equipmentStatus</Alias>
+        <Columns isList="true" count="3">
+          <value>equipmentStatusName,System.String</value>
+          <value>equipmentStatusCount,System.Decimal</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>0b6e1ce2c3354c998e079554c49381d3</Key>
+        <Name>root_periods_statuses_transactions_equipmentStatus</Name>
+        <NameInSource>WOTable.root_periods_statuses_transactions_equipmentStatus</NameInSource>
+      </root_periods_statuses_transactions_equipmentStatus>
+    </DataSources>
+    <Relations isList="true" count="4">
+      <root Ref="8" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>6853a447b01a4d77b26fbe66440d0715</Key>
+        <Name>root</Name>
+        <NameInSource>root_periods</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>periods</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+      <root_periods Ref="9" type="DataRelation" isKey="true">
+        <Alias>root_periods</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="5" />
+        <Dictionary isRef="1" />
+        <Key>5cda54190c6a4423b1573de1e94efd87</Key>
+        <Name>root_periods</Name>
+        <NameInSource>root_periods_statuses</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>statuses</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </root_periods>
+      <root_periods_statuses Ref="10" type="DataRelation" isKey="true">
+        <Alias>root_periods_statuses</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="6" />
+        <Dictionary isRef="1" />
+        <Key>d0fc17d60d9546e2ac28c478d233740b</Key>
+        <Name>root_periods_statuses</Name>
+        <NameInSource>root_periods_statuses_transactions</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>transactions</value>
+        </ParentColumns>
+        <ParentSource isRef="5" />
+      </root_periods_statuses>
+      <root_periods_statuses_transactions Ref="11" type="DataRelation" isKey="true">
+        <Alias>root_periods_statuses_transactions</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Key>0f85dc83394a46b5bc291ae33956e28c</Key>
+        <Name>root_periods_statuses_transactions</Name>
+        <NameInSource>root_periods_statuses_transactions_equipmentStatus</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>equipmentStatus</value>
+        </ParentColumns>
+        <ParentSource isRef="6" />
+      </root_periods_statuses_transactions>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>f6911b7914da43cc85eac90e5c378a2e</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="12" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <PivotTable1 Ref="13" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>-20,-20,1540,640</ClientRectangle>
+          <Columns isList="true" count="3">
+            <Item13 Ref="14" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_periods_statuses.statusName</Expression>
+              <Key>b5d652c2a2cd4dd6adb820355b9cf9d0</Key>
+              <Label>Status</Label>
+              <Size Ref="15" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="16" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item13>
+            <Item14 Ref="17" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_periods_statuses_transactions.transactionName</Expression>
+              <Key>4919e540229442849210fa0b42de8669</Key>
+              <Label>Transaction</Label>
+              <Size Ref="18" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="19" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item14>
+            <Item15 Ref="20" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_periods_statuses_transactions_equipmentStatus.equipmentStatusName</Expression>
+              <Key>db0465b36c6b488da53803bd36551e0e</Key>
+              <Label>Equipment</Label>
+              <Size Ref="21" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="22" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item15>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>5bb521c211d741e69076c965edc06da5</Guid>
+          <Margin>6,6,6,6</Margin>
+          <Name>PivotTable1</Name>
+          <Page isRef="12" />
+          <Parent isRef="12" />
+          <PivotTableConditions isList="true" count="0" />
+          <Rows isList="true" count="2">
+            <Item16 Ref="23" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root.siteName</Expression>
+              <Key>9bd6b08a77164f03a77601fcfb89662b</Key>
+              <Label>Site Name</Label>
+              <Size Ref="24" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="25" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item16>
+            <Item17 Ref="26" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root_periods.periodName</Expression>
+              <Key>9c1582fe9c794b8297c8addee0ec0899</Key>
+              <Label>Duration Periods</Label>
+              <Size Ref="27" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="28" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item17>
+          </Rows>
+          <Summaries isList="true" count="1">
+            <Item18 Ref="29" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotSummary" isKey="true">
+              <Expression>Sum(root_periods_statuses_transactions_equipmentStatus.equipmentStatusCount)</Expression>
+              <Key>89ab09fceb7f4d4db3f76800c595c7a8</Key>
+              <Label>equipmentStatusCount</Label>
+              <Size Ref="30" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item18>
+          </Summaries>
+          <Title Ref="31" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,9</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Wo Table Report</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+        </PivotTable1>
+      </Components>
+      <DashboardWatermark Ref="32" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>70e3294a59864f2e980ed07c8a350f64</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+      <Width>1500</Width>
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>10/25/2023 3:53:31 PM</ReportChanged>
+  <ReportCreated>10/25/2023 10:17:30 AM</ReportCreated>
+  <ReportFile>C:\Users\karthick.rajendran\Desktop\wotable.mrt</ReportFile>
+  <ReportGuid>6f93a56c56524e2a8c2317a03cd7e60f</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

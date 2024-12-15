@@ -1,0 +1,368 @@
+<div class="fv-row" [formGroup]="technicalInspectionForm">
+  <div class="card card-custom">
+    <!-- begin::Header -->
+    <div class="card-header card-header-stretch overflow-auto">
+      <ul
+        class="nav nav-stretch nav-line-tabs fw-bold border-transparent flex-nowrap"
+        role="tablist"
+      >
+        <li class="nav-item">
+          <a
+            class="nav-link cursor-pointer"
+            [ngClass]="{ active: activeTab === 'Lines' }"
+            (click)="setActiveTab('Lines')"
+            role="tab"
+          >
+            <h4
+              class="d-flex align-items-center text-primary"
+              *ngIf="getControls('lines').length > 0"
+            >
+              Lines
+            </h4>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link cursor-pointer"
+            [ngClass]="{ active: activeTab === 'RegistryFiles' }"
+            (click)="setActiveTab('RegistryFiles')"
+            role="tab"
+          >
+            <h4
+              class="d-flex align-items-center text-primary"
+              *ngIf="getControls('registryFiles').length > 0"
+            >
+              Registry Files
+            </h4>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content pt-3">
+        <div class="tab-pane" [ngClass]="{ active: activeTab === 'Lines' }">
+          <div class="card card-flush mt-2 mb-2 mb-xl-2">
+            <div class="card-body pt-4">
+              <div formArrayName="lines">
+                <div
+                  *ngFor="let info of getControls('lines'); let i = index"
+                  class="formline add-more-value-border add-more-values margin-bottom-add-more"
+                >
+                  <div [formGroupName]="i" class="d-flex">
+                    <fieldset class="formline">
+                      <div class="row py-3">
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3" [ngClass]="{'disableDiv': true}">
+                          <label class="fs-6 fw-bold form-label">Item</label>
+                          <!-- <input type="text" formControlName="item" name="item" class="form-control form-control-sm form-control-solid" placeholder="Enter ..." /> -->
+                          <p-autoComplete [delay]="1000"
+                            placeholder="Please enter . . . "
+                            formControlName="item"
+                           
+                            [style]="{ width: '100%' }"
+                            [inputStyle]="{ width: '100%' }"
+                            (onSelect)="bindPoLine($event, i)"
+                            [suggestions]="selectedPOLines"
+                            (completeMethod)="searchPoLine($event)"
+                            (onClear)="clearPoLine(i)"
+                            field="item"
+                          >
+                          </p-autoComplete>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label">Type</label>
+                          <input
+                            type="text"
+                            formControlName="type"
+                            name="type"
+                            class="form-control form-control-sm form-control-solid"
+                            readonly
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label"
+                            >Unit of Measure</label
+                          >
+                          <input
+                            type="text"
+                            formControlName="uom"
+                            name="uom"
+                            class="form-control form-control-sm form-control-solid"
+                            readonly
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label">Ordered</label>
+                          <input
+                            type="number"
+                            formControlName="ordered"
+                            name="ordered"
+                            class="form-control form-control-sm form-control-solid"
+                            readonly
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                      </div>
+                      <div class="row py-3">
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label"
+                            >Received</label
+                          >
+                          <input
+                            type="number"
+                            formControlName="received"
+                            name="received"
+                            class="form-control form-control-sm form-control-solid"
+                            readonly
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label">Billed</label>
+                          <input
+                            type="number"
+                            formControlName="billed"
+                            name="billed"
+                            class="form-control form-control-sm form-control-solid"
+                            readonly
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label"
+                            >Cancelled</label
+                          >
+                          <input
+                            type="number"
+                            formControlName="cancelled"
+                            name="cancelled"
+                            class="form-control form-control-sm form-control-solid"
+                            readonly
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label">Price</label>
+                          <input
+                            type="number"
+                            formControlName="price"
+                            name="price"
+                            class="form-control form-control-sm form-control-solid"
+                            readonly
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                      </div>
+                      <div class="row py-3">
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label"
+                            >Received</label
+                          >
+                          <input
+                            type="number"
+                            formControlName="deliveryReceived"
+                            name="deliveryReceived"
+                            readonly
+                            class="form-control form-control-sm form-control-solid"
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                          <label class="fs-6 fw-bold form-label"
+                            >Remaining</label
+                          >
+                          <input
+                            type="number"
+                            formControlName="remaining"
+                            name="remaining"
+                            class="form-control form-control-sm form-control-solid"
+                            readonly
+                            placeholder="Enter ..."
+                          />
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                          <label class="fs-6 fw-bold form-label"
+                            >Description</label
+                          >
+                          <textarea
+                            formControlName="description"
+                            name="description"
+                            readonly
+                            class="form-control form-control-sm form-control-solid"
+                            placeholder="Enter ..."
+                            rows="2"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="row py-3" [ngClass]="{'disableDiv': true}">
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                          <label
+                            class="form-check form-switch form-check-custom form-check-solid"
+                            ><input
+                              formControlName="accessory"
+                              name="accessory"
+                              (change)="checkAccessory($event, i)"
+                              class="form-check-input"
+                              type="checkbox"
+                              value="1"
+                            /><span
+                              class="form-check-label fw-bold text-dark-400"
+                              >Accessory</span
+                            ></label
+                          >
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6" [ngClass]="{'disableDiv': true}">
+                          <label
+                            class="form-check form-switch form-check-custom form-check-solid"
+                          >
+                            <input
+                              formControlName="requiredInspection"
+                              (change)="checkRequiredInspection($event, i)"
+                              name="requiredInspection"
+                              class="form-check-input"
+                              type="checkbox"
+                              value="1"
+                            />
+                            <span class="form-check-label fw-bold text-dark-400"
+                              >Required Inspection</span
+                            ></label
+                          >
+                        </div>
+                      </div>
+                    </fieldset>
+                    <div class="add-more-value-button field ms-8 mb-4">
+                            <button
+                        pButton
+                        type="button"
+                        title="Inspection"
+                        (click)="addtechnicalinspection(i)"
+                        class="p-button-rounded p-button-info mr-2"
+                        icon="pi pi-check-circle"
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" [ngClass]="{ active: activeTab === 'RegistryFiles', 'disableDiv': hideContinue==false }">
+          <div class="card card-flush mt-6 mb-6 mb-xl-9">
+            <div class="card-body pt-4">
+              <div formArrayName="registryFiles">
+                <div
+                  *ngFor="
+                    let info of getControls('registryFiles');
+                    let i = index
+                  "
+                  class="formline add-more-value-border add-more-values margin-bottom-add-more"
+                >
+                  <div [formGroupName]="i" class="d-flex">
+                    <fieldset class="formline">
+                      <div class="row py-3">
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-xxl-12">
+                          <input
+                            type="text"
+                            formControlName="fileName"
+                            name="fileName"
+                            style="border: none"
+                            class="form-control form-control-sm d-flex align-items-center"
+                            readonly
+                          />
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xl-4 col-xxl-4">
+                          <label class="fs-6 fw-bold form-label"></label>
+                          <label
+                            class="form-check form-switch form-check-custom form-check-solid"
+                            ><input
+                              formControlName="available"
+                              name="available"
+                              class="form-check-input"
+                              type="checkbox"
+                              (change)="checkFileAvailable($event, i)"
+                              value="1"
+                            /><span
+                              class="form-check-label fw-bold text-gray-400"
+                              >Available</span
+                            ></label
+                          >
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xl-4 col-xxl-4">
+                          <label class="fs-6 fw-bold form-label"> </label>
+                          <label
+                            class="form-check form-switch form-check-custom form-check-solid"
+                            ><input
+                              formControlName="notAvailable"
+                              name="notAvailable"
+                              class="form-check-input"
+                              (change)="checkFileNonAvailable($event, i)"
+                              type="checkbox"
+                              value="1"
+                            /><span
+                              class="form-check-label fw-bold text-gray-400"
+                              >Not Available</span
+                            ></label
+                          >
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xl-4 col-xxl-4">
+                          <label class="fs-6 fw-bold form-label"> </label>
+                          <label
+                            class="form-check form-switch form-check-custom form-check-solid"
+                            ><input
+                              formControlName="notRequired"
+                              name="notRequired"
+                              class="form-check-input"
+                              type="checkbox"
+                              (change)="checkFileRequired($event, i)"
+                              value="1"
+                            /><span
+                              class="form-check-label fw-bold text-gray-400"
+                              >Not Required</span
+                            ></label
+                          >
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!isCancel">
+    <div class="col-12">
+      <button type="button" class="btn btn-primary mt-8 ml-6" (click)="back()">
+        Back
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary mt-8 ml-6"
+        (click)="save()"
+        *ngIf="hideContinue"
+      >
+        Save
+      </button>
+  
+      <button
+        type="button"
+        class="btn btn-primary mt-8 ml-6"
+        (click)="continue()"
+        *ngIf="!hideContinue"
+      >
+        Continue
+      </button>
+      <button
+      type="button"
+      class="btn btn-primary mt-8 ml-6"
+      (click)="print()"
+      *ngIf="!hideContinue"
+    >
+      Print
+    </button>
+    </div>
+  </div>
+</div>

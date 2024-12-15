@@ -1,0 +1,204 @@
+
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class=" ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <p-toast></p-toast>
+
+              <div class="">
+                <!-- <app-search-component (OnSearch)="Search()" (OnReset)="Reset()"> -->
+                <div #drawerFilter  [ngClass]=" showmodal ? 'show' : ''"
+                    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                    <div class="offcanvas-header">
+                      <h1 class="offcanvas-title offcanvas-heading">search Gas Room</h1>
+                      <button type="button" class="btn-close" (click)="close_modal()"></button>
+                    </div>
+                    <div class="row box-gryco">
+                      <div class="pt-2">
+                        <form [formGroup]="roomFG">
+                          <div class="row box-gryco py-3">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                             <div class="form-floating mb-2">
+                              <label class="form-label">Room ID</label>
+                              <p-autoComplete [delay]="1000" formControlName="roomId" [suggestions]="roomIdList"
+                                (onSelect)="this.filter.roomId =$event.value" (completeMethod)="roomIdFilter($event)" field="roomId"
+                                placeholder="Room ID">
+                              </p-autoComplete>
+                            </div>
+                            </div>
+
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                             <div class="form-floating mb-2">
+                              <label class="form-label">Site</label>
+                              <p-autoComplete [delay]="1000" formControlName="siteId" placeholder="Site Name" [suggestions]="siteList"
+                                (onSelect)="filter.siteId = $event.value.id" (completeMethod)="siteFilter($event)" field="custName">
+                              </p-autoComplete>
+                            </div>
+                            </div>
+
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+
+                    <div class="fixed-bottom">
+                      <div class="row">
+                        <div class="col-12">
+                          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="Search()">Apply Filter</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+               <!--  </app-search-component> -->
+               <div class="main">
+                <div class="container-fluid">
+                  <div class="contents ngprime-custom">
+                      <div class="row">
+                      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="row  mb-3 content-heading">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                            <div class="float-start main-heading">
+                              Gas Room
+                            </div>
+                            <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                                  src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                            <div class="row float-end">
+                              <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                                <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                      src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                              </div>
+                              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                                <div class="form-floating float-start ">
+                                  <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                    [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                    value="Type here">
+                                  <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                                  <label for="floatingName">Search</label>
+                                  <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                              (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                                </div>
+                              </div>
+                              <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                                <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                    (click)="openModal()">Add </button></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <p-table #dt
+                          [value]="rooms"
+                          [rows]="filter.pageSize"
+                          [lazy]="true"
+                          [rowHover]="false"
+                          dataKey="id"
+                          [tableStyle]="{'min-width': '75rem'}"
+                          [totalRecords]="totalRows" >
+                          <!-- <ng-template pTemplate="caption">
+                            <div class="d-flex  justify-content-between">
+                                <div class="card-title">
+                                  <span class="">
+                                    Medical Gas Room <br>
+                                    <span class="total_rows_data"> Total: {{totalRows}} </span>
+                                  </span>
+                                </div>
+                                <div class="d-flex">
+                                  <a [routerLink]="['/maintenance/gas-room/add-control']" class="nav-link" canAdd>
+                                    <button pButton pRipple label="Add" class="btn btn-light-primary me-2 mr-2"> </button>
+                                  </a>
+                                  <button (click)="export()" pRipple class="btn btn-light-primary me-2">Export</button>
+                                </div>
+                            </div>
+                          </ng-template> -->
+
+                          <!-- <ng-template pTemplate="caption">
+                            <div class="row">
+                              <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                <h4 class="mt-3 inline main-heading">Gas Room</h4>
+                                <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="export()">Export <img src="navbar/export.svg" alt=""></a>
+                              </div>
+                              <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+
+                                  <div class="p-input-icon-left ">
+                                    <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="close_modal()">
+                                      <img src="navbar/filter.svg" alt="">
+                                    </p-button>
+                                  </div>
+                                  <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                        <div class="form-floating float-end">
+                                          <input type="text"
+                                            pInputText
+                                            class="form-control border-0 header-search-background"
+                                            id="floatingSearchInput"
+                                            value="Type here"
+                                            placeholder="Type here" (click)="clearValue($event);">
+                                          <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                          <label for="floatingSearchInput">Search</label>
+                                        </div>
+                                  </div>
+                                  <div class="p-input-icon-left">
+                                    <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                      Add New
+                                    </button>
+                                  </div>
+                              </div>
+                            </div>
+                          </ng-template> -->
+
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th class="text-center">Room ID</th>
+                              <th class="text-center">Site</th>
+                              <th class="text-center">Action</th>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-room>
+                            <tr>
+                              <!-- <td class="text-center"><a class="link-info" (click)="navToDetails(room,0)">{{room.roomId}}</a></td> -->
+                              <td class="text-center">{{room.roomId}}</td>
+                              <td class="text-center">{{room.customerName}}</td>
+                              <td class="text-center">
+                                <div class="">
+                                  <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                    (click)="navToViewDetails(room,0)" >
+                                    <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                  </button>
+                                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info me-2"
+                                    (click)="navToDetails(room,1)" canUpdate></button>
+
+                                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                    (click)="deleteRoom(room)" canDelete></button>
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-template>
+
+                        </p-table>
+                        <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                          [showCurrentPageReport]="true"
+                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+<app-gas-room-control [showmodal]="addTransferLoaded" [edit_asset_id]="asset_id" [editIndex]="" (openModals)="openModal()"></app-gas-room-control>
+<app-gas-room-view-control [showmodal]="viewTransfersLoaded" [edit_asset_id]="asset_id" [editIndex]="" (openModals)="openView()"></app-gas-room-view-control>
+<div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="viewTransfersLoaded" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="showmodal" class="offcanvas-backdrop fade show"></div>
+

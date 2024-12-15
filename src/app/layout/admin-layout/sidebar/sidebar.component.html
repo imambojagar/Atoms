@@ -1,0 +1,634 @@
+<div class="nano">
+  <div class="nano-content">
+    <div class="logo">
+      <a href="#">
+        <img src="assets/img/favicon.png" alt="" />
+      </a>
+    </div>
+
+    <div class="atom-logo mb-4">
+      <div class="d-flex justify-content-center text-center"></div>
+      <div class="text-center">
+        <a href="#">
+          <img src="assets/img/logo-white.svg" alt="" width="200" />
+        </a>
+      </div>
+    </div>
+
+    <ul class="side-icon">
+      <li [routerLinkActive]="['active']">
+        <a pRipple (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/dashboard']">
+          <img src="navbar/assets.png" class="mr-3" alt="" />
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="sidebar-sub-toggle">
+          <img src="assets/img/sidebar/asset.svg" alt="" /> Assets
+          <span class="sidebar-collapse-icon fa fa-angle-down"></span></a>
+        <!-- <ul>
+            <li><a href="#">Dashboard 1</a></li>
+            <li><a href="#">Dashboard 2</a></li>
+          </ul> -->
+        <ul>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/assets/name-definition']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Asset Nomenclature</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/assets/model-definition']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Model</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/assets/taxonomy']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Manufacturer and Model</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a class="sidebar-sub-toggle" (click)="isMobile ? handleSidebarToggle() : ''">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Assets </span>
+              <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+            </a>
+            <ul>
+              <li [routerLinkActive]="['active']">
+                <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/assets/assets']">
+                  <i class="pi pi-table mr-3"></i>
+                  <span>Asset</span>
+                </a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/assets/assets/assets-bulk-update']"
+                  [routerLinkActive]="['active']">
+                  <i class="pi pi-search mr-3"></i>
+                  <span>Update Asset Information</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li></li>
+          <li [routerLinkActive]="['active']" [routerLink]="['/assets/maintenance-contract']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Maintenance Contract</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/assets/technical-retirement']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Technical Retirement</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['assets/asset-inventory']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Asset Inventory</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['assets/asset-utilization']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Asset Utilization</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a class="sidebar-sub-toggle">
+          <img src="navbar/mainteinance.png" class="mr-3" alt="" />
+          <span>Maintenance</span>
+          <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+        </a>
+        <ul>
+          <!-- <li [routerLinkActive]="['active']">
+            <a (click)=" isMobile ? handleSidebarToggle(): ''">
+              <span>Recurring Task</span>
+              <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+            </a>
+            <ul>
+              <li [routerLinkActive]="['active']">
+                <a pRipple (click)=" isMobile ? handleSidebarToggle(): ''"
+                  [routerLink]="['/maintenance/recurrent-task/schedule']">
+                  <i class="pi pi-table mr-3"></i>
+                  <span>Task Schedule</span>
+                </a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a pRipple (click)=" isMobile ? handleSidebarToggle(): ''"
+                  [routerLink]="['/maintenance/recurrent-task/entries']">
+                  <i class="pi pi-search mr-3"></i>
+                  <span>Task Entries</span>
+                </a>
+              </li>
+            </ul>
+          </li> -->
+
+          <li [routerLinkActive]="['active']">
+            <a class="sidebar-sub-toggle" (click)="isMobile ? handleSidebarToggle() : ''">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Recurring Task </span>
+              <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+            </a>
+            <ul>
+              <li [routerLinkActive]="['active']">
+                <a (click)="isMobile ? handleSidebarToggle() : ''"
+                  [routerLink]="['/maintenance/recurrent-task/schedule']">
+                  <i class="pi pi-table mr-3"></i>
+                  <span>Task Schedule</span>
+                </a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a (click)="isMobile ? handleSidebarToggle() : ''"
+                  [routerLink]="['/maintenance/recurrent-task/entries']" [routerLinkActive]="['active']">
+                  <i class="pi pi-search mr-3"></i>
+                  <span>Task Entries</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/gas-room']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Medical Gas Room</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+
+          <!-- <li [routerLinkActive]="['active']">
+            <a (click)=" isMobile ? handleSidebarToggle(): ''">
+              <span>Cylinders Reference</span>
+              <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+            </a>
+            <ul>
+              <li [routerLinkActive]="['active']">
+                <a pRipple (click)=" isMobile ? handleSidebarToggle(): ''"
+                  [routerLink]="['/maintenance/cylinders-reference/amount']">
+                  <i class="pi pi-table mr-3"></i>
+                  <span>Quantity</span>
+                </a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a pRipple (click)=" isMobile ? handleSidebarToggle(): ''"
+                  [routerLink]="['/maintenance/cylinders-reference/price']">
+                  <i class="pi pi-search mr-3"></i>
+                  <span>Price</span>
+                </a>
+              </li>
+            </ul>
+          </li> -->
+
+          <li [routerLinkActive]="['active']">
+            <a class="sidebar-sub-toggle" (click)="isMobile ? handleSidebarToggle() : ''">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Cylinders Reference </span>
+              <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+            </a>
+            <ul>
+              <li [routerLinkActive]="['active']">
+                <a (click)="isMobile ? handleSidebarToggle() : ''"
+                  [routerLink]="['/maintenance/cylinders-reference/amount']">
+                  <i class="pi pi-table mr-3"></i>
+                  <span>Quantity</span>
+                </a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a (click)="isMobile ? handleSidebarToggle() : ''"
+                  [routerLink]="['/maintenance/cylinders-reference/price']" [routerLinkActive]="['active']">
+                  <i class="pi pi-search mr-3"></i>
+                  <span>Price</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/ordering-cylinders-lox']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>OrderingCylindersLox</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>PPM</span>
+              <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+            </a>
+            <ul>
+              <li [routerLinkActive]="['active']">
+                <a pRipple (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/ppm']">
+                  <i class="pi pi-table mr-3"></i>
+                  <span>PPMs Schedules</span>
+                </a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a pRipple (click)="isMobile ? handleSidebarToggle() : ''"
+                  [routerLink]="['/maintenance/ppm/ppm-entry']">
+                  <i class="pi pi-search mr-3"></i>
+                  <span>PPMs Entry</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/asset-transfer']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Transfer Assets</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+
+          <!-- <li [routerLinkActive]="['active']">
+            <a (click)=" isMobile ? handleSidebarToggle(): ''">
+              <span>Service Request</span>
+              <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+            </a>
+            <ul>
+              <li [routerLinkActive]="['active']">
+                <a pRipple (click)=" isMobile ? handleSidebarToggle(): ''"
+                  [routerLink]="['/maintenance/service-request']">
+                  <i class="pi pi-table mr-3"></i>
+                  <span>Service Request</span>
+                </a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a pRipple (click)=" isMobile ? handleSidebarToggle(): ''"
+                  [routerLink]="['/maintenance/service-request/service-request-bulk-update']">
+                  <i class="pi pi-search mr-3"></i>
+                  <span>Update Service Request Information</span>
+                </a>
+              </li>
+            </ul>
+          </li> -->
+
+          <li [routerLinkActive]="['active']">
+            <a class="sidebar-sub-toggle" (click)="isMobile ? handleSidebarToggle() : ''">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Service Request </span>
+              <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+            </a>
+            <ul>
+              <li [routerLinkActive]="['active']">
+                <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/service-request']">
+                  <i class="pi pi-table mr-3"></i>
+                  <span>Service Request</span>
+                </a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="[
+                    '/maintenance/service-request/service-request-bulk-update'
+                  ]" [routerLinkActive]="['active']">
+                  <i class="pi pi-search mr-3"></i>
+                  <span>Update Service Request</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/work-order']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Work Order</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/quotations']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Quotations</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/purchase-order']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Purchase Order</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/maintenance/gas-refill']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Gas Refill</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="[
+                '/maintenance/asset-delivery/search-asset-delivery'
+              ]">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Asset Delivery</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a class="sidebar-sub-toggle">
+          <img src="assets/img/sidebar/ref.svg" alt="" /> Reference Table
+          <span class="sidebar-collapse-icon fa fa-angle-down"></span></a>
+        <ul>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/reference-table/define-organization']">
+              <span>Define Organization</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/reference-table/supplier']">
+              <span>Supplier</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/reference-table/department']">
+              <span>Department</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/reference-table/customer']">
+              <span>Sites</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/reference-table/model-creation']">
+              <span>Model Creation</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="sidebar-sub-toggle">
+          <img src="assets/img/sidebar/human.svg" alt="" /> Human Resource
+          <span class="sidebar-collapse-icon fa fa-angle-down"></span></a>
+        <ul>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/human-resources/employee']">
+              <span>Employee</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''"
+              [routerLink]="['/human-resources/employee-position-rate']">
+              <span>Employee Position Rate</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/human-resources/shifts']">
+              <span>Shifts</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/human-resources/rota']">
+              <span>Rota</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/human-resources/customer-experience']">
+              <span>Customer Experience</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a class="sidebar-sub-toggle">
+          <img src="navbar/mainteinance.png" class="mr-3" alt="" />
+          <span>Inventory </span>
+          <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+        </a>
+        <ul>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/store/store-control']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Define Store</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/store/part-catalog']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>View Part</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/store/spare-part-transaction']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Spare Part transaction</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/store/partDelivery']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Spare Part Delivery</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="sidebar-sub-toggle">
+          <img src="assets/img/sidebar/system.svg" alt="" /> System
+          Configuration
+          <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+        </a>
+        <ul>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/systemsettings/permissions']">
+              <span>Permissions</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/systemsettings/instructiontext']">
+              <span>Instruction Text</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''"
+              [routerLink]="['/systemsettings/instructiondescription']">
+              <span>Instruction Description</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''"
+              [routerLink]="['/systemsettings/instructionDescriptionMapping']">
+              <span>Instruction Text & Description Mapping</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/systemsettings/lookups/edit-lookup']">
+              <span>Define Lookups</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/systemsettings/roles']">
+              <span>Define Role</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/systemsettings/modeldefects']">
+              <span>Define Model Defects</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/systemsettings/managerassigned']">
+              <span>Manager Assigned</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- <li><a class="sidebar-sub-toggle"><img src="assets/img/sidebar/maintenance.svg" alt=""> Maintenance <span
+              class="sidebar-collapse-icon fa fa-angle-down"></span></a>
+          <ul>
+            <li><a href="#">Flot</a></li>
+            <li><a href="#">Morris</a></li>
+
+          </ul>
+        </li> -->
+      <!-- <li><a href="#"><img src="assets/img/sidebar/ref.svg" alt=""> Reference Table </a></li>
+      <li><a href="#"><img src="assets/img/sidebar/human.svg" alt=""> Human Resources </a></li>
+      <li><a href="#"><img src="assets/img/sidebar/inventory.svg" alt=""> Inventory </a></li> -->
+      <!-- <li><a href="#"><img src="assets/img/sidebar/report.svg" alt=""> Reports </a></li> -->
+
+      <li>
+        <a class="sidebar-sub-toggle">
+          <img src="navbar/mainteinance.png" class="mr-3" alt="" />
+          <span>Reports </span>
+          <span class="sidebar-collapse-icon fa fa-angle-down"></span>
+        </a>
+        <ul>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/general-reports/invoice-collection']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Invoice Collection</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''"
+              [routerLink]="['/general-reports/reports/service-request-report']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Service Request Report</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/general-reports/reports/status-table']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Status Table Report</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/general-reports/reports/wo-table']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Wo Table Report</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/general-reports/reports/alert-report']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Alert Report</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''"
+              [routerLink]="['/general-reports/reports/creates-and-closed']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Create And Closed Report</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''"
+              [routerLink]="['/general-reports/reports/Engineer-KPIs-1']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Engineer-KPIs-1</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''"
+              [routerLink]="['/general-reports/reports/Engineer-KPIs-2']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Engineer-KPIs-2</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''"
+              [routerLink]="['/general-reports/reports/Engineer-KPIs-3']">
+              <!-- <i class="pi pi-chart-line mr-3"></i>  -->
+              <span>Engineer-KPIs-3</span>
+              <!-- <span class="sidebar-collapse-icon fa fa-angle-down"></span> -->
+            </a>
+          </li>
+        </ul>
+
+      </li>
+      <li>
+        <a class="sidebar-sub-toggle">
+          <img src="assets/img/sidebar/ref.svg" alt="" /> Demo
+          <span class="sidebar-collapse-icon fa fa-angle-down"></span></a>
+        <ul>
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/demo/request']">
+              <span>Demo Requests</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/demo/request/approvals']">
+              <span>Demo Approvals</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/demo/assessment']">
+              <span>Demo Assessment</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/demo/gate-pass']">
+              <span>Gate Pass</span>
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a (click)="isMobile ? handleSidebarToggle() : ''" [routerLink]="['/demo/evaluation']">
+              <span>End User Evaluation</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><img src="assets/img/sidebar/import.svg" alt="" />Imports
+        </a>
+      </li>
+      <li>
+        <a href="#"><img src="assets/img/sidebar/traf.svg" alt="" />TRAFS </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="cloud-powerby p-3">
+  <span class="float-start text-white">Powered By</span><br />
+  <a href="#"><img src="assets/img/footer/cs-white.svg" alt="Powered by Cloud Solutions" /></a>
+  <a href="#"><img src="assets/img/footer/flow.svg" alt="Powered by Cloud Solutions" /></a>
+</div>

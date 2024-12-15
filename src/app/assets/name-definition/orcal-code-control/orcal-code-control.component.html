@@ -1,0 +1,73 @@
+
+<div class="container">
+  <p-dialog header="Add Orcal Code" [(visible)]="displayAdd" [modal]="true" [style]="{width: '50vw'}"
+    [maximizable]="true" [draggable]="false" [resizable]="false">
+    <form [formGroup]="orcalCodesForm">
+      <label>Add Orcal Code</label>
+      <div>
+        <input formControlName="orcalCode" id="add" type="text" pInputText [required]="true">
+        <button   class="btn btn-primary mt-2" type="submit" (click)="onAdd()">Add</button>
+      </div>
+    </form>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="displayAdd=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog header="Update orcalCode" [(visible)]="displayUpdate" [modal]="true" [style]="{width: '50vw'}"
+    [maximizable]="true" [draggable]="false" [resizable]="false">
+    <form [formGroup]="orcalCodesForm">
+      <label>Update Orcal Code</label>
+      <input formControlName="orcalCode" type="text" pInputText>
+      <button  label="Update" class="btn btn-primary mt-2" type="submit" (click)="onUpdate()">Update</button>
+    </form>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="displayUpdate=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+  </p-dialog>
+  <p-header class="header">
+    <h5> Orcal Code Control</h5>
+  </p-header>
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <button  pRipple label="" class="p-button-sm p-button-info me-2 "
+        (click)="showAddDialog()">Add Orcal Code</button>
+    </ng-template>
+  </p-toolbar>
+
+  <div class="view-name-def-header card">
+    <p-table #dt [value]="orcalCodesList" styleClass="p-datatable-striped p-datatable-gridlines"
+      [rows]="filter.pageSize" [tableStyle]="{'min-width': '75rem'}" [lazy]="true" [loading]="loading"
+      [rowHover]="false" dataKey="id" [totalRecords]="totalRows">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          Orcal Code Control Table
+          <span class="total_rows_data"> Total: {{totalRows}} </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">Orcal Code</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-orcalCode>
+        <tr>
+          <td>{{orcalCode.orcalCodeName}}</td>
+          <td class="pb-2">
+            <button (click)="showUpdateDialog()" (click)="orcalCodeId=orcalCode.id"  pRipple icon="pi pi-pencil"
+              class="p-button-rounded p-button-info me-2"></button>
+            <button (click)="onDelete(orcalCode)"  pRipple icon="pi pi-trash"
+              class="p-button-rounded btn btn-danger"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

@@ -1,0 +1,128 @@
+<div
+  #drawerView
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Model</h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_view_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div
+        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-3"
+      >
+        <form [formGroup]="form" id="modelCreationForm">
+          <div class="row mb-4">
+            <div class="col-12">
+              <h3 class="section-heading">Request Information</h3>
+            </div>
+            <div class="row box-gryco">
+              <div class="row py-3">
+                <!-- User Name -->
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <p class="viewp-text">
+                    <strong>User Name:</strong>
+                    <span class="viewspan-text">{{ form.value.userName }}</span>
+                  </p>
+                </div>
+
+                <!-- Assign Origin -->
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <p class="viewp-text">
+                    <strong>Assign Origin:</strong>
+                    <span class="viewspan-text">
+                      {{ form.value.assignOriginId }}
+                    </span>
+                  </p>
+                </div>
+
+                <!-- Model -->
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <p class="viewp-text">
+                    <strong>Model:</strong>
+                    <span class="viewspan-text">{{ form.value.model }}</span>
+                  </p>
+                </div>
+
+                <!-- Manufacturer -->
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <p class="viewp-text">
+                    <strong>Manufacturer:</strong>
+                    <span class="viewspan-text">{{
+                      form.value.manufacturer
+                    }}</span>
+                  </p>
+                </div>
+
+                <!-- Name -->
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <p class="viewp-text">
+                    <strong>Name:</strong>
+                    <span class="viewspan-text">{{ form.value.name }}</span>
+                  </p>
+                </div>
+
+                <!-- Supplier -->
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <p class="viewp-text">
+                    <strong>Supplier:</strong>
+                    <span class="viewspan-text">{{ form.value.supplier }}</span>
+                  </p>
+                </div>
+
+                <!-- Remarks -->
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <p class="viewp-text">
+                    <strong>Remarks:</strong>
+                    <span class="viewspan-text">{{ form.value.remarks }}</span>
+                  </p>
+                </div>
+
+                <!-- Attachments -->
+                <!-- <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                >
+                  <label class="form-label">Attachments</label>
+                  <app-attachments
+                    [attachments]="attachments"
+                  ></app-attachments>
+                </div> -->
+              </div>
+
+              <!-- Transaction History Section -->
+              <!-- <div class="card-body pt-5" *ngIf="!isAddMode">
+                <app-transaction-history
+                  *ngIf="transactionHistory"
+                  [transactionHistory]="transactionHistory"
+                ></app-transaction-history>
+              </div> -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

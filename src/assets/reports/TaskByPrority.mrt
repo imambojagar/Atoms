@@ -1,0 +1,160 @@
+{
+  "ReportVersion": "2024.1.3.0",
+  "ReportGuid": "32a63773565041c3ad36ab547f894fad",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportAuthor": "Ahmad Majed",
+  "ReportCreated": "/Date(1707657841000+0300)/",
+  "ReportChanged": "/Date(1708418699763+0300)/",
+  "EngineVersion": "EngineV2",
+  "CalculationMode": "Interpretation",
+  "ReportUnit": "Inches",
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "ScrollTime": 30,
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "Dictionary": {
+    "DataSources": {
+      "0": {
+        "Ident": "StiDataTableSource",
+        "Name": "root",
+        "Alias": "root",
+        "Key": "8cba380b2213448fa4ff1defe6d37080",
+        "Columns": {
+          "0": {
+            "Name": "taskPriority",
+            "Index": -1,
+            "NameInSource": "taskPriority",
+            "Alias": "taskPriority",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "taskCount",
+            "Index": -1,
+            "NameInSource": "taskCount",
+            "Alias": "taskCount",
+            "Type": "System.Decimal"
+          }
+        },
+        "NameInSource": "chart2.root"
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiJsonDatabase",
+        "Name": "chart2",
+        "Alias": "chart2",
+        "PathData": "C:\\Users\\karthick.Rajendran\\Desktop\\chart2.json",
+        "HeadersString": ""
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiDashboard",
+      "Name": "Dashboard2",
+      "Guid": "80c03dd2fb7f4fc98268017f724a1a80",
+      "Brush": "solid:",
+      "Components": {
+        "0": {
+          "Ident": "StiChartElement",
+          "Name": "Chart2",
+          "Guid": "b02038cfe53d436c8cef8b5f180d6200",
+          "ClientRectangle": "0,0,1200,600",
+          "Border": ";;;;",
+          "BackColor": "White",
+          "AltClientRectangle": "0,0,0,0",
+          "Values": {
+            "0": {
+              "Ident": "ValueChartMeter",
+              "Key": "11f873be888840fba7c48ca2e31a5184",
+              "Expression": "Sum(root.taskCount)",
+              "Label": "taskCount",
+              "SeriesType": "Pie"
+            }
+          },
+          "DashboardInteraction": {
+            "Ident": "Chart",
+            "OnHover": "ShowToolTip",
+            "OnClick": "ApplyFilter",
+            "HyperlinkDestination": "NewTab",
+            "DrillDownPageKey": "af3d7fcb3085439096a0093ff4a50eb7",
+            "AllowUserSorting": false,
+            "ViewsState": "OnHover"
+          },
+          "Title": {
+            "Text": "Count of Task By Priority",
+            "BackColor": "White",
+            "HorAlignment": "Center"
+          },
+          "ManuallyEnteredChartMeter": {
+            "Ident": "ValueChartMeter",
+            "Key": "c4738d5c6992468a84743133fa57c630"
+          },
+          "Series": {
+            "Ident": "SeriesChartMeter",
+            "Key": "39b7fcc9fc14458188129ab43872d966",
+            "Expression": "root.taskPriority",
+            "Label": "taskPriority"
+          },
+          "ArgumentFormat": {
+            "Ident": "StiGeneralFormatService"
+          },
+          "ValueFormat": {
+            "Ident": "StiGeneralFormatService"
+          },
+          "Legend": {
+            "HorAlignment": "LeftOutside",
+            "Direction": "BottomToTop",
+            "Columns": 1
+          },
+          "Area": {
+            "SideBySide": true,
+            "GridLinesHor": {
+              "Visible": true
+            },
+            "Indicator": {
+              "Value": {
+                "Color": "Transparent"
+              },
+              "Title": {
+                "Color": "Transparent"
+              }
+            },
+            "VertSpacing": 0
+          },
+          "Labels": {
+            "TextAfter": " )",
+            "TextBefore": "(",
+            "Position": "TwoColumns",
+            "Style": "CategoryPercentOfTotal",
+            "AutoRotate": true
+          },
+          "Options3D": {
+            "Lighting": "Gradient"
+          },
+          "SeriesColors": {
+            "0": "31,73,125",
+            "1": "84,141,212",
+            "2": "0,176,80",
+            "3": "149,179,215",
+            "4": "255,192,0",
+            "5": "255,0,0"
+          },
+          "ManuallyEnteredData": "H4sIAAAAAAAEAIvm5VJQiAYRCgpKYYk5palKOlCea14KqoBzTn5xKqqQT345qoBHZnoGqohjUXppbmpeCVwgPBWoBsENTi3KTC1WAvFiebliAcwjTseRAAAAWklQ",
+          "CornerRadius": "0,0,0,0",
+          "Shadow": "0,176,80;;;"
+        }
+      },
+      "Border": ";;2;;;;;solid:Black"
+    }
+  }
+}

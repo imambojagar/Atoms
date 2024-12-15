@@ -1,0 +1,132 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Maintenence Contract List
+                        </div>
+                        <div class="float-start export-icon mt-3">
+                          <a class="m-5" (click)="export()">Export
+                            <img src="assets/img/dashboard/excel.svg" alt="" /></a>
+                        </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row float-end">
+                          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 mb-3">
+                            <div class="float-end filter-icon h-100">
+                              <a (click)="openFilterModal()"><img src="assets/img/dashboard/filter.svg" alt="" /></a>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="form-floating float-start">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here" />
+                              <a>
+                                <img class="float-end search-icon" src="assets/img/dashboard/search.svg" alt="" /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid">
+                              <button class="btn btn-blue text-white border-r10" type="button" (click)="openaddmodel()">
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <p-table #dt [value]="allData" [rows]="10" [rowHover]="true" dataKey="id" sortMode="multiple"
+                        [loading]="loading" [rows]="filter.pageSize" [lazy]="true" [totalRecords]="totalRows">
+
+
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th></th>
+                            <th>Contract Number</th>
+                            <th>Contract Name</th>
+                            <th>Contract Status</th>
+                            <th>Contract Type</th>
+                            <th>Contract Related</th>
+                            <th>Number of Assets</th>
+                            <th>View Assets</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Supplier</th>
+                            <!-- <th>Correct Visits</th>
+                  <th>Comment</th> -->
+                            <th>Action</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-allData>
+
+                          <tr>
+                            <td></td>
+
+                            <td>{{allData.contractNumber}}</td>
+
+                            <td>{{allData.contractName}}</td>
+                            <td>{{allData.contractStatus}}</td>
+                            <td>{{allData.contractType}}</td>
+                            <td>{{allData.contractRelated}}</td>
+                            <td>{{allData.numberOfAssets}}</td>
+                            <td>
+                              <!-- / <a (click)="openDialog(allData.id)" style="color: blue;cursor: pointer;">View Assets</a> -->
+                            </td>
+                            <td>{{Date(allData.startDate)}}</td>
+                            <td>{{Date(allData.endDate)}}</td>
+                            <td>{{allData.supplierName}}</td>
+
+                            <td class="list-group list-group-horizontal align-items-center">
+                              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                (click)="openeditModal(allData.id)" canUpdate></button>
+
+                              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                                (click)="delete(allData.id)" canDelete></button>
+                            </td>
+
+                          </tr>
+
+                        </ng-template>
+
+
+                      </p-table>
+                      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-search-maintenece-ccontract [filter]="filter" [showmodal]="filterLoaded" (openSearchModals)="openFilterModal()"
+    (MaintenanceSearch)="getMaintenanceSearch($event)"></app-search-maintenece-ccontract>
+  <app-maintenece-ccontract-management *ngIf="addMaintenanceLoaded" [showmodal]="addMaintenanceLoaded"
+    (openModal)="closeaddmodel()"></app-maintenece-ccontract-management>
+  <div *ngIf="filterLoaded" class="offcanvas-backdrop fade show" (click)="close()"></div>
+
+  <div *ngIf="addMaintenanceLoaded" class="offcanvas-backdrop fade show" (click)="closeaddmodel()"></div>
+
+
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+</div>

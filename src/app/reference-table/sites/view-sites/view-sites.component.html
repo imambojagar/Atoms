@@ -1,0 +1,301 @@
+<div
+  #drawer
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Supplier</h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+      <p-toast></p-toast>
+      <div
+        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form"
+      >
+       <form [formGroup]="frmCustomer" *ngIf="model">
+            <div class="row form-scroller hide-x-axis mb-4">
+              <div class="col-12">
+                <h3>{{ "Site Information" | tr : PAGE_TITLE | translate }}</h3>
+              </div>
+
+              <div class="row ">
+                <div class="box-gryco">
+                <div class="row py-3" [ngClass]="{ disableDiv: inViewMode }">
+                  <!-- Site Name -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "Site Name" | tr : PAGE_TITLE | translate }} -
+                      {{ currentUserLanguage }} :
+                      <span class="viewspan-text">{{
+                        frmCustomer.get("custName")?.value
+                      }}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row py-3">
+                  <!-- Site Code -->
+                  <div
+                    *ngIf="!inAddMode"
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "Site Code" | tr : PAGE_TITLE | translate }} :
+                      <span class="viewspan-text">{{
+                        model.customerCode
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Assigned Employee -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "Assigned Employee" | tr : PAGE_TITLE | translate }} :
+                      <span class="viewspan-text">{{
+                        model.assignedEmployeeId
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Site Categorization -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      Site categorization :
+                      <span class="viewspan-text">{{
+                        model.custCategoryId
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Group -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "Group" | tr : PAGE_TITLE | translate }} :
+                      <span class="viewspan-text">{{ model.custGroupId }}</span>
+                    </p>
+                  </div>
+
+                  <!-- City -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "City" | tr : PAGE_TITLE | translate }} :
+                      <span class="viewspan-text">{{ model.cityId }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Organisation -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "Organisation" | tr : PAGE_TITLE | translate }} :
+                      <span class="viewspan-text">{{
+                        model.organizationId
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Operating Unit Number -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{
+                        "Operating Unit Number" | tr : PAGE_TITLE | translate
+                      }}
+                      :
+                      <span class="viewspan-text">{{
+                        model.operatingUnitNumber
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <!-- Operating Unit Name -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "Operating Unit Name" | tr : PAGE_TITLE | translate }}
+                      :
+                      <span class="viewspan-text">{{
+                        model.operatingUnitName
+                      }}</span>
+                    </p>
+                  </div>
+                </div>
+                </div>
+                <div class="col-12 mt-4">
+                  <h3>{{ "Building " | tr : PAGE_TITLE | translate }}</h3>
+                </div>
+                
+                <div class="row py-3 box-gryco">
+                  <div formArrayName="buildings">
+                    <div
+                      *ngFor="
+                        let building of model.buildings;
+                        let buildingIndex = index
+                      "
+                    >
+                      <div class="row">
+                        <p class="viewp-text">
+                          {{ building.clientBuildingName }}
+                        </p>
+                      </div>
+
+                      <div
+                        class="row"
+                        *ngIf="building.floors && building.floors.length"
+                      >
+                        <p class="viewp-text">
+                          {{ "Floors" | translate }} :
+                          <span class="viewspan-text">
+                            <span
+                              *ngFor="
+                                let floor of building.floors;
+                                let floorIndex = index;
+                                let last = last
+                              "
+                            >
+                              {{ floor.clientFloorName }}
+                              <span *ngIf="!last">, </span>
+                            </span>
+                          </span>
+                        </p>
+                      </div>
+
+                      <div
+                        class="row"
+                        *ngIf="building.floors && building.floors.length"
+                      >
+                        <p class="viewp-text">
+                          {{ "Departments" | translate }} :
+                          <span class="viewspan-text">
+                            <span
+                              *ngFor="
+                                let floor of building.floors;
+                                let floorIndex = index
+                              "
+                            >
+                              <span
+                                *ngFor="
+                                  let department of floor.departments;
+                                  let departmentIndex = index;
+                                  let last = last
+                                "
+                              >
+                                {{ department.departmentName }}
+                                <span *ngIf="!last">, </span>
+                              </span>
+                            </span>
+                          </span>
+                        </p>
+                      </div>
+
+                      <div
+                        class="row"
+                        *ngIf="building.floors && building.floors.length"
+                      >
+                        <p class="viewp-text">
+                          {{ "Rooms" | translate }} :
+                          <span class="viewspan-text">
+                            <span
+                              *ngFor="
+                                let floor of building.floors;
+                                let floorIndex = index
+                              "
+                            >
+                              <span
+                                *ngFor="
+                                  let department of floor.departments;
+                                  let departmentIndex = index
+                                "
+                              >
+                                <span
+                                  *ngFor="
+                                    let room of department.rooms;
+                                    let roomIndex = index;
+                                    let last = last
+                                  "
+                                >
+                                  {{ room.roomName }}
+                                  <span *ngIf="!last">, </span>
+                                </span>
+                              </span>
+                            </span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3 floor"
+                >
+                  <p class="viewp-text">
+                    {{ "Attachment" | tr : PAGE_TITLE | translate }} :
+                    <span class="viewspan-text">
+                      {{
+                        attachmentNames.length
+                          ? attachmentNames.join(", ")
+                          : "No Attachments Available"
+                      }}
+                    </span>
+                  </p>
+                </div> -->
+
+                <div
+                  *ngIf="!inAddMode"
+                  class="row py-3 mt-4 box-gryco"
+                  [ngClass]="{ disableDiv: true }"
+                >
+                  <!-- Created On -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "Created ON" | tr : PAGE_TITLE | translate }} :
+                      <span class="viewspan-text">
+                        {{ createdOn ? (createdOn | date : "medium") : "None" }}
+                      </span>
+                    </p>
+                  </div>
+
+                  <!-- Modified On -->
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3"
+                  >
+                    <p class="viewp-text">
+                      {{ "Modified ON" | tr : PAGE_TITLE | translate }} :
+                      <span class="viewspan-text">
+                        {{ modifiedOn ? (modifiedOn | date : "medium") : " " }}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+</div>

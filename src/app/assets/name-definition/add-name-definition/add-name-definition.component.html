@@ -1,0 +1,177 @@
+<p-toast position="bottom-right"></p-toast>
+<div #drawer [ngClass]=" showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 "
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Add New Nomenclature</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-scroller assets-form">
+
+        <form [formGroup]="addNameForm">
+
+
+
+          <div class="row box-gryco">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input type="text" id="assetname" formControlName="assetname" pInputText
+                  class="form-control  icon-padding" [required]="true" placeholder="Asset Name" />
+                <label for="assetname"> {{ 'Asset Name'| tr:PAGE_TITLE| translate }} </label>
+              </div>
+              <small class="p-error block" *ngIf="
+              addNameForm.get('assetname')?.invalid &&
+              addNameForm.get('assetname')?.dirty">
+              </small>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input id="oraclename" formControlName="oraclename" type="text" pInputText
+                  class="form-control  icon-padding" placeholder="Asset Oracle name" />
+                <label for="oraclename"> {{'Asset Oracle Name'| tr:PAGE_TITLE| translate}} </label>
+              </div>
+            </div>
+            @if(oracleCodesControl().length > 0)
+            { <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" formArrayName="oracleCodes">
+              @for (code of oracleCodesControl(); track $index;let i=$index) {
+              <div [formGroupName]="i">
+                <div class="form-floating mb-2">
+                  <input formControlName="codeValue" type="text" id="codeoracle{{codeName[i]}}" pInputText
+                    class="form-control " placeholder="{{codeName[i]}}" />
+                  <label for="codeoracle{{codeName[i]}}">{{codeName[i]}}</label>
+                </div>
+                <input formControlName="assetNDId" type="hidden" />
+                <input formControlName="id" type="hidden" />
+              </div>}
+
+            </div>}
+
+          </div>
+
+          <div class="col-12">
+            <h3 class="section-heading">{{'Asset Nomenclature Info'| tr:PAGE_TITLE| translate}}</h3>
+          </div>
+          <div class="row box-gryco">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input formControlName="umdns" type="text" pInputText class="form-control  icon-padding"
+                  placeholder="{{'UMDNS'| tr:PAGE_TITLE| translate}}" />
+                <label>{{'UMDNS'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-dropdown [options]="riskOptions" optionLabel="name" optionValue="id" formControlName="assetriskId"
+                  class="dropdown" (onChange)="onSelectRisk($event)" placeholder="select"></p-dropdown>
+                <label>{{'Asset Risk Level'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-dropdown [options]="complexOptions" formControlName="complex" class="dropdown"
+                  (onChange)="onSelectComplex($event)" placeholder="select"></p-dropdown>
+                <label>{{'Complexity'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-dropdown [options]="classOptions" optionLabel="name" optionValue="id"
+                  formControlName="classficationId" class="dropdown" (onChange)="onSelectClassification($event)"
+                  placeholder="select"></p-dropdown>
+                <label>{{'Classification'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label>{{'Category'| tr:PAGE_TITLE| translate}}</label>
+                <p-dropdown [options]="categoriesOptions" optionLabel="name" optionValue="id"
+                  formControlName="categoryId" class="dropdown" (onChange)="onSelectCategories($event)"
+                  placeholder="select"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label>{{'Mission Critical'| tr:PAGE_TITLE| translate}}</label>
+                <p-dropdown [options]="businessOptions" optionLabel="name" optionValue="id" formControlName="businessId"
+                  class="dropdown" (onChange)="onSelectBusiness($event)" placeholder="select">
+                </p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-dropdown [options]="modilityOptions" id="modilityId" optionLabel="name" optionValue="id"
+                  formControlName="modilityId" class="dropdown" (onChange)="onSelectModility($event)"
+                  placeholder="select"></p-dropdown>
+                <label for="modilityId">{{'Modality'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input formControlName="submodility" type="text" id="subModility" pInputText
+                  class="form-control  icon-padding" placeholder="{{'Sub Modality'| tr:PAGE_TITLE| translate}}" />
+                <label for="subModility">{{'Sub Modality'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-dropdown [options]="functionOptions" id="functionclass" optionLabel="name" optionValue="id"
+                  formControlName="functionclassId" placeholder="Select Function Class" class="dropdown"
+                  (onChange)="onSelectFunction($event)"></p-dropdown>
+                <label for="functionclass">{{'Function Class'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-dropdown [options]="typeAssetOptions" id="typeassetId" optionLabel="name" optionValue="id"
+                  formControlName="typeassetId" class="dropdown" (onChange)="onSelectTypeAsset($event)"
+                  placeholder="select"></p-dropdown>
+                <label for="typeassetId">{{'Type of Asset'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-inputNumber formControlName="lifespan" id="lifrspan" mode="decimal" [useGrouping]="false">
+                </p-inputNumber>
+                <label id="lifrspan">{{'Life Span'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-dropdown [options]="equipmentList" optionLabel="name" optionValue="value"
+                  formControlName="essentialEquipement" id="essequipment" (onChange)="onSelectEquipment($event)"
+                  placeholder="Select Essential Equipement"></p-dropdown>
+                <label for="essequipment">{{'Essential Equipment'| tr:PAGE_TITLE| translate}}</label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- <div class="field">
+                <label>NT Code</label>
+                <input id="ntcode" formControlName="ntcode" type="text" pInputText  class="form-control  icon-padding" [hidden]="true" />
+              </div> -->
+
+          <!-- <div class="card-footer d-flex justify-content-end border-top ">
+              <button type="submit" (submit)="addNameSubmit()" class="btn btn-primary col-lg-2">{{'Save'| tr:PAGE_TITLE|
+                translate}}</button>
+              <button type="button" (click)="cancel()" class="btn btn-light btn-active-light-primary col-lg-2">{{'Cancel'|
+                tr:PAGE_TITLE| translate}}</button>
+            </div> -->
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="fixed-bottom">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+          (click)="addNameSubmit()">{{'Save'| tr:PAGE_TITLE| translate}}</button>
+        <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{'Cancel'| tr:PAGE_TITLE| translate}}</button> -->
+      </div>
+    </div>
+  </div>
+  <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+</div>

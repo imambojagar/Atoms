@@ -1,0 +1,144 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="custom-card ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+              <!--begin Search Fields -->
+              <div class="card card-flush mb-6 mb-xl-9">
+                  <div class="card-header bg-primary">
+                      <div class="card-title">
+                          <h2 class="d-flex align-items-center text-white"> Search </h2>
+                      </div>
+                  </div>
+
+                  <div class="card-body pt-5">
+                      <form [formGroup]="searchForm">
+                          <div class="row py-3">
+                                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                      <label class="form-label"> Name
+                                      </label>
+                                      <p-autoComplete [delay]="1000" placeholder="Search . . . "   formControlName="name" [suggestions]="assetGroups"
+                                              field="assetGroupName"
+                                              (completeMethod)="selectAssetGroupAuto($event)" (onSelect)="bindAssetGroup($event)"
+                                              (onClear)="assetGroupClear()"></p-autoComplete>
+                                  </div>
+                              <div class="card-footer d-flex justify-content-end border-top py-6">
+                                  <button type="button" class="btn btn-primary" (click)="searchAssetGroups()">Search</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+
+
+
+              <!-- <app-table [tableData]="tableConfig" (deleteRow)="deleteAssetGroup($event)" (editRow)="editAssetGroup($event)"
+                  (paginate)="paginate($event)"  (addEvent)="add()">
+              </app-table> -->
+
+              <p-table
+                  #dt
+                  [value]="assetgroupsdata"
+                  [rows]="10"
+                  [paginator]="true"
+                  [globalFilterFields]= "tableConfig.tableHeaders"
+                  [(selection)]="selectedNames"
+                  [rowHover]="true"
+                  dataKey="id"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                  [showCurrentPageReport]="true"
+                  sortMode="multiple"
+                  [rows]="searchFilter.pageSize"
+                  [lazy]="true"
+                  [scrollable]="true"
+                  [totalRecords]="totalRows"
+                  [tableStyle]="{width: 'max-content'}" >
+
+                  <ng-template pTemplate="caption">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <h4 class="mt-3 inline main-heading">Assets Groups</h4>
+                        <!-- <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="exportAsset()">Export <img src="navbar/export.svg" alt=""></a> -->
+                      </div>
+                      <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                          <!-- <h5 class="m-0">Manage assets</h5> -->
+                          <div class="p-input-icon-left ">
+                            <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                              <img src="navbar/filter.svg" alt="">
+                            </p-button>
+                          </div>
+                          <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                <div class="form-floating float-end">
+                                  <input type="text"
+                                    pInputText
+                                    class="form-control border-0 header-search-background"
+                                    id="floatingSearchInput"
+                                    value="Type here"
+                                    placeholder="Type here" (click)="clearValue($event);">
+                                  <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                  <label for="floatingSearchInput">Search</label>
+                                </div>
+                          </div>
+                          <div class="p-input-icon-left">
+                            <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                              Add New
+                            </button>
+                          </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      @for(headers of tableConfig.tableHeaders; track headers) {
+                        @if(headers == 'Action') {
+                          <th class="sticky-header" alignFrozen="right" pFrozenColumn >{{headers}}</th>
+                        } @else {
+                          <th>{{headers}}</th>
+                        }
+                      }
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-assetgroupsdata>
+
+                    <tr>
+                      <!-- <td><a class="link-info cursor-pointer" pRipple (click)="navToDetails(assets,0)">{{assets.id}}</a></td> -->
+                      <!-- <td>{{assets.id}}</td> -->
+                      <!-- <td>{{assets.ass}}</td> -->
+                      <td>{{assetgroupsdata.Id}}</td>
+                      <td>{{assetgroupsdata.Name}}</td>
+                      <td>{{assetgroupsdata.Code}}</td>
+
+                      <!-- <td class="val4">
+                        <ul *ngFor="let code of assetgroupsdata.oracleCodes">
+                          <li *ngIf="code.codeValue!=''"> {{code.codeValue}}</li>
+                        </ul>
+                      </td> -->
+
+                      <td class="val13">{{assetgroupsdata.assetndcode}}</td>
+                      <td  class="sticky-header">
+                        <div class="d-flex">
+                          <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                              (click)="navToDetails(assetgroupsdata,0)" >
+                            <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                          </button>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                          (click)="navToDetails(assetgroupsdata,1)" canUpdate></button>
+
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                          (click)="deleteAssetGroup(assetgroupsdata)" canDelete></button>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+              </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <app-asset-group-managment  [showmodal]="addTransferLoaded" [edit_asset_id]="asset_group_id" (openModals)="openModal()"></app-asset-group-managment>
+
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

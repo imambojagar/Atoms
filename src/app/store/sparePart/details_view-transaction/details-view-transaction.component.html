@@ -1,0 +1,155 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="!isEdit"> Add Transaction</h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="isEdit"> Edit Transaction</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <p-toast></p-toast>
+  <div class="p-3">
+    <div class="row">
+
+      <p-toast></p-toast>
+      <form [formGroup]="addTransactionForm" (ngSubmit)="addTransactionSubmit()" class="add-content-type">
+        <div class="form-scroller">
+          <div class="box-gryco pt-2">
+            <div class="row py-3">
+              <!-- Title Input -->
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <span class="p-float-label">
+                  <input id="title" formControlName="title" type="text" pInputText class="form-control" placeholder="Enter Title" />
+                  <label for="title">Title</label>
+                </span>
+              </div>
+      
+              <!-- Transaction Status Dropdown -->
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <span class="p-float-label">
+                  <p-dropdown id="statusId" [options]="transactionStatus" optionValue="id" placeholder="--Select--" formControlName="statusId">
+                    <ng-template let-item pTemplate="selectedItem">
+                      <b>{{ item.name }}</b>
+                    </ng-template>
+                    <ng-template let-item pTemplate="item">
+                      {{ item.name }}
+                    </ng-template>
+                  </p-dropdown>
+                  <label for="statusId">Transaction Status</label>
+                </span>
+              </div>
+      
+              <!-- Reserved Dropdown -->
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <span class="p-float-label">
+                  <p-dropdown id="reserved" [options]="reserved" placeholder="--Select--" formControlName="reserved">
+                    <ng-template let-item pTemplate="selectedItem">
+                      <b>{{ item.name }}</b>
+                    </ng-template>
+                    <ng-template let-item pTemplate="item">
+                      {{ item.name }}
+                    </ng-template>
+                  </p-dropdown>
+                  <label for="reserved">Reserved</label>
+                </span>
+              </div>
+            </div>
+          </div>
+      
+          <p-tabView>
+            <p-tabPanel header="Part Information" leftIcon="pi pi-icon">
+              <div class="box-gryco pt-5">
+                <div class="row py-3">
+                  <!-- Date Input -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <span class="p-float-label">
+                      <p-calendar id="date" [showIcon]="true" [showOnFocus]="false" formControlName="date" dateFormat="yy/mm/dd"
+                        dataType="string" placeholder="Select Date"></p-calendar>
+                      <label for="date">Date</label>
+                    </span>
+                  </div>
+      
+                  <!-- Supplier AutoComplete -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <span class="p-float-label">
+                      <p-autoComplete
+                        id="supplier"
+                        [delay]="1000"
+                        [suggestions]="suppliers"
+                        (completeMethod)="getSupplier($event)"
+                        [field]="'suppliername'"
+                        formControlName="supplierIdBind"
+                        (onSelect)="selectSupplier($event)"
+                        placeholder="Enter Supplier"
+                      ></p-autoComplete>
+                      <label for="supplier">Supplier</label>
+                    </span>
+                  </div>
+      
+                  <!-- Received By Dropdown -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="isdeposit">
+                    <span class="p-float-label">
+                      <p-dropdown id="receivedBy" [options]="assignedEmpList" optionLabel="userName" optionValue="userId" formControlName="receivedBy" placeholder="Select">
+                      </p-dropdown>
+                      <label for="receivedBy">Received By</label>
+                    </span>
+                  </div>
+      
+                  <!-- Number of Packing -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <span class="p-float-label">
+                      <input id="numOfPacking" formControlName="numOfPacking" type="text" pInputText class="form-control" placeholder="Enter No of Packing" />
+                      <label for="numOfPacking">No of Packing</label>
+                    </span>
+                  </div>
+      
+                  <!-- Site AutoComplete -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <span class="p-float-label">
+                      <p-autoComplete
+                        id="customerId"
+                        [delay]="1000"
+                        [suggestions]="customers"
+                        (completeMethod)="getCustomers($event)"
+                        [field]="'custName'"
+                        (onSelect)="onSelectCustomer($event)"
+                        formControlName="customerId"
+                        placeholder="Enter Site"
+                      ></p-autoComplete>
+                      <label for="customerId">Site</label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </form>
+      
+
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-blue text-white form-button border-r10 float-end mr-4" type="button"
+              (click)="addTransactionSubmit()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+
+  <!-- <p-dialog header="Search For Product" [(visible)]="showQuantityDialog" [style]="{width: '50vw'}"> -->
+  <div #drawer [ngClass]=" showQuantityDialog ? 'show' : ''"
+    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+    role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading"> Search For Product</h1>
+      <button type="button" class="btn-close" (click)="close_quantity_modal()"></button>
+    </div>
+    <app-sparePartsQuantityLookup>
+    </app-sparePartsQuantityLookup>
+  </div>
+
+  <!-- </p-dialog> -->
+</div>

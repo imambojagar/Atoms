@@ -1,0 +1,145 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "atom": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/atom",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/assets/scss/main.scss",
+              "src/assets/scss/sidebar.scss",
+              "src/assets/scss/font-awesome.min.css",
+              "src/assets/fonts/poppins_font.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "src/assets/js/particles.min.js",
+              "src/assets/js/app.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/menubar/sidebar.js",
+              "src/scripts/stimulsoft.reports.engine.js",
+              "src/scripts/stimulsoft.reports.export.js",
+              "src/scripts/stimulsoft.reports.chart.js",
+              "src/scripts/stimulsoft.dashboards.js",
+              "src/scripts/stimulsoft.viewer.js",
+              "node_modules/quill/dist/quill.js",
+              "node_modules/apexcharts/dist/apexcharts.min.js"
+            ],
+            "server": "src/main.server.ts",
+            "prerender": false,
+            "ssr": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "atom:build:production"
+            },
+            "development": {
+              "buildTarget": "atom:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+            ],
+            "scripts": [
+              "src/scripts/stimulsoft.reports.engine.js",
+              "src/scripts/stimulsoft.reports.export.js",
+              "src/scripts/stimulsoft.reports.chart.js",
+              "src/scripts/stimulsoft.dashboards.js",
+              "src/scripts/stimulsoft.viewer.js",
+              "node_modules/apexcharts/dist/apexcharts.min.js"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "c0ee03f7-9578-41c2-8089-fac3488d1516"
+  }
+}

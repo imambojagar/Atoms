@@ -1,0 +1,227 @@
+#chart {
+  max-width: 380px;
+  margin: 35px auto;
+  padding: 0;
+}
+
+
+
+::ng-deep {
+  .p-element .p-splitbutton-defaultbutton {
+    display: none !important;
+
+  }
+
+  .p-element.p-splitbutton-menubutton .p-button-icon-only {
+    background-color: transparent !important;
+  }
+
+  .apexcharts-canvas {
+    z-index: 12 !important;
+  }
+}
+
+::ng-deep {
+  p-paginator p-dropdown {
+    display: none;
+  }
+
+  .apexcharts-datalabels {
+    display: none;
+  }
+
+  .apexcharts-legend-marker {
+    border-radius: 0px !important;
+  }
+
+  .apexcharts-legend-text {
+    font-weight: 750 !important;
+    font-size: 10px;
+    font-family: Poppins;
+  }
+}
+
+/* High Priority */
+.high-priority1 {
+  background-color: #FBB0B0;
+  /* Lighter red for background */
+  color: #F63939;
+  /* Darker red for text */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.high-priority1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #F63939;
+  /* Matches text color */
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* Completed */
+.completed1 {
+  background-color: #BBE6C2;
+  /* Soft green */
+  color: #54C166;
+  /* Darker green for text */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: block;
+  align-items: center;
+}
+
+.completed1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #54C166;
+  /* Matches text color */
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* Closed */
+.closed1 {
+  background-color: rgba(225, 227, 230, 1);
+  /* Light gray-blue */
+  color: rgba(181, 185, 193, 1);
+  /* Slate blue for text */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: block;
+  align-items: center;
+}
+
+.closed1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(181, 185, 193, 1);
+  /* Matches text color */
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* Rejected */
+.rejected1 {
+  background-color: #B3B3B3;
+  /* Light gray */
+  color: #000000;
+  /* Very dark gray (almost black) */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rejected1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #000000;
+  /* Matches text color */
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* Open */
+.open1 {
+  background-color: #B6C3EF;
+  /* Light blue */
+  color: rgba(72, 104, 215, 1);
+  /* Medium blue */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: block;
+  align-items: center;
+}
+
+.open1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(72, 104, 215, 1);
+  /* Matches text color */
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* New */
+.new1 {
+  background-color: #B1DBF5;
+  /* Lighter blue */
+  color: #3DA5E5;
+  /* Deeper blue for text */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.new1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #3DA5E5;
+  /* Matches text color */
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* Overdue */
+.overdue1 {
+  background-color: #FBB0B0;
+  /* Pale yellow */
+  color: #FFC945;
+  /* Deep gold */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.overdue1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #FFC945;
+  /* Matches text color */
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* In Progress */
+.in-progress1 {
+  background-color: rgba(237, 220, 176, 1);
+  /* Warm beige */
+  color: #D3A73A;
+  /* Deep brown */
+  border-radius: 12px;
+  padding: 4px 8px;
+  display: block;
+  align-items: center;
+  width: 125px;
+}
+
+.in-progress1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #D3A73A;
+  /* Matches text color */
+  border-radius: 50%;
+  margin-right: 6px;
+}

@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <DashboardViewerSettings>ShowRefreshButton, ShowOpenButton, ShowFullScreenButton, ShowMenuButton, ShowEditButton, ShowReportSnapshots, ShowExports, ShowResetAllFilters, ShowParametersButton</DashboardViewerSettings>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <response_1698917166239 Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>response_1698917166239</Alias>
+        <HeadersString />
+        <Key />
+        <Name>response_1698917166239</Name>
+        <PathData>C:\Users\karthick.rajendran\Desktop\response_1698917166239.json</PathData>
+      </response_1698917166239>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>engineerName,System.String</value>
+          <value>dashboard5Statuses,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>623166971fab49d2a9d1df39aebea94b</Key>
+        <Name>root</Name>
+        <NameInSource>response_1698917166239.root</NameInSource>
+      </root>
+      <root_dashboard5Statuses Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_dashboard5Statuses</Alias>
+        <Columns isList="true" count="3">
+          <value>statusName,System.String</value>
+          <value>statusCount,System.Decimal</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>21485e32045e45eba10f5eb71250ced6</Key>
+        <Name>root_dashboard5Statuses</Name>
+        <NameInSource>response_1698917166239.root_dashboard5Statuses</NameInSource>
+      </root_dashboard5Statuses>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <root Ref="5" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>84b95f14295944d295bdfff35bd060b1</Key>
+        <Name>root</Name>
+        <NameInSource>root_dashboard5Statuses</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>dashboard5Statuses</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>85172fedf597453fab6333633a7057a8</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="6" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <PM_Wo_Engineer_wise___Opened___closed___Overdue__live Ref="7" type="Stimulsoft.Dashboard.Components.Chart.StiChartElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <Area Ref="8" type="Stimulsoft.Dashboard.Components.Chart.StiChartArea" isKey="true">
+            <InterlacingHor Ref="9" type="Stimulsoft.Dashboard.Components.Chart.StiHorChartInterlacing" isKey="true">
+              <Color>Transparent</Color>
+            </InterlacingHor>
+            <InterlacingVert Ref="10" type="Stimulsoft.Dashboard.Components.Chart.StiVertChartInterlacing" isKey="true">
+              <Color>Transparent</Color>
+            </InterlacingVert>
+          </Area>
+          <Arguments isList="true" count="0" />
+          <BackColor>Transparent</BackColor>
+          <ChartConditions isList="true" count="0" />
+          <ClientRectangle>0,0,1200,600</ClientRectangle>
+          <CloseValues isList="true" count="0" />
+          <ConstantLines isList="true" count="0" />
+          <DashboardInteraction Ref="11" type="Stimulsoft.Dashboard.Interactions.StiChartDashboardInteraction" isKey="true">
+            <AllowUserSorting>False</AllowUserSorting>
+            <DrillDownParameters isList="true" count="0" />
+          </DashboardInteraction>
+          <DataFilters isList="true" count="0" />
+          <EndValues isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>286a567ee8f040dbb8bd397a8cf57308</Guid>
+          <HighValues isList="true" count="0" />
+          <Labels Ref="12" type="Stimulsoft.Dashboard.Components.Chart.StiChartLabels" isKey="true">
+            <Font>Arial,8</Font>
+            <ForeColor>Transparent</ForeColor>
+          </Labels>
+          <Legend Ref="13" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegend" isKey="true">
+            <Labels Ref="14" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegendLabels" isKey="true">
+              <Color>Transparent</Color>
+              <Font>Arial,8</Font>
+            </Labels>
+            <Title Ref="15" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegendTitle" isKey="true">
+              <Color>Transparent</Color>
+              <Font>Arial,12,Bold</Font>
+            </Title>
+          </Legend>
+          <LowValues isList="true" count="0" />
+          <ManuallyEnteredChartMeter Ref="16" type="Stimulsoft.Dashboard.Components.Chart.StiValueChartMeter" isKey="true">
+            <Key>67a5dfecbe6d4d2993aad80bd87d8d28</Key>
+          </ManuallyEnteredChartMeter>
+          <ManuallyEnteredData>H4sIAAAAAAAEAIvm5VJQiAYRCgpKYYk5palKOlCea14KqoBzTn5xKqqQT345qoBHZnoGqohjUXppbmpeCVwgPBWoBsENTi3KTC1WAvFiebliAcwjTseRAAAAWklQ</ManuallyEnteredData>
+          <Margin>3,3,3,3</Margin>
+          <Marker Ref="17" type="Stimulsoft.Dashboard.Components.Chart.StiChartMarker" isKey="true" />
+          <Name>PM_Wo_Engineer_wise___Opened___closed___Overdue__live</Name>
+          <NegativeSeriesColors />
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <ParetoSeriesColors />
+          <RoundValues>True</RoundValues>
+          <Series Ref="18" type="Stimulsoft.Dashboard.Components.Chart.StiSeriesChartMeter" isKey="true">
+            <Expression>root_dashboard5Statuses.statusName</Expression>
+            <Key>cf4d155fff5140f98fd42228f39d3a4e</Key>
+            <Label>Status Name</Label>
+          </Series>
+          <SeriesColors />
+          <Title Ref="19" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>PM Wo Engineer wise ( Opened - closed - Overdue) live</Text>
+          </Title>
+          <TopN Ref="20" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <TrendLines isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+          <UserViewStates isList="true" count="0" />
+          <ValueFormat Ref="21" type="NumberFormat" isKey="true">
+            <DecimalDigits>0</DecimalDigits>
+            <GroupSeparator>,</GroupSeparator>
+            <NegativePattern>1</NegativePattern>
+            <State>DecimalDigits, Abbreviation</State>
+          </ValueFormat>
+          <Values isList="true" count="1">
+            <Item7 Ref="22" type="Stimulsoft.Dashboard.Components.Chart.StiValueChartMeter" isKey="true">
+              <Expression>Sum(root_dashboard5Statuses.statusCount)</Expression>
+              <Key>d8cc43c2aa224eb6ad6797b450f9a315</Key>
+              <Label>Status Count</Label>
+              <SeriesType>Pie</SeriesType>
+              <ShowNulls>Gap</ShowNulls>
+              <ShowZeros>Gap</ShowZeros>
+            </Item7>
+          </Values>
+          <Weights isList="true" count="0" />
+        </PM_Wo_Engineer_wise___Opened___closed___Overdue__live>
+      </Components>
+      <DashboardWatermark Ref="23" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>d855af69167f4a4c88abe62beb5c3b24</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <PreviewSettings>58663423</PreviewSettings>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>1/11/2024 6:00:00 PM</ReportChanged>
+  <ReportCreated>11/2/2023 12:26:59 PM</ReportCreated>
+  <ReportFile>C:\inetpub\wwwroot\CloudERP\Atoms\Frontend\Atom-NewDesign\src\assets\reports\chart11.mrt</ReportFile>
+  <ReportGuid>8c9c9544ba794367b0c4727466245ee8</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

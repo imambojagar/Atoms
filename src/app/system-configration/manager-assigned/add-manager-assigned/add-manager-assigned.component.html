@@ -1,0 +1,110 @@
+<div #addmodel [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="isAddMode==true">Add Assigned Managers</h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="isAddMode==false">Edit Assigned Managers</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <p-toast></p-toast>
+  <div class="p-3 ngprime-custom form-scroller">
+
+
+    <form [formGroup]="assignManagerForm " (ngSubmit)="onSubmit()" class="add-content-type">
+
+      <div class="row box-gryco">
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <div class="form-floating mb-2">
+            <label class="form-label">API Director ID</label>
+            <p-dropdown [options]="directorList" placeholder="Select" formControlName="apiDirectorId" class="dropdown"
+              optionLabel="userName" optionValue="userId"></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <div class="form-floating mb-2">
+            <label class="form-label">Assessor Team Leader</label>
+            <p-dropdown [options]="teamLeaderList" placeholder="Select" formControlName="assessorTeamLeaderId"
+              class="dropdown" optionLabel="userName" optionValue="userId"></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <!-- <pre>
+                    {{trafOfferForm.value|json}}
+                </pre>
+                {{attachmentFormArray(0).value|json}} -->
+      <div class="row box-gryco mt-3">
+        <div class="col-md-12 col-xl-12 col-xxl-12 mb-3" formArrayName="sites">
+
+          <h4>Managers Assigned</h4>
+          <hr>
+          <div *ngFor=" let site of managersControl(); let i=index">
+            <div class="row py-3 certificate add-more-value-border" [formGroupName]="i">
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <div class="form-floating mb-2">
+                  <label class="form-label">Site</label>
+                  <p-autoComplete [delay]="1000" [suggestions]="siteList" formControlName="bind"
+                    (completeMethod)="FillSite($event)" (onSelect)="selectSite($event.value,i)" field="custName">
+                  </p-autoComplete>
+                </div>
+
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <div class="form-floating mb-2">
+                  <label class="form-label">Role</label>
+                  <p-dropdown placeholder="Select Role " [options]="rolesList" (onChange)="onChangeRole($event,i)"
+                    class="dropdown" optionLabel="name" optionValue="id" formControlName="roleId"></p-dropdown>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+
+                <div class="form-floating mb-2">
+                  <label class="form-label">Employee ID</label>
+                  <p-dropdown [options]="empList[i]" placeholder="Select" formControlName="employeeId" class="dropdown"
+                    (onSelect)="selectEmp($event,i)" optionLabel="userName" optionValue="userId"></p-dropdown>
+                </div>
+              </div>
+
+              <input type="hidden" formControlName="id">
+              <input type="hidden" formControlName="assignedManagerId">
+              <div class="ms-4 mb-4 add-more-value-button">
+                <button pButton type="button" (click)="addMoreManagers()" class="p-button-rounded p-button-info mr-2"
+                  icon="pi pi-plus"></button>
+                <button pButton type="button" (click)="removeManagers(i)"
+                  class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isAddMode">
+        <div class="">
+          <div class="row py-3" [ngClass]="{'disableDiv': true}">
+            <app-transaction-history *ngIf="transactionHistory"
+              [transactionHistory]="transactionHistory"></app-transaction-history>
+          </div>
+        </div>
+      </div>
+      <div class="fixed-bottom" *ngIf="!isAddMode">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+              (click)="onSubmit()" styleClass="p-button-text">Update</button>
+            <!-- <p-button icon="pi pi-times" (click)=" displayAdd=false" label="Cancel" styleClass="p-button-text"></p-button> -->
+          </div>
+        </div>
+      </div>
+      <div class="fixed-bottom" *ngIf="isAddMode">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+              (click)="onSubmit()" styleClass="p-button-text">Save</button>
+            <!-- <p-button icon="pi pi-times" (click)=" displayAdd=false" label="Cancel" styleClass="p-button-text"></p-button> -->
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

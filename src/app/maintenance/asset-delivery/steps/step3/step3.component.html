@@ -1,0 +1,127 @@
+<div class="card card-flush">
+  <form [formGroup]="form">
+    <div class="card-body">
+      <div class="fv-row">
+        <div class="row py-3" [ngClass]="{'disableDiv': hideContinue==false}">
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            
+            <div class="d-flex">
+              <div class="col-lg-10">
+                <div class="form-floating mb-2"> 
+                  <label class="fs-6 fw-bold form-label">Accepted By</label>
+                <input id="mm" type="text" formControlName="acceptedBy" pInputText readonly />
+              </div>
+              </div>
+              <app-employee-details-oracle (onSelectedEmployee)="onAcceptedBySelected($event)"></app-employee-details-oracle>
+            </div>
+              <div *ngIf=" form.get('acceptedBy')?.hasError('required') && form.get('acceptedBy')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            
+            <div class="d-flex">
+              <div class="col-lg-10">
+                <div class="form-floating mb-2"> 
+                  <label class="fs-6 fw-bold form-label">Verified By</label>
+                <input id="mm" type="text" formControlName="verifiedBy" pInputText readonly />
+              </div>
+              </div>
+              <app-employee-details-oracle (onSelectedEmployee)="onVerifiedBySelected($event)"></app-employee-details-oracle>
+            </div>
+              <div *ngIf=" form.get('verifiedBy')?.hasError('required') && form.get('verifiedBy')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+           
+            <div class="d-flex">
+              <div class="col-lg-10">
+                <div class="form-floating mb-2"> 
+                  <label class="fs-6 fw-bold form-label">Approve By</label>
+                <input id="mm" type="text" formControlName="technicalApprovedBy1" pInputText readonly />
+              </div>
+              </div>
+              <app-employee-details-oracle (onSelectedEmployee)="onTechnicalApprovedBy1Selected($event)"></app-employee-details-oracle>
+            </div>
+              <div *ngIf=" form.get('technicalApprovedBy1')?.hasError('required') && form.get('technicalApprovedBy1')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            
+            <div class="d-flex">
+              <div class="col-lg-10">
+                <div class="form-floating mb-2"> 
+                  <label class="fs-6 fw-bold form-label">Approve By</label>
+                <input id="mm" type="text" formControlName="technicalApprovedBy2" pInputText readonly />
+              </div>
+              </div>
+              <app-employee-details-oracle (onSelectedEmployee)="onTechnicalApprovedBy2Selected($event)"></app-employee-details-oracle>
+            </div>
+              <div *ngIf=" form.get('technicalApprovedBy2')?.hasError('required') && form.get('technicalApprovedBy2')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Certificate Number</label>
+            <input
+              type="text"
+              formControlName="certificateNumber"
+              name="certificateNumber"
+              readonly
+              class="form-control form-control-lg form-control-solid"
+              placeholder="Enter ..."
+            />
+            </div>
+            <div
+              *ngIf="
+                form.get('certificateNumber')?.hasError('required') &&
+                form.get('certificateNumber')?.touched
+              "
+              class="fv-plugins-message-container invalid-feedback"
+            >
+              Filed is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="row" *ngIf="!isCancel">
+  <div class="col-12">
+    <button type="button" class="btn btn-primary mt-8 ml-6" (click)="back()">
+      Back
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mt-8 ml-6"
+      (click)="save()"
+      *ngIf="hideContinue"
+    >
+      Save
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mt-8 ml-6"
+      (click)="continue()"
+      *ngIf="!hideContinue"
+    >
+      Continue
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mt-8 ml-6"
+      (click)="print4()"
+      *ngIf="!hideContinue"
+    >
+      Print Technical Acceptance
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mt-8 ml-6"
+      (click)="print5()"
+      *ngIf="!hideContinue"
+    >
+    Print Technical Inspection
+    </button>
+  </div>
+</div>

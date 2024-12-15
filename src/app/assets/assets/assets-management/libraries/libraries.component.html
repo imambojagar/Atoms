@@ -1,0 +1,24 @@
+<form [formGroup]="assetFormService.libraryForm">
+  <div class="row py-2">
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+      <div class="form-floating mb-2">
+
+        <span class="p-float-label">
+          <p-multiSelect [options]="assetFormService.technicalGuidanceBooks" formControlName="technicalGuidanceBooks"
+            defaultLabel="Select a technical Guidance Book" optionLabel="name" dataKey="lookupId"
+            id="technicalGuidanceBooks" class="multiselect-custom">
+          </p-multiSelect>
+          <label for="technicalGuidanceBooks" class="form-label">Technical guidance books</label></span>
+      </div>
+    </div>
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+      <div class="form-floating mb-2">
+        <textarea id="comment" formControlName="comment" placeholder="Enter the Comment information"
+          class="form-control header-search-background" pInputTextarea></textarea>
+        <label for="comment" class="form-label">Comment</label>
+      </div>
+    </div>
+  </div>
+</form>

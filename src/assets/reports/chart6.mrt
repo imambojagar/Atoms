@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <response_1698751470982 Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>response_1698751470982</Alias>
+        <HeadersString />
+        <Key />
+        <Name>response_1698751470982</Name>
+        <PathData>C:\Users\karthick.rajendran\Desktop\response_1698751470982.json</PathData>
+      </response_1698751470982>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>siteName,System.String</value>
+          <value>dashboard1CallLastSituationWithCount,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>54468eb577734a0d8cfdc6fe2b0f37db</Key>
+        <Name>root</Name>
+        <NameInSource>response_1698751470982.root</NameInSource>
+      </root>
+      <root_dashboard1CallLastSituationWithCount Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_dashboard1CallLastSituationWithCount</Alias>
+        <Columns isList="true" count="3">
+          <value>callLastSituationName,System.String</value>
+          <value>callLastSituationCount,System.Decimal</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>6229607a5e9540268d5186a2b0c8c5e3</Key>
+        <Name>root_dashboard1CallLastSituationWithCount</Name>
+        <NameInSource>response_1698751470982.root_dashboard1CallLastSituationWithCount</NameInSource>
+      </root_dashboard1CallLastSituationWithCount>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <root Ref="5" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>44e26f0afddf463284b7af37bf6c2c32</Key>
+        <Name>root</Name>
+        <NameInSource>root_dashboard1CallLastSituationWithCount</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>dashboard1CallLastSituationWithCount</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>3d1197f1d4a3469d862d4787a7aaefaa</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="6" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <Chart_6 Ref="7" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,0,800,400</ClientRectangle>
+          <Columns isList="true" count="1">
+            <Item7 Ref="8" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_dashboard1CallLastSituationWithCount.callLastSituationName</Expression>
+              <Key>64fcba1fc3304442b26c1a9706a65ce8</Key>
+              <Label>Call Last Situation</Label>
+              <Size Ref="9" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="10" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item7>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>d81cda534c9044c481c043bc27e7af1d</Guid>
+          <Margin>3,3,3,3</Margin>
+          <Name>Chart_6</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <PivotTableConditions isList="true" count="0" />
+          <Rows isList="true" count="1">
+            <Item8 Ref="11" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root.siteName</Expression>
+              <Key>0705b931d6f34994a5c4e2626ed47179</Key>
+              <Label>Site Name</Label>
+              <Size Ref="12" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="13" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item8>
+          </Rows>
+          <Summaries isList="true" count="1">
+            <Item9 Ref="14" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotSummary" isKey="true">
+              <Expression>Sum(root_dashboard1CallLastSituationWithCount.callLastSituationCount)</Expression>
+              <Key>c5cf33f46fed4063b0cf49873a726ba4</Key>
+              <Label>callLastSituationCount</Label>
+              <Size Ref="15" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item9>
+          </Summaries>
+          <Title Ref="16" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Mission Critical Wo Per Site</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+        </Chart_6>
+      </Components>
+      <DashboardWatermark Ref="17" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>15f19f81e8f146cdb2b27da850f4f483</Guid>
+      <Height>400</Height>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+      <Width>800</Width>
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Mission Critical Wo Per Site</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>1/11/2024 12:19:00 PM</ReportChanged>
+  <ReportCreated>10/31/2023 2:25:28 PM</ReportCreated>
+  <ReportFile>C:\inetpub\wwwroot\CloudERP\Atoms\Frontend\Atom-NewDesign\src\assets\reports\chart6.mrt</ReportFile>
+  <ReportGuid>b99d576a72744431af07fda95c2a6ce0</ReportGuid>
+  <ReportName>Mission Critical Wo Per Site</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Mission_Critical_Wo_Per_Site : Stimulsoft.Report.StiReport
+    {
+        public Mission_Critical_Wo_Per_Site()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

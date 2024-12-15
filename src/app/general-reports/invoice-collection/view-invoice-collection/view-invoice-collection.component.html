@@ -1,0 +1,231 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="custom-card ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <p-toast></p-toast>
+            <div class="view-name-def-header">
+
+              <!-- <div class="card flex justify-content-center mb-5">
+                <p-breadcrumb [model]="items"></p-breadcrumb>
+              </div> -->
+
+                  <!-- <app-search-component (OnSearch)="Search()" (OnReset)="Reset()"> -->
+                  <div #drawerFilter [ngClass]=" showmodal ? 'show' : ''"
+                    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                     <div class="offcanvas-header">
+                       <h1 class="offcanvas-title offcanvas-heading">Search Asset</h1>
+                       <button type="button" class="btn-close" (click)="close_modal()"></button>
+                     </div>
+                     <div class="p-3">
+                       <div class="row">
+                      <div class="pt-4">
+                        <form [formGroup]="invoiceSearchForm">
+                          <div class="row py-3">
+                            <div class="col-md-3" *ngIf="false">
+                              <label class="form-label">Asset Group</label>
+                              <p-dropdown [options]="AssetGroups" optionLabel="name" formControlName="assetGroup" [hidden]="true"
+                                  class="dropdown" placeholder="select"></p-dropdown>
+                            </div>
+                            <div class="col-md-3">
+                              <label class="form-label">Asset Number</label>
+                              <p-autoComplete [delay]="1000" (ngModelChange)="filter.assetName=$event" placeholder="Asset Number"
+                                [suggestions]="assetNameList" (onSelect)="this.filter.assetName = $event.value.assetNumber"
+                                (completeMethod)="assetNameFilter(filter.assetName)" field="assetNumber" formControlName="assetNo">
+                              </p-autoComplete>
+                            </div>
+                            <div class="col-md-3">
+                              <label class="form-label">Site</label>
+                              <p-autoComplete [delay]="1000" (ngModelChange)="filter.site=$event" placeholder="Site Name" [suggestions]="siteList"
+                                (onSelect)="onSelectSite($event)" (completeMethod)="siteFilter($event)" field="custName"
+                                formControlName="site">
+                              </p-autoComplete>
+                            </div>
+                            <div class="col-md-3">
+                              <label class="form-label">Invoice Number</label>
+                              <p-inputNumber (onInput)="onChangeInvNo($event)" placeholder="Invoice Number"
+                                formControlName="invNo"></p-inputNumber>
+                            </div>
+                            <div class="col-md-3">
+                              <label class="form-label">Invoice Paid</label>
+                              <p-dropdown [options]="invoicePaid" (onChange)="onChangeInvPaied($event)" optionLabel="name"
+                                optionValue="id" placeholder="None" formControlName="isPaid">
+                              </p-dropdown>
+                            </div>
+                            <div class="col-md-3">
+                              <label class="form-label">Maintenance Contract Number</label>
+                              <input (ngModelChange)="filter.contractNumber=$event" pInputText type="text"
+                                placeholder="Maintenance Contract Number" formControlName="mCNo">
+                            </div>
+                            <div class="col-md-3">
+                              <label class="form-label">From Date</label>
+                              <p-calendar (onSelect)="onChangefromDate($event)" placeholder="From Date" dateFormat="yy-mm-dd"
+                                dataType="string" formControlName="fromD" [showIcon]="true" [showOnFocus]="false"></p-calendar>
+                            </div>
+                            <div class="col-md-3">
+                              <label class="form-label">To Date</label>
+                              <p-calendar (onSelect)="onChangeToDate($event)" placeholder="To Date" dateFormat="yy-mm-dd"
+                                dataType="string" formControlName="toD" [showIcon]="true" [showOnFocus]="false"></p-calendar>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <!-- </app-search-component> -->
+
+
+                  <div class="row">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="row  mb-3 content-heading">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                          <div class="float-start main-heading">
+                            Work Order
+                          </div>
+                          <div class="float-start export-icon mt-3">
+                            <!-- <a class="m-5" (click)="exportWorkOrder() ">Export <img
+                                src="assets/img/dashboard/excel.svg" alt=""></a> -->
+                            </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                          <div class="row float-end">
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                              <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                    src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                            </div>
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+        
+                              <div class="form-floating float-start ">
+                                <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                  [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                  value="Type here">
+                                <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                                <label for="floatingName">Search</label>
+                                <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                            (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                              </div>
+                            </div>
+                            <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                              <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                  (click)="openModal()">Add </button></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <p-table #dt [value]="invoices"  [(first)]="first"
+                       [rows]="filter.pageSize" [lazy]="true" [totalRecords]="totalRows"
+                      [tableStyle]="{width: 'max-width'}" [rowHover]="false" dataKey="id">
+                      <!-- <ng-template pTemplate="caption">
+                        <div class="flex align-items-center justify-content-between">
+                          <div class="card-header bg-primary">
+                            <div class="card-title">
+                              <span class="text-white"> Invoices <br>
+                                <span class="total_rows_data"> Total: {{totalRows}} </span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template> -->
+
+                      <!-- <ng-template pTemplate="caption">
+                        <div class="row">
+                          <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <h4 class="mt-3 inline main-heading">Invoices  <span class="total_rows_data"> Total: {{ totalRows }} </span></h4>
+                            
+                          </div>
+                          <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                               
+                              <div class="p-input-icon-left">
+                                <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                                  <img src="navbar/filter.svg" alt="">
+                                </p-button>
+                              </div>
+                              <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                    <div class="form-floating float-end">
+                                      <input type="text" 
+                                        class="form-control " 
+                                        id="floatingSearchInput"
+                                        value="Type here"
+                                        placeholder="Type here">
+                                      <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                      <label for="floatingSearchInput">Search</label>
+                                    </div>
+                              </div>
+                              <div class="p-input-icon-left">
+                                <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                  Add Part Catalog
+                                </button>
+                              </div>
+                          </div>
+                        </div>
+                      </ng-template> -->
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th>Collection Id</th>
+                          <th>Expected Date Provide Invoice</th>
+                          <th>Actual Date Provide Invoice</th>
+                          <th>Invoice Paid</th>
+                          <th>Amount</th>
+                          <th>Edited Price</th>
+                          <th>Visit Cost</th>
+                          <th>Payment Method</th>
+                          <th>Number of Emergency Visits</th>
+                          <th>Contract Number</th>
+                          <th>Asset Number</th>
+                          <th>Serial Number</th>
+                          <th>Site</th>
+                          <th class="sticy-header">Action</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-invoice>
+
+                        <tr>
+                          <!-- <td><a class="link-info" (click)="navToDetails(invoice,0)">{{invoice.id}}</a></td> -->
+                          <td>{{invoice.id}}</td>
+                          <td>{{Date(invoice.expectedDate)}}</td>
+                          <td>{{Date(invoice.actualDate)}}</td>
+                          <td>{{invoice.isPaid}}</td>
+                          <td>{{invoice.amount}}</td>
+                          <td>{{invoice.editedPrice}}</td>
+                          <td>{{invoice.visitCost}}</td>
+                          <td>{{invoice.paymentMethod}} Months</td>
+                          <td>{{invoice.numberOfEmergencyVisits}}</td>
+                          <td>{{invoice.contractNumber}}</td>
+                          <td>{{invoice.asset.assetName}}</td>
+                          <td>{{invoice.asset.serialNumber}}</td>
+                          <td>{{invoice.asset.customerName}}</td>
+                          <td class="sticy-header">
+                            <div class="d-flex">
+                              <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                 (click)="navToDetails(invoice,0)" >
+                                <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                              </button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToDetails(invoice,1)" canUpdate></button>
+                            </div>
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                    </p-table>
+                    <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                      [showCurrentPageReport]="true"
+                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                  </div>
+                  </div>
+                  <!-- <div class="saveButton">
+                    <button pButton type="button" label="Back" BackButton class="p-button-info col-lg-2"></button>
+                  </div> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-update-invoice-collection [showmodal]="editPartCatalogLoaded" [edit_asset_id]="invoiceCollectionModel.id" [tabIndex]="partIndex" (openModals)="openModal()"></app-update-invoice-collection>
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

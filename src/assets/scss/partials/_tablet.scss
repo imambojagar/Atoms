@@ -1,0 +1,31 @@
+// Media query for tablets
+@media only screen and (max-width: $tablet) { 
+    .login-left-bg {
+        h3 {
+            font-size: $mobile-heading-fs !important;
+            line-height: 60px !important;
+        }
+
+        .content-center {
+            width: 100% !important;
+            padding: 30px !important;
+        }
+    }
+
+    .atoms-hide
+    {
+        display: none;
+    }
+
+    // .mat-select-input-control {
+    //     width: 88% !important;
+    // }
+
+    .border-end {
+        border-right: none !important;
+        height: 12% !important;
+    }
+}
+
+
+

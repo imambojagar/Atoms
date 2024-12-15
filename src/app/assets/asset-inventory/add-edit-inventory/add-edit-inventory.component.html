@@ -1,0 +1,207 @@
+<div #drawer [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    @if(isAddMode){
+    <h1 class="offcanvas-title offcanvas-heading">Add New Asset Inventory</h1>
+    } @else{
+    <h1 class="offcanvas-title offcanvas-heading">Edit Asset Inventory</h1>
+    }
+
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+      <p-toast></p-toast>
+      <p-tabView [(activeIndex)]="tabIndex">
+        <form [formGroup]="assetInventoryForm">
+          <div class="row form-scroller mb-4">
+            <div [hidden]="isAddMode">
+              <div class="row box-gryco">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <input id="title" formControlName="surveyCode" type="text" pInputText [readOnly]="true"
+                      class="form-control header-search-background icon-padding" placeholder="Title" /><label
+                      class="form-label" for="title">Title</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <h3 class="section-heading">Asset Inventory Information</h3>
+            </div>
+
+            <div class="row box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <span class="p-float-label">
+                    <p-calendar formControlName="surveyDate" [showIcon]="true" [showButtonBar]="true"
+                      [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar>
+
+                    <label class="form-label" for="surveyDate">Asset Inventory Date
+                      <span class="text-danger">*</span></label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-autoComplete [delay]="1000" [suggestions]="customers" [required]="true" [field]="'custName'"
+                      (onSelect)="getBuildingList($event)" (completeMethod)="getCustomers($event)"
+                      formControlName="siteBind"></p-autoComplete> <label class="form-label">Site <span
+                        class="text-danger">*</span></label></span>
+
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-dropdown placeholder="--Select--" (onChange)="getFloorList($event)" formControlName="buildingId"
+                      [options]="buildingList" optionLabel="name" optionValue="id" class="dropdown">
+                    </p-dropdown><label class="form-label">Building <span class="text-danger">*</span></label></span>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-dropdown placeholder="--Select--" (onChange)="getDepartments($event)" formControlName="floorId"
+                      [options]="floorList" optionLabel="name" optionValue="id" class="dropdown">
+                    </p-dropdown>
+                    <label class="form-label">Floor <span class="text-danger">*</span></label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-dropdown placeholder="--Select--" (onChange)="getRooms($event)" formControlName="departmentId"
+                      [options]="departmentList" optionLabel="name" optionValue="id" class="dropdown">
+                    </p-dropdown><label class="form-label">Department <span class="text-danger">*</span></label></span>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-dropdown placeholder="--Select--" formControlName="roomId" [options]="roomList"
+                      optionLabel="name" optionValue="id" class="dropdown">
+                    </p-dropdown>
+                    <label class="form-label">Room</label></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <h3 class="section-heading">Asset Information</h3>
+            </div>
+
+            <div class="row box-gryco">
+              <div formArrayName="details">
+                <!-- <h4>Asset Info</h4>
+                <hr /> -->
+                <div *ngFor="let assets of detailsControl(); let i = index">
+                  <fieldset class="row py-3 certificate add-more-value-border" [formGroupName]="i">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+
+                        <span class="p-float-label">
+                          <p-autoComplete [delay]="1000" [suggestions]="assetList" field="assetNumber"
+                            (completeMethod)="filterByName($event)" formControlName="bind"
+                            (onSelect)="selectAsset($event, i)">
+                          </p-autoComplete><label class="form-label">Asset Number</label></span>
+                      </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <input type="text" pInputText [readOnly]="true" placeholder="Asset S.N"
+                          class="form-control border-0 header-search-background"
+                          [value]="getValueFor(assets, 'bind', 'assetSerialNo')" />
+                        <label class="form-label" for="assetSN">Asset S.N</label>
+                      </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+
+                        <input type="text" pInputText [readOnly]="true" placeholder="Asset Name"
+                          class="form-control border-0 header-search-background"
+                          [value]="getValueFor(assets, 'bind', 'assetName')" /><label class="form-label"
+                          for="assetSN">Asset Name</label>
+                      </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+
+                        <span class="p-float-label">
+
+                          <p-inputNumber mode="decimal" formControlName="tagCode" inputId="tagCode"
+                            [useGrouping]="false">
+                          </p-inputNumber>
+                          <label class="form-label">Tag Code</label>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+
+                        <span class="p-float-label">
+                          <p-dropdown [options]="statusList" optionLabel="name" optionValue="id"
+                            formControlName="statusId" class="dropdown" placeholder="select"></p-dropdown>
+                          <label class="form-label">Status</label></span>
+                      </div>
+                    </div>
+
+                    <input type="hidden" formControlName="id" />
+                    <input type="hidden" formControlName="assetSurveyId" />
+                    <div class="ms-4 mb-4">
+                      <p-button icon="pi pi-plus" class="mr-2" [rounded]="true" [outlined]="true" severity="success"
+                        (click)="addMoreDetails()" />
+
+                      <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"
+                        *ngIf="detailsControl().length>1" (click)="removeDetails(i)" canDelete />
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="!isAddMode && addOrEditFlag">
+              <app-transaction-history [transactionHistory]="transactionHistory"></app-transaction-history>
+            </div>
+
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <div *ngIf="isAddMode">
+                    <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                      (click)="onSubmit()">
+                      Save
+                    </button>
+                  </div>
+                  <div *ngIf="!isAddMode">
+                    <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                      (click)="onSubmit()">
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </p-tabView>
+    </div>
+  </div>
+  <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>

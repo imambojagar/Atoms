@@ -1,0 +1,305 @@
+<div class="row mb-1 m-15">
+  <div class="col-12 g-0">
+    <div class="row">
+      <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+        <div class="row ">
+          <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <div class="main">
+              <div class="m-4 counter-box">
+                <h3 class="float-start">Highpiroty</h3>
+                <span class="float-end"><img src="assets/img/dashboard/high.svg" alt=""></span>
+                <div class="clearfix"></div>
+                <h6 class="counter" data-target="173">{{ServiceDeliveryCount?.countHighPriority}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <div class="main">
+              <div class="m-4 counter-box">
+                <h3 class="float-start">Complete</h3>
+                <span class="float-end"><img src="assets/img/dashboard/complete.svg" alt=""></span>
+                <div class="clearfix"></div>
+                <h6 class="counter" data-target="103">{{ServiceDeliveryCount?.countCompleted}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <div class="main">
+              <div class="m-4 counter-box">
+                <h3 class="float-start">Close</h3>
+                <span class="float-end"><img src="assets/img/dashboard/close.svg" alt=""></span>
+                <div class="clearfix"></div>
+                <h6 class="counter" data-target="13">{{ServiceDeliveryCount?.countClosed}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <div class="main">
+              <div class="m-4 counter-box">
+                <h3 class="float-start">New</h3>
+                <span class="float-end"><img src="assets/img/dashboard/new.svg" alt=""></span>
+                <div class="clearfix"></div>
+                <h6 class="counter" data-target="703">{{ServiceDeliveryCount?.countNew}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <div class="main">
+              <div class="m-4 counter-box">
+                <h3 class="float-start">Inprogress</h3>
+                <span class="float-end"><img src="assets/img/dashboard/inprogress.svg" alt=""></span>
+                <div class="clearfix"></div>
+                <h6 class="counter" data-target="543">{{ServiceDeliveryCount?.countInprogress}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <div class="main">
+              <div class="m-4 counter-box">
+                <h3 class="float-start">Overdue</h3>
+                <span class="float-end"><img src="assets/img/dashboard/overdue.svg" alt=""></span>
+                <div class="clearfix"></div>
+                <h6 class="counter" data-target="243">{{ServiceDeliveryCount?.countNew}}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mb-3">
+        <div class="main">
+
+
+          <div class="m-4 counter-box">
+            <h3 class="float-start">Reject</h3>
+            <span class="float-end"><img src="assets/img/dashboard/reject.svg" alt=""></span>
+            <div class="clearfix"></div>
+            <h6 class="counter" data-target="243">{{ServiceDeliveryCount?.countRejected}}</h6>
+            <!-- <div><img src="assets/img/dashboard/graph.jpg" alt="" width="262px"></div> -->
+            <!--The content below is only a placeholder and can be replaced.-->
+            <div id="chart">
+              <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
+                [colors]="chartOptions.colors" [legend]="chartOptions.legend" [plotOptions]="chartOptions.plotOptions"
+                [responsive]="chartOptions.responsive">
+              </apx-chart>
+            </div>
+
+          </div>
+
+
+          <div class="col-12 mb-3">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="main">
+      <div class="container-fluid">
+        <div class="contents ngprime-custom">
+
+          <div class="row">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="row  mb-3 content-heading">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                  <div class="float-start main-heading">
+                    Service Request List
+                  </div>
+                  <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                        src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                  <div class="row float-end">
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                      <div class="float-end filter-icon h-100"><a (click)="opensearchServiceReq()"><img
+                            src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                      <div class="form-floating float-start ">
+                        <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                          [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                          value="Type here">
+                        <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                        <label for="floatingName">Search</label>
+                        <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                      (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                      </div>
+                    </div>
+                    <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                      <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                          (click)="openaddServiceReq(null)">Add New
+                          Request</button></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive table-bg">
+                <p-table [value]="tableConfig.tableData" class="table table-data" [rowHover]="true" dataKey="id"
+                  [loading]="loading" [rows]="searchFilter.pageSize" [lazy]="true" [totalRecords]="totalRows" #dt>
+
+                  <ng-template pTemplate="header">
+                    <tr class="shadow1">
+
+                      @for (col of tableConfig.tableHeaders; track $index) {
+                      @if(!col.hidden)
+                      { <th>{{ col.header }}</th>}}
+                      <th class="sticky-header" alignFrozen="right" pFrozenColumn [frozen]="true">Actions</th>
+                      <!-- <th></th>
+                      <th></th> -->
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-call let-index="rowIndex">
+
+                    <tr>
+
+                      @for (col of tableConfig.tableHeaders; track $index) {
+                      <td>
+
+                        @if(col.field=='status'){
+                        <span *ngIf="col.field === 'status'" [ngClass]="getStatusClass(call.status)">
+                          {{ call.status }}
+                        </span>}
+                        @else if(col.field=='priority'){
+                        <span>
+                          <i class="fa fa-circle"
+                            [ngClass]="{'high-priority': call.priority === 'Yes', 'low-priority': call.priority === 'No'}"
+                            aria-hidden="true"></i> {{ call.priority }}
+                        </span>
+                        }
+                        @else
+                        {
+                        <ng-container>{{call[col.field]}}</ng-container>}
+
+                      </td>
+
+
+                      }
+
+                      <td alignFrozen="right" pFrozenColumn [frozen]="true" class="right-icons sticky-header">
+                        <ul class="list-group list-group-horizontal align-items-center">
+
+
+                          <li><a (click)="openaddServiceReq(call)"><img src="assets/img/dashboard/eye-1.svg"
+                                alt="View"></a>
+                          </li>
+
+                          <li (click)="openTLreq(call)"><a><img src="assets/img/dashboard/rewise.svg" alt="Rewise"></a>
+                          </li>
+
+                          <!-- pi-ellipsis-v -->
+                          @if( call.status !== 'In Progress')
+                          { <li>
+                            <!-- <p-splitButton (onDropdownClick)="activeRow = call" label="Actions" [model]="items"
+                              appendTo="body" data-id="call" rounded>
+
+                            </p-splitButton> -->
+
+                            <p-splitButton label="Save" icon="pi pi-plus" [model]="items" appendTo="body" data-id="call"
+                              rounded (onDropdownClick)="activeRow = call" label="Actions" [model]="items">
+
+                              <ng-template pTemplate="dropdownicon">
+                                <i class="pi pi-ellipsis-v"></i>
+                              </ng-template>
+                            </p-splitButton>
+
+
+                          </li>}
+                        </ul>
+
+                      </td>
+                    </tr>
+
+                  </ng-template>
+
+                </p-table>
+
+              </div>
+
+
+              <p-paginator [rows]="searchFilter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+            </div>
+          </div>
+
+
+
+          <!-- Accept -->
+          <!-- @if(activeRow){ -->
+          <app-assign-emp [showmodal]="assignEmpLoaded" (openModals)="closeModal()" (activeRowreset)="resetActiveRow()"
+            [activeRow]="activeRow"></app-assign-emp>
+          <!-- } -->
+          @if(activeRow){
+          <app-service-delivery-timeline [serviceDerlivery]="activeRow" [showmodal]="TLReqLoaded"
+            (openModals)="closeTLreq(activeRow)"></app-service-delivery-timeline>}
+          <!-- Reject -->
+          <!-- @if(activeRow){ -->
+          <app-reject-request [showmodal]="rejectReqLoaded" (openModals)="close1()" (activeRowreset)="resetActiveRow()"
+            [activeRow]="activeRow"></app-reject-request>
+          <!-- } -->
+
+
+          <!-- Customer Survey -->
+          <div class="offcanvas offcanvas-end offcanvas-container" id="customer-survey">
+            <div class="offcanvas-header">
+              <h1 class="offcanvas-title offcanvas-heading">Assign Engineer</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="p-3">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" aria-label="State">
+                      <option selected>Muhammad Ahmed</option>
+                      <option value="1">Ibrahem</option>
+                      <option value="2">Hobaishi Almuhammad</option>
+                    </select>
+                    <label for="floatingSelect">Engineer Name</label>
+                  </div>
+                </div>
+                <div class="col-12 mb-3">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Address" id="floatingTextarea"
+                      style="height: 100px;"></textarea>
+                    <label for="floatingTextarea">Address</label>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="fixed-bottom">
+                <div class="row">
+                  <div class="col-12">
+                    <button class="btn btn-blue text-white border-r10 float-end" type="button">Assign</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- Reqest -->
+          @if(addServiceReqLoaded&&activeRow)
+
+          { <app-service-delivery-management [showmodal]="addServiceReqLoaded" (activeRowreset)="resetActiveRow()"
+            [activeRow]="activeRow" (openModals)="closeServiceReq(null)"></app-service-delivery-management>}
+          @else {
+          <app-service-delivery-management [showmodal]="addServiceReqLoaded"
+            (openModals)="closeServiceReq(null)"></app-service-delivery-management>
+          }
+          <app-search-service-delivery [showmodal]="searchServiceReqLoaded" (openModals)="closesearchServiceReq()"
+            (serviceDeliverySearch)="serviceDeliverySearch($event)"></app-search-service-delivery>
+
+          <div *ngIf="TLReqLoaded" class="offcanvas-backdrop fade show" (click)="closeTLreq(null)"></div>
+          <div *ngIf="addServiceReqLoaded" class="offcanvas-backdrop fade show" (click)="closeServiceReq(null)"></div>
+          <div *ngIf="assignEmpLoaded" class="offcanvas-backdrop fade show" (click)="closeModal()"></div>
+          <div *ngIf="rejectReqLoaded" class="offcanvas-backdrop fade show" (click)="close1()"></div>
+          <div *ngIf="searchServiceReqLoaded" class="offcanvas-backdrop fade show" (click)="closesearchServiceReq()">
+          </div>
+        </div>
+      </div>
+    </div> <!--  Content div end -->

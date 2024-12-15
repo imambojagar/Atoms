@@ -1,0 +1,720 @@
+<p-toast></p-toast>
+<div class="">
+
+  <div class="card flex justify-content-center mb-5">
+    <p-breadcrumb [model]="items"></p-breadcrumb>
+  </div>
+
+  <p-tabView [(activeIndex)]="tabIndex">
+    <p-tabPanel header="View" leftIcon="pi pi-file">
+      <div class="card-body pt-5">
+        <p-fieldset legend="PPM Info">
+          <form [formGroup]="visitForm">
+
+            <div class="row py-3">
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="ppmScheduleId">PPM Schedule </label>
+                <input type="text" formControlName="ppmId" pInputText id="ppmScheduleId" [readonly]="true" />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Asset Number </label>
+                <input formControlName="assetNumber" type="text" pInputText [readonly]="true" />
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="assetId">Asset SN</label>
+                <input formControlName="assetSerialNo" pInputTextarea [readonly]="true" />
+
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Asset Name </label>
+                <input formControlName="assetName" type="text" pInputText [readonly]="true" />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Model</label>
+                <input formControlName="modelName" type="text" pInputText [readonly]="true" />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Manufacturer</label>
+                <input formControlName="manufacturerName" type="text" pInputText [readonly]="true" />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Site</label>
+                <input formControlName="siteName" type="text" pInputText [readonly]="true" />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Department</label>
+                <input formControlName="departmentName" type="text" pInputText [readonly]="true" />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Supplier</label>
+                <input formControlName="assetSupplierName" type="text" pInputText [readonly]="true" />
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="expectedDate">Expected Date of PPM</label>
+                <input type="text" pInputText placeholder="{{visitForm.value.expectedDate|date:'medium'}}"
+                  [readonly]="true" />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="assignedToId">Assigned Employee</label>
+                <input formControlName="assignedEmployeeName" type="text" [readonly]="true" pInputText />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Type of PPM Service </label>
+                <input id="assignedToId" formControlName="typeOfServiceName" type="text" [readonly]="true" pInputText />
+              </div>
+
+
+
+
+              <!-- Not found in the Model , So I had to add it in the model -->
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="actualDate">Actual Date of Visit</label>
+                <input type="text" pInputText placeholder="{{visitForm.value.actualDate}}" [readonly]="true" />
+
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="visitStatusId">Task Status</label>
+                <input formControlName="taskStatusName" [readonly]="true" pInputText />
+
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="visitStatusId">Contract Number</label>
+                <input formControlName="contractNumber" [readonly]="true" pInputText />
+
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="executionTimeFrameId">Execution Time Frame</label>
+                <input formControlName="executionTimeFrameName" [readonly]="true" pInputText />
+
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label" for="visitNo">PPM Visits Status</label>
+                <input formControlName="visitStatusName" [readonly]="true" pInputText />
+
+              </div>
+
+
+            </div>
+            <div class="row" [ngClass]="{'disableDiv': true}">
+              <form [formGroup]="visitTimersForm">
+                <ng-container formArrayName="visitTimers">
+                  <ng-container *ngFor=" let info of visitTimerControl(); let i=index">
+                    <fieldset class="row py-3" [formGroupName]="i">
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                        <label class="form-label">Start Date </label>
+                        <p-calendar formControlName="startDateTime" [showIcon]="true" [showTime]="true" hourFormat="12"
+                          (onSelect)="selectStartDate($event,i)" [dateFormat]="'dd/mm/yy'"></p-calendar>
+                      </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                        <label class="form-label">End Date </label>
+                        <p-calendar formControlName="endDateTime" [showIcon]="true" [showTime]="true" hourFormat="12"
+                          (onSelect)="selectEndDate($event,i)" [dateFormat]="'dd/mm/yy'"></p-calendar>
+                      </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                        <label class="form-label">Working Hours </label>
+                        <p-inputNumber mode="decimal" formControlName="workingHours" [readonly]="true"
+                          [useGrouping]="false">
+                        </p-inputNumber>
+
+                      </div>
+
+
+                    </fieldset>
+                  </ng-container>
+                </ng-container>
+              </form>
+            </div>
+
+            <div class="card" [hidden]="isInternal">
+              <h4 class="ps-3">External Engineer</h4>
+              <hr>
+              <fieldset class="row py-3">
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Supplier Name </label>
+                  <input [readOnly]="true" formControlName="supplierName" type="text" pInputText />
+
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">External Engineer Name</label>
+                  <p-dropdown [options]="suppPersons" [readonly]="true" placeholder="select"
+                    formControlName="suppPersonId" optionLabel="name" optionValue="id">
+                  </p-dropdown>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label" for="telephone">Telephone </label>
+                  <input [readOnly]="true" formControlName="telephone" type="text" pInputText />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">External Engineer Start Date </label>
+                  <input type="text" pInputText placeholder="{{visitForm.value.suppStartDate|date:'medium'}}"
+                    [readonly]="true" />
+
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label"> External Engineer End Date </label>
+                  <input type="text" pInputText placeholder="{{visitForm.value.suppEndDate |date:'medium'}}"
+                    [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label"> External Engineer Working Hours </label>
+                  <p-inputNumber mode="decimal" [readonly]="true" formControlName="suppWorkingHours" [readonly]="true"
+                    [useGrouping]="false">
+                  </p-inputNumber>
+                </div>
+                <!-- 
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Work Order Number </label>
+                  <p-inputNumber mode="decimal" [readonly]="true" formControlName="jobSheetNo" inputId="code"
+                    [useGrouping]="false">
+                  </p-inputNumber>
+                </div> -->
+              </fieldset>
+            </div>
+
+            <div class="card">
+              <h4 class="ps-3">Calibration Tools</h4>
+              <hr>
+              <fieldset>
+                <dl *ngFor="let cali of calibration" class="row py-3">
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <dt><label>Asset SN</label></dt>
+                    <dd>
+                      <input type="text" pInputText placeholder="{{cali.assetSerialNo}}">
+                    </dd>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <dt><label>calibration DateOf Testers</label></dt>
+                    <dd>
+                      <input type="text" pInputText placeholder="{{cali.calibrationDateOfTesters}}">
+                    </dd>
+                  </div>
+                </dl>
+              </fieldset>
+
+            </div>
+
+            <div class="card">
+              <h4 class="ps-3">PPM Kits</h4>
+              <hr>
+              <fieldset>
+                <dl *ngFor="let kit of kits" class="row py-3">
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <dt><label>Part Catalog Name</label></dt>
+                    <dd>
+                      <input type="text" pInputText placeholder="{{kit.partName}}">
+                    </dd>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <dt><label>Part Catalog Number</label></dt>
+                    <dd>
+                      <input type="text" pInputText placeholder="{{kit.partNumber}}">
+                    </dd>
+                  </div>
+                </dl>
+              </fieldset>
+            </div>
+
+            <div class="card" style="height:250px; overflow: auto; padding-bottom: 30px;">
+              <h4 class="ps-3">PPM CheckList</h4>
+
+              <hr>
+              <h3 *ngIf="this.AssetGroupId==2">{{instructionDescription}}</h3>
+
+              <fieldset>
+                <!-- {{checklist|json}} -->
+                <dl *ngFor="let list of checklist;  let i=index;" class="row py-3">
+
+                  <div *ngIf="this.AssetGroupId==1" class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <dt><label>Task </label></dt>
+                    <dd>
+                      <input type="text" pInputText placeholder="{{list.task}}">
+                    </dd>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" *ngIf="this.AssetGroupId==2">
+                    <dd>
+                      <input type="checkbox" value="{{list.instructionTextId}}" [checked]="true" [attr.disabled]="true">
+                      {{list.text}}
+                    </dd>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <dt><label>Task Status</label></dt>
+                    <dd><input [readOnly]="true" type="text" pInputText placeholder="{{list.taskStatusName}}">
+                    </dd>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <dt><label>Task Comment</label></dt>
+                    <dd>
+                      <input [readOnly]="true" type="text" pInputText placeholder="{{list.taskComment}}">
+                    </dd>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <dt><label>Measured Value</label></dt>
+                    <dd><input [readOnly]="true" type="text" pInputText placeholder="{{list.measuredValue}}">
+                    </dd>
+                  </div>
+
+                </dl>
+              </fieldset>
+            </div>
+
+            <div class="card-body pt-5">
+              <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory">
+              </app-transaction-history>
+            </div>
+          </form>
+        </p-fieldset>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Edit" leftIcon="pi pi-file-edit">
+      <form [formGroup]="visitForm" (ngSubmit)="update()">
+
+        <p-tabView>
+          <p-tabPanel header="PPM Info" leftIcon="pi pi-icon">
+
+            <div class="card-body pt-5">
+              <div class="row py-3">
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">PPM Schedule </label>
+                  <input formControlName="ppmId" type="text" pInputText [readonly]="true" />
+                </div>
+
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Asset Number </label>
+                  <input formControlName="assetNumber" type="text" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Asset SN </label>
+                  <input formControlName="assetSerialNo" type="text" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Asset Name </label>
+                  <input formControlName="assetName" type="text" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Model</label>
+                  <input formControlName="modelName" type="text" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Manufacturer</label>
+                  <input formControlName="manufacturerName" type="text" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Site</label>
+                  <input formControlName="siteName" type="text" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Department</label>
+                  <input formControlName="departmentName" type="text" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Asset Supplier</label>
+                  <input formControlName="assetSupplierName" type="text" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Expected Date of PPM </label>
+                  <input placeholder="{{visitForm.value.expectedDate}}" type="text" [readonly]="true" pInputText />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Assigned Employee </label>
+                  <p-dropdown [options]="employee" placeholder="Select" formControlName="assignedEmployeeId"
+                    (onChange)="changeEmployee($event)" optionLabel="userName" optionValue="userId"></p-dropdown>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Actual Date of Visit <span *ngIf="required"
+                      class="span-color">*</span></label>
+                  <p-calendar formControlName="actualDate" [showIcon]="true" [showButtonBar]="true"
+                    [dateFormat]="'dd/mm/yy'" [required]="required" [minDate]="actualMinDate" [showOnFocus]="false">
+                  </p-calendar>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Contract No </label>
+                  <p-autoComplete [delay]="1000" [suggestions]="contractList" field="contractNumber"
+                    (completeMethod)="searchContract($event)" formControlName="maintenanceCString"
+                    (onSelect)="onSelectContract($event)">
+                  </p-autoComplete>
+                </div>
+
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [ngClass]="{'disableDiv': true}">
+                  <label class="form-label">Execution Time Frame </label>
+                  <p-dropdown [options]="timeFrame" placeholder="Select" formControlName="executionTimeFrameId"
+                    (onChange)="changeTimeFrame($event)" optionLabel="name" optionValue="id">
+                  </p-dropdown>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Electrical Safety Test</label>
+                  <p-dropdown [options]="safetyList" placeholder="Select" formControlName="safetyId"
+                    (onChange)="changeSafetyStatus($event)" optionLabel="name" optionValue="id">
+                  </p-dropdown>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Type of PPM Service </label>
+                  <p-dropdown [options]="TypeService" placeholder="Select" formControlName="typeOfServiceId"
+                    (onChange)="changeService($event)" optionLabel="name" optionValue="id">
+                  </p-dropdown>
+                </div>
+              </div>
+              <div class="card" [hidden]="isInternal">
+                <h4 class="ps-3">External Engineer</h4>
+                <hr>
+                <fieldset class="row py-3">
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">Supplier Name </label>
+                    <p-autoComplete [delay]="1000" formControlName="supplierString" [suggestions]="suppliers"
+                      (onSelect)="onSelectSupplier($event)" (completeMethod)="searchSupplier($event)"
+                      field="suppliername"></p-autoComplete>
+
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">External Engineer Name </label>
+                    <p-dropdown [options]="suppPersons" placeholder="Select" formControlName="suppPersonId"
+                      (onChange)="changePerson($event)" optionLabel="name" optionValue="id">
+                    </p-dropdown>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label" for="telephone">Telephone </label>
+                    <input id="telephone" formControlName="telephone" type="text" pInputText />
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">External Engineer Start Date </label>
+                    <p-calendar formControlName="suppStartDate" [showIcon]="true" [showTime]="true"
+                      [showOnFocus]="false" hourFormat="12" [showButtonBar]="true"
+                      (onSelect)="selectSuppStartDate($event)" [dateFormat]="'dd/mm/yy'">
+                    </p-calendar>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label"> External Engineer End Date </label>
+                    <p-calendar formControlName="suppEndDate" [showIcon]="true" [showTime]="true" [showOnFocus]="false"
+                      hourFormat="12" [showButtonBar]="true" (onSelect)="selectSuppEndDate($event)"
+                      [dateFormat]="'dd/mm/yy'">
+                    </p-calendar>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label"> External Engineer Working Hours </label>
+                    <p-inputNumber mode="decimal" formControlName="suppWorkingHours" [readonly]="true"
+                      [useGrouping]="false">
+                    </p-inputNumber>
+                  </div>
+                  <!-- <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <label class="form-label">Work Order Number </label>
+                    <p-inputNumber mode="decimal" formControlName="jobSheetNo" inputId="code" [useGrouping]="false">
+                    </p-inputNumber>
+                  </div> -->
+                </fieldset>
+
+              </div>
+
+              <div class="card" formArrayName="vCalibrationTools">
+                <h4 class="ps-3">Calibration Tools</h4>
+                <hr>
+                <div *ngFor=" let info of calibrationsControl(); let i=index">
+                  <fieldset class="row py-3" [formGroupName]="i">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <label class="form-label">Asset Number</label>
+                      <p-autoComplete [delay]="1000" [suggestions]="assetList" field="assetNumber"
+                        (completeMethod)="filterByName($event)" formControlName="bind"
+                        (onSelect)="onSerialNumberSelect($event,i)">
+                      </p-autoComplete>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <label class="form-label">Asset Sn</label>
+                      <input pInputText [value]="getValueFor(info, 'bind','assetSerialNo')" [readOnly]="true">
+                      <input type="hidden" formControlName="id">
+                      <input type="hidden" formControlName="visitId">
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <label class="form-label">Asset Name</label>
+                      <input pInputText [value]="getValueFor(info, 'bind','assetName')" [readOnly]="true">
+
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <label class="form-label" for="calibrationDateOfTesters">Calibration Date of
+                        Testers </label>
+                      <p-calendar formControlName="calibrationDateOfTesters" [showOnFocus]="false" [showIcon]="true"
+                        [showButtonBar]="true" (onSelect)="selectCalibDate(i,$event)" [dateFormat]="'dd/mm/yy'">
+                      </p-calendar>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-button">
+                      <button pButton type="button" (click)="addMoreCalibration()"
+                        class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                      <button pButton type="button" (click)="removeCalibration(i)"
+                        class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div class="card" formArrayName="vKits">
+
+                <h4>PPM Kits</h4>
+                <hr>
+                <div *ngFor=" let kit of ppmKitsControl(); let i=index">
+                  <fieldset class="row py-3" [formGroupName]="i">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <label class="form-label">Part Catalog Name</label>
+                      <p-autoComplete [delay]="1000" formControlName="bind" [suggestions]="catalogList"
+                        (onSelect)="onCatalogSelect(i,$event)" (completeMethod)="selectcatalog($event)"
+                        field="partName"></p-autoComplete>
+                      <input type="hidden" formControlName="id">
+                      <input type="hidden" formControlName="visitId">
+
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <label class="form-label">Part Catalog Number</label>
+                      <p-autoComplete [delay]="1000" formControlName="bind" [suggestions]="catalogNumberList"
+                        (onSelect)="onCatalogSelect(i,$event)" (completeMethod)="selectcatalogNumber($event)"
+                        field="partNumber"></p-autoComplete>
+                      <input type="hidden" formControlName="id">
+                      <input type="hidden" formControlName="visitId">
+
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-button">
+                      <button pButton type="button" (click)="addMorePpmKits()"
+                        class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                      <button pButton type="button" (click)="removePpmKits(i)"
+                        class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div *ngIf="this.AssetGroupId==1" class="card" formArrayName="vChecklists">
+
+                <h4>PPM CheckList</h4>
+                <hr>
+
+                <div *ngFor=" let info of ppmCheckListControl(); let i=index">
+
+                  <fieldset class="row py-3 certificate add-more-value-border" [formGroupName]="i">
+
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <label class="form-label" for="task">Task </label>
+                      <input id="task" formControlName="task" type="text" pInputText />
+
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-div">
+                      <label class="form-label">Task Status </label>
+                      <p-dropdown [options]="taskStatus" placeholder="Select" formControlName="taskStatusId"
+                        (onChange)="changeTaskStatus($event)" optionLabel="name" optionValue="id">
+                      </p-dropdown>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-div">
+                      <label class="form-label" for="comment">Task Comment </label>
+                      <input id="comment" formControlName="taskComment" type="text" pInputText />
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-div">
+                      <label class="form-label">Measured Value </label>
+                      <textarea id="value" formControlName="measuredValue" style="width: 210px; height: 50px;"
+                        pInputTextarea></textarea>
+                    </div>
+
+                    <input type="hidden" formControlName="id">
+                    <input type="hidden" formControlName="visitId">
+
+                    <div class="ms-4 mb-4 add-more-value-button">
+                      <button pButton type="button" (click)="addMorePpmCheckList()"
+                        class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                      <button pButton type="button" (click)="removePpmCheckList(i)"
+                        class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <fieldset class="row py-3 ">
+
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">PPM Visit Status <span class="span-color">*</span></label>
+                  <p-dropdown [options]="visitStatus" placeholder="Select" formControlName="visitStatusId"
+                    (onChange)="changeVisitStatus($event)" optionLabel="name" optionValue="id" [required]="true">
+                  </p-dropdown>
+                </div>
+
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Task Status </label>
+                  <p-dropdown [options]="taskStatus" placeholder="Select" formControlName="taskStatusId"
+                    (onChange)="changeTaskStatus($event)" optionLabel="name" optionValue="id">
+                  </p-dropdown>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Status </label>
+                  <p-dropdown [options]="deviceStatus" placeholder="Select" formControlName="deviceStatusId"
+                    (onChange)="changeDeviceStatus($event)" optionLabel="name" optionValue="id">
+                  </p-dropdown>
+
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Asset Availability </label>
+                  <p-dropdown [options]="assetAvailabilityList" placeholder="Select"
+                    formControlName="assetAvailabilityId" (onChange)="changeAssetAvailability($event)"
+                    optionLabel="name" optionValue="id">
+                  </p-dropdown>
+
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Attachment</label>
+                  <app-attachments (onUploaded)="ready($event)" [attachments]="attachmentName"></app-attachments>
+                </div>
+
+              </fieldset>
+              <form [formGroup]="visitTimersForm">
+                <ng-container formArrayName="visitTimers">
+                  <ng-container *ngFor=" let info of visitTimerControl(); let i=index">
+                    <fieldset class="row py-3" [formGroupName]="i">
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [ngClass]="{'disableDiv': dateFlag}">
+                        <label class="form-label">Start Date </label>
+                        <p-calendar formControlName="startDateTime" [showIcon]="true" [showTime]="true" hourFormat="12"
+                          (onSelect)="selectStartDate($event,i)" [dateFormat]="'dd/mm/yy'"></p-calendar>
+                      </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [ngClass]="{'disableDiv': dateFlag}">
+                        <label class="form-label">End Date </label>
+                        <p-calendar formControlName="endDateTime" [showIcon]="true" [showTime]="true" hourFormat="12"
+                          (onSelect)="selectEndDate($event,i)" [dateFormat]="'dd/mm/yy'"></p-calendar>
+                      </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [ngClass]="{'disableDiv': dateFlag}">
+                        <label class="form-label">Working Hours </label>
+                        <p-inputNumber mode="decimal" formControlName="workingHours" [readonly]="true"
+                          [useGrouping]="false">
+                        </p-inputNumber>
+
+                      </div>
+
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-button"
+                        [ngClass]="{'disableDiv': dateFlag}">
+                        <button pButton type="button" (click)="addMorevisitTimer()"
+                          class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                        <button pButton type="button" (click)="removeVisitTimer(i)"
+                          class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+
+                      </div>
+                    </fieldset>
+                  </ng-container>
+                </ng-container>
+              </form>
+
+
+
+            </div>
+
+          </p-tabPanel>
+
+          <p-tabPanel *ngIf="this.AssetGroupId==2" header="FMS PPM Check List">
+
+            <div class="card" formArrayName="vChecklists" style="height:250px; overflow: auto; padding-bottom: 30px;">
+
+              <h3>{{instructionDescription}}</h3>
+              <hr>
+
+              <div *ngFor="let instText of InstructionText; let i=index;">
+
+                <fieldset class="row py-3 certificate add-more-value-border" [formGroupName]="i">
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-div">
+                    <label class="form-label">Instruction Text </label>
+                    <input type="checkbox" value="{{instText.instructionTextId}}" [checked]="true" [disabled]="true">
+
+                    {{ instText.text }}
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-div">
+                    <label class="form-label">Task Status <span class="span-color">*</span> </label>
+                    <p-dropdown [options]="taskStatus" placeholder="Select" formControlName="taskStatusId"
+                      (onChange)="changeTaskStatus($event)" optionLabel="name" optionValue="id"
+                      [required]="this.required">
+                    </p-dropdown>
+                    <!-- <small class="p-error block"
+                    *ngIf="vChecklists.get('taskStatusId')?.invalid&&vChecklists.get('taskStatusId')?.dirty">
+                  </small> -->
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-div">
+                    <label class="form-label" for="comment">Task Comment </label>
+                    <input id="comment" formControlName="taskComment" type="text" pInputText />
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3 add-more-value-div">
+                    <label class="form-label">Measured Value <span class="span-color">*</span> </label>
+                    <textarea [required]="this.required" id="value" formControlName="measuredValue"
+                      style="width: 210px; height: 50px;" pInputTextarea></textarea>
+                  </div>
+
+                  <input type="hidden" formControlName="id">
+                  <input type="hidden" formControlName="visitId">
+
+                </fieldset>
+              </div>
+
+            </div>
+
+          </p-tabPanel>
+
+          <p-tabPanel header="Others" leftIcon="pi pi-icon">
+            <div class="others">
+              <fieldset class="row py-3">
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Comments</label>
+                  <textarea id="comments" formControlName="comments" style="width: 210px; height: 50px;"
+                    pInputTextarea></textarea>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Work Performed By </label>
+                  <input formControlName="workPerformed" type="text" pInputText />
+
+                </div>
+
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">PPM Next Expected Date </label>
+                  <p-calendar formControlName="nextDate" [showIcon]="true" [showOnFocus]="false" [showButtonBar]="true"
+                    [dateFormat]="'dd/mm/yy'">
+                  </p-calendar>
+                </div>
+
+              </fieldset>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+
+
+        <div class="card-body pt-5">
+          <fieldset class="row py-3" [ngClass]="{'disableDiv': true}">
+            <div class="card-body pt-5">
+              <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory">
+              </app-transaction-history>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="formline3">
+          <div class="saveButton">
+            <button pButton type="submit" (submit)="update()" label="Update" class="p-button-info col-lg-2" canUpdate
+              *ngIf="!visitClosed"></button>
+
+            <button pButton type="button" (click)="deletePpmEntry()" label="Delete" class="p-button-danger col-lg-2"
+              canDelete></button>
+          </div>
+        </div>
+
+      </form>
+    </p-tabPanel>
+  </p-tabView>
+
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+</div>

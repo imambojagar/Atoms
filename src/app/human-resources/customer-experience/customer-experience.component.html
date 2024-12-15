@@ -1,0 +1,350 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                  >
+                    <div class="row mb-3 content-heading">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3"
+                      >
+                        <div class="float-start main-heading">
+                          Customer Experience List
+                        </div>
+                        <div class="float-start export-icon mt-3">
+                          <!-- <a class="m-5" (click)="export()"
+                            >Export
+                            <img src="assets/img/dashboard/excel.svg" alt=""
+                          /></a> -->
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"
+                      >
+                        <div class="row float-end">
+                          <div
+                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3"
+                          >
+                            <div class="float-end filter-icon h-100">
+                              <a (click)="toggleFilter()"
+                                ><img
+                                  src="assets/img/dashboard/filter.svg"
+                                  alt=""
+                              /></a>
+                            </div>
+                          </div>
+                          <div
+                            class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3"
+                          >
+                            <div class="form-floating float-start">
+                              <input
+                                type="text"
+                                class="form-control input-field icon-padding"
+                                id="floatingName"
+                                [(ngModel)]="searchValue"
+                                (input)="applyGlobalFilter($event)"
+                                placeholder="Search"
+                                value="Type here"
+                              />
+                              <a>
+                                <img
+                                  class="float-end search-icon"
+                                  src="assets/img/dashboard/search.svg"
+                                  alt=""
+                              /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div
+                            class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3"
+                          >
+                            <div class="d-grid">
+                              <button
+                                class="btn btn-blue text-white border-r10"
+                                type="button"
+                                (click)="add()"
+                              >
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <p-table
+                        [value]="dataTable"
+                        [paginator]="true"
+                        [rows]="10"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        #dt
+                      >
+                        >
+                        <!-- <ng-template pTemplate="caption">
+                          <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                              <h4 class="mt-3 inline main-heading">
+                                Customer Experience List
+                              </h4>
+                              <a class="ps-4 mt-4 exportfile" (click)="export()"
+                        >Export <img src="navbar/export.svg" alt=""
+                      /></a>
+                            </div>
+                            <div
+                              class="col-lg-6 col-md-12 col-sm-12 col-12 text-right"
+                            >
+                              <div class="p-input-icon-left">
+                                <p-button
+                                  [outlined]="false"
+                                  class="header-icon-background header-icon float-end"
+                                  (click)="toggleFilter()"
+                                >
+                                  <img src="navbar/filter.svg" alt="" />
+                                </p-button>
+                              </div>
+                              <div
+                                class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1"
+                              >
+                                <div class="form-floating float-end">
+                                  <input
+                                    type="text"
+                                    pInputText
+                                    class="form-control border-0 header-search-background"
+                                    id="floatingSearchInput"
+                                    placeholder="Type here"
+                                    (input)="applyGlobalFilter($event)"
+                                    [(ngModel)]="searchValue"
+                                  />
+                                  <span>
+                                    <img
+                                      class="float-end search-icon"
+                                      src="navbar/search.svg"
+                                      alt=""
+                                  /></span>
+                                  <label for="floatingSearchInput"
+                                    >Search</label
+                                  >
+                                </div>
+                              </div>
+                              <div class="p-input-icon-left">
+                                <button
+                                  class="btn btn-blue text-white border-0 p-4 float-end"
+                                  (click)="add()"
+                                >
+                                  Add Customer Experience
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template> -->
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th class="text-center">Site</th>
+                            <th class="text-center">Department</th>
+                            <th class="text-center">Customer Name</th>
+                            <th class="text-center">Survey Date</th>
+                            <th class="text-center">Actions</th>
+                          </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-dataTable>
+                          <tr>
+                            <td class="text-center">{{ dataTable.site }}</td>
+                            <td class="text-center">
+                              {{ dataTable.department }}
+                            </td>
+                            <td class="text-center">
+                              {{ dataTable.customerName }}
+                            </td>
+                            <td class="text-center">
+                              {{ dataTable.surveyDate }}
+                            </td>
+                            <td
+                              class="sticky-header"
+                              alignFrozen="right"
+                              pFrozenColumn
+                              [frozen]="balanceFrozen"
+                            >
+                              <div class="d-flex justify-content-center">
+                                <p-button
+                                  icon="pi pi-pencil"
+                                  class="mr-2"
+                                  [rounded]="true"
+                                  [outlined]="true"
+                                  severity="success"
+                                  (click)="editCustomerExperience(dataTable)"
+                                  canUpdate
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          #drawerAdd
+          [ngClass]="showFilterModal ? 'show' : ''"
+          class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+          id="r-step-1"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div class="offcanvas-header">
+            <h1 class="offcanvas-title offcanvas-heading">
+              Search Customer Experience
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="close_filter_modal()"
+            ></button>
+          </div>
+          <div class="p-3">
+            <div class="row">
+              <p-toast></p-toast>
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3"
+              >
+                <form [formGroup]="searchForm">
+                  <div class="row mb-4">
+                    <div class="row box-gryco">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <span class="p-float-label">
+                            <p-autoComplete
+                              [delay]="1000"
+                              placeholder="Site"
+                              formControlName="site"
+                              [suggestions]="sites"
+                              field="custName"
+                              (completeMethod)="onSelectSite($event)"
+                              dataKey="id"
+                              (onSelect)="bindSite($event)"
+                              (onClear)="clearSite()"
+                              inputId="siteInput"
+                            ></p-autoComplete>
+                            <label for="siteInput" class="form-label"
+                              >Site</label
+                            >
+                          </span>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <!-- <input id="department" formControlName="department" pInputText /> -->
+                          <p-dropdown
+                            [options]="departments"
+                            optionLabel="departmentName"
+                            formControlName="department"
+                            placeholder="Please select ..."
+                          ></p-dropdown>
+
+                          <label class="form-label">Department</label>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                      <div class="form-floating mb-2">
+                        <span class="p-float-label">
+                          <p-autoComplete
+                            [delay]="1000"
+                            formControlName="customerName"
+                            field="customerName"
+                            (completeMethod)="getAutoComplete($event)"
+                            [suggestions]="customer_Name"
+                            (onSelect)="bindCustomerName($event)"
+                            (onClear)="ClearCustomerName()"
+                            placeholder="Customer Name"
+                            inputId="customerNameInput"
+                          ></p-autoComplete>
+                          <label for="customerNameInput" class="form-label">Customer Name</label>
+                        </span>
+                      </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-calendar
+                            [showIcon]="true"
+                            [showOnFocus]="false"
+                            [required]="true"
+                            formControlName="SurveyDate"
+                            dateFormat="yy/mm/dd"
+                            dataType="string"
+                            placeholder="Survey Date"
+                          ></p-calendar>
+                          <label class="form-label">Survey Date</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                    type="button"
+                    (click)="searchCustomerExperience()"
+                  >
+                    Apply Filter
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+
+<app-add-edit-customer-experience
+  [showmodal]="addcusExpLoaded"
+  [cusExp_id]="cusExp_id"
+  [cusExp_index]="cusExp_index"
+  [status]="status"
+  (openModals)="toggleAdd()"
+></app-add-edit-customer-experience>
+
+<div
+  *ngIf="addcusExpLoaded"
+  class="offcanvas-backdrop fade show"
+  (click)="toggleAdd()"
+></div>
+<div
+  *ngIf="showFilterModal"
+  class="offcanvas-backdrop fade show"
+  (click)="toggleFilter()"
+></div>

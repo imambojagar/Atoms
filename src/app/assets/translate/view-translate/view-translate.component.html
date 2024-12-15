@@ -1,0 +1,91 @@
+<p-toast></p-toast>
+<div class="view-data-header">
+  <div class="view-name-def-header view-data-header">
+    <div class="card flex justify-content-center mb-5">
+      <p-breadcrumb [model]="items"></p-breadcrumb>
+    </div>
+    <!-- <app-search-component (OnSearch)="search()" (OnReset)="Reset()">
+      <div class="card-body pt-5">
+        <form [formGroup]="searchForm">
+          <div class="row py-3">
+            <div class="col-md-3">
+              <label class="form-label">Is Translated</label>
+              <p-dropdown [options]="isTranslatedList" placeholder="Select" formControlName="isTranslated"
+                (onChange)="filter.isTranslated=$event.value" optionLabel="name" optionValue="id"></p-dropdown>
+            </div>
+
+
+            <div class="col-md-3">
+              <label class="form-label">Word</label>
+              <input type="text" formControlName="word" (ngModelChange)="filter.word = searchForm.value.word" pInputText
+                placeholder="Search Word">
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">Page Name</label>
+              <p-autoComplete [delay]="1000" (ngModelChange)="filter.pageName=$event.pageName" [suggestions]="pagesNamesList"
+                (onSelect)="filter.pageName=$event.pageName" (completeMethod)="pageNameFilter($event)" field="pageName"
+                placeholder="Search Page Name" formControlName="pageName"></p-autoComplete>
+            </div>
+          </div>
+        </form>
+      </div>
+    </app-search-component> -->
+
+
+    <div class="view-name-def-header card">
+      <p-table #dt [value]="trans" styleClass="p-datatable-striped p-datatable-gridlines" [loading]="loading"
+        [rows]="filter.pageSize" [tableStyle]="{'min-width': '75rem'}" [lazy]="true" [totalRecords]="totalRows"
+        [rowHover]="false" dataKey="id">
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            <div class="card-header bg-primary">
+              <div class="card-title">
+                <span class="text-white"> Translation Table <br>
+                  <span class="total_rows_data"> Total: {{totalRows}} </span>
+                </span>
+              </div>
+              <div class="card-title table-btns">
+                <a [routerLink]="['/systemsettings/translate/add-control']" class="nav-link" canAdd>
+                  <button pRipple class="btn btn-light-primary me-2 mr-2"> Add</button>
+                </a>
+                <button (click)="export()" pButton pRipple label="Export" class="btn btn-light-primary me-2"></button>
+              </div>
+
+
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>ID</th>
+            <th>Word</th>
+            <th class="text-center" *ngFor="let lang of languagesList">{{lang.name}}</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tran>
+          <tr>
+            <td><a class="link-info" pRipple (click)="navToDetails(tran,0)">{{tran.id}}</a></td>
+            <td>{{tran.word}}</td>
+            <td class="text-center" *ngFor="let row of tran.translations">
+              {{row.transValue}}
+            </td>
+            <td class="action-width">
+              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                (click)="navToDetails(tran,1)" canUpdate></button>
+              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger" (click)="delete(tran)"
+                canDelete></button>
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+    </div>
+
+
+
+    <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

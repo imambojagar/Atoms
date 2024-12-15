@@ -1,0 +1,130 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Recurring Task</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <!-- <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Recurring Task</h1>
+  </div> -->
+  <div class="p-3">
+    <div class="row">
+      <div class="">
+        <div class="">
+          <div class="row box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Task No.'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.title }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Task Type'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.taskType }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Frequency'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.frequesnt }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Sch-Ent'}}:
+                      <span class="viewspan-text">{{ isChild ? 'Entry' : 'Schedule' }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Renewed'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.renewed ? 'Yes' : 'No' }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Status'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.taskStatusName }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!is2PerDay || isChild">
+                  <p class="viewp-text">{{'Date'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.dateView }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="is2PerDay && !isChild">
+                  <p class="viewp-text">{{'First Date'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.firstDate.toUTCString().slice(0, 26) }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="is2PerDay && !isChild">
+                  <p class="viewp-text">{{'Second Date'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.secondDate.toUTCString().slice(0, 26) }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Site'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.siteName?.custName }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{'Assigned Engineer 1'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.engineerUser1Name }}</span>
+                  </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!isChild">
+                  <p class="viewp-text">{{'Assigned Engineer 2'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.engineerUser2Name }}</span>
+                  </p>
+              </div>
+          </div>
+
+          <div class="row box-gryco py-3" *ngIf="isDay && !isChild">
+              <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                  <p class="viewp-text">{{'Sunday'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.sunday ? 'Yes' : 'No' }}</span>
+                  </p>
+              </div>
+              <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                  <p class="viewp-text">{{'Monday'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.monday ? 'Yes' : 'No' }}</span>
+                  </p>
+              </div>
+              <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                  <p class="viewp-text">{{'Tuesday'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.tuesday ? 'Yes' : 'No' }}</span>
+                  </p>
+              </div>
+              <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                  <p class="viewp-text">{{'Wednesday'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.wednesday ? 'Yes' : 'No' }}</span>
+                  </p>
+              </div>
+              <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                  <p class="viewp-text">{{'Thursday'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.thursday ? 'Yes' : 'No' }}</span>
+                  </p>
+              </div>
+              <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                  <p class="viewp-text">{{'Friday'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.friday ? 'Yes' : 'No' }}</span>
+                  </p>
+              </div>
+              <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                  <p class="viewp-text">{{'Saturday'}}:
+                      <span class="viewspan-text">{{ addRecurrentForm.value.saturday ? 'Yes' : 'No' }}</span>
+                  </p>
+              </div>
+          </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>

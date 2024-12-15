@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <GetDemoCountBysite Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>GetDemoCountBysite</Alias>
+        <HeadersString />
+        <Key />
+        <Name>GetDemoCountBysite</Name>
+        <PathData>D:\Reports Schema\GetDemoCountBysite.json</PathData>
+      </GetDemoCountBysite>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="3">
+          <value>SiteName,System.String</value>
+          <value>SiteId,System.Decimal</value>
+          <value>Count,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>6400ed634e934205a663fac899790237</Key>
+        <Name>root</Name>
+        <NameInSource>GetDemoCountBysite.root</NameInSource>
+      </root>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <UserFunctions isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>a5e7c724133a4e40adc625ee67931ff2</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="4" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <Chart1 Ref="5" type="Stimulsoft.Dashboard.Components.Chart.StiChartElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <Area Ref="6" type="Stimulsoft.Dashboard.Components.Chart.StiChartArea" isKey="true">
+            <InterlacingHor Ref="7" type="Stimulsoft.Dashboard.Components.Chart.StiHorChartInterlacing" isKey="true">
+              <Color>Transparent</Color>
+            </InterlacingHor>
+            <InterlacingVert Ref="8" type="Stimulsoft.Dashboard.Components.Chart.StiVertChartInterlacing" isKey="true">
+              <Color>Transparent</Color>
+            </InterlacingVert>
+          </Area>
+          <Arguments isList="true" count="1">
+            <Item5 Ref="9" type="Stimulsoft.Dashboard.Components.Chart.StiArgumentChartMeter" isKey="true">
+              <Expression>root.SiteName</Expression>
+              <Key>6f26b8df016d4354aacfd8b098e55b61</Key>
+              <Label>SiteName</Label>
+            </Item5>
+          </Arguments>
+          <BackColor>Transparent</BackColor>
+          <ChartConditions isList="true" count="0" />
+          <ClientRectangle>60,40,920,520</ClientRectangle>
+          <CloseValues isList="true" count="0" />
+          <ConstantLines isList="true" count="0" />
+          <CustomStyleName isNull="true" />
+          <DataFilters isList="true" count="0" />
+          <EndValues isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>c7badb92d4414837a08babd090ddaa49</Guid>
+          <HighValues isList="true" count="0" />
+          <Labels Ref="10" type="Stimulsoft.Dashboard.Components.Chart.StiChartLabels" isKey="true">
+            <Font>Arial,8</Font>
+            <ForeColor>Transparent</ForeColor>
+          </Labels>
+          <Legend Ref="11" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegend" isKey="true">
+            <Labels Ref="12" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegendLabels" isKey="true">
+              <Color>Transparent</Color>
+              <Font>Arial,8</Font>
+            </Labels>
+            <Title Ref="13" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegendTitle" isKey="true">
+              <Color>Transparent</Color>
+              <Font>Arial,12,Bold</Font>
+            </Title>
+          </Legend>
+          <LowValues isList="true" count="0" />
+          <ManuallyEnteredChartMeter Ref="14" type="Stimulsoft.Dashboard.Components.Chart.StiValueChartMeter" isKey="true">
+            <Key>5b9442e47f2e42c99e0d5924a2037aef</Key>
+          </ManuallyEnteredChartMeter>
+          <ManuallyEnteredData>H4sIAAAAAAAEAIvm5VJQiAYRCgpKYYk5palKOlCea14KqoBzTn5xKqqQT345qoBHZnoGqohjUXppbmpeCVwgPBWoBsENTi3KTC1WAvFiebliAcwjTseRAAAAWklQ</ManuallyEnteredData>
+          <Margin>3,3,3,3</Margin>
+          <Marker Ref="15" type="Stimulsoft.Dashboard.Components.Chart.StiChartMarker" isKey="true" />
+          <Name>Chart1</Name>
+          <NegativeSeriesColors />
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ParetoSeriesColors />
+          <RoundValues>True</RoundValues>
+          <SeriesColors />
+          <Style>Blue</Style>
+          <Title Ref="16" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Demo Assets / Site</Text>
+          </Title>
+          <TopN Ref="17" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <TrendLines isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+          <UserViewStates isList="true" count="0" />
+          <ValueFormat Ref="18" type="NumberFormat" isKey="true">
+            <DecimalDigits>0</DecimalDigits>
+            <GroupSeparator>,</GroupSeparator>
+            <NegativePattern>1</NegativePattern>
+            <State>DecimalDigits, Abbreviation</State>
+          </ValueFormat>
+          <Values isList="true" count="1">
+            <Item6 Ref="19" type="Stimulsoft.Dashboard.Components.Chart.StiValueChartMeter" isKey="true">
+              <Expression>root.Count</Expression>
+              <Key>54ea877d54ca4e3896b7ee263fcbe68a</Key>
+              <Label>Count</Label>
+            </Item6>
+          </Values>
+          <Weights isList="true" count="0" />
+        </Chart1>
+      </Components>
+      <DashboardWatermark Ref="20" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>cbadfb05560440b3ad1d510d712be0df</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Mohamed Alaa</ReportAuthor>
+  <ReportChanged>3/7/2024 5:19:57 PM</ReportChanged>
+  <ReportCreated>3/7/2024 5:04:54 PM</ReportCreated>
+  <ReportFile>D:\Reports\GetDemoCountBySite.mrt</ReportFile>
+  <ReportGuid>fb6145319a12469582536649ff41ac15</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2024.1.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

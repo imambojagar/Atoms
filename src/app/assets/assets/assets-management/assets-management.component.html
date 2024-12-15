@@ -1,0 +1,655 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <!-- <h1 class="offcanvas-title offcanvas-heading">Add New Asset</h1> -->
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="assetFormService.isViewMode"> View Asset </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="assetFormService.isAddMode"> Add Asset </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="assetFormService.isEditMode&&!assetFormService.isViewMode">
+      Edit Asset </h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-2 ngprime-custom">
+    <p-toast></p-toast>
+    <div *ngIf="!assetFormService.isViewMode" class="row  form-scroller">
+      <!--begin Search Fields -->
+      <div class=" mb-6 mb-xl-9">
+        <!-- <div class="row">
+              <div class="card-title">
+                  <h2 class="d-flex align-items-center" *ngIf="assetFormService.isAddMode"> Create Asset </h2>
+                  <h2 class="d-flex align-items-center" *ngIf="assetFormService.isEditMode"> Edit Asset </h2>
+                  <h2 class="d-flex align-items-center" *ngIf="assetFormService.isViewMode"> View Asset </h2>
+              </div>
+          </div> -->
+
+        <div class="card-body">
+          <form [formGroup]="assetFormService.assetForm">
+            <div class="row box-gryco mb-2 mb-2 py-3">
+              <div class="row">
+                <div class="col-md-6 col-xl-4 col-xl-4 col-xxl-4" *ngIf="false">
+                  <div class="form-floating mb-2">
+
+                    <p-dropdown [options]="assetFormService.AssetGroups" optionLabel="name" id="assetGroup"
+                      formControlName="assetGroup" [hidden]="true" class="dropdown" placeholder="select"></p-dropdown>
+                    <label for="assetGroup" class="form-label">Asset Group<small class="text-danger">*</small></label>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-4 col-xl-4 col-xxl-4">
+                  <div class="form-floating mb-2">
+
+                    <p-dropdown [options]="assetFormService.Asset_Types" optionLabel="name" id="assetType"
+                      formControlName="assetType" class="dropdown" placeholder="select"
+                      (onChange)="selectAssetType($event)"></p-dropdown>
+                    <label for="assetType" class="form-label">Asset Type<small class="text-danger">*</small></label>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-4 col-xl-4 col-xxl-4"
+                  *ngIf="assetFormService.assetInfoForm.controls['assetType']?.value?.value==3">
+                  <div class="form-floating mb-2">
+
+                    <p-autoComplete [delay]="1000" formControlName="demoRequest" [suggestions]="demos"
+                      (completeMethod)="selectDemo($event)" id="demoRequest" field="id" dataKey="id"></p-autoComplete>
+                    <label for="demoRequest" class="form-label">Demo<small class="text-danger">*</small></label>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-4 col-xl-4 col-xxl-4" *ngIf="!assetFormService.isAddMode">
+                  <button pButton type="button" (click)="openDialog();" class="p-button-rounded btn-blue r-2 py-3"> View
+                    History</button>
+                </div>
+              </div>
+              <ng-container formArrayName="multiAssets">
+                <ng-container *ngFor="let stageForm of assetFormService.multiAssets.controls; let i = index">
+                  <div class="row py-3" [formGroupName]="i">
+                    <div class="col-md-6 col-xl-4 col-xl-4 col-xxl-4">
+                      <div class="form-floating mb-2">
+                        <input id="assetNumber" formControlName="assetNumber"
+                          class="form-control header-search-background" type="text" pInputText
+                          placeholder="Asset Number" />
+                        <label for="assetNumber" class="form-label">Asset Number</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4 col-xl-4 col-xxl-4">
+                      <div class="form-floating mb-2">
+                        <input id="assetSerialNo" formControlName="assetSerialNo"
+                          class="form-control header-search-background" type="text" pInputText
+                          placeholder="Serial numbers" />
+                        <label for="assetSerialNo" class="form-label">Serial numbers</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4 col-xl-4 col-xxl-4">
+                      <div class="form-floating mb-2">
+                        <input id="systemID" formControlName="systemID" class="form-control header-search-background"
+                          type="text" pInputText placeholder="System ID" />
+                        <label for="systemID" class="form-label">System ID</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4 col-xl-4 col-xxl-4 pt-2" *ngIf="assetFormService.isAddMode===true">
+                      <button pButton type="button" (click)="addStage();"
+                        [disabled]="!assetFormService.multiAssets.controls[i].valid"
+                        class="btn btn-outline mr-2 header-icon-background" icon="pi pi-plus"></button>
+                      <button pButton type="button" (click)="deleteStage(i)"
+                        [disabled]="!assetFormService.multiAssets.controls[i].valid"
+                        class="btn btn-outline mr-2 btn btn-danger header-icon-background" icon="pi pi-trash"
+                        [disabled]="i<=0"></button>
+                      <button pButton type="button" (click)="fixAssetNumber();"
+                        [disabled]="!assetFormService.multiAssets.controls[i].valid"
+                        class="btn btn-outline mr-2 header-icon-background" icon="pi pi-refresh" *ngIf="i===0"></button>
+                    </div>
+                  </div>
+
+                </ng-container>
+              </ng-container>
+            </div>
+          </form>
+        </div>
+        <div class="card-body">
+          <p-tabView class="assets-tap px-0 navebarcardul" styleClass=" tabview-custom">
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <!-- <i class="pi pi-calendar"></i> -->
+                <span> Asset Info<small class="text-danger">*</small></span>
+              </ng-template>
+              <div class="row box-gryco mb-2 mb-2 py-3">
+                <app-asset-info></app-asset-info>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel header="Location and Category ">
+              <ng-template pTemplate="header">
+                <!--  <i class="pi pi-user"></i> -->
+                <span> Location and Category<small class="text-danger">*</small> </span>
+              </ng-template>
+              <div class="row box-gryco mb-2 mb-2 py-3">
+                <app-location-and-category></app-location-and-category>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel header="Economic Data">
+              <ng-template pTemplate="header">
+                <!-- <i class="pi pi-calendar"></i> -->
+                <span> Economic</span>
+              </ng-template>
+              <div class="row box-gryco mb-2 mb-2 py-3">
+                <app-economic-data></app-economic-data>
+              </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Header III">
+              <ng-template pTemplate="header">
+                <!-- <i class="pi pi-search"></i> -->
+                <span> Installation<small class="text-danger">*</small></span>
+                <!-- <i class="pi pi-cog"></i> -->
+              </ng-template>
+              <div class="row box-gryco mb-2 mb-2 py-3">
+                <app-installation></app-installation>
+              </div>
+            </p-tabPanel>
+
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <!-- <i class="pi pi-calendar"></i> -->
+                <span> Warranty</span>
+              </ng-template>
+              <div class="row box-gryco mb-2 mb-2 py-3">
+                <app-warranty-info></app-warranty-info>
+              </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Header II">
+              <ng-template pTemplate="header">
+                <!-- <i class="pi pi-user"></i> -->
+                <span> Libraries</span>
+              </ng-template>
+              <div class="row box-gryco mb-2 mb-2 py-3">
+                <app-libraries></app-libraries>
+              </div>
+            </p-tabPanel>
+
+            <p-tabPanel *ngIf="this.assetGroupId==2">
+              <ng-template pTemplate="header">
+                <!-- <i class="pi pi-user"></i> -->
+                <span> PPM Instruction</span>
+              </ng-template>
+              <div class="row box-gryco mb-2 mb-2 py-3">
+                <app-instruction></app-instruction>
+              </div>
+            </p-tabPanel>
+
+          </p-tabView>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="assetFormService.attachmentAssetForm">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <label class="form-label">Attachment</label>
+              <app-attachments (onUploaded)="assetFormService.attachmentReady($event)" formArrayName="attachments"
+                [attachments]="assetFormService.attachmentName"></app-attachments>
+            </div>
+          </form>
+        </div>
+        <div class="card-body" *ngIf="!assetFormService.isAddMode">
+          <app-transaction-history *ngIf="assetFormService.transactionHistory"
+            [transactionHistory]="assetFormService.transactionHistory"></app-transaction-history>
+        </div>
+        <!-- <div class="card-footer d-flex justify-content-end border-top py-6">
+              <button type="button" class="btn btn-primary p-button-info"(click)="assetFormService.Save()" *ngIf="!assetFormService.isViewMode">Save</button>
+              <button BackButton type="button" class="btn btn-light btn-active-light-primary me-2"routerLink="/systemsettings/assets"> Cancel </button>
+          </div> -->
+        <!-- <div *ngIf="assetFormService.isDispalyMassege=='true'">
+          <span  style="color:red">{{assetFormService.messageText}}</span>
+      </div> -->
+      </div>
+    </div>
+
+    <div *ngIf="assetFormService.isViewMode"
+      class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form">
+      <div class="form-scroller">
+
+        <!-- Asset Info Form -->
+        <div class="row box-gryco mb-2">
+          <h3 class="section-heading">Asset Information </h3>
+          <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="row">
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Model Definition:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().modelDefinition?.modelName
+                    }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Model:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().Model }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Manufacturer:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().Manufacturer
+                    }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Supplier:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().supplier?.suppliername
+                    }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Asset Name:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().assetName }}</span>
+                </p>
+              </div>
+
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">IP Address:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().ipAddress }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">MAC Address:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().macAddress }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Port Number:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().portNumber }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Asset Replace:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().assetReplace?.name
+                    }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Old Asset:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().oldAsset?.name }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Is Parent:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().isParent?.name }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Parent Asset:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().parentAsset }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Is Enabled:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().isEnabled?.name }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Tag Code:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().tagCode }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <p class="viewp-text">Mission Critical:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().missionCritical
+                    }}</span>
+                </p>
+              </div>
+
+
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"></div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Essential Equipment:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().essentialEquipement
+                    }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Parent Asset Number:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().parentassetnumber
+                    }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Retirement Type Name:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().retirementTypeName
+                    }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Retirement Status Name:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().retirementStatusName
+                    }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Retirement Date:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().retirementDate
+                    }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Asset Photo:
+                  <span class="viewspan-text">{{ assetFormService.assetInfoForm.getRawValue().assetPhoto }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location Category -->
+        <div class="row box-gryco mb-2">
+          <h3 class="section-heading">Location Category </h3>
+          <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+            <div class="row">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Site:
+                  <span class="viewspan-text">{{ assetFormService.Location_Category.getRawValue().site?.custName
+                    }}</span>
+                </p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Building:
+                  <span class="viewspan-text">{{ assetFormService.Location_Category.getRawValue().building?.name
+                    }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Floor:
+                  <span class="viewspan-text">{{ assetFormService.Location_Category.getRawValue().floor?.name }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Department:
+                  <span class="viewspan-text">{{ assetFormService.Location_Category.getRawValue().department?.name
+                    }}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Room:
+                  <span class="viewspan-text">{{ assetFormService.Location_Category.getRawValue().room?.name }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row box-gryco mb-2">
+          <h3 class="section-heading">Economic Data </h3>
+          <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <p class="viewp-text">Purchasing Price:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().purchasingPrice
+                }}</span>
+            </p>
+            <p class="viewp-text">NBV:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().nbv }}</span>
+            </p>
+            <p class="viewp-text">Tests Day:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().testsDay
+                }}</span>
+            </p>
+            <p class="viewp-text">Currency:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().currency
+                }}</span>
+            </p>
+            <p class="viewp-text">PO Date:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().poDate }}</span>
+            </p>
+            <p class="viewp-text">PO No:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().poNo }}</span>
+            </p>
+            <p class="viewp-text">Invoice Number:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().invoiceNumber
+                }}</span>
+            </p>
+            <p class="viewp-text">Invoice Date:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().invoiceDate
+                }}</span>
+            </p>
+            <p class="viewp-text">Last PO Price:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().lastPOPrice
+                }}</span>
+            </p>
+            <p class="viewp-text">Replacement Date:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().replacementDate
+                }}</span>
+            </p>
+            <p class="viewp-text">Origin Department:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().originDepartment?.name
+                }}</span>
+            </p>
+            <p class="viewp-text">Origin Site:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().originSite?.name
+                }}</span>
+            </p>
+            <p class="viewp-text">Budget Year:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().budgetYear
+                }}</span>
+            </p>
+            <p class="viewp-text">Commissioning Status:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().commissioningStatus ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">Market Price:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().marketPrice
+                }}</span>
+            </p>
+            <p class="viewp-text">Internal PO No:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().internalPONo
+                }}</span>
+            </p>
+            <p class="viewp-text">Internal PO Date:
+              <span class="viewspan-text">{{ assetFormService.economicdataForm.getRawValue().internalPODate
+                }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Installation Form -->
+        <div class="row box-gryco mb-2">
+          <h3 class="section-heading">Installation </h3>
+          <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <p class="viewp-text">Production Date:
+              <span class="viewspan-text">{{ assetFormService.installationForm.getRawValue().productionDate
+                }}</span>
+            </p>
+            <p class="viewp-text">EDD:
+              <span class="viewspan-text">{{ assetFormService.installationForm.getRawValue().edd }}</span>
+            </p>
+            <p class="viewp-text">Technical Inspection Date:
+              <span class="viewspan-text">{{ assetFormService.installationForm.getRawValue().technicalInspectionDate ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">Delivery Inspection Date:
+              <span class="viewspan-text">{{ assetFormService.installationForm.getRawValue().deliveryInspectionDate ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">End User Acceptance Date:
+              <span class="viewspan-text">{{ assetFormService.installationForm.getRawValue().endUserAcceptanceDate ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">Technical Acceptance Date:
+              <span class="viewspan-text">{{ assetFormService.installationForm.getRawValue().technicalAcceptanceDate ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">Final Acceptance Date:
+              <span class="viewspan-text">{{ assetFormService.installationForm.getRawValue().finalAcceptanceDate ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">Installation Date:
+              <span class="viewspan-text">{{ assetFormService.installationForm.getRawValue().installationDate
+                }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Warranty Form -->
+        <div class="row box-gryco mb-2">
+          <h3 class="section-heading">Warranty </h3>
+          <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <p class="viewp-text">Site Warranty Month No:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().siteWarrantyMonthNo
+                }}</span>
+            </p>
+            <p class="viewp-text">Extended Warranty Month No:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().extendedWarrantyMonthNo ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">Remainder Warranty Month No:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().remainderWarrantyMonthNo ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">EOM Warranty Months No:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().eomWarrantyMonthsNo
+                }}</span>
+            </p>
+            <p class="viewp-text">Warranty Value:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().warrantyValue
+                }}</span>
+            </p>
+            <p class="viewp-text">Warranty End Date:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().warrantyEndDateDisplay ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">Warranty Contract Conditions:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().warrantyContractConditions ||
+                'N/A' }}</span>
+            </p>
+            <p class="viewp-text">Asset Periods:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().assetPeriods
+                }}</span>
+            </p>
+            <p class="viewp-text">Start Date:
+              <span class="viewspan-text">{{ assetFormService.warrantyForm.getRawValue().isStartDate }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Library Form -->
+        <div class="row box-gryco mb-2">
+          <h3 class="section-heading">Library </h3>
+          <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <p class="viewp-text">Technical Guidance Books:
+              <span class="viewspan-text">{{ assetFormService.libraryForm.getRawValue().technicalGuidanceBooks
+                }}</span>
+            </p>
+            <p class="viewp-text">Comment:
+              <span class="viewspan-text">{{ assetFormService.libraryForm.getRawValue().comment }}</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button *ngIf="assetFormService.isAddMode"
+            class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button" (click)="saveAsets()">{{
+            'Save' }}</button>
+          <button *ngIf="assetFormService.isEditMode&&!assetFormService.isViewMode"
+            class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button" (click)="saveAsets()">{{
+            'Update' }}</button>
+          <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{ 'Cancel' }}</button> -->
+        </div>
+      </div>
+    </div>
+
+    <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+
+    <!-- <p-dialog header="lookup search" [(visible)]="showDialog" [modal]="true"
+          [style]="{width :'60vw',height:'60hw'}
+          " [maximizable]="true" [draggable]="false" [resizable]="false"> -->
+    <div *ngIf="showDialog" class="offcanvas-backdrop fade show" (click)="close_externaldialog()"></div>
+    <div #drawerFilter [ngClass]=" showDialog ? 'show' : ''"
+      class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+      role="dialog">
+      <div class="offcanvas-header">
+        <h1 class="offcanvas-title offcanvas-heading">Select Asset</h1>
+        <button type="button" class="btn-close" (click)="close_externaldialog()"></button>
+      </div>
+      <div>
+        <form [formGroup]="searchForm">
+          <div class="row py-3 box-gryco">
+            <div class="col-md-3">
+
+              <p-calendar formControlName="dateFrom" dateFormat="yy/mm/dd" dataType="string" [showIcon]="true"
+                [showButtonBar]="true" [showOnFocus]="false"></p-calendar><label class="form-label">Date From</label>
+            </div>
+            <div class="col-md-3">
+
+              <p-calendar formControlName="dateTo" dateFormat="yy/mm/dd" dataType="string" [showIcon]="true"
+                [showButtonBar]="true" [showOnFocus]="false"></p-calendar> <label class="form-label">Date To</label>
+            </div>
+
+          </div>
+
+          <div class="fixed-bottom">
+            <div class="row">
+              <div class="col-12">
+                <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                  (click)="searchHistory()">Search</button>
+                <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{ 'Cancel' }}</button> -->
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div>
+        <p-tabView class="assets-tap navebarcardul" styleClass=" tabview-custom">
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-calendar"></i>
+              <span>Service Requests</span>
+            </ng-template>
+            <div>
+              <app-table [tableData]="tableConfigServiceRequest"
+                (paginate)="paginateServiceRequest($event)"></app-table>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-calendar"></i>
+              <span>Asset Transfer</span>
+            </ng-template>
+            <div>
+              <app-table [tableData]="tableConfigAssetTransfer" (paginate)="paginateAssetTransfer($event)"></app-table>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-calendar"></i>
+              <span>Visits</span>
+            </ng-template>
+            <div>
+              <app-table [tableData]="tableConfigVisit" (paginate)="paginateVisit($event)"></app-table>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+
+      <ng-template pTemplate="footer">
+
+        <p-button icon="pi pi-times" (click)="showDialog=false" label="Cancel" styleClass="p-button-text"></p-button>
+      </ng-template>
+    </div>
+    <!-- </p-dialog> -->
+  </div>
+</div>

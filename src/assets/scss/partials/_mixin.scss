@@ -1,0 +1,283 @@
+@mixin main-font {
+  font-family: Poppins;
+}
+
+@mixin login-content {
+  font-family: Poppins;
+  font-weight: 500;
+  text-align: left;
+}
+
+@mixin fw-600 {
+  font-family: Poppins;
+  font-weight: 600;
+  text-align: left;
+}
+
+@mixin flexitem {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+
+@mixin bread-crumb-text {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@mixin footer-text {
+  font-family: Poppins;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+@mixin round-button {
+  height: 42px;
+  width: 42px;
+  padding: 8px;
+  border-radius: 32px;
+  border: none;
+}
+
+@mixin content-table-text {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+@mixin label-text {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  /* line-height: 21px; */
+}
+
+@mixin form-placeholder {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@mixin modal-title {
+  font-family: Poppins;
+  font-size: 28px;
+  font-weight: 600;
+  /* line-height: 42px; */
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+
+// mixins from html designer
+
+@mixin login-content {
+  font-weight: 500;
+  text-align: left;
+}
+
+@mixin label-text {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+@mixin buton-text {
+  font-family: Poppins;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28px;
+  text-align: center;
+  width: 220px;
+}
+
+@mixin acordian-heading {
+  font-family: Poppins;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 42px;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+@mixin caption {
+  font-family: Poppins;
+  margin-left: 25px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 42px;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+@mixin alert {
+  width: 101.5%;
+  position: relative;
+  background: #fff;
+  height: 66px;
+  bottom: 90px;
+  margin-left: -10px;
+  border-radius: 11px;
+}
+
+@mixin bg-alert-circle {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+@mixin alert-message-text {
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28px;
+  text-align: left;
+  vertical-align: -webkit-baseline-middle;
+}
+
+@mixin step-heading {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+@mixin login-content {
+  font-weight: 500;
+  text-align: left;
+}
+@mixin font-14
+{
+
+font-size: 14px;
+font-weight: 500;
+line-height: 21px;
+
+
+}
+
+@mixin main-font {
+  font-family: Poppins;
+}
+@mixin flexitem {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+@mixin signin {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 40px;
+}
+@mixin main-col {
+  font-size: $fs-13;
+
+}
+@mixin main {
+
+  border: 1px solid #d0d4d696;
+  border-radius: 20px;
+  // margin: 15px;
+  background: $color-white;
+}
+@mixin main-heading {
+
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 42px;
+  letter-spacing: -0.02em;
+  color: $secondary-color;
+}
+@mixin step-heading {
+
+
+font-size: 21px;
+font-weight: 600;
+
+letter-spacing: -0.02em;
+
+
+
+}
+@mixin btns {
+  font-size: $fs-19 !important;
+  border-radius: 10px;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+@mixin inner-box {
+  box-shadow: 0px 0px 20px #00000017;
+  border-radius: 19px;
+}
+@mixin full-col {
+  @include inner-box;
+  border-radius: 19px;
+  background: $color-white;
+}
+@mixin sub-heading {
+  color: $main-heading;
+  font-size: $fs-19;
+  font-weight: bold;
+}
+@mixin error-text {
+  // font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+@mixin shadow1
+{
+  box-shadow: 0px 1px 20px #0000000f;
+  // box-shadow: 0px 0px 14px 0px #00000014;
+
+}
+
+@mixin table-align
+{
+  vertical-align: middle;
+  text-align: center;
+}
+@mixin main-table-bg
+{
+  background: $table-bg;
+  border: 1px solid #EAF1F4;
+  border-radius: 20px;
+  padding: 10px;
+}
+@mixin status-txt
+{
+
+font-size: $fs-14 !important;
+font-weight: 600 !important;
+// line-height: 42px !important;
+padding: 10px 20px !important;
+letter-spacing: -0.02em !important;
+
+}
+@mixin dropdown-radius
+{
+  // border-radius: 20px;
+  border: 1px solid transparent;
+
+}
+@mixin dropdown-1
+{
+  border-radius: 20px !important;
+  border: 1px solid $table-bg!important;
+
+}
+@mixin offcanvas-heading
+{
+font-size: $fs-28 !important;
+font-weight: 600 !important;
+letter-spacing: -0.02em !important;
+
+}

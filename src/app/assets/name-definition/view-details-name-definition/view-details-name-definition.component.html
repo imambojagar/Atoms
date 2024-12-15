@@ -1,0 +1,160 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 "
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Asset Nomenclature</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+      <p-toast></p-toast>
+
+      <!-- <p-tabView [(activeIndex)]="tabIndex" (onChange)="handleChange()"> -->
+
+      <!-- <p-tabPanel header='{{"View"| tr:PAGE_TITLE| translate}}' leftIcon="pi pi-file"> -->
+      <!-- <p-fieldset legend="Asset Nomenclature Info" class="mb-2 mb-xl-4"> -->
+
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form">
+        <!-- <div class="col-12">
+
+            </div> -->
+        <div class="form-scroller">
+          <form [formGroup]="addNameForm">
+            <div class="row box-gryco">
+              <!-- Start View Content -->
+              <h3 class="section-heading">Asset Nomenclature Info</h3>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Asset Name'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.assetname}}</span></p>
+
+              </div>
+              @if(oracleCodesControl().length > 0)
+              { <div class="row " formArrayName="oracleCodes">
+                @for (code of oracleCodesControl(); track $index;let i=$index) {
+
+                <!-- <p>{{code.value.codeName[i]}} : <span> {{addNameForm.value.code[i]}} </span></p> -->
+                <div [formGroupName]="i" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">{{codeNames[0]}} : <span class="viewspan-text">
+                      {{code.value.codeValue}}</span></p>
+                </div>
+
+                }
+
+              </div>}
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+
+                <p class="viewp-text">{{'Oracle Name'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.oraclename}}</span></p>
+
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+
+                <p class="viewp-text">{{'UMDNS'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.umdns}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                <p class="viewp-text">{{'Asset Risk Level'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.assetrisk}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Complexity'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.complex}}</span></p>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Classification'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.classfication}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Category'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.category}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Mission Critical'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.business}}</span></p>
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Modality'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.modility}}</span></p>
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                <p class="viewp-text">{{'Sub Modality'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.submodility}}</span></p>
+
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Function Class'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.functionclass}}</span></p>
+
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Type of Asset'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.typeasset}}</span></p>
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Life Span'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.lifespan}}</span></p>
+
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Asset Name Code'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.assetndcode}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Essential Equipment'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{addNameForm.value.essentialEquipementView}}</span></p>
+              </div>
+              <!-- transactions -->
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Created By'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{transactionHistory?.createdByName}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Created Date'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{transactionHistory?.createdDate}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Modified By'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{transactionHistory?.modifiedByName}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">{{'Modified Date'| tr:PAGE_TITLE| translate}} : <span class="viewspan-text">
+                    {{transactionHistory?.modifiedDate}}</span></p>
+              </div>
+              <!-- End View Content -->
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <!-- </p-tabPanel> -->
+
+      <!-- </p-tabView> -->
+    </div>
+  </div>
+  <div *ngIf="tabIndex == 1" class="fixed-bottom">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-blue text-white form-button float-end mx-4" type="button"
+          (click)="updateNameDefiniton()">
+          {{'Update'| tr:PAGE_TITLE| translate}}</button>
+        <!-- <button type="button" (click)="deleteNameDefiniton()" class="btn btn-danger form-button float-end mx-4" canDelete>
+            {{'Delete'| tr:PAGE_TITLE| translate}}</button>
+            <button type="button" BackButton class="btn btn-light form-button float-end mx-4">
+              {{'Back'|  tr:PAGE_TITLE| translate}}</button> -->
+      </div>
+    </div>
+  </div>
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+</div>

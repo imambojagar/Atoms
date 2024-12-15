@@ -1,0 +1,138 @@
+<div class="containter-fluid login-page">
+  <div class="row g-0">
+    <div class="col-xxl-8 col-xl-8 col-lg-7 col-md-12 col-sm-12 col-12 " data-aos="fade-down">
+      <div id="particles-js" class="position-relative adf-hide h-100">
+        <div class="login-left-bg  align-self-center h-100">
+          <div class="content-center">
+            <h3 class="">Welcome to <br>Elevate Healthcare Efficiency</h3>
+            <p>Streamline your hospital's machinery management with Atoms, a specialised solution
+              designed to track, maintain, and optimise medical equipment, ensuring a smooth and
+              efficient healthcare environment. </p>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12">
+
+      <div class="login-right-bg">
+        <div class="p-4 w-100" data-aos="fade-up" data-aos-delay="100">
+          <div class="row">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+              <a class="d-flex justify-content-center">
+                <img src="assets/img/logo.svg" alt="" class=" mb-5">
+              </a>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+              <span class="float-end qips-lang">
+                <select class="form-select mb-3" aria-label=".form-select-lg example">
+                  <option selected>English</option>
+                  <option value="1">عربي</option>
+
+                </select>
+
+
+              </span>
+            </div>
+          </div>
+          <div class="d-flex  login-flex">
+            <div class=" align-self-center w-100">
+              <div class="row">
+
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 w-100">
+
+                  <div class="mb-2">
+                    <h3>Login </h3>
+                    <h5>Enter you credential to login</h5>
+                  </div>
+                  <form class="" [formGroup]="loginForm" novalidate="novalidate" (ngSubmit)="submit()">
+                    <div class="row">
+                      <div class="col-12 mb-3">
+                        <div class="form-floating">
+                          <input type="text" class="form-control box-shadow" id="username" placeholder="Adminsys"
+                            name="username" required formControlName="username" autocomplete="off" [ngClass]="{
+                          'is-invalid': loginForm.controls['username'].invalid,
+                          'is-valid': loginForm.controls['username'].valid
+                        }">
+                          <label for="username">Username</label>
+                        </div>
+                        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Username is required',
+                        control: loginForm.controls['username']
+                      }"></ng-container>
+                        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'username',
+                        message: 'Username is invalid',
+                        control: loginForm.controls['username']
+                      }"></ng-container>
+                      </div>
+                      <div class="col-12 mb-3">
+                        <div class="form-floating">
+                          <input type="password" class="form-control box-shadow" id="password" required name="password"
+                            autocomplete="off" formControlName="password" [ngClass]="{
+                          'is-invalid': loginForm.controls['password'].invalid,
+                          'is-valid': loginForm.controls['password'].valid
+                        }" placeholder="***************" value="99999999999">
+                          <label for="floatingName">Password</label>
+                        </div>
+                        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Password is required',
+                        control: loginForm.controls['password']
+                      }"></ng-container>
+                      </div>
+                      <div class="col-6 mb-3">
+
+                        <input class="form-check-input me-1 " type="checkbox" name="inlineRadioOptions"
+                          id="inlineRadio1" value="option1" checked="">
+                        <label class="form-check-label text-black pt-0" for="inlineRadio1">Remember
+                          Me</label>
+
+                      </div>
+                      <div class="col-6 mb-3 ">
+
+                        <a class="forgot-psw float-end" (click)="submit()">Forgot
+                          Password?</a>
+
+                      </div>
+
+                      <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+                        <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+                          <div class="fv-plugins-message-container">
+                            <span role="alert">
+                              {{ message }}
+                            </span>
+                          </div>
+                        </ng-container>
+                      </ng-template>
+
+                      <div class="d-grid mt-5">
+                        <button class="btn btn-blue text-white mt-4 border-r10" type="button"
+                          (click)="submit()">Login</button>
+                      </div>
+
+
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="poweredby ">
+          <span class="float-start ">Powered By</span><br>
+          <a><img src="assets/img/footer/cloud-logo.svg" alt="Powered by Cloud Solutions"></a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast></p-toast>

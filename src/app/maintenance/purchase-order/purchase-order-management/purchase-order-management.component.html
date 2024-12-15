@@ -1,0 +1,341 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading"
+        *ngIf="typeScreen=='Add' && isPR!='PR'">Add New Purchase Orders </h1>
+        <h1 class="offcanvas-title offcanvas-heading"
+        *ngIf="typeScreen=='Edit' && isPR!='PR'">Edit Purchase Order </h1>
+        <h1 class="offcanvas-title offcanvas-heading"
+        *ngIf="typeScreen=='Add' && isPR=='PR'">New Purchase Request </h1>
+        <h1 class="offcanvas-title offcanvas-heading"
+        *ngIf="typeScreen=='Edit' && isPR=='PR'"> Edit Purchase Request </h1>
+      <button type="button" class="btn-close" (click)="close_modal()"></button>
+    </div>
+    <div class="p-3">
+      <div class="row">
+
+        <p-toast></p-toast>
+       <!--  <p-header class="header">
+            <h5 *ngIf="typeScreen=='Add' && isPR!='PR'">New Purchase Order</h5>
+            <h5 *ngIf="typeScreen=='View' && isPR!='PR'">View Purchase Order</h5>
+            <h5 *ngIf="typeScreen=='Edit' && isPR!='PR'">Edit Purchase Order</h5>
+            <h5 *ngIf="typeScreen=='Add' && isPR=='PR'">New Purchase Request</h5>
+            <h5 *ngIf="typeScreen=='View' && isPR=='PR'">View Purchase Request</h5>
+            <h5 *ngIf="typeScreen=='Edit' && isPR=='PR'">Edit Purchase Request</h5>
+        </p-header> -->
+       <!--  <div class="saveButton">
+            <div class="saveButton">
+                <div *ngFor="let step of steps;let i=index" style="float: left; ">
+                    <button pButton type="button" label="{{step.name}}" class="p-button-success" *ngIf="step.processed" (click)="clickStep(step)"></button>
+                    <button pButton type="button" label="{{step.name}}" class="p-button-info" *ngIf="!step.processed" (click)="clickStep(step)"></button>
+                </div>
+              </div>
+        </div> -->
+        <!-- begin::Header -->
+        <div class="card-header card-header-stretch overflow-auto">
+            <ul class="nav nav-stretch nav-line-tabs fw-bold border-transparent flex-nowrap" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'BasicInformation' }"
+                        (click)="setActiveTab('BasicInformation')" role="tab">
+                        Basic Information
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'MaintenanceInformation' }"
+                        (click)="setActiveTab('MaintenanceInformation')" role="tab">
+                        Maintenance Information
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <form [formGroup]="purchaseOrderForm" (ngSubmit)="save()">
+            <!-- begin::Body -->
+            <div class="row form-scroller">
+                <div class="tab-content pt-3 box-gryco">
+                    <!-- begin::Sidebar -->
+                    <div class="tab-pane" [ngClass]="{ active: activeTab === 'BasicInformation' }">
+                        <div class="row py-3">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                 <label class="">Asset Number</label>
+                                <input type="text" formControlName="assetNumber" name="assetNumber" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                 <label class="">Asset Serial No</label>
+                                <input type="text" formControlName="assetNo" name="assetNo" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                 <label class="">Asset Name</label>
+                                <input type="text" formControlName="assetName" name="assetName" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                 <label class="">Call No</label>
+                                <input type="text" formControlName="callNo" name="callNo" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                 <label class="">Quotation No</label>
+                                <input type="text" formControlName="quotationNo" name="quotationNo" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                <label class=" required" *ngIf="isPR!='PR'" >PO number</label>
+                                <label class=" required" *ngIf="isPR=='PR'" >PR number</label>
+                                <input type="text" formControlName="importCodeNo" name="importCodeNo"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                        </div>
+                        <div class="row py-3">
+                            <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                               <div class="form-floating mb-2">
+                                 <label class=" required" *ngIf="isPR!='PR'">Purchase Order Date</label>
+                                <label class=" required" *ngIf="isPR=='PR'">Purchase Request Date</label>
+                                <p-calendar placeholder="Please select date" [showIcon]="true" [showButtonBar]="true"
+                                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                    formControlName="purchaseOrderDate" dateFormat="yy-mm-dd" dataType="string" [showOnFocus]="false">
+                                </p-calendar>
+                                <div *ngIf=" purchaseOrderForm.get('purchaseOrderDate')?.hasError('required') && purchaseOrderForm.get('purchaseOrderDate')?.touched " class="fv-plugins-message-container invalid-feedback" > Filed is required </div>
+                            </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3" *ngIf="isPR!='PR'">
+                              <div class="form-floating mb-2">
+                                <label class="">PO Estimated delivery date</label>
+                                <p-calendar placeholder="Please select date" [showIcon]="true" [showButtonBar]="true"
+                                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                    formControlName="deadlineDate" dateFormat="yy-mm-dd" dataType="string" [showOnFocus]="false">
+                                </p-calendar>
+                                <div *ngIf=" purchaseOrderForm.get('deadlineDate')?.hasError('required') && purchaseOrderForm.get('deadlineDate')?.touched " class="fv-plugins-message-container invalid-feedback" > Filed is required </div>
+                            </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3" *ngIf="isPR!='PR'">
+                              <div class="form-floating mb-2">
+                                <label class="">Dismissal Notice Date</label>
+                                <p-calendar placeholder="Please select date" [showIcon]="true" [showButtonBar]="true"
+                                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                    formControlName="dismissalNoticeDate" dateFormat="yy-mm-dd" dataType="string" [showOnFocus]="false">
+                                </p-calendar>
+                                <div *ngIf=" purchaseOrderForm.get('dismissalNoticeDate')?.hasError('required') && purchaseOrderForm.get('dismissalNoticeDate')?.touched " class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row py-3">
+                            <!-- <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                               <div class="form-floating mb-2">
+                                 <label class="">Asset Status</label>
+                                <p-dropdown [options]="assetStatus" placeholder="Please select" formControlName="assetStatusId" (onChange)="changeAssetStatus($event)"
+                                    optionLabel="name" optionValue="id" [style]="{'width':'100%'}" [filter]="true" filterBy="name" [showClear]="true" >
+                                </p-dropdown>
+                            </div> -->
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                 <label class=" required">Call Last Situation</label>
+                                <p-dropdown [options]="callLastSituation" placeholder="Please select"
+                                    formControlName="callLastSituationId" (onChange)="changeCallLastSituation($event)"
+                                    optionLabel="name" optionValue="id" [style]="{'width':'100%'}" >
+                                </p-dropdown>
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-right: 10px;">
+                              <div class="form-floating mb-2">
+                                <label class="">Start of work</label>
+                                <p-calendar formControlName="startofWorkTime" [showTime]="true"
+                                    dataType="string" [readonlyInput]="true" [showOnFocus]="false"></p-calendar>
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-right: 10px;">
+                              <div class="form-floating mb-2">
+                                <label class="">End of work</label>
+                                <p-calendar formControlName="endofWorkNewTime" [showTime]="true"
+                                    dataType="string" [readonlyInput]="true" [showOnFocus]="false"></p-calendar>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mt-6 mb-6 mb-xl-9"> 
+                                <div class="col-12"> 
+                                    <h5 class="section-heading">Spare Parts</h5> 
+                                </div> 
+                            <div class="pt-4">
+                                <div formArrayName="purchaseOrderSpareParts">
+                                    <div *ngFor=" let info of getControls('purchaseOrderSpareParts'); let i=index"
+                                        class="formline add-more-value-border add-more-values margin-bottom-add-more">
+                                        <div [formGroupName]="i" class="d-flex">
+                                            <fieldset class="formline">
+                                                <div class="row py-3 box-gryco">
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <div class="form-floating mb-2">
+                                                        <label class="">Part No</label>
+                                                        <p-autoComplete [delay]="1000" class="input-field" formControlName="partId"
+                                                            placeholder="Please enter . . . " [style]="{'width':'100%'}"
+                                                            [inputStyle]="{'width':'100%'}"
+                                                            [suggestions]="sparePartAutoComplete" field="partNo"
+                                                            dataKey="id" (completeMethod)="onSelectSparePart($event)"
+                                                            (onSelect)="bindSparePart($event,i)"></p-autoComplete>
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <div class="form-floating mb-2">
+                                                        <label class="">Part Name</label>
+                                                        <input formControlName="description" name="description"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            [readonly]="true" rows="3">
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                                                        <div class="form-floating mb-2">
+                                                        <label class="">Part Status</label>
+                                                        <p-dropdown [options]="PartStatus" optionLabel="name" optionValue="id" formControlName="partStatusId" class="dropdown" (onChange)="changepartStatus($event)" placeholder="select"
+                                                            [style]="{'width':'100%'}" [filter]="true" filterBy="name" [showClear]="true" ></p-dropdown>
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                                                        <div class="form-floating mb-2">
+                                                        <label class="">Currency</label>
+                                                        <p-dropdown [options]="currency" placeholder="Select" formControlName="currencyId" (onChange)="changeCurrency($event)"
+                                                            optionLabel="name" optionValue="id" [style]="{'width':'100%'}" [filter]="true" filterBy="name" [showClear]="true" >
+                                                        </p-dropdown>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row py-3">
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                      <div class="form-floating mb-2">
+                                                        <label class="">Quantity Requested</label>
+                                                        <input type="number" formControlName="quantityRequested" name="quantityRequested" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                                                    </div>
+                                                    </div>
+    <!--                                                 <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3" *ngIf="typeScreen!='Add'">
+                                                        <label class="">Quantity Recieved</label>
+                                                        <input type="number" formControlName="quantityRecieved" name="quantityRecieved" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                                                    </div> -->
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <div class="form-floating mb-2">
+                                                        <label class="">Unit Price</label>
+                                                        <input type="number" formControlName="unitPrice" name="unitPrice" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <div class="form-floating mb-2">
+                                                        <label class="">Discount</label>
+                                                        <input type="number" formControlName="discount" name="discount" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                                                    </div>
+                                                    </div>
+                                                </div>
+    <!--                                             <div class="row py-3">
+                                                    <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
+                                                        <label class="">Description</label>
+                                                        <textarea formControlName="description" name="description"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            placeholder="Enter description" rows="3"></textarea>
+                                                    </div>
+                                                </div> -->
+                                            </fieldset>
+                                            <div class="add-more-value-button field ms-4 mb-4">
+                                                <button pButton type="button" (click)="addMoreSparePart()" class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"> </button>
+                                                <button pButton type="button" (click)="removeControl('purchaseOrderSpareParts',i)" class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash" [disabled]="i<=0"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end::Sidebar -->
+
+                    <!-- begin::Header -->
+                    <div class="tab-pane"  [ngClass]="{ active: activeTab === 'MaintenanceInformation'}">
+                        <div class="row py-3 box-gryco">
+
+                            <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                               <div class="form-floating mb-2">
+                                 <label class="">Component To Be Fixed</label>
+                                <p-dropdown [options]="componentToBeFixeds" optionLabel="name" optionValue="id" formControlName="componentToBeFixedId" class="dropdown"
+                                    (onChange)="changecomponentToBeFixed($event)" placeholder="Please select" [style]="{'width':'100%'}" [filter]="true" filterBy="name" [showClear]="true">
+                                </p-dropdown>
+                            </div>
+                            </div>
+                            <div class="row py-3">
+                                <div class="col-md-4 col-lg-14 col-xl-4 col-xxl-4 ">
+                                  <div class="form-floating mb-2">
+                                    <label class="">Work Performed</label>
+                                    <textarea formControlName="workPerformed" name="workPerformed" class="form-control form-control-lg form-control-solid" placeholder="Enter Work Performed" rows="3"></textarea>
+                                </div>
+                                </div>
+                                <div class="col-md-4 col-lg-14 col-xl-4 col-xxl-4 ">
+                                  <div class="form-floating mb-2">
+                                    <label class="">Comment</label>
+                                    <textarea formControlName="comment" name="comment" class="form-control form-control-lg form-control-solid" placeholder="Enter Comment" rows="3"></textarea>
+                                </div>
+                                </div>
+                                <div class="col-md-4 col-lg-14 col-xl-4 col-xxl-4 ">
+                                  <div class="form-floating mb-2">
+                                    <label class="">Spare Parts Needed</label>
+                                    <textarea formControlName="sparePartsNeeded" name="sparePartsNeeded" class="form-control form-control-lg form-control-solid" placeholder="Enter sparePartsNeeded" rows="3"></textarea>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end::Header -->
+                    <!-- end::Header -->
+                    <div class="card-body pt-5"  *ngIf="typeScreen!='Add'">
+                        <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                    </div>
+                </div>
+                <!-- begin::Footer -->
+                <!-- <div class="card-footer d-flex justify-content-end border-top py-6">
+                    <button type="button" class="btn btn-light btn-active-light-primary me-2"
+                        [routerLink]="['..']">
+                        <ng-container> <span class="indicator-label">Cancel</span> </ng-container>
+                    </button>
+                    <button type="button" type="submit" (submit)="save()" class="btn btn-primary me-2" *ngIf="typeScreen=='Add'" canAdd>
+                        <ng-container>
+                            <span class="indicator-label">Save</span>
+                        </ng-container>
+                    </button>
+                    <button type="button" type="submit" (submit)="save()" class="btn btn-primary me-2" *ngIf="typeScreen=='Edit'" canUpdate>
+                        <ng-container>
+                            <span class="indicator-label">Update</span>
+                        </ng-container>
+                    </button>
+                    <button type="button" type="button" (click)="navigate()" class="btn btn-primary me-2"  *ngIf="isPR!='PR'">
+                        <ng-container>
+                            <span class="indicator-label">Add Invoice</span>
+                        </ng-container>
+                    </button>
+                    <button type="button" (click)="delete()" class="btn btn-danger me-2" *ngIf="typeScreen=='Edit'" canDelete>
+                        <ng-container>
+                            <span class="indicator-label">Delete</span>
+                        </ng-container>
+                    </button>
+                </div> -->
+                <!-- end::Footer -->
+            </div>
+        </form>
+      </div>
+
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <button *ngIf="typeScreen=='Add'" class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button" (click)="save()">{{ 'Save' }}</button>
+            <button *ngIf="typeScreen=='Edit'" class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button" (click)="save()">{{ 'Update' }}</button>
+            <button *ngIf="isPR!='PR'" class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button" (click)="navigate()">{{ 'Add Invoice' }}</button>
+            <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{ 'Cancel' }}</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+     <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+  </div>

@@ -1,0 +1,97 @@
+<div #drawerFilter [ngClass]="showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Model</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="modelSearchForm">
+          <div class="row box-gryco py-3">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" formControlName="assetName" [suggestions]="assetsList"
+                  (completeMethod)="assetNameFilter($event)" (onSelect)="filter.assetNDId=$event.value.id"
+                  field="assetname" placeholder="Please enter Asset Name"></p-autoComplete>
+                <label>Asset Nomenclature</label>
+              </span>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" formControlName="modelName" [suggestions]="modelsList"
+                  (completeMethod)="modelNameFilter($event)" (onSelect)="filter.modelId =$event.value.modelId"
+                  field="modelName" placeholder="Please enter Model Name"></p-autoComplete>
+                <label for="modelName">Model Name</label>
+              </span>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" formControlName="manufacturer" [suggestions]="manufacturerList"
+                  (completeMethod)="manufacturerFilter($event)" (onSelect)="filter.manufacturerId=$event.value.id"
+                  field="taxonomyName" placeholder="Please enter Manufacturer"></p-autoComplete>
+                <label for="manufacturer">Manufacturer</label>
+              </span>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" formControlName="supplier" [suggestions]="supplierList"
+                  (completeMethod)="supplierFilter($event)" (onSelect)="filter.supplierId=$event.value.id"
+                  field="suppliername" placeholder="Please enter Supplier"></p-autoComplete>
+                <label for="supplier">Supplier</label>
+              </span>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" formControlName="oName" [suggestions]="oracleNames"
+                  (completeMethod)="oracleNameFilter($event)" (onSelect)="filter.oracleName=$event.value.oraclename"
+                  field="oraclename" placeholder="Please enter Oracle Name"></p-autoComplete>
+                <label for="oName">Asset Oracle Name</label>
+              </span>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+              <div class="form-floating ">
+                <label class="select-label">Asset Code Type</label>
+                <p-dropdown [options]="assetCodesList" optionLabel="name" optionValue="id" class="dropdown"
+                  (onChange)="filter.assetOracleCodeTypeId=$event.value" placeholder="Please select Asset Code Type"
+                  formControlName="codeType"></p-dropdown>
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" *ngIf="filter.assetOracleCodeTypeId">
+              <div class="form-floating ">
+                <!-- <label >Asset Code Value</label>
+                <br /> -->
+                <input type="text" placeholder="Choose Code Type to enter Code Value" formControlName="codeValue"
+                  (keyup)="onCodeInput($event)" pInputText id="cValue" class="form-control input-field icon-padding" />
+                <label for="codeValue">Asset Code Value</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="search()">
+            Apply Filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,182 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+
+          <p-toast></p-toast>
+
+
+
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row  mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Asset Nomenclature List
+                        </div>
+                        <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                              src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                        <div class="row float-end">
+                          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 mb-3">
+                            <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                  src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-9 col-9 mb-3">
+
+                            <div class="form-floating float-start ">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here">
+                              <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                              <label for="floatingName">Search</label>
+                              <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                          (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                (click)="openModal()">Add </button></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <p-table #dt [value]="names" [rows]="10" [paginator]="false" [globalFilterFields]="[
+                  'Asset Name',
+                  'UMDNS',
+                  'Asset Risk Level',
+                  'Complexity',
+                  'Classification',
+                  'Category',
+                  'Business Critical',
+                  'Modality',
+                  'Sub Modality',
+                  'Function Class',
+                  'Type of Asset',
+                  'Life Span',
+                  'Oracle Name',
+                  'Code Value',
+                  'Asset Name Code',
+                  'Action'
+              ]" [(selection)]="selectedNames" [rowHover]="true" dataKey="id" sortMode="multiple" [loading]="loading"
+                        [rows]="filter.pageSize" [lazy]="true" [totalRecords]="totalRows"
+                        [tableStyle]="{width: 'max-content'}" (onLazyLoad)="loadUserData($event)">
+
+
+                        <ng-template pTemplate="header">
+                          <tr class="muiline">
+                            <th style="width:200px">Asset Name</th>
+                            <th>UMDNS</th>
+                            <th>Asset Risk Level</th>
+                            <th>Complexity</th>
+                            <th>Classification</th>
+                            <th>Category</th>
+                            <th>Buisness Critical</th>
+                            <th>Modality</th>
+                            <th>Sub Modality</th>
+                            <th>Function Class</th>
+                            <th>Type of Asset</th>
+                            <th>Life Span</th>
+                            <th>Oracle Name</th>
+                            <th>Code Value</th>
+                            <th>Asset Name Code</th>
+                            <th class="sticky-header" alignFrozen="right" pFrozenColumn [frozen]="balanceFrozen">
+                              Action</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-name>
+
+                          <tr class="muiline">
+                            <td style="width:200px">{{name.assetname}}</td>
+                            <td class="val2">{{name.umdns}}</td>
+                            <td class="val3">{{name.assetrisk}}</td>
+                            <td class="val4">{{name.complex}}</td>
+                            <td class="val5">{{name.classfication}}</td>
+                            <td class="val6">{{name.category}}</td>
+                            <td>{{name.business}}</td>
+                            <td class="val7">{{name.modility}}</td>
+                            <td class="val8">{{name.submodility}}</td>
+                            <td class="val9">{{name.functionclass}}</td>
+                            <td class="val10">{{name.typeasset}}</td>
+                            <td class="val11">{{name.lifespan}}</td>
+                            <td class="val11">{{name.oraclename}}</td>
+                            <td class="val4">
+                              <ul *ngFor="let code of name.oracleCodes">
+                                <li *ngIf="code.codeValue!=''"> {{code.codeValue}}</li>
+                              </ul>
+                            </td>
+
+                            <td class="val13">{{name.assetndcode}}</td>
+
+                            <!-- <td class="right-icons" alignFrozen="right"  pFrozenColumn [frozen]="balanceFrozen">
+                      <ul class="list-group list-group-horizontal align-items-center">
+                        <li (click)="navToDetails(name,0)"><a><img src="assets/img/dashboard/eye-1.svg" alt="View"></a></li>
+                        <li (click)="navToDetails(name,1)"><a><img src="assets/img/dashboard/rewise.svg" alt="Rewise"></a></li>
+                        <li (click)="deleteNameDefinition(name)"><a><img src="assets/img/dashboard/rewise.svg" alt="Rewise"></a></li>
+                      </ul>
+                    </td> -->
+                            <td class="sticky-header" alignFrozen="right" pFrozenColumn [frozen]="balanceFrozen">
+                              <div class="d-flex">
+                                <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToDetails(name,0)">
+                                  <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                </button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToDetails(name,1)" canUpdate></button>
+
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-info"
+                                  (click)="deleteNameDefinition(name)" canDelete></button>
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-template>
+
+
+                      </p-table>
+                      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+
+                    </div>
+                  </div>
+
+
+
+
+                  <add-name-definition [showmodal]="addTransferLoaded" [edit_asset_id]="asset_id"
+                    (openModals)="openModal()"></add-name-definition>
+                  <app-search-name-definition [filter]="filter" [showmodal]="filterLoaded"
+                    (openSearchModals)="openFilterModal()"
+                    (AssetsTransferSearch)="getNameDefinitionSearch($event)"></app-search-name-definition>
+                  @if(nameDefinitionModel.id&&editTransferLoaded && (edit_index_tab == 1))
+                  {<edit-delete-name-definition [showmodal]="editTransferLoaded && (edit_index_tab == 1)"
+                    [edit_asset_id]="asset_id" [index_tab]="edit_index_tab"
+                    (openModals)="openEditModal()"></edit-delete-name-definition>}
+                  @if(nameDefinitionModel.id&&editTransferLoaded && (edit_index_tab == 0))
+                  { <view-details-name-definition [showmodal]="editTransferLoaded  && (edit_index_tab == 0)"
+                    [edit_asset_id]="asset_id" [index_tab]="edit_index_tab"
+                    (openModals)="openEditModal()"></view-details-name-definition>}
+                  <div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show" (click)="openModal()"></div>
+                  <div *ngIf="editTransferLoaded" class="offcanvas-backdrop fade show" (click)="openEditModal()"></div>
+                  <div *ngIf="filterLoaded" class="offcanvas-backdrop fade show" (click)="openFilterModal()"></div>
+                  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

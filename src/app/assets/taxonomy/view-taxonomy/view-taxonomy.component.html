@@ -1,0 +1,117 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+
+          <p-toast></p-toast>
+
+
+
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row  mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Manufacturer/Model Table
+                        </div>
+                        <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                              src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                        <div class="row float-end">
+                          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 mb-3">
+                            <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                  src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-9 col-9 mb-3">
+
+                            <div class="form-floating float-start ">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here">
+                              <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                              <label for="floatingName">Search</label>
+                              <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                          (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                (click)="openModal()">Add </button></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <p-table #dt [value]="models" [rows]="10" [rowHover]="true" dataKey="id" [loading]="loading"
+                        [rows]="filter.pageSize" [lazy]="true" [totalRecords]="totalRows">
+
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>Manufacturer ID</th>
+                            <th>Manufacturer Name</th>
+                            <th>Actions</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-model>
+
+                          <tr>
+                            <td>{{model.id}}</td>
+                            <td>{{model.taxonomyName}}</td>
+                            <td>
+                              <a (click)="openChildModals(model)" canUpdate class="mr-2">
+                                <img src="assets/img/plus.png" height="32px" alt="" class="pointer-plus"></a>
+
+                              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                (click)="openeditModal(model.id)" canUpdate></button>
+
+                              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                (click)="delete(model.id)" canDelete></button>
+                            </td>
+                          </tr>
+                        </ng-template>
+
+
+                      </p-table>
+                      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-search-taxonomy [filter]="filter" [showmodal]="filterLoaded" (openSearchModals)="closeFilterModal()"
+    (TaxonomySearch)="getTaxonomySearch($event)"></app-search-taxonomy>
+  <app-munfactrer-model-mangement *ngIf="childLoaded" [child]="child" [showmodal]="childLoaded"
+    (openChildModals)="closchild()" (TaxonomySearch)="getTaxonomySearch($event)"></app-munfactrer-model-mangement>
+  <div *ngIf="filterLoaded" class="offcanvas-backdrop fade show" (click)="closeFilterModal()"></div>
+
+  <div *ngIf="childLoaded" class="offcanvas-backdrop fade show" (click)="closchild()"></div>
+
+  <div *ngIf="addTaxonomyLoaded" class="offcanvas-backdrop fade show" (click)="closeModal()"></div>
+  @if(!editModelobject)
+  {
+  <add-model [showmodal]="addTaxonomyLoaded" (openModals)="closeModal()"></add-model>}
+  @else
+  {
+
+  <add-model [showmodal]="addTaxonomyLoaded" (openModals)="closeModal()"
+    [editModelobject]="editModelobject"></add-model>}
+
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

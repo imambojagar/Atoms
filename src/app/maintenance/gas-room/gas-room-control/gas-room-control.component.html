@@ -1,0 +1,329 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 *ngIf="inAddMode" class="offcanvas-title offcanvas-heading">Add Gas Room</h1>
+    <h1 *ngIf="inEditMode" class="offcanvas-title offcanvas-heading">Update Gas Room</h1>
+    <!-- <h1 *ngIf="inViewMode" class="offcanvas-title offcanvas-heading">View Gas Room</h1> -->
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+       <p-toast></p-toast>
+      <!-- <div *ngIf="id==0; then AddTemplate; else EditTemplate"></div> -->
+
+
+      <!-- <ng-template #AddTemplate>
+        <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+      </ng-template>
+
+      <ng-template #EditTemplate>
+
+        <p-tabView [(activeIndex)]="tabIndex" (onChange)="changeTabIndex($event)">
+          <p-tabPanel header="View" leftIcon="pi pi-file">
+            <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+          </p-tabPanel>
+          <p-tabPanel header="Edit" leftIcon="pi pi-file">
+            <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+          </p-tabPanel>
+          <div class=" box-gryco pt-2" >
+            <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+          </div>
+
+        </p-tabView>
+      </ng-template> -->
+
+
+
+      <!-- <ng-template #formTemplate> -->
+        <div class="mb-4 mb-xl-4">
+
+            <!-- <div class="card-title">
+              <h2 *ngIf="inAddMode" class="d-flex align-items-center text-white">Add Gas Room</h2>
+              <h2 *ngIf="inEditMode" class="d-flex align-items-center text-white">Update Gas Room</h2>
+              <h2 *ngIf="inViewMode" class="d-flex align-items-center text-white">View Gas Room</h2>
+            </div> -->
+
+          <div class="pt-2">
+            <form [formGroup]="roomFg" (ngSubmit)="save()" *ngIf="model">
+              <div class="row form-scroller mb-2">
+                <div class="row py-3 box-gryco" [ngClass]="{'disableDiv': inViewMode}">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="roomId">Room ID<small class="text-danger"
+                        *ngIf="!inViewMode">*</small></label>
+                    <input id="roomId" type="text" formControlName="roomId" pInputText class="form-control" required />
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                    <label class="form-label" for="customerId">Site<small class="text-danger"
+                        *ngIf="!inViewMode">*</small></label>
+                    <p-autoComplete [delay]="1000" [suggestions]="sitesList" (onSelect)="sendSiteId($event)"
+                      (completeMethod)="searchSites($event)" field="custName" placeholder="Search Site Name"
+                      formControlName="customerName"></p-autoComplete>
+                    </div>
+                  </div>
+                </div>
+
+                <p-tabView>
+                  <p-tabPanel header="Manifold" leftIcon="pi pi-icon" [ngClass]="{'disableDiv': inViewMode}">
+                    <div class="row py-3 box-gryco">
+                      <div class="col-md-12 col-xl-4 col-xxl-3">
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <h4 class="section-heading">Oxygen</h4>
+                        </div>
+                        <div class="col-md-6 col-xl-12 col-xxl-12">
+                          <input id="o2ManifoldMainOut" type="checkbox" formControlName="o2ManifoldMainOut" />
+                          <label class="ms-2" for="o2ManifoldMainOut">O<sub>2</sub> Main OUT</label>
+                        </div>
+                        <div class="col-md-6 col-xl-12 col-xxl-12">
+                          <input id="o2ManifoldRightBank" type="checkbox" formControlName="o2ManifoldRightBank" />
+                          <label class="ms-2" for="o2ManifoldRightBank">O<sub>2</sub> R-Bank</label>
+                        </div>
+                        <div class="col-md-6 col-xl-12 col-xxl-12">
+                          <input id="o2ManifoldLeftBank" type="checkbox" formControlName="o2ManifoldLeftBank" />
+                          <label class="ms-2" for="o2ManifoldLeftBank">O<sub>2</sub> L-Bank</label>
+                        </div>
+                        <div class="col-md-6 col-xl-12 col-xxl-12">
+                          <input id="o2ManifoldEmergency" type="checkbox" formControlName="o2ManifoldEmergency" />
+                          <label class="ms-2" for="o2ManifoldEmergency">O<sub>2</sub> ER</label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 col-xl-4 col-xxl-3">
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <h4 class="section-heading">N<sub>2</sub>O</h4>
+                        </div>
+                        <div class="col-md-6 col-xl-12 col-xxl-12">
+                          <input id="n2OMainout" type="checkbox" formControlName="n2OMainout" />
+                          <label class="ms-2" for="n2OMainout">N<sub>2</sub>O Main OUT</label>
+                        </div>
+                        <div class="col-md-6 col-xl-12 col-xxl-12">
+                          <input id="n2ORightBank" type="checkbox" formControlName="n2ORightBank" />
+                          <label class="ms-2" for="n2ORightBank">N<sub>2</sub>O-Right Bank</label>
+                        </div>
+                        <div class="col-md-6 col-xl-12 col-xxl-12">
+                          <input id="n2OLeftBank" type="checkbox" formControlName="n2OLeftBank" />
+                          <label class="ms-2" for="n2OLeftBank">N<sub>2</sub>O-Left Bank</label>
+                        </div>
+                        <div class="col-md-6 col-xl-12 col-xxl-12">
+                          <input id="n2OEmergencyBank" type="checkbox" formControlName="n2OEmergencyBank" />
+                          <label class="ms-2" for="n2OEmergencyBank">N<sub>2</sub>O-Emergency Bank</label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 col-xl-4 col-xxl-3">
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <h4 class="section-heading">CO<sub>2</sub></h4>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="cO2MainOut" type="checkbox" formControlName="cO2MainOut" />
+                          <label class="ms-2" for="cO2MainOut">CO<sub>2</sub> Main OUT</label>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="cO2RightBank" type="checkbox" formControlName="cO2RightBank" />
+                          <label class="ms-2" for="cO2RightBank">CO<sub>2</sub> Right Bank</label>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="cO2LeftBank" type="checkbox" formControlName="cO2LeftBank" />
+                          <label class="ms-2" for="cO2LeftBank">CO<sub>2</sub> Left Bank</label>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="cO2EmergencyBank" type="checkbox" formControlName="cO2EmergencyBank" />
+                          <label class="ms-2" for="cO2EmergencyBank">CO<sub>2</sub> Emergency Bank</label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 col-xl-4 col-xxl-3">
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <h4 class="section-heading">N<sub>2</sub></h4>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="n2MainOut" type="checkbox" formControlName="n2MainOut" />
+                          <label class="ms-2" for="n2MainOut">N<sub>2</sub> Main OUT</label>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="n2RightBank" type="checkbox" formControlName="n2RightBank" />
+                          <label class="ms-2" for="n2RightBank">N<sub>2</sub> Right Bank</label>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="n2LeftBank" type="checkbox" formControlName="n2LeftBank" />
+                          <label class="ms-2" for="n2LeftBank">N<sub>2</sub> Left Bank</label>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="n2EmergencyBank" type="checkbox" formControlName="n2EmergencyBank" />
+                          <label class="ms-2" for="n2EmergencyBank">N<sub>2</sub> Emergency Bank</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row box-gryco mt-4">
+                      <div class="col-lg-12 col-md-12 col-xl-12 col-xxl-12">
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <h4 class="section-heading">Medical Air</h4>
+                        </div>
+
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="medicalAirMainOut" type="checkbox" formControlName="medicalAirMainOut" />
+                          <label class="ms-2" for="medicalAirMainOut">Medical Air Main OUT</label>
+                        </div>
+
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="medicalAirRightBank" type="checkbox" formControlName="medicalAirRightBank" />
+                          <label class="ms-2" for="medicalAirRightBank">Medical Air Right Bank</label>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="medicalAirLeftBank" type="checkbox" formControlName="medicalAirLeftBank" />
+                          <label class="ms-2" for="medicalAirLeftBank">Medical Air Left Bank</label>
+                        </div>
+                        <div class="col-md-12 col-xl-12 col-xxl-12">
+                          <input id="medicalAirEmergencyBank" type="checkbox" formControlName="medicalAirEmergencyBank" />
+                          <label class="ms-2" for="medicalAirEmergencyBank">Medical Air Emergency Bank</label>
+                        </div>
+                      </div>
+                    </div>
+                  </p-tabPanel>
+
+                  <p-tabPanel header="LOX" leftIcon="pi pi-icon" [ngClass]="{'disableDiv': inViewMode}">
+                    <div class="row py-3 box-gryco">
+                      <div class="col-md-6 col-xl-3 col-xxl-3">
+                        <input id="loX1Volume" type="checkbox" formControlName="loX1Volume" />
+                        <label class="ms-2" for="loX1Volume">LOX1 Volume</label>
+                      </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3">
+                        <input id="loX1Pressure" type="checkbox" formControlName="loX1Pressure" />
+                        <label class="ms-2" for="loX1Pressure">LOX1 Pressure</label>
+                      </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3">
+                        <input id="loX2Volume" type="checkbox" formControlName="loX2Volume" />
+                        <label class="ms-2" for="loX2Volume">LOX2 Volume</label>
+                      </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3">
+                        <input id="loX2Pressure" type="checkbox" formControlName="loX2Pressure" />
+                        <label class="ms-2" for="loX2Pressure">LOX2 Pressure</label>
+                      </div>
+                    </div>
+                  </p-tabPanel>
+
+                  <p-tabPanel header="Plant Room" leftIcon="pi pi-icon" [ngClass]="{'disableDiv': inViewMode}">
+                    <div class="row py-3 box-gryco plant-room-label">
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="compressorsCheckforAnyUnusualNoise" type="checkbox"
+                          formControlName="compressorsCheckforAnyUnusualNoise" />
+                        <label class="ms-2 " for="compressorsCheckforAnyUnusualNoise">Compressors Check for
+                          any Unusual Noise</label>
+                      </div>
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="compressorsOutputPressure" type="checkbox" formControlName="compressorsOutputPressure" />
+                        <label class="ms-2" for="compressorsOutputPressure">Compressors Output Pressure(10-13
+                          bar)</label>
+                      </div>
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="compressorsMedicalAirLinePressure7To8Bar" type="checkbox"
+                          formControlName="compressorsMedicalAirLinePressure7To8Bar" />
+                        <label class="ms-2 " for="compressorsMedicalAirLinePressure7To8Bar">Compressors
+                          Medical Air line Pressure(7-8 bar)</label>
+                      </div>
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="compressorsMedicalAirLinePressure4To5Bar" type="checkbox"
+                          formControlName="compressorsMedicalAirLinePressure4To5Bar" />
+                        <label class="ms-2 " for="compressorsMedicalAirLinePressure4To5Bar">Compressors
+                          Medical
+                          Air line Pressure(4-5bar)</label>
+                      </div>
+
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="dryersCheckforAlarmOrUnusualNoise" type="checkbox"
+                          formControlName="dryersCheckforAlarmOrUnusualNoise" />
+                        <label class="ms-2" for="dryersCheckforAlarmOrUnusualNoise">Dryers Check for
+                          Alarm/Unusual Noise</label>
+                      </div>
+
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="vacuumPumpCheckOilLeakage" type="checkbox" formControlName="vacuumPumpCheckOilLeakage" />
+                        <label class="ms-2" for="vacuumPumpCheckOilLeakage">Vacuum Pump Check Oil
+                          Leakage</label>
+                      </div>
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="vacuumPumpCheckForAnyUnusualNoise" type="checkbox"
+                          formControlName="vacuumPumpCheckForAnyUnusualNoise" />
+                        <label class="ms-2 " for="vacuumPumpCheckForAnyUnusualNoise">Vacuum Pump Check for
+                          any
+                          Unusual Noise</label>
+                      </div>
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="vacuumPumpPressure" type="checkbox" formControlName="vacuumPumpPressure" />
+                        <label class="ms-2" for="vacuumPumpPressure">Vacuum Pump Pressure (-0.9 / -0.6
+                          bar)</label>
+                      </div>
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="agssCheckForAnyAlarm" type="checkbox" formControlName="agssCheckForAnyAlarm" />
+                        <label class="ms-2" for="agssCheckForAnyAlarm">AGSS Check for any Alarm</label>
+                      </div>
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="agssCheckManualOperation" type="checkbox" formControlName="agssCheckManualOperation" />
+                        <label class="ms-2" for="agssCheckManualOperation">AGSS Check Manual Operation</label>
+                      </div>
+
+
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <input id="agssCheckAndCleanFilter" type="checkbox" formControlName="agssCheckAndCleanFilter" />
+                        <label class="ms-2" for="agssCheckAndCleanFilter">AGSS Check & Clean Filter</label>
+                      </div>
+                    </div>
+                  </p-tabPanel>
+
+                  <p-tabPanel header="Backup Cylinders" leftIcon="pi pi-icon" [ngClass]="{'disableDiv': inViewMode}">
+
+                    <div class="row py-3 box-gryco">
+                      <ng-container *ngFor="let item of cylindersArr; let i =index">
+                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <input [id]="item.label" type="checkbox" [formControlName]="item.control.replace('Recieved', '')" />
+                          <label class="ms-2" [for]="item.label">{{item.label}}</label>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </p-tabPanel>
+                </p-tabView>
+
+                <!-- <div class="saveButton ">
+                  <button canUpdate type="submit" label="Save" *ngIf="!inViewMode" class="p-button-info col-lg-2"
+                    pButton></button>
+                  <button canDelete type="button" (click)="deleteRoom()" label="Delete" *ngIf="inEditMode"
+                    class="p-button-danger col-lg-2" pButton></button>
+                  <button type="reset" label="Cancel" *ngIf="!inViewMode" class="p-button-cancel col-lg-2" BackButton
+                    pButton></button>
+                  <button type="reset" label="Back" *ngIf="inViewMode" class="p-button-cancel col-lg-2" BackButton
+                    pButton></button>
+                </div> -->
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class=" box-gryco pt-2" >
+          <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+        </div>
+      <!-- </ng-template> -->
+
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button" (click)="save()">{{'Save'}}</button>
+            <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{'Cancel'| tr:PAGE_TITLE| translate}}</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

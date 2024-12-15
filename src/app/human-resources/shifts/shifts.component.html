@@ -1,0 +1,258 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                  >
+                    <div class="row mb-3 content-heading">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3"
+                      >
+                        <div class="float-start main-heading">Shifts</div>
+                        <!-- <div class="float-start export-icon mt-3">
+                          <a class="m-5" (click)="export()"
+                            >Export
+                            <img src="assets/img/dashboard/excel.svg" alt=""
+                          /></a>
+                        </div> -->
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"
+                      >
+                        <div class="row float-end">
+                          <div
+                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3"
+                          >
+                            <div class="float-end filter-icon h-100">
+                              <a (click)="toggleFilter()"
+                                ><img
+                                  src="assets/img/dashboard/filter.svg"
+                                  alt=""
+                              /></a>
+                            </div>
+                          </div>
+                          <div
+                            class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3"
+                          >
+                            <div class="form-floating float-start">
+                              <input
+                                type="text"
+                                class="form-control input-field icon-padding"
+                                id="floatingName"
+                                [(ngModel)]="searchValue"
+                                (input)="applyGlobalFilter($event)"
+                                placeholder="Search"
+                                value="Type here"
+                              />
+                              <a>
+                                <img
+                                  class="float-end search-icon"
+                                  src="assets/img/dashboard/search.svg"
+                                  alt=""
+                              /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div
+                            class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3"
+                          >
+                            <div class="d-grid">
+                              <button
+                                class="btn btn-blue text-white border-r10"
+                                type="button"
+                                (click)="addShift()"
+                              >
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <p-table
+                        [value]="dataTable"
+                        [paginator]="true"
+                        [rows]="10"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        #dt
+                      >
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Shift Type</th>
+                            <th class="text-center">From</th>
+                            <th class="text-center">To</th>
+                            <th class="text-center">Action</th>
+                          </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-dataTable>
+                          <tr>
+                            <td class="text-center">
+                              {{ dataTable.shiftName }}
+                            </td>
+                            <td class="text-center">
+                              {{ dataTable.shiftType }}
+                            </td>
+                            <td class="text-center">
+                              {{ dataTable.startShift }}
+                            </td>
+                            <td class="text-center">
+                              {{ dataTable.endShift }}
+                            </td>
+                            <td
+                              class="sticky-header"
+                              alignFrozen="right"
+                              pFrozenColumn
+                              [frozen]="balanceFrozen"
+                            >
+                              <div class="d-flex justify-content-center">
+                                <p-button
+                                  icon="pi pi-pencil"
+                                  class="mr-2"
+                                  [rounded]="true"
+                                  [outlined]="true"
+                                  severity="success"
+                                  (click)="editShift(dataTable)"
+                                  canUpdate
+                                />
+
+                                <p-button
+                                  icon="pi pi-trash"
+                                  severity="danger"
+                                  [rounded]="true"
+                                  [outlined]="true"
+                                  (click)="deleteShift(dataTable)"
+                                  canDelete
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          #drawerAdd
+          [ngClass]="showFilterModal ? 'show' : ''"
+          class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+          id="r-step-1"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div class="offcanvas-header">
+            <h1 class="offcanvas-title offcanvas-heading">Search Shift</h1>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="close_filter_modal()"
+            ></button>
+          </div>
+          <div class="p-3">
+            <div class="row">
+              <p-toast></p-toast>
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3"
+              >
+                <form [formGroup]="searchForm">
+                  <div class="row mb-4">
+                    <div class="row box-gryco">
+                      <div
+                        *ngIf="false"
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-dropdown
+                            [options]="AssetGroups"
+                            optionLabel="name"
+                            formControlName="assetGroup"
+                            [hidden]="true"
+                            class="dropdown"
+                            placeholder="select"
+                          ></p-dropdown>
+                          <label class="form-label">Asset Group</label>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                      <div class="form-floating mb-2">
+                        <span class="p-float-label">
+                          <p-autoComplete
+                            [delay]="1000"
+                            placeholder="Search . . ."
+                            formControlName="name"
+                            [suggestions]="shifts"
+                            field="shiftName"
+                            (completeMethod)="selectShift($event)"
+                            (onSelect)="bindShift($event)"
+                            (onClear)="shiftClear()"
+                            inputId="shiftNameInput"
+                          ></p-autoComplete>
+                          <label for="shiftNameInput" class="form-label">Name</label>
+                        </span>
+                      </div>
+                      
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                    type="button"
+                    (click)="searchShifts()"
+                  >
+                    Apply Filter
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+
+<app-add-edit-shift
+  [showmodal]="addShiftLoaded"
+  [shift_id]="shift_id"
+  (openModals)="toggleAdd()"
+  [status]="status"
+></app-add-edit-shift>
+
+<div
+  *ngIf="addShiftLoaded"
+  class="offcanvas-backdrop fade show"
+  (click)="toggleAdd()"
+></div>
+<div
+  *ngIf="showFilterModal"
+  class="offcanvas-backdrop fade show"
+  (click)="toggleFilter()"
+></div>

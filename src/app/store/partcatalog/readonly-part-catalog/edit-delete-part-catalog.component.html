@@ -1,0 +1,208 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+ class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading"> Update Part Catalog</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <p-toast></p-toast>
+  <div class="p-3">
+    <div class="row">
+      <!-- <p-tabView [(activeIndex)]="tabIndex">
+        <p-tabPanel header="View">
+          <p-fieldset legend="View Part Catalog">
+
+            <form [formGroup]="partCatalogForm">
+
+              <div class="pt-2">
+                <div class="row box-gryco">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">   
+                    <label class="form-label" for="assetname">Part Number :</label>
+                    <input type="text" formControlName="partNumber" pInputText id="name" [readonly]="true" />
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">   
+                    <label class="form-label" for="oraclecode">Part Name :</label>
+                    <input formControlName="partName" pInputText inputId="oraclecode" [readonly]="true" />
+
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">   
+                    <label class="form-label" for="altassetname">Oracle Code :</label>
+                    <input id="alassetname" formControlName="oracleCode" type="text" [readonly]="true" pInputText />
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">   
+                    <label class="form-label" for="umdns">Part Type :</label>
+                    <input id="umdns" formControlName="partType" type="text" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">   
+                    <label class="form-label" for="classfication">End of Support Date :</label>
+                    <input type="text" formControlName="endSupportText" [readonly]="true" pInputText />
+
+                  </div>
+                  </div>
+                   
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">   
+                    <label class="form-label" for="business">Warranty Methods :</label>
+                    <input formControlName="warranty" [readonly]="true" pInputText />
+
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">   
+                    <label class="form-label" for="modility">Initials :</label>
+                    <input formControlName="initials" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">   
+                    <label class="form-label" for="typeasset">PO Number :</label>
+                    <input formControlName="poNumber" [readonly]="true" pInputText />
+                  </div>
+                  </div>
+                </div>
+
+                <div formArrayName="modelInfo" *ngFor=" let info of modelControl(); let i=index">
+                  <fieldset class="" [formGroupName]="i" *ngIf="info.value.id != ''">
+                    <div class="row py-3">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label" for="submodility">Asset Model :</label>
+                        <input formControlName="assetModelName" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">.
+                        <div class="form-floating mb-2"> 
+                        <label class="form-label" for="functionclass">Manufacturer :</label>
+                        <input formControlName="manufact" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+
+                <div formArrayName="inventory" *ngFor=" let info of inventoryControl(); let i=index">
+                  <fieldset class="" [formGroupName]="i" *ngIf="info.value.id != ''">
+                    <div class="row py-3 box-gryco mt-4">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="lifespan">Client Part :</label>
+                        <input formControlName="clientPartName" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="oraclename">Current Stock :</label>
+                        <input formControlName="currentStock" type="text" [readonly]="true" pInputText>
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="assetndcode">Store :</label>
+                        <input formControlName="storeName" type="text" [readonly]="true" pInputText>
+                      </div>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label">Balance Price</label>
+                        <input id="mobile" formControlName="balancePrice" type="number" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label">Stock Value</label>
+                        <input id="mobile" formControlName="stockValue" type="number" pInputText />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label">Unit Price</label>
+                        <input id="mobile" formControlName="unitPrice" type="number" pInputText />
+                      </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+
+                 
+                <div class="">
+                  <div class="row py-3  box-gryco">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                     <div class="form-floating mb-2">
+                       <label class="form-label" for="typeasset">Maximum Quantity :</label>
+                      <input formControlName="maximumQuantity" [readonly]="true" pInputText />
+
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                     <div class="form-floating mb-2">
+                       <label class="form-label" for="lifespan">Threshold :</label>
+                      <input formControlName="threshold" [readonly]="true" pInputText />
+
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                     <div class="form-floating mb-2">
+                       <label class="form-label" for="oraclename">Requisitioned :</label>
+                      <input formControlName="requisitioned" type="text" [readonly]="true" pInputText>
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                     <div class="form-floating mb-2">
+                       <label class="form-label" for="lifespan">On Reserve :</label>
+                      <input formControlName="onReserve" [readonly]="true" pInputText />
+
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div formArrayName="supplier" *ngFor=" let info of supplierControl(); let i=index">
+                  <fieldset class="formline" [formGroupName]="i">
+                    <div class="row py-3 box-gryco">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="typeasset">Supplier :</label>
+                        <input formControlName="supplierName" [readonly]="true" pInputText />
+
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                       <div class="form-floating mb-2">
+                        <label class="form-label" for="lifespan">Supplier Price :</label>
+                        <input formControlName="supplierPrice" [readonly]="true" pInputText />
+                      </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+                </div>
+              </div>
+            </form>
+          </p-fieldset>
+          <div class="pt-4 box-gryco">
+            <fieldset class="row py-3" [ngClass]="{'disableDiv': true}">
+              <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+            </fieldset>
+          </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Edit" > -->
+          <add-part-catalog *ngIf="model != null" [addCatalogForm]="partCatalogForm" [model]="model" [modelInfo]="modelInfo" [inventory]="inventory" [supplier]="supplier"></add-part-catalog>
+          <div class="pt-4 box-gryco" >
+            <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+          </div>
+       <!--  </p-tabPanel>
+      </p-tabView> -->
+    </div>
+  </div>
+
+    <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+</div>

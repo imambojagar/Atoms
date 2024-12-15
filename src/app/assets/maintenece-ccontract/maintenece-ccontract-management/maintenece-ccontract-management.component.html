@@ -1,0 +1,549 @@
+<div #addMC [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Create Maintenance Contracts</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <p-toast></p-toast>
+  <div class="p-3 ngprime-custom form-scroller">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form class="form" [formGroup]="addMaintenanceForm" (ngSubmit)="addMaintenanceSubmit()">
+          <div class="row box-gryco">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <input formControlName="contractNumber" id="contractNumber" type="text" pInputText [required]="true"
+                  class="form-control" placeholder="Contract Num" /> <label for="contractNumber"
+                  class="required">Contract Num</label>
+                <small class="p-error block"></small>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <input id="contractName" formControlName="contractName" type="text" pInputText class="form-control"
+                  placeholder="Contract Name" /> <label for="contractName" class="required">Contract Name</label>
+              </div>
+            </div>
+          </div>
+
+          <p-tabView class="assets-tap px-0 navebarcardul">
+            <p-tabPanel header="Maintenance Contracts Info" leftIcon="pi pi-icon">
+              <div class="row box-gryco">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <p-dropdown [options]="contractType" optionLabel="name" optionValue="id" class="dropdown"
+                      formControlName="contractTypeId" placeholder="--Select--" [required]="true">
+                    </p-dropdown><label>Contract Type<span class="text-danger">*</span></label>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <p-dropdown placeholder="--Select--" formControlName="contractStatusId" [options]="contractStatus"
+                      class="dropdown" optionLabel="name" optionValue="id">
+                    </p-dropdown><label for="contractStatusId">Contract Status</label>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <p-dropdown [required]="true" [options]="cuurencyId" formControlName="currencyId" optionLabel="name"
+                      class="dropdown" optionValue="id" placeholder="--Select--">
+                    </p-dropdown><label>Currency<span class="text-danger">*</span></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row box-gryco mt-4">
+                <h4 class="ps-3">Contract Details</h4>
+                <hr>
+
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <p-calendar [showIcon]="true" [showOnFocus]="false" [required]="true" formControlName="startDate"
+                      dataType="string" dateFormat="yy-mm-dd"></p-calendar> <label>From Date</label>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <p-dropdown [required]="true" [options]="numberOfYears" (onChange)="setYears()" class="dropdown"
+                      (ngModelChange)="onSelectYears($event)" formControlName="numberOfYears" placeholder="--Select--">
+                    </p-dropdown><label for="noy">Number of Years<span class="text-danger">*</span></label>
+                    <input id="noy" type="text" [value]="test" pInputText [hidden]="true">
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-6 col-xxl-6 mb-3" formArrayName="mContractYearPrice"
+                  *ngFor="let year of priceArray.controls; index as i">
+                  <div [formGroupName]="i">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+
+
+                        <input [required]="true" [readOnly]="true" formControlName="price" id="price" type="number"
+                          class="form-control  icon-padding" pInputText /> <label for="price">Price of Year
+                          {{i+1}}</label>
+
+                        <input placeholder="years" formControlName="year" id="year" type="number" pInputText
+                          [hidden]="true" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <p-dropdown [required]="true" formControlName="paymentMethod" [options]="months" class="dropdown"
+                      placeholder="--Select--">
+                    </p-dropdown> <label> Payment Terms<span class="text-danger">*</span></label>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <input formControlName="correctVisits" id="visits" type="text" pInputText
+                      class="form-control  icon-padding" /> <label for="visits">Correct Visits</label>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <textarea id="comment" formControlName="comment" pInputTextarea
+                      class="form-control  icon-padding"></textarea> <label for="comment">Comment</label>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+                    <label>Asset</label>
+                    <button pButton icon="pi pi-external-link" class="lookup-btn" type="button" (click)="show()"
+                      class="btn btn-blue text-white form-button border-r10 float-end mx-4" label="Add Asset"></button>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div formArrayName="assetMContract" *ngFor="let asset of assetArray.controls; index as i" class="">
+                <div [formGroupName]="i" class="row box-gryco">
+
+
+                  <input [hidden]="true" formControlName="assetId" id="id" type="number" pInputText>
+
+                  <h4>Asset {{i+1}}</h4>
+                  <hr>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input [readOnly]="true" id="sn" type="text" formControlName="assetSN" pInputText
+                        class="form-control  icon-padding"> <label for="sn">S.N</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input [readOnly]="true" id="assetname" type="text" formControlName="assetName" pInputText
+                        class="form-control  icon-padding"> <label for="assetname">Asset Number</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input [readOnly]="true" type="text" formControlName="department" pInputText
+                        class="form-control  icon-padding"> <label>Department</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input [readOnly]="true" type="text" formControlName="manufacturerName" pInputText
+                        class="form-control  icon-padding"> <label>Manufacturer</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input [readOnly]="true" type="text" formControlName="modelName" pInputText
+                        class="form-control  icon-padding"> <label>Model</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input [readOnly]="true" type="text" formControlName="site" pInputText
+                        class="form-control  icon-padding"> <label>Site</label>
+                    </div>
+                  </div>
+
+                  <div *ngIf="test" formArrayName="mContractAssetPrices">
+                    <div *ngFor="let year of mContractAssetPrices(i).controls; index as j" [formGroupName]="j">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+
+                          <input formControlName="price" min="0" oninput="validity.valid||(value='');"
+                            (ngModelChange)="displayTotal()" id="annual" type="number" pInputText [required]="true"
+                            class="form-control  icon-padding"> <label for="annual">Price {{j+1}}<span
+                              class="text-danger">*</span></label>
+                          <input formControlName="year" type="hidden" pInputText>
+                          <small class="text-primary">Accepts positive numbers only</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <p-dropdown formControlName="ppmMonths" [options]="months" placeholder="--Select--"
+                          class="dropdown">
+                        </p-dropdown>
+                        <label>PPM Month</label>
+                      </div>
+                    </div>
+
+                    <div class="add-more-value-button col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <button pButton (click)="removeAsset(i)" type="button"
+                        class="p-button-rounded  mr-2 btn btn-danger" icon="pi pi-trash"></button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </p-tabPanel>
+            <p-tabPanel header="Maintenance" leftIcon="pi pi-icon">
+              <div class="" id="form">
+                <div class="row py-3">
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input id="spareCM" type="text" formControlName="sparePartsIncludedInCM" pInputText
+                        class="form-control  icon-padding" placeholder="pare Parts included in CM" /> <label
+                        class="form-label" for="spareCM">Spare Parts included in CM</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input formControlName="responseTime" id="time" type="number" min="0"
+                        oninput="validity.valid||(value='');" pInputText [required]="true"
+                        class="form-control  icon-padding" placeholder="Accepts positive numbers only" />
+                      <label class="form-label" for="time">Response Time(Hours)<span
+                          class="text-danger">*</span></label>
+                      <small class="text-primary">Accepts positive numbers only</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <p-dropdown placeholder="--Select--" [options]="typeOfContract" optionLabel="name"
+                        optionValue="id" formControlName="typeOfContractId" (onChange)="showField($event)">
+                      </p-dropdown> <label class="form-label">Type of Contract</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="supplierField">
+                    <span class="p-float-label">
+                      <p-autoComplete [delay]="1000" formControlName="supplierNameField" [suggestions]="suppliersList"
+                        field="suppliername" (completeMethod)="getSpplier($event)" optionValue="id"
+                        (onSelect)="onSelectSupplier($event)">
+                      </p-autoComplete> <label class="form-label" for="modelId">Supplier Name</label></span>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="clientField">
+                    <span class="p-float-label">
+                      <p-autoComplete [delay]="1000" formControlName="siteNameField" [suggestions]="sitesList"
+                        field="custName" (completeMethod)="getSite($event)" optionValue="id"
+                        (onSelect)="onSelectSite($event)">
+                      </p-autoComplete>
+                      <label class="form-label" for="modelId">Site</label>
+                    </span>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input formControlName="guaranteeUpTime" id="guarantee" type="text" pInputText [required]="true"
+                        placeholder="Guarantee Up time" class="form-control" />
+                      <label class="form-label" for="guarantee">Guarantee Up time<span
+                          class="text-danger">*</span></label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <p-dropdown [options]="autorenew" optionLabel="name" optionValue="value"
+                        formControlName="misUseCoverage" placeholder="None">
+                      </p-dropdown><label class="form-label" for="coverage">Misuse Coverage</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <p-dropdown [options]="autorenew" optionLabel="name" optionValue="value"
+                        formControlName="autoRenew" placeholder="None"> <label class="form-label">Auto renew</label>
+                      </p-dropdown>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input formControlName="ettr" id="ettr" type="number" min="0"
+                        oninput="validity.valid||(value='');" class="form-control" pInputText [required]="true"
+                        placeholder="ETTR(Hours)" />
+                      <label class="form-label" for="ettr">ETTR(Hours)<span class="text-danger">*</span></label>
+                      <small class="text-primary">Accepts positive numbers only</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input id="novisits" type="number" min="0" oninput="validity.valid||(value='');"
+                        class="form-control" placeholder="No. of Corrective Visits"
+                        formControlName="noOfCorrectiveVisits" pInputText />
+                      <label class="form-label" for="novisits">No. of Corrective Visits</label>
+                      <small class="text-primary">Accepts positive numbers only</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input id="sparePM" type="text" formControlName="sparePartsIncludedInPM" pInputText
+                        class="form-control" placeholder="Spare Parts included in PM" />
+                      <label class="form-label" for="sparePM">Spare Parts included in PM</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input id="max" type="number" min="0" oninput="validity.valid||(value='');" class="form-control"
+                        placeholder="Maximum System Failures" formControlName="maximumSystemFailures" pInputText />
+                      <label class="form-label" for="max">Maximum System Failures</label>
+                      <small class="text-primary">Accepts positive numbers only</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input id="labor" type="number" min="0" oninput="validity.valid||(value='');" class="form-control"
+                        placeholder="Labor Hourly price" formControlName="laborHourlyPrice" pInputText />
+                      <label class="form-label" for="labor">Labor Hourly price</label>
+                      <small class="text-primary">Accepts positive numbers only</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input formControlName="excludedParts" type="text" pInputText class="form-control"
+                        placeholder="List of excluded parts" />
+                      <label class="form-label">List of excluded parts</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <label class="form-label" for="quote">Quote reference number</label>
+                      <input formControlName="quoteReferenceNumber" id="quote" type="text" pInputText />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <input formControlName="purchaseOrder" id="purchase" type="text" pInputText class="form-control"
+                        placeholder="Purchase order" />
+                      <label class="form-label" for="purchase">Purchase order</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <textarea id="included" formControlName="includeServices" pInputTextarea class="form-control"
+                        placeholder="Included services"></textarea><label class="form-label" for="included">Included
+                        services</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                    <div class="form-floating mb-2">
+                      <textarea id="excluded" formControlName="excludeServices" pInputTextarea class="form-control"
+                        placeholder="Excluded services"></textarea><label class="form-label" for="excluded">Excluded
+                        services</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Vendor Operation Times" leftIcon="pi pi-icon">
+              <div class="radio-padding radio-padding-display d-flex radio-state gap-3">
+                <div *ngFor="let category of categories" class="p-field-checkbox d-flex gap-2">
+                  <span class="p-float-label">
+                    <p-radioButton [inputId]="category.key" name="checkedOption" [value]="category"
+                      formControlName="checkedOption" (onClick)="operationEvent($event)"></p-radioButton>
+                    <label [for]="category.key">{{category.name}}</label></span>
+                </div>
+              </div>
+
+              <div *ngIf="first" class="row py-3" formArrayName="vendorOperationTimes">
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-12" [formGroupName]="i"
+                  *ngFor="let op of operationArray.controls; index as i">
+                  <div>
+                    <input class="active" type="checkbox" formControlName="active" (ngModelChange)="eventCheck($event)">
+                    <label for="active">
+                      <h2 class="look">{{days[i]}}</h2>
+                    </label>
+                  </div>
+                  <div class="from-to-display" [hidden]="!operationArray.at(i).get('active')?.value || is24Hrs">
+                    <p>from</p>
+                    <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="fromTime" [timeOnly]="true"
+                      hourFormat="12" inputId="timeonly"></p-calendar>
+                    <p>to</p>
+                    <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="toTime" [timeOnly]="true"
+                      hourFormat="12" inputId="timeonly"></p-calendar>
+                  </div>
+                </div>
+              </div>
+            </p-tabPanel>
+            <!--  -->
+
+          </p-tabView>
+          <div class="fixed-bottom">
+            <div class="row">
+              <div class="col-12">
+                <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                  (click)="addMaintenanceSubmit()">{{'Save'}}</button>
+                <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{'Cancel'| tr:PAGE_TITLE| translate}}</button> -->
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div #addMC2 [ngClass]="showmodal2 ? 'show' : ''"
+    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+    role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">Search Maintenence Contract</h1>
+      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+    </div>
+    <div class="p-3">
+      <div class="row">
+        <form [formGroup]="assetSearchForm">
+          <div class="row py-3 box-gryco">
+            <div class="col-md-3" *ngIf="false">
+
+              <p-dropdown [options]="AssetGroups" optionLabel="name" formControlName="assetGroup" [hidden]="true"
+                class="dropdown" placeholder="select"></p-dropdown> <label class="form-label">Asset Group</label>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" [suggestions]="manufacts" field="taxonomyName" dataKey="id"
+                  (completeMethod)="selectManufacturer($event)" (onSelect)="bindManufacturer($event)"
+                  formControlName="manufacturer"></p-autoComplete> <label class="form-label">Manufacturer</label></span>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" [suggestions]="serialNosList" field="assetSerialNo" dataKey="id"
+                  (completeMethod)="selectSN($event)" (onSelect)="bindSN($event)" [minLength]="1"
+                  formControlName="serialNo"></p-autoComplete>
+                <label class="form-label">Asset Serial Number</label>
+              </span>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" [suggestions]="assetsNumberList" field="assetNumber" dataKey="id"
+                  (completeMethod)="selectAssetNumber($event)" (onSelect)="bindAssetNumber($event)" [minLength]="1"
+                  formControlName="assetNo"></p-autoComplete>
+                <label class="form-label">Asset Number</label>
+              </span>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" [suggestions]="assetNames" field="modelDefinition.assetName"
+                  formControlName="assetName" (completeMethod)="selectAssetName($event)"
+                  (onSelect)="bindAssetName($event)"></p-autoComplete>
+                <label class="form-label">Asset Name</label></span>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="atoms-workorder">
+      <div class="row">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="m-2 qipsa-content-bg">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+              <p-toast></p-toast>
+              <div class="main">
+                <div class="container-fluid">
+                  <div class="contents ngprime-custom">
+                    <div class="row">
+                      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="row mb-3 content-heading">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                            <div class="float-start main-heading">
+                              Equipments listing
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                        <div class="table-responsive table-bg">
+                          <p-table #dt [value]="allAssets" styleClass="p-datatable-striped p-datatable-gridlines"
+                            [loading]="loading2" [rows]="filter.pageSize" (onRowSelect)="onRowSelect($event)"
+                            (onRowUnselect)="onRowUnselect($event)" [lazy]="true" [rowHover]="false" dataKey="id"
+                            [totalRecords]="totalRows">
+
+                            <ng-template pTemplate="header">
+                              <tr>
+                                <th></th>
+                                <th>S.N</th>
+                                <th>Asset Name</th>
+                                <th>Manufacturer</th>
+                                <th>Model</th>
+                                <th>Site</th>
+                                <th>Asset Number</th>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-asset>
+                              <tr>
+                                <td>
+                                  <p-tableCheckbox [value]="asset"></p-tableCheckbox>
+                                </td>
+                                <td>{{asset.assetSerialNo}}</td>
+                                <td>{{asset.modelDefinition.assetName}}</td>
+                                <td>{{asset.modelDefinition == null?"": asset.modelDefinition.manufacturerName}}</td>
+                                <td>{{asset.modelDefinition == null?"": asset.modelDefinition.modelName}}</td>
+                                <td>{{asset.site == null?"": asset.site.custName}}</td>
+                                <td>{{asset.assetNumber}}</td>
+                              </tr>
+                            </ng-template>
+
+                          </p-table>
+                          <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows"
+                            (onPageChange)="paginate($event)" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                          <div class="fixed-bottom">
+                            <div class="row">
+                              <div class="col-12">
+                                <button class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                                  type="button" (click)="addSerialNumber()">Sumbit</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showmodal2" class="offcanvas-backdrop fade show" (click)="closeDialog()"></div>
+</div>

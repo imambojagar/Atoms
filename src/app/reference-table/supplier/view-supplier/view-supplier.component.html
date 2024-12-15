@@ -1,0 +1,274 @@
+<div
+  #drawer
+  [ngClass]="showViewModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Supplier</h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_view_modal()"
+    ></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+      <p-toast></p-toast>
+      <div
+        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form"
+      >
+          <form [formGroup]="supplierForm">
+            <div class="row form-scroller hide-x-axis mb-4">
+              <div class="col-12">
+                <h3 class="section-heading">Supplier Information</h3>
+              </div>
+              <div class="row box-gryco">
+                <div class="row">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Supplier Name" }} :
+                      <span class="viewspan-text">{{
+                        supplierForm.get("suppliername")?.value
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Supplier Code" }} :
+                      <span class="viewspan-text">{{
+                        supplierForm.get("code")?.value
+                      }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <div formArrayName="suppTCodes">
+                      <div
+                        *ngFor="let code of suppTCodesControl(); let i = index"
+                        [formGroupName]="i"
+                      >
+                        <p class="viewp-text">
+                          {{ codeNames[i] }} :
+                          <span class="viewspan-text">{{
+                            supplierForm
+                              .get("suppTCodes")
+                              ?.value.at(i)
+                              ?.get("codeValue")?.value
+                          }}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Supplier Website" }} :
+                      <span class="viewspan-text">{{
+                        supplierForm.get("website")?.value
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Supplier Email" }} :
+                      <span class="viewspan-text">{{
+                        supplierForm.get("email")?.value
+                      }}</span>
+                    </p>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Supplier Status" }} :
+                      <span class="viewspan-text">{{
+                        supplierForm.get("suppStatusId")?.value
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Supplier City" }} :
+                      <span class="viewspan-text">{{
+                        supplierForm.get("cityId")?.value
+                      }}</span>
+                    </p>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Zip Code" }} :
+                      <span class="viewspan-text">{{
+                        supplierForm.get("zipcode")?.value
+                      }}</span>
+                    </p>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Comment" }} :
+                      <span class="viewspan-text">{{
+                        supplierForm.get("comment")?.value
+                      }}</span>
+                    </p>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Attachment" }} :
+                      <span class="viewspan-text">{{ attachmentName }}</span>
+                    </p>
+                  </div>
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 add-more-value-div my-1"
+                    formArrayName="addresses"
+                  >
+                    <p class="viewp-text">
+                      {{ "Address" }} :
+                      <span class="viewspan-text">
+                        <span *ngFor="let address of addr; let last = last">
+                          {{ address.address }}<span *ngIf="!last">, </span>
+                        </span>
+                      </span>
+                    </p>
+                  </div>
+
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 add-more-value-div"
+                    formArrayName="faxes"
+                  >
+                    <p class="viewp-text">
+                      {{ "Fax" }} :
+                      <span class="viewspan-text">
+                        <span *ngFor="let fax of fax; let last = last">
+                          {{ fax.fax }}<span *ngIf="!last">, </span>
+                        </span>
+                      </span>
+                    </p>
+                  </div>
+
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 add-more-value-div"
+                    formArrayName="telephones"
+                  >
+                  <p class="viewp-text">
+                    {{ "Telephone" }} :
+                    <span class="viewspan-text">
+                      <span *ngFor="let tele of telephone; let last = last">
+                        {{ tele.telephone }}<span *ngIf="!last">, </span>
+                      </span>
+                    </span>
+                  </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mt-4">
+                <h3 class="section-heading">Supplier Contacts</h3>
+              </div>
+              <div class="row box-gryco">
+                <div formArrayName="suppPersons">
+                  <div class="">
+                    <div *ngFor="let person of personsControl(); let i = index">
+                      <fieldset class="formline2 supplier-prson">
+                        <dl
+                          *ngFor="let person of persons"
+                          class="display-block-add-more add-more-value-border"
+                        >
+                          <div class="row">
+                            <div class="col-6">
+                              <p class="viewp-text">
+                                {{ "Engineer Supplier Name" }} :
+                                <span class="viewspan-text">{{
+                                  person.personName
+                                }}</span>
+                              </p>
+                            </div>
+                            <div class="col-6">
+                              <p class="viewp-text">
+                                {{ "Role" }} :
+                                <span class="viewspan-text">{{
+                                  person.personRoleName
+                                }}</span>
+                              </p>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-6">
+                              <p class="viewp-text">
+                                {{ "Contact" }} :
+                                <span class="viewspan-text">{{
+                                  person.contact
+                                }}</span>
+                              </p>
+                            </div>
+                            <div class="col-6">
+                              <p class="viewp-text">
+                                {{ "Email" }} :
+                                <span class="viewspan-text">{{
+                                  person.email
+                                }}</span>
+                              </p>
+                            </div>
+                          </div>
+                        </dl>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+                <div class="row py-3" [ngClass]="{ disableDiv: true }">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Created ON" }} :
+                      <span class="viewspan-text" *ngIf="createdOn != null">{{
+                        createdOn | date : "medium"
+                      }}</span
+                      ><span *ngIf="createdOn == null">None</span>
+                    </p>
+                  </div>
+
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <p class="viewp-text">
+                      {{ "Modified ON" }} :
+                      <span class="viewspan-text" *ngIf="modifiedOn != null">{{
+                        modifiedOn | date : "medium"
+                      }}</span
+                      ><span *ngIf="modifiedOn == null">None</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+</div>

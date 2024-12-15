@@ -1,0 +1,30 @@
+:host {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.outer {
+  width: 100%;
+  height: 425px;
+  white-space: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.div1 {
+  width: 25%;
+  background-color: white;
+  float: none;
+  height: 100%;
+  margin: 0 0.25%;
+  display: inline-block;
+  zoom: 1;
+}
+.stiJsViewerForm {
+  z-index: 1000 !important;
+  position: relative;
+}

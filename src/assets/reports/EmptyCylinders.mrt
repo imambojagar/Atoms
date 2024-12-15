@@ -1,0 +1,1591 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <FullCylinder Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>FullCylinder</Alias>
+        <HeadersString />
+        <Key />
+        <Name>FullCylinder</Name>
+        <PathData>D:\Reports Schema\FullCylinder.json</PathData>
+      </FullCylinder>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="22">
+          <value>id,System.Decimal</value>
+          <value>o2KTypeEmpty,System.Decimal</value>
+          <value>o2MTypeEmpty,System.Decimal</value>
+          <value>o2ETypeEmpty,System.Decimal</value>
+          <value>o2DTypeEmpty,System.Decimal</value>
+          <value>makTypeEmpty,System.Decimal</value>
+          <value>maeTypeEmpty,System.Decimal</value>
+          <value>n2OKTypeEmpty,System.Decimal</value>
+          <value>n2OETypeEmpty,System.Decimal</value>
+          <value>cO2ETypeEmpty,System.Decimal</value>
+          <value>cO2KTypeEmpty,System.Decimal</value>
+          <value>mixtureMTypeEmpty,System.Decimal</value>
+          <value>n2KTypeEmpty,System.Decimal</value>
+          <value>pftMixEmpty,System.Decimal</value>
+          <value>pftHeliumEmpty,System.Decimal</value>
+          <value>liquidNitrogenLarge121LEmpty,System.Decimal</value>
+          <value>liquidNitrogenMedium50LEmpty,System.Decimal</value>
+          <value>liquidNitrogenSmall30LEmpty,System.Decimal</value>
+          <value>nitricoxidE11PPM,System.Decimal</value>
+          <value>nitricoxidE25PPM,System.Decimal</value>
+          <value>siteId,System.Decimal</value>
+          <value>siteName,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>f6d728b7a7ac4cdb9c8dba395bef5ffa</Key>
+        <Name>root</Name>
+        <NameInSource>FullCylinder.root</NameInSource>
+      </root>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <UserFunctions isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>5d8cd621b0af40e288e27700f9fa3bcd</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>All;[31:73:125];2;Solid;True;4;Black</Border>
+      <Brush>[255:255:255]</Brush>
+      <Components isList="true" count="2">
+        <Headerroot Ref="5" type="HeaderBand" isKey="true">
+          <Border>Left, Right;[0:0:0];1;Solid;False;4;Black;True</Border>
+          <Brush>[181:223:255]</Brush>
+          <ClientRectangle>0,0.2,16.22,0.5</ClientRectangle>
+          <Components isList="true" count="19">
+            <Headerroot_siteName Ref="6" type="Text" isKey="true">
+              <Border>Top, Left, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>0,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_siteName</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Site</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_siteName>
+            <Headerroot_o2KTypeEmpty Ref="7" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>0.5,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_o2KTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>O2(K)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_o2KTypeEmpty>
+            <Headerroot_o2MTypeEmpty Ref="8" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>1,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_o2MTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>O2(M)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_o2MTypeEmpty>
+            <Headerroot_o2ETypeEmpty Ref="9" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>1.5,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_o2ETypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>O2(E)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_o2ETypeEmpty>
+            <Headerroot_o2DTypeEmpty Ref="10" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>2,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_o2DTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>O2(D)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_o2DTypeEmpty>
+            <Headerroot_makTypeEmpty Ref="11" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>2.5,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_makTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>MA(k)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_makTypeEmpty>
+            <Headerroot_maeTypeEmpty Ref="12" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>3,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_maeTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>MA(E)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_maeTypeEmpty>
+            <Headerroot_n2OKTypeEmpty Ref="13" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>3.5,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_n2OKTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>N2O(K)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_n2OKTypeEmpty>
+            <Headerroot_n2OETypeEmpty Ref="14" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>4,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_n2OETypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>N2O(E)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_n2OETypeEmpty>
+            <Headerroot_cO2ETypeEmpty Ref="15" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>4.5,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_cO2ETypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>CO2(K)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_cO2ETypeEmpty>
+            <Headerroot_cO2KTypeEmpty Ref="16" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>5,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_cO2KTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>CO2(E)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_cO2KTypeEmpty>
+            <Headerroot_n2KTypeEmpty Ref="17" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>5.5,0,0.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_n2KTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>N2(K)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_n2KTypeEmpty>
+            <Headerroot_pftMixEmpty Ref="18" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>6,0,0.9,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_pftMixEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>PFT Mix</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_pftMixEmpty>
+            <Headerroot_pftHeliumEmpty Ref="19" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>6.9,0,1.1,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_pftHeliumEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>PFT HE</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_pftHeliumEmpty>
+            <Headerroot_liquidNitrogenLarge121LEmpty Ref="20" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>9.5,0,1.4,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_liquidNitrogenLarge121LEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>L-N2(121L)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_liquidNitrogenLarge121LEmpty>
+            <Headerroot_liquidNitrogenMedium50LEmpty Ref="21" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>8,0,1.5,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_liquidNitrogenMedium50LEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>L-N2(50L)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_liquidNitrogenMedium50LEmpty>
+            <Headerroot_liquidNitrogenSmall30LEmpty Ref="22" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>10.9,0,1.4,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_liquidNitrogenSmall30LEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>L-N2(30L)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_liquidNitrogenSmall30LEmpty>
+            <Headerroot_nitricoxidE11PPM Ref="23" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>12.3,0,1.1,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_nitricoxidE11PPM</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>ND(M)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_nitricoxidE11PPM>
+            <Headerroot_nitricoxidE25PPM Ref="24" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[181:223:255]</Brush>
+              <ClientRectangle>13.4,0,1.4,0.7</ClientRectangle>
+              <ComponentStyle>Style 2_Footer5</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headerroot_nitricoxidE25PPM</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>Entonox(D)</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headerroot_nitricoxidE25PPM>
+          </Components>
+          <ComponentStyle>Style 2_Footer5</ComponentStyle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>Headerroot</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </Headerroot>
+        <Dataroot Ref="25" type="DataBand" isKey="true">
+          <Border>Left, Right;[0:0:0];1;Solid;False;4;Black;True</Border>
+          <Brush>[143:185:237]</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,1.1,16.22,0.3</ClientRectangle>
+          <Components isList="true" count="19">
+            <Dataroot_siteName Ref="26" type="Text" isKey="true">
+              <Border>Top, Left, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_siteName</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.siteName}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_siteName>
+            <Dataroot_o2KTypeEmpty Ref="27" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.5,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_o2KTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.o2KTypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_o2KTypeEmpty>
+            <Dataroot_o2MTypeEmpty Ref="28" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_o2MTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.o2MTypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_o2MTypeEmpty>
+            <Dataroot_o2ETypeEmpty Ref="29" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1.5,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_o2ETypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.o2ETypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_o2ETypeEmpty>
+            <Dataroot_o2DTypeEmpty Ref="30" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_o2DTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.o2DTypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_o2DTypeEmpty>
+            <Dataroot_makTypeEmpty Ref="31" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.5,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_makTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.makTypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_makTypeEmpty>
+            <Dataroot_maeTypeEmpty Ref="32" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_maeTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.maeTypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_maeTypeEmpty>
+            <Dataroot_n2OKTypeEmpty Ref="33" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.5,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_n2OKTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.n2OKTypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_n2OKTypeEmpty>
+            <Dataroot_n2OETypeEmpty Ref="34" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_n2OETypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.n2OETypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_n2OETypeEmpty>
+            <Dataroot_cO2ETypeEmpty Ref="35" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.5,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_cO2ETypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.cO2ETypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_cO2ETypeEmpty>
+            <Dataroot_cO2KTypeEmpty Ref="36" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_cO2KTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.cO2KTypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_cO2KTypeEmpty>
+            <Dataroot_n2KTypeEmpty Ref="37" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.5,0,0.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_n2KTypeEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.n2KTypeEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_n2KTypeEmpty>
+            <Dataroot_pftMixEmpty Ref="38" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6,0,0.9,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_pftMixEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.pftMixEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_pftMixEmpty>
+            <Dataroot_pftHeliumEmpty Ref="39" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.9,0,1.1,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_pftHeliumEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.pftHeliumEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_pftHeliumEmpty>
+            <Dataroot_liquidNitrogenLarge121LEmpty Ref="40" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9.5,0,1.3,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_liquidNitrogenLarge121LEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.liquidNitrogenLarge121LEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_liquidNitrogenLarge121LEmpty>
+            <Dataroot_liquidNitrogenMedium50LEmpty Ref="41" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>8,0,1.5,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_liquidNitrogenMedium50LEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.liquidNitrogenMedium50LEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_liquidNitrogenMedium50LEmpty>
+            <Dataroot_liquidNitrogenSmall30LEmpty Ref="42" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>10.8,0,1.4,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_liquidNitrogenSmall30LEmpty</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.liquidNitrogenSmall30LEmpty}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_liquidNitrogenSmall30LEmpty>
+            <Dataroot_nitricoxidE11PPM Ref="43" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.2,0,1.2,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_nitricoxidE11PPM</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.nitricoxidE11PPM}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_nitricoxidE11PPM>
+            <Dataroot_nitricoxidE25PPM Ref="44" type="Text" isKey="true">
+              <Border>Top, Bottom;[0:0:0];1;Solid;False;4;Black;True</Border>
+              <Brush>[158:200:252]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>13.4,0,1.4,0.3</ClientRectangle>
+              <ComponentStyle>Style 2_Data3_Even Style</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataroot_nitricoxidE25PPM</Name>
+              <Page isRef="4" />
+              <Parent isRef="25" />
+              <Text>{root.nitricoxidE25PPM}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Dataroot_nitricoxidE25PPM>
+          </Components>
+          <ComponentStyle>Style 2_Data1_Even Style</ComponentStyle>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>root</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>Dataroot</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </Dataroot>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>6c2e299ea6664d3da266ed85a18c926b</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>11</PageHeight>
+      <PageWidth>17</PageWidth>
+      <PaperSize>Tabloid</PaperSize>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Mohamed Alaa</ReportAuthor>
+  <ReportChanged>3/12/2024 10:33:40 PM</ReportChanged>
+  <ReportCreated>3/6/2024 12:41:47 AM</ReportCreated>
+  <ReportFile>D:\Reports\EmptyCylinders.mrt</ReportFile>
+  <ReportGuid>cc211a453820402489ed2c628456d22a</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2024.1.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="41">
+    <Style_x0020_2_Report_Title1 Ref="45" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item45 Ref="46" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>ReportTitle</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item45>
+      </Conditions>
+      <Font>Arial,14,Bold</Font>
+      <Name>Style 2_Report_Title1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Report_Title1>
+    <Style_x0020_2_Report_Title2 Ref="47" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item47 Ref="48" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>ReportTitle</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item47>
+      </Conditions>
+      <Font>Arial,10,Bold</Font>
+      <Name>Style 2_Report_Title2</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Report_Title2>
+    <Style_x0020_2_Report_Summary1 Ref="49" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item49 Ref="50" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>ReportSummary</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item49>
+      </Conditions>
+      <Font>Arial,12,Bold</Font>
+      <Name>Style 2_Report_Summary1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Report_Summary1>
+    <Style_x0020_2_Report_Summary2 Ref="51" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item51 Ref="52" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>ReportSummary</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item51>
+      </Conditions>
+      <Font>Arial,10,Bold</Font>
+      <Name>Style 2_Report_Summary2</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Report_Summary2>
+    <Style_x0020_2_Page_Header Ref="53" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item53 Ref="54" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>PageHeader</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item53>
+      </Conditions>
+      <Font>Arial,10</Font>
+      <Name>Style 2_Page_Header</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Page_Header>
+    <Style_x0020_2_Page_Footer Ref="55" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item55 Ref="56" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>PageFooter</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item55>
+      </Conditions>
+      <Font>Arial,10</Font>
+      <Name>Style 2_Page_Footer</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Page_Footer>
+    <Style_x0020_2_Group_Header1 Ref="57" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item57 Ref="58" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupHeader</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item57>
+      </Conditions>
+      <Font>Arial,13,Bold</Font>
+      <Name>Style 2_Group_Header1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Header1>
+    <Style_x0020_2_Group_Header2 Ref="59" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item59 Ref="60" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupHeader</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item59>
+      </Conditions>
+      <Font>Arial,13,Bold</Font>
+      <Name>Style 2_Group_Header2</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Header2>
+    <Style_x0020_2_Group_Header3 Ref="61" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item61 Ref="62" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupHeader</Placement>
+          <PlacementNestedLevel>3</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item61>
+      </Conditions>
+      <Font>Arial,12,Bold</Font>
+      <Name>Style 2_Group_Header3</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Header3>
+    <Style_x0020_2_Group_Header4 Ref="63" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item63 Ref="64" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupHeader</Placement>
+          <PlacementNestedLevel>4</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item63>
+      </Conditions>
+      <Font>Arial,11,Bold</Font>
+      <Name>Style 2_Group_Header4</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Header4>
+    <Style_x0020_2_Group_Header5 Ref="65" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item65 Ref="66" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>GroupHeader</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item65>
+      </Conditions>
+      <Font>Arial,10,Bold</Font>
+      <Name>Style 2_Group_Header5</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Header5>
+    <Style_x0020_2_Group_Footer1 Ref="67" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item67 Ref="68" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupFooter</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item67>
+      </Conditions>
+      <Font>Arial,13,Bold</Font>
+      <Name>Style 2_Group_Footer1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Footer1>
+    <Style_x0020_2_Group_Footer2 Ref="69" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item69 Ref="70" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupFooter</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item69>
+      </Conditions>
+      <Font>Arial,13,Bold</Font>
+      <Name>Style 2_Group_Footer2</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Footer2>
+    <Style_x0020_2_Group_Footer3 Ref="71" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item71 Ref="72" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupFooter</Placement>
+          <PlacementNestedLevel>3</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item71>
+      </Conditions>
+      <Font>Arial,12,Bold</Font>
+      <Name>Style 2_Group_Footer3</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Footer3>
+    <Style_x0020_2_Group_Footer4 Ref="73" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item73 Ref="74" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupFooter</Placement>
+          <PlacementNestedLevel>4</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item73>
+      </Conditions>
+      <Font>Arial,11,Bold</Font>
+      <Name>Style 2_Group_Footer4</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Footer4>
+    <Style_x0020_2_Group_Footer5 Ref="75" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item75 Ref="76" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupFooter</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item75>
+      </Conditions>
+      <Font>Arial,10,Bold</Font>
+      <Name>Style 2_Group_Footer5</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[31:73:125]</TextBrush>
+    </Style_x0020_2_Group_Footer5>
+    <Style_x0020_2_Header1 Ref="77" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[31:73:125]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item77 Ref="78" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Header</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item77>
+      </Conditions>
+      <Font>Arial,8,Bold</Font>
+      <Name>Style 2_Header1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Header1>
+    <Style_x0020_2_Header2 Ref="79" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[61:103:155]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item79 Ref="80" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Header</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item79>
+      </Conditions>
+      <Font>Arial,8,Bold</Font>
+      <Name>Style 2_Header2</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Header2>
+    <Style_x0020_2_Header3 Ref="81" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[91:133:185]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item81 Ref="82" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Header</Placement>
+          <PlacementNestedLevel>3</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item81>
+      </Conditions>
+      <Font>Arial,8,Bold</Font>
+      <Name>Style 2_Header3</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Header3>
+    <Style_x0020_2_Header4 Ref="83" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[121:163:215]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item83 Ref="84" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Header</Placement>
+          <PlacementNestedLevel>4</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item83>
+      </Conditions>
+      <Font>Arial,8,Bold</Font>
+      <Name>Style 2_Header4</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Header4>
+    <Style_x0020_2_Header5 Ref="85" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[151:193:245]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item85 Ref="86" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>Header</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item85>
+      </Conditions>
+      <Font>Arial,8,Bold</Font>
+      <Name>Style 2_Header5</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Header5>
+    <Style_x0020_2_Data1 Ref="87" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item87 Ref="88" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Data</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item87>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data1>
+    <Style_x0020_2_Data1_Odd_x0020_Style Ref="89" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[255:255:255]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item89 Ref="90" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataOddStyle</Placement>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item89>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data1_Odd Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data1_Odd_x0020_Style>
+    <Style_x0020_2_Data1_Even_x0020_Style Ref="91" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[143:185:237]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item91 Ref="92" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataEvenStyle</Placement>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item91>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data1_Even Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data1_Even_x0020_Style>
+    <Style_x0020_2_Data2 Ref="93" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item93 Ref="94" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Data</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item93>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data2</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data2>
+    <Style_x0020_2_Data2_Odd_x0020_Style Ref="95" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[255:255:255]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item95 Ref="96" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataOddStyle</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item95>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data2_Odd Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data2_Odd_x0020_Style>
+    <Style_x0020_2_Data2_Even_x0020_Style Ref="97" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[152:194:246]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item97 Ref="98" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataEvenStyle</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item97>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data2_Even Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data2_Even_x0020_Style>
+    <Style_x0020_2_Data3 Ref="99" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item99 Ref="100" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Data</Placement>
+          <PlacementNestedLevel>3</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item99>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data3</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data3>
+    <Style_x0020_2_Data3_Odd_x0020_Style Ref="101" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[255:255:255]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item101 Ref="102" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataOddStyle</Placement>
+          <PlacementNestedLevel>3</PlacementNestedLevel>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item101>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data3_Odd Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data3_Odd_x0020_Style>
+    <Style_x0020_2_Data3_Even_x0020_Style Ref="103" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[158:200:252]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item103 Ref="104" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataEvenStyle</Placement>
+          <PlacementNestedLevel>3</PlacementNestedLevel>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item103>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data3_Even Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data3_Even_x0020_Style>
+    <Style_x0020_2_Data4 Ref="105" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item105 Ref="106" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Data</Placement>
+          <PlacementNestedLevel>4</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item105>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data4</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data4>
+    <Style_x0020_2_Data4_Odd_x0020_Style Ref="107" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[255:255:255]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item107 Ref="108" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataOddStyle</Placement>
+          <PlacementNestedLevel>4</PlacementNestedLevel>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item107>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data4_Odd Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data4_Odd_x0020_Style>
+    <Style_x0020_2_Data4_Even_x0020_Style Ref="109" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[158:200:252]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item109 Ref="110" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <Placement>DataEvenStyle</Placement>
+          <PlacementNestedLevel>4</PlacementNestedLevel>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item109>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data4_Even Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data4_Even_x0020_Style>
+    <Style_x0020_2_Data5 Ref="111" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item111 Ref="112" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>Data</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item111>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data5</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data5>
+    <Style_x0020_2_Data5_Odd_x0020_Style Ref="113" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[255:255:255]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item113 Ref="114" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>DataOddStyle</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item113>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data5_Odd Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data5_Odd_x0020_Style>
+    <Style_x0020_2_Data5_Even_x0020_Style Ref="115" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[158:200:252]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item115 Ref="116" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>DataEvenStyle</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item115>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Data5_Even Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Data5_Even_x0020_Style>
+    <Style_x0020_2_Footer1 Ref="117" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[61:103:155]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item117 Ref="118" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Footer</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item117>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Footer1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Footer1>
+    <Style_x0020_2_Footer2 Ref="119" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[91:133:185]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item119 Ref="120" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Footer</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item119>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Footer2</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Footer2>
+    <Style_x0020_2_Footer3 Ref="121" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[121:163:215]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item121 Ref="122" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Footer</Placement>
+          <PlacementNestedLevel>3</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item121>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Footer3</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Footer3>
+    <Style_x0020_2_Footer4 Ref="123" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[151:193:245]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item123 Ref="124" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Footer</Placement>
+          <PlacementNestedLevel>4</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item123>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Footer4</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Footer4>
+    <Style_x0020_2_Footer5 Ref="125" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[0:0:0];1;Solid;False;4;Black;True</Border>
+      <Brush>[181:223:255]</Brush>
+      <CollectionName>Style 2</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item125 Ref="126" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Footer</Placement>
+          <PlacementNestedLevel>5</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item125>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Style 2_Footer5</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Style_x0020_2_Footer5>
+  </Styles>
+</StiSerializer>

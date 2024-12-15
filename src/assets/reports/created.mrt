@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Created Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>Created</Alias>
+        <HeadersString />
+        <Key />
+        <Name>Created</Name>
+        <PathData>C:\Users\karthick.rajendran\Desktop\Report atoms\Created.json</PathData>
+      </Created>
+    </Databases>
+    <DataSources isList="true" count="4">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>siteName,System.String</value>
+          <value>engineers,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>e9a203f1a375446897c557ac9dd572b0</Key>
+        <Name>root</Name>
+        <NameInSource>Created.root</NameInSource>
+      </root>
+      <root_engineers Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_engineers</Alias>
+        <Columns isList="true" count="3">
+          <value>engineerName,System.String</value>
+          <value>status,System.String</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>f756345a4f214b0588f6f12c83b1e272</Key>
+        <Name>root_engineers</Name>
+        <NameInSource>Created.root_engineers</NameInSource>
+      </root_engineers>
+      <root_engineers_status Ref="5" type="DataTableSource" isKey="true">
+        <Alias>root_engineers_status</Alias>
+        <Columns isList="true" count="3">
+          <value>statusName,System.String</value>
+          <value>jobTypes,System.String</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>e4157da668a743db928f71cab2361123</Key>
+        <Name>root_engineers_status</Name>
+        <NameInSource>Created.root_engineers_status</NameInSource>
+      </root_engineers_status>
+      <root_engineers_status_jobTypes Ref="6" type="DataTableSource" isKey="true">
+        <Alias>root_engineers_status_jobTypes</Alias>
+        <Columns isList="true" count="3">
+          <value>jobType,System.String</value>
+          <value>jobTypeCount,System.Decimal</value>
+          <value>relationId,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>bbe23d8451394cbbb704474d1d1070fc</Key>
+        <Name>root_engineers_status_jobTypes</Name>
+        <NameInSource>Created.root_engineers_status_jobTypes</NameInSource>
+      </root_engineers_status_jobTypes>
+    </DataSources>
+    <Relations isList="true" count="3">
+      <root Ref="7" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>0f70022b84594c738509cb9a325848e9</Key>
+        <Name>root</Name>
+        <NameInSource>root_engineers</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>engineers</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+      <root_engineers Ref="8" type="DataRelation" isKey="true">
+        <Alias>root_engineers</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="5" />
+        <Dictionary isRef="1" />
+        <Key>c47a26c49494426785971385b85a6117</Key>
+        <Name>root_engineers</Name>
+        <NameInSource>root_engineers_status</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>status</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </root_engineers>
+      <root_engineers_status Ref="9" type="DataRelation" isKey="true">
+        <Alias>root_engineers_status</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="6" />
+        <Dictionary isRef="1" />
+        <Key>6ecfe59498e7486fa17cb74ec4fede72</Key>
+        <Name>root_engineers_status</Name>
+        <NameInSource>root_engineers_status_jobTypes</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>jobTypes</value>
+        </ParentColumns>
+        <ParentSource isRef="5" />
+      </root_engineers_status>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>b63eaeb627374f6283c345ccac25db53</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="10" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <PivotTable1 Ref="11" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,0,1200,520</ClientRectangle>
+          <Columns isList="true" count="2">
+            <Item11 Ref="12" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_engineers_status.statusName</Expression>
+              <Key>9f1e6f146b6848a4b22a3044553bb7dc</Key>
+              <Label>Status Name</Label>
+              <Size Ref="13" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="14" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item11>
+            <Item12 Ref="15" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotColumn" isKey="true">
+              <ExpandExpression />
+              <Expression>root_engineers_status_jobTypes.jobType</Expression>
+              <Key>a6b14b7809fe4a3a8275cd51c601fb52</Key>
+              <Label>JobType</Label>
+              <Size Ref="16" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="17" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item12>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>b7f520b0b4cb4547a79e780df4908dbf</Guid>
+          <Margin>3,3,3,3</Margin>
+          <Name>PivotTable1</Name>
+          <Page isRef="10" />
+          <Parent isRef="10" />
+          <PivotTableConditions isList="true" count="0" />
+          <Rows isList="true" count="2">
+            <Item13 Ref="18" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root.siteName</Expression>
+              <Key>7b22f6f783af4dbab4b2fb40288a05fc</Key>
+              <Label>Site Name</Label>
+              <Size Ref="19" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="20" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item13>
+            <Item14 Ref="21" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotRow" isKey="true">
+              <ExpandExpression />
+              <Expression>root_engineers.engineerName</Expression>
+              <Key>953d71b40c1a4687820e983bbc657e16</Key>
+              <Label>Engineer Name</Label>
+              <Size Ref="22" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TopN Ref="23" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+            </Item14>
+          </Rows>
+          <Summaries isList="true" count="1">
+            <Item15 Ref="24" type="Stimulsoft.Dashboard.Components.PivotTable.StiPivotSummary" isKey="true">
+              <Expression>Sum(root_engineers_status_jobTypes.jobTypeCount)</Expression>
+              <Key>1a91472d7acc419697de4654385f5668</Key>
+              <Label>jobTypeCount</Label>
+              <Size Ref="25" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item15>
+          </Summaries>
+          <Title Ref="26" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Created VS Closed Per CE</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+        </PivotTable1>
+      </Components>
+      <DashboardWatermark Ref="27" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>35d20abfdd9d4857b4b828bf2ad1d2d3</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>10/26/2023 4:09:17 PM</ReportChanged>
+  <ReportCreated>10/26/2023 3:59:47 PM</ReportCreated>
+  <ReportFile>C:\Users\karthick.rajendran\Desktop\Report atoms\created.mrt</ReportFile>
+  <ReportGuid>e8c20b4ba0c645b09121a73ca11a32ac</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

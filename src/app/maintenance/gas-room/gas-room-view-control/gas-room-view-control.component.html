@@ -1,0 +1,167 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <!-- <h1 *ngIf="inAddMode" class="offcanvas-title offcanvas-heading">Add Gas Room</h1>
+    <h1 *ngIf="inEditMode" class="offcanvas-title offcanvas-heading">Update Gas Room</h1> -->
+    <h1 class="offcanvas-title offcanvas-heading">View Gas Room</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+
+        <div class="mb-2 mb-xl-2">
+          <div class="pt-2">
+            <form [formGroup]="roomFg" (ngSubmit)="save()" *ngIf="model">
+              <div class="row mb-2">
+                <div class="row py-3 box-gryco" [ngClass]="{'disableDiv': inViewMode}">
+
+                  <!-- Room ID -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">Room ID:
+                      <span class="viewspan-text">{{roomFg.value.roomId}}</span>
+                    </p>
+                  </div>
+
+                  <!-- Site -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">Site:
+                      <span class="viewspan-text">{{roomFg.value.customerName}}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <p-tabView>
+                  <p-tabPanel header="Manifold" [ngClass]="{'disableDiv': inViewMode}">
+                    <div class="row py-3 box-gryco">
+                      <!-- Oxygen -->
+                      <div class="col-md-12 col-xl-4 col-xxl-3">
+                        <h4 class="section-heading">Oxygen</h4>
+                        <p class="viewp-text">O<sub>2</sub> Main OUT:
+                          <span class="viewspan-text">{{roomFg.value.o2ManifoldMainOut ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">O<sub>2</sub> R-Bank:
+                          <span class="viewspan-text">{{roomFg.value.o2ManifoldRightBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">O<sub>2</sub> L-Bank:
+                          <span class="viewspan-text">{{roomFg.value.o2ManifoldLeftBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">O<sub>2</sub> ER:
+                          <span class="viewspan-text">{{roomFg.value.o2ManifoldEmergency ? 'Yes' : 'No'}}</span>
+                        </p>
+                      </div>
+
+                      <!-- Nitrous Oxide -->
+                      <div class="col-md-12 col-xl-4 col-xxl-3">
+                        <h4 class="section-heading">N<sub>2</sub>O</h4>
+                        <p class="viewp-text">N<sub>2</sub>O Main OUT:
+                          <span class="viewspan-text">{{roomFg.value.n2OMainout ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">N<sub>2</sub>O-Right Bank:
+                          <span class="viewspan-text">{{roomFg.value.n2ORightBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">N<sub>2</sub>O-Left Bank:
+                          <span class="viewspan-text">{{roomFg.value.n2OLeftBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">N<sub>2</sub>O-Emergency Bank:
+                          <span class="viewspan-text">{{roomFg.value.n2OEmergencyBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                      </div>
+
+                      <!-- CO2 -->
+                      <div class="col-md-12 col-xl-4 col-xxl-3">
+                        <h4 class="section-heading">CO<sub>2</sub></h4>
+                        <p class="viewp-text">CO<sub>2</sub> Main OUT:
+                          <span class="viewspan-text">{{roomFg.value.cO2MainOut ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">CO<sub>2</sub> Right Bank:
+                          <span class="viewspan-text">{{roomFg.value.cO2RightBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">CO<sub>2</sub> Left Bank:
+                          <span class="viewspan-text">{{roomFg.value.cO2LeftBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">CO<sub>2</sub> Emergency Bank:
+                          <span class="viewspan-text">{{roomFg.value.cO2EmergencyBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </p-tabPanel>
+
+                  <!-- Medical Air -->
+                  <p-tabPanel header="Medical Air" [ngClass]="{'disableDiv': inViewMode}">
+                    <div class="row box-gryco mt-4">
+                      <div class="col-md-12 col-xl-12 col-xxl-12">
+                        <h4 class="section-heading">Medical Air</h4>
+                        <p class="viewp-text">Medical Air Main OUT:
+                          <span class="viewspan-text">{{roomFg.value.medicalAirMainOut ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">Medical Air Right Bank:
+                          <span class="viewspan-text">{{roomFg.value.medicalAirRightBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">Medical Air Left Bank:
+                          <span class="viewspan-text">{{roomFg.value.medicalAirLeftBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                        <p class="viewp-text">Medical Air Emergency Bank:
+                          <span class="viewspan-text">{{roomFg.value.medicalAirEmergencyBank ? 'Yes' : 'No'}}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </p-tabPanel>
+
+                  <!-- LOX -->
+                  <p-tabPanel header="LOX" [ngClass]="{'disableDiv': inViewMode}">
+                    <div class="row py-3 box-gryco">
+                      <p class="viewp-text">LOX1 Volume:
+                        <span class="viewspan-text">{{roomFg.value.loX1Volume ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">LOX1 Pressure:
+                        <span class="viewspan-text">{{roomFg.value.loX1Pressure ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">LOX2 Volume:
+                        <span class="viewspan-text">{{roomFg.value.loX2Volume ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">LOX2 Pressure:
+                        <span class="viewspan-text">{{roomFg.value.loX2Pressure ? 'Yes' : 'No'}}</span>
+                      </p>
+                    </div>
+                  </p-tabPanel>
+
+                  <!-- Plant Room -->
+                  <p-tabPanel header="Plant Room" [ngClass]="{'disableDiv': inViewMode}">
+                    <div class="row py-3 box-gryco plant-room-label">
+                      <p class="viewp-text">Compressors Check for any Unusual Noise:
+                        <span class="viewspan-text">{{roomFg.value.compressorsCheckforAnyUnusualNoise ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">Compressors Output Pressure (10-13 bar):
+                        <span class="viewspan-text">{{roomFg.value.compressorsOutputPressure ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">Compressors Medical Air Line Pressure (7-8 bar):
+                        <span class="viewspan-text">{{roomFg.value.compressorsMedicalAirLinePressure7To8Bar ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">Compressors Medical Air Line Pressure (4-5 bar):
+                        <span class="viewspan-text">{{roomFg.value.compressorsMedicalAirLinePressure4To5Bar ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">Dryers Check for Alarm/Unusual Noise:
+                        <span class="viewspan-text">{{roomFg.value.dryersCheckforAlarmOrUnusualNoise ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">Vacuum Pump Check Oil Leakage:
+                        <span class="viewspan-text">{{roomFg.value.vacuumPumpCheckOilLeakage ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">Vacuum Pump Check for any Unusual Noise:
+                        <span class="viewspan-text">{{roomFg.value.vacuumPumpCheckForAnyUnusualNoise ? 'Yes' : 'No'}}</span>
+                      </p>
+                      <p class="viewp-text">Vacuum Pump Pressure (-0.8 bar):
+                        <span class="viewspan-text">{{roomFg.value.vacuumPumpPressure0_8Bar ? 'Yes' : 'No'}}</span>
+                      </p>
+                    </div>
+                  </p-tabPanel>
+                </p-tabView>
+              </div>
+            </form>
+
+          </div>
+        </div>
+    </div>
+  </div>
+  <!--  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

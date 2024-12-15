@@ -1,0 +1,47 @@
+<form [formGroup]="assetFormService.Location_Category ">
+  <div class="row py-2">
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <span class="p-float-label">
+          <p-autoComplete [delay]="1000" class="" formControlName="site" [suggestions]="assetFormService.Sites"
+            field="custName" (completeMethod)="assetFormService.onSelectContractor($event)"
+            (onSelect)="assetFormService.onSelectContractor($event)"></p-autoComplete>
+          <label class="form-label required" for="site">Site</label></span>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-dropdown [options]="assetFormService.Assets_Buildings" optionLabel="name" formControlName="building"
+          class="dropdown" placeholder="select" (onChange)="assetFormService.onSelectBulding($event)"> </p-dropdown>
+        <label class="form-label">Assets Building</label>
+      </div>
+    </div>
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+
+        <p-dropdown [options]="assetFormService.Assets_Floors" optionLabel="name" formControlName="floor"
+          class="dropdown" placeholder="select" (onChange)="assetFormService.onSelectFloor($event)"></p-dropdown> <label
+          class="form-label">Assets Floor</label>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+
+        <p-dropdown [options]="assetFormService.Departments" formControlName="department" placeholder="Select"
+          optionLabel="name" class="dropdown" placeholder="select"
+          (onChange)="assetFormService.onSelectDepartment($event)"></p-dropdown> <label
+          class="form-label">Department</label>
+      </div>
+    </div>
+  </div>
+  <div class="row py-3">
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+
+        <p-dropdown [options]="assetFormService.Rooms" formControlName="room" placeholder="Select" optionLabel="name"
+          class="dropdown" placeholder="select"></p-dropdown> <label class="form-label">Room</label>
+      </div>
+    </div>
+  </div>
+</form>

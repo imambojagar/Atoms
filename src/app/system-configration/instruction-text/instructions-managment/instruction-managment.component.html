@@ -1,0 +1,159 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="custom-card ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+
+            <p-toast></p-toast>
+            <!-- <div class="card flex justify-content-center mb-5">
+              <p-breadcrumb [model]="items"></p-breadcrumb>
+            </div> -->
+
+            <!-- <p-dialog header="Add New Instruction Text" [(visible)]="displayAdd" [modal]="true" (onHide)="onHideDialog()"
+                [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false"
+                [contentStyle]="{ 'overflow-y': 'none !important' }"> -->
+            <div #drawer [ngClass]=" showmodal ? 'show' : ''"
+              class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1"
+              aria-modal="true" role="dialog">
+              <div class="offcanvas-header">
+                <h1 class="offcanvas-title offcanvas-heading"> Add New Instruction Text</h1>
+                <button type="button" class="btn-close" (click)="close_modal()"></button>
+              </div>
+
+              <p-toast></p-toast>
+              <div class="p-3">
+                <div class="row">
+                  <form [formGroup]="instructionText">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class=" mb-3">
+                        <!-- <textarea id="callComments" formControlName="callComments" placeholder="Comment"
+                      pInputTextarea></textarea>
+
+                    <label for="callComments">Comment</label> -->
+                        <span class="p-float-label">
+                          <textarea id="instrText" class="w-100" rows="10" formControlName="instrText"
+                            placeholder="Enter the instruction text" pInputTextarea></textarea>
+                          <label for="textarea">Instruction Text</label>
+                        </span>
+
+                      </div>
+                    </div>
+                  </form>
+                  <div class="fixed-bottom">
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                          (click)="onAdd()" styleClass="p-button-text">Save</button>
+                        <!-- <p-button icon="pi pi-times" (click)=" displayAdd=false" label="Cancel" styleClass="p-button-text"></p-button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div #drawer [ngClass]=" displayUpdate ? 'show' : ''"
+              class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1"
+              aria-modal="true" role="dialog">
+              <div class="offcanvas-header">
+                <h1 class="offcanvas-title offcanvas-heading"> Update Instruction Text </h1>
+                <button type="button" class="btn-close" (click)="close_modals()"></button>
+              </div>
+
+              <p-toast></p-toast>
+              <div class="p-3">
+                <div class="row">
+                  <form [formGroup]="instructionText">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class=" mb-3">
+                        <!-- <textarea id="callComments" formControlName="callComments" placeholder="Comment"
+                      pInputTextarea></textarea>
+
+                    <label for="callComments">Comment</label> -->
+                        <span class="p-float-label">
+                          <textarea id="instrText" class="w-100" formControlName="instrText" rows="10"
+                            placeholder="Enter the instruction text" pInputTextarea></textarea>
+                          <label for="textarea">Instruction Text</label>
+                        </span>
+
+                      </div>
+                    </div>
+                  </form>
+                  <div class="fixed-bottom">
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                          (click)="onUpdate()" styleClass="p-button-text">Save</button>
+                        <!-- <p-button icon="pi pi-times" (click)=" displayAdd=false" label="Cancel" styleClass="p-button-text"></p-button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p-table #dt [value]="instructionTextList" styleClass="p-datatable-striped p-datatable-gridlines"
+              [rows]="filter.pageSize" [tableStyle]="{}" [lazy]="true" [loading]="loading" [rowHover]="false"
+              dataKey="id" [totalRecords]="totalRows">
+              <ng-template pTemplate="caption">
+                <div class="row">
+                  <div class="float-start main-heading col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9 mb-3">
+                    Instruction Text List
+                  </div>
+
+
+                  <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-9 col-9 mb-3">
+
+                    <div class="form-floating  ">
+                      <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                        [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                        value="Type here">
+                      <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                      <label for="floatingName">Search</label>
+                      <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                    (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                    </div>
+                  </div>
+                  <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-3">
+                    <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                        (click)="openModal()">Add New
+                      </button></div>
+                  </div>
+
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Id</th>
+                  <th>Instruction Text</th>
+                  <th>Action</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-instruction>
+                <!-- {{instruction |json}} -->
+                <tr>
+                  <td>{{instruction.id}}</td>
+                  <td>{{instruction.text}}</td>
+                  <td class="pb-2">
+                    <button (click)="showUpdateDialog(instruction.text)" (click)="instructionId=instruction.id" pButton
+                      pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info me-2"></button>
+                    <button (click)="onDelete(instruction)" pButton pRipple icon="pi pi-trash"
+                      class="p-button-rounded p-button-danger"></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            </p-paginator>
+
+            <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+
+            <div *ngIf="showmodal" class="offcanvas-backdrop fade show" (click)="close_modal()"></div>
+            <div *ngIf="displayUpdate" class="offcanvas-backdrop fade show" (click)="close_modals()"></div>

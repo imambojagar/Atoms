@@ -1,0 +1,32 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 "
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading"> Service Request
+      Timeline
+    </h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="form-scroller viewtimeline">
+    <p-timeline [value]="events">
+      <ng-template pTemplate="content" let-event>
+        <p class="ptextte " [ngClass]="getStatusClass(event.status)">
+
+          {{ event.status }}
+        </p>
+        <div class="container">
+          <div class="row boxtimeline ">
+            <div class="col-4 itomdfca">
+              <small>{{ event.date | date: 'dd MMM, yyyy hh:mm a' }}</small>
+            </div>
+            <div class="col-8 itomdfca">
+              <p>{{event.step}}</p>
+            </div>
+
+          </div>
+        </div>
+
+
+      </ng-template>
+    </p-timeline>
+  </div>
+</div>

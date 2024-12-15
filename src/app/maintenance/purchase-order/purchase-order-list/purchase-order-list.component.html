@@ -1,0 +1,243 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class=" ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+
+            <p-toast></p-toast>
+            <!--beginbreadcrumb-->
+            <!-- <div class="card flex justify-content-center mb-5">
+              <p-breadcrumb [model]="items"></p-breadcrumb>
+            </div> -->
+            <!--endbreadcrumb-->
+
+            <!--begin Search Fields -->
+                <!-- <app-search-component (OnSearch)="search()" (OnReset)="reset()"> -->
+              <div #drawerFilter
+                  [ngClass]=" showmodal ? 'show' : ''"
+                  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                  <div class="offcanvas-header">
+                    <h1 class="offcanvas-title offcanvas-heading">Search Asset</h1>
+                    <button type="button" class="btn-close" (click)="close_modal()"></button>
+                  </div>
+                  <div class="p-3">
+                    <div class="row">
+                      <form [formGroup]="searchForm">
+
+                        <div class="row py-3 box-gryco">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                            <label class="">Purchase Order No</label >
+                            <input type="text" name="purchaseOrderNo" formControlName="purchaseOrderNo" [(ngModel)]="filter.purchaseOrderNo"  class="form-control form-control-lg form-control-solid" placeholder="Enter ..."/>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                            <label class="">Quotation No</label >
+                            <input type="text" name="quotationNo" formControlName="quotationNo" [(ngModel)]="filter.quotationNo"  class="form-control form-control-lg form-control-solid" placeholder="Enter ..."/>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                            <label class="">Call No</label >
+                            <input type="text" name="callNo" formControlName="callNo" [(ngModel)]="filter.callNo"  class="form-control form-control-lg form-control-solid" placeholder="Enter ..."/>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                            <label class="">Asset Serial No</label >
+                            <input type="text" name="assetSerialNo" formControlName="assetSerialNo" [(ngModel)]="filter.assetSerialNo"  class="form-control form-control-lg form-control-solid" placeholder="Enter ..."/>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="false">
+                            <div class="form-floating mb-2">
+                              <label class="">Asset Group</label>
+                              <p-dropdown placeholder="Search Asset Group" [options]="assetGroupsList" [hidden]="true"
+                              optionLabel="name" optionValue="id" [(ngModel)]="filter.assetGroup"></p-dropdown>
+                            </div>
+                          </div>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                  <div class="fixed-bottom">
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="search()">Apply Filter</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+                <!-- </app-search-component> -->
+            <!--end Search Fields-->
+
+              <!--begin::Card header-->
+              <!-- <div class="">
+                <div class="card-title">
+                  <span class="">Purchase Orders</span>
+                </div>
+                <div class="card-toolbar">
+                  <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+
+                      <button (click)="export()" pRipple class="btn btn-light-primary me-3">Export</button>
+
+                  </div>
+                </div>
+              </div> -->
+              <div class="main">
+                <div class="container-fluid">
+                  <div class="contents ngprime-custom">
+                    <div class="row">
+                      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="row  mb-3 content-heading">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                            <div class="float-start main-heading">
+                              Purchase Orders Table
+                            </div>
+                            <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                                  src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                            <div class="row float-end">
+                              <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                                <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                      src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                              </div>
+                              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                                <div class="form-floating float-start ">
+                                  <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                    [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                    value="Type here">
+                                  <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                                  <label for="floatingName">Search</label>
+                                  <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                              (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                                </div>
+                              </div>
+                              <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                                <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                    (click)="openModal()">Add </button></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      <p-table #dt
+                        [value]="perchaseOrder"
+                        [loading]="loading"
+                        [rows]="filter.pageSize"
+                        [lazy]="true"
+                        [totalRecords]="totalRows"
+                        [rowHover]="false"
+                        dataKey="id"
+                        [tableStyle]="{'min-width': '75rem'}"
+                          >
+                        <!-- <ng-template pTemplate="caption">
+                          <div class="flex align-items-center justify-content-between">
+                            Purchase Orders Table
+                            <span class="total_rows_data"> Total: {{ totalRows }} </span>
+                          </div>
+                        </ng-template> -->
+                        <!-- <ng-template pTemplate="caption">
+                          <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                              <h4 class="mt-3 inline main-heading">Purchase Orders</h4>
+                              <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="export()">Export <img src="navbar/export.svg" alt=""></a>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                                <div class="p-input-icon-left ">
+                                  <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                                    <img src="navbar/filter.svg" alt="">
+                                  </p-button>
+                                </div>
+                                <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                      <div class="form-floating float-end">
+                                        <input type="text"
+                                          pInputText
+                                          class="form-control border-0 header-search-background"
+                                          id="floatingSearchInput"
+                                          value="Type here"
+                                          placeholder="Type here" (click)="clearValue($event);">
+                                        <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                        <label for="floatingSearchInput">Search</label>
+                                      </div>
+                                </div>
+                                <div class="p-input-icon-left">
+                                  <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                    Add New
+                                  </button>
+                                </div>
+                            </div>
+                          </div>
+                        </ng-template> -->
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>No</th>
+                            <th>Quotation No</th>
+                            <th>Call No</th>
+                            <th class="val1">Asset No</th>
+                            <th class="val2">Date</th>
+                            <th class="val3">Call Last Situation</th>
+                            <th>Action</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-perchaseOrder>
+
+                          <tr>
+                            <!-- <td><a class="link-info" pRipple (click)="navToDetails(perchaseOrder,0)">{{perchaseOrder.purchaseOrderNo}}</a></td> -->
+                            <td>{{perchaseOrder.purchaseOrderNo}}</td>
+                            <td>{{perchaseOrder.quotationNo}}</td>
+                            <td class="val1">{{perchaseOrder.callNo }}</td>
+                            <td class="val2">{{perchaseOrder.assetNo}}</td>
+                            <td class="val3">{{perchaseOrder.purchaseOrderDate}}</td>
+                            <td class="val4">{{perchaseOrder.callLastSituationName}}</td>
+                            <td>
+                              <!-- <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                (click)="navToDetails(perchaseOrder,1)" canUpdate></button> -->
+                                <div class="d-flex">
+                                  <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                    (click)="navToView(perchaseOrder,0)" >
+                                    <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                  </button>
+                                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                    (click)="navToDetails(perchaseOrder,1)" canUpdate></button>
+
+                                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                                    (click)="deletePurchaseOrder(perchaseOrder)" canDelete></button>
+                                </div>
+
+                            </td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                      [showCurrentPageReport]="true"
+                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if(addTransferLoaded) {
+<app-purchase-order-management  [showmodal]="addTransferLoaded" [edit_asset_id]="purchase_order_edit_id" [indexs]="edit_index" [queryData]="queryData" (openModals)="openModal()"></app-purchase-order-management>
+}
+
+@if(purchase_order_edit_id && viewPurchaseTransferLoaded) {
+  <app-purchase-order-view  [showmodal]="viewPurchaseTransferLoaded" [edit_asset_id]="purchase_order_edit_id" [indexs]="edit_index" [queryData]="queryData" (openModals)="openViewModal()"></app-purchase-order-view>
+}
+<div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show"  (click)="openModal()" ></div>
+<div *ngIf="viewPurchaseTransferLoaded" class="offcanvas-backdrop fade show"  (click)="openViewModal()" ></div>
+<div *ngIf="showmodal" class="offcanvas-backdrop fade show" (click)="showmodal = false"></div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+

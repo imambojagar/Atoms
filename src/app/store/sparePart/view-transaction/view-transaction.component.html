@@ -1,0 +1,293 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class=" ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <p-toast></p-toast>
+            <!-- <div class="view-data-header">
+              <div class="card flex justify-content-center mb-5">
+                <p-breadcrumb [model]="items"></p-breadcrumb>
+              </div> -->
+              <!-- <app-search-component (OnSearch)="filterTransactions()" (OnReset)="reset()"> -->
+              <div #drawerFilter [ngClass]=" showmodal ? 'show' : ''"
+                class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                <div class="offcanvas-header">
+                  <h1 class="offcanvas-title offcanvas-heading">Search Transaction</h1>
+                  <button type="button" class="btn-close" (click)="close_modal()"></button>
+                </div>
+                <div class="p-3">
+                  <div class="row">
+                    <form [formGroup]="searchForm">
+                      <div class="row box-gryco">
+                        
+                        <!-- Asset Group (Hidden due to *ngIf="false") -->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="false">
+                          <div class="form-floating mb-2">
+                            <label  for="assetGroup">Asset Group</label>
+                            <p-dropdown [options]="AssetGroups" optionLabel="name" formControlName="assetGroup" [hidden]="true"
+                              class="dropdown" placeholder="Select"></p-dropdown>
+                          </div>
+                        </div>
+                    
+                        <!-- Title -->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <span class="p-float-label">
+                              <p-autoComplete inputId="title" [delay]="1000" [suggestions]="titles" (completeMethod)="getTitle($event)"
+                                field="title" (onSelect)="filter.title=$event.value.title" formControlName="title"></p-autoComplete>
+                              <label for="title">Title</label>
+                            </span>
+                          </div>
+                        </div>
+                    
+                        <!-- Asset Name -->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <span class="p-float-label">
+                              <p-autoComplete inputId="assetName" [delay]="1000" (completeMethod)="completeAssetNameService($event)"
+                                (onSelect)="filter.assetNDId=$event.value.id" [suggestions]="assetNames" field="assetname"
+                                formControlName="assetNDId"></p-autoComplete>
+                              <label for="assetName">Asset Name</label>
+                            </span>
+                          </div>
+                        </div>
+                    
+                        <!-- Asset Number -->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <span class="p-float-label">
+                              <p-autoComplete inputId="assetNumber" [delay]="1000" (completeMethod)="completeAssetNumberService($event)"
+                                (onSelect)="filter.assetId=$event.value.id" [suggestions]="assetNumbers" field="assetNumber"
+                                formControlName="assetId"></p-autoComplete>
+                              <label for="assetNumber">Asset Number</label>
+                            </span>
+                          </div>
+                        </div>
+                    
+                        <!-- Asset S.N -->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <span class="p-float-label">
+                              <p-autoComplete inputId="assetSN" [delay]="1000" (completeMethod)="completeAssetService($event)"
+                                (onSelect)="filter.assetId=$event.value.id" [suggestions]="assets" field="assetSerialNo"
+                                formControlName="assetId"></p-autoComplete>
+                              <label for="assetSN">Asset S.N</label>
+                            </span>
+                          </div>
+                        </div>
+                    
+                        <!-- Supplier -->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <span class="p-float-label">
+                              <p-autoComplete inputId="supplier" [delay]="1000" [suggestions]="suppliers" (completeMethod)="getSupplier($event)"
+                                [field]="'suppliername'" (onSelect)="onSelectSupplier($event)" formControlName="supplierId"></p-autoComplete>
+                              <label for="supplier">Supplier</label>
+                            </span>
+                          </div>
+                        </div>
+                    
+                        <!-- Site -->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <span class="p-float-label">
+                              <p-autoComplete inputId="site" [delay]="1000" [suggestions]="customers" (completeMethod)="getCustomers($event)"
+                                [field]="'custName'" (onSelect)="onSelectCustomer($event)" formControlName="customerId"></p-autoComplete>
+                              <label for="site">Site</label>
+                            </span>
+                          </div>
+                        </div>
+                    
+                        <!-- Transaction Status -->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <label for="transactionType">Transaction Status</label>
+                            <p-dropdown inputId="transactionType" (onChange)="filter.transactionType=$event.value" formControlName="transactionType"
+                              [options]="transactionStatusList" optionLabel="name" optionValue="id"
+                              placeholder="Search Transaction Status"></p-dropdown>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    
+                  </div>
+                  <div class="fixed-bottom">
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="filterTransactions()">Apply Filter</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- </app-search-component> -->
+              </div>
+
+              <div class="main">
+                <div class="container-fluid">
+                  <div class="contents ngprime-custom">
+                    <div class="row">
+                      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="row  mb-3 content-heading">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                            <div class="float-start main-heading">
+                              Transaction Table <span class="total_rows_data"> Total: {{ totalRows }} </span>
+                            </div>
+                            <div class="float-start export-icon mt-3"><a class="m-5" (click)="exportToExcel() ">Export <img
+                                  src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                            <div class="row float-end">
+                              <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                                <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                      src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                              </div>
+                              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                                <div class="form-floating float-start ">
+                                  <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                    [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                    value="Type here">
+                                  <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                                  <label for="floatingName">Search</label>
+                                  <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                              (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                                </div>
+                              </div>
+                              <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                                <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                    (click)="openModal()">Add </button></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <p-table #dt [value]="names" styleClass="p-datatable-striped p-datatable-gridlines" [loading]="loading"
+                          [rows]="filter.pageSize" [tableStyle]="{'min-width': '75rem'}" [lazy]="true" [totalRecords]="totalRows"
+                          [rowHover]="false" dataKey="id">
+                          <!-- <ng-template pTemplate="caption">
+                            <div class="flex align-items-center justify-content-between">
+                              <div class="card-header bg-primary">
+                                <div class="card-title">
+                                  <span class="text-white">
+                                    Transaction Table <br>
+                                    <span class="total_rows_data"> Total: {{ totalRows }} </span>
+                                  </span>
+                                </div>
+                                <div class="card-title table-btns">
+                                  <a [routerLink]="['/store/spare-part-transaction/add-control/deposit']" class="nav-link">
+                                    <button pButton pRipple label="Deposit" class="btn btn-light-primary me-2 mr-2" canAdd>
+                                    </button>
+                                  </a>
+                                  <a [routerLink]="['/store/spare-part-transaction/add-control/Withdrawal']" class="nav-link m-1">
+                                    <button pButton pRipple label="Dispach" class="btn btn-light-primary me-2 mr-2" canAdd>
+                                    </button>
+                                  </a>
+                                  <button pRipple (click)="exportToExcel()" class="btn btn-light-primary me-2">Export</button>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template> -->
+
+                          <!-- <ng-template pTemplate="caption">
+                            <div class="row">
+                              <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                <h4 class="mt-3 inline main-heading">Transaction Table  <span class="total_rows_data"> Total: {{ totalRows }} </span></h4>
+                                <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="exportToExcel()">Export <img src="navbar/export.svg" alt=""></a>
+                              </div>
+                              <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                                  <div class="p-input-icon-left">
+                                    <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                                      <img src="navbar/filter.svg" alt="">
+                                    </p-button>
+                                  </div>
+                                  <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                        <div class="form-floating float-end">
+                                          <input type="text"
+                                            pInputText
+                                            class="form-control border-0 header-search-background"
+                                            id="floatingSearchInput"
+                                            value="Type here"
+                                            placeholder="Type here">
+                                          <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                          <label for="floatingSearchInput">Search</label>
+                                        </div>
+                                  </div>
+                                  <div class="p-input-icon-left">
+                                    <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                      Deposit
+                                    </button>
+                                    <button class="btn btn-blue text-white border-0 p-4 float-end  me-3" (click)="openModal()" >
+                                      Dispach
+                                    </button>
+                                  </div>
+                              </div>
+                            </div>
+                          </ng-template> -->
+
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th>Title</th>
+                              <th class="val1">Transaction Status</th>
+                              <th class="val2">Supplier</th>
+                              <th class="val3">Site</th>
+                              <th class="val3">Asset Name</th>
+                              <th class="val3">Asset Number</th>
+                              <th class="val3">Asset Name</th>
+                              <th>Action</th>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-name>
+
+                            <tr>
+                              <!-- <td><a class="link-info" pRipple
+                                  (click)="navToDetails(name, getStatusById(name.statusId),0)">{{name.title}}</a></td> -->
+                              <td>{{name.title}}</td>
+                              <td class="val1">{{getStatusById(name.statusId)}}</td>
+                              <td class="val2">{{name.supplierName}}</td>
+                              <td class="val3">{{name.customerName}}</td>
+                              <td class="val3">{{name.assetName}}</td>
+                              <td class="val3">{{name.assetNumber}}</td>
+                              <td class="val3">{{name.assetName}}</td>
+                              <td>
+                                <div class="d-flex">
+                                 <!--  <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                   (click)="navToDetails(item,0)" >
+                                    <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                  </button> -->
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToDetails(name, getStatusById(name.statusId),1)" canUpdate></button>
+
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                  (click)="deleteRowdata(name)" canDelete></button>
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-template>
+
+
+                        </p-table>
+                        <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                          [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        </p-paginator>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <!-- <div class="saveButton">
+                  <button pButton type="button" label="Back" BackButton class="p-button-info col-lg-2"></button>
+                </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <add-transaction [showmodal]="addTransferLoaded" [edit_asset_id]="partTransactionModel" [deposite]="deposite" (openModals)="openModal()"></add-transaction>
+  <div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show"></div>
+  <div *ngIf="showmodal" class="offcanvas-backdrop fade show"></div>
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+
+

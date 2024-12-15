@@ -1,0 +1,102 @@
+<div
+  #drawerAdd
+  [ngClass]="showAddDepartment ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Create Department</h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <!-- ========== -->
+        <form [formGroup]="addDepartment">
+          <!-- <h1 class="offcanvas-title offcanvas-heading mb-4">
+            Department Information
+          </h1> -->
+          <!-- <div class="card-body pt-5"> -->
+          <div class="row mb-4">
+            <div class="row box-gryco">
+              <div
+                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <input
+                    id="departmentName"
+                    formControlName="departmentName"
+                    class="form-control"
+                    type="text"
+                    name="departmentName"
+                    placeholder="Department Name"
+                  />
+                  <label class="form-label" for="departmentName"
+                    >Department Name<small class="text-danger">*</small></label
+                  >
+                </div>
+              </div>
+              <div
+                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <input
+                    id="costCenterNumber"
+                    formControlName="costCenterNumber"
+                    class="form-control"
+                    type="text"
+                    name="costCenterNumber"
+                    placeholder="Cost Center Number"
+                  />
+                  <label class="form-label" for="departmentCode"
+                    >Cost Center Number</label
+                  >
+                </div>
+              </div>
+              <div
+                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+              >
+                <div class="form-floating mb-2">
+                  <input
+                    id="costCenterName"
+                    formControlName="costCenterName"
+                    class="form-control"
+                    type="text"
+                    name="costCenterName"
+                    placeholder="Cost Center Name"
+                  />
+                  <label class="form-label" for="departmentCode"
+                    >Cost Center Name</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+        </form>
+        <!-- ++++++++++ -->
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="addDepartmentSubmit()"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+  </div>
+</div>

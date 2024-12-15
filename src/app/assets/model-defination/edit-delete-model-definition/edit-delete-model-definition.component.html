@@ -1,0 +1,248 @@
+<div #drawer [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form form-scroller">
+        <h1 class="offcanvas-title offcanvas-heading ">
+          Edit Model Definition
+        </h1>
+        <p-toast></p-toast>
+        <form [formGroup]="addModelForm" (ngSubmit)="updateModelDefinition()">
+          <div class="row  box-gryco mb-2">
+            <!-- <p-tabView> -->
+            <!-- <p-tabPanel header="Model Information" leftIcon="pi pi-icon"> -->
+            <div class="col-12">
+              <h3 class="section-heading">Model Information</h3>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" [suggestions]="asset" field="assetname"
+                  (completeMethod)="searchAsset($event)" formControlName="assetNDAssetName"
+                  (onSelect)="onSelectAsset($event)">
+                </p-autoComplete> <label class="form-label" for="assetNDId">Asset Nomenclature<span
+                    class="text-danger">*</span></label>
+              </span>
+              <input id="assetNDId" (onSelect)="onSelectAsset($event)" type="text" formControlName="assetNDId"
+                [value]="assetId" style="display: none" />
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <input id="manufacture" type="text" formControlName="modelParentTaxonomyName" pInputText
+                  class="form-control" placeholder="Manufacturer" [readonly]="true" /> <label class="form-label"
+                  for="manufacture">Manufacturer<span class="text-danger">*</span></label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" formControlName="modelTaxonomyName" [suggestions]="model"
+                  field="modelName" (completeMethod)="searchModel($event)" (onSelect)="onSelectModel($event)">
+                </p-autoComplete> <label class="form-label" for="modelId">Model<span
+                    class="text-danger">*</span></label>
+              </span>
+              <input id="modelId" (onSelect)="onSelectModel($event)" type="text" formControlName="modelId"
+                [value]="modelId" style="display: none" class="p-inputtext" />
+            </div>
+
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="row d-flex">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 d-flex" *ngFor="
+                        let supplier of suppliersControls().controls;
+                        let i = index
+                      ">
+
+
+
+                  <span class="p-float-label col-9">
+                    <p-autoComplete [delay]="1000" class="input-field-add-more-value  rounded-0 my-2"
+                      [formControlName]="i" [suggestions]="suppliersList" field="suppliername"
+                      (completeMethod)="getSpplier($event)" (onSelect)="onSelectSupplier($event, i)"></p-autoComplete>
+                    <label>Supplier {{i+1}}</label>
+                  </span>
+                  <p-button class="col-2" icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"
+                    (click)="removeSuppliers(i)" [disabled]="i <= 0" canDelete />
+                </div>
+                <!-- @if(i==suppliersControls().controls.length) -->
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex">
+                  <button class="atoms-button-outline-dashed me-auto" (click)="addMoreSuppliers()">
+                    + Add more
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" formArrayName="modelDefTCodes">
+              <div class="row">
+
+                <div [formGroupName]="i" *ngFor="let code of modelDefTCodesControl(); index as i"
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <input formControlName="codeValue" type="text" pInputText class="form-control  icon-padding"
+                      placeholder="{{ codeNames[i] }}" />
+
+                    <label>{{ codeNames[i] }}</label>
+                    <input formControlName="modelDefinitionId" type="hidden" class="form-control  icon-padding" />
+                    <input formControlName="id" type="hidden" class="form-control  icon-padding" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <p-calendar formControlName="endOfSupportDate" [required]="true" [showIcon]="true"
+                  [showButtonBar]="true" [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar> <label
+                  class="form-label">End of Support Date</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <p-dropdown placeholder="--Select--" formControlName="countryOfOriginId" [options]="country"
+                  optionLabel="name" optionValue="id" class="dropdown"> <label class="form-label" class="pb-1">Country
+                    of
+                    Origin</label>
+                </p-dropdown>
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <textarea id="specialTools2" formControlName="specialTools" pInputTextarea class="form-control"
+                  placeholder="Special Tools"></textarea> <label class="form-label" for="specialTools2">Special
+                  Tools</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <textarea id="modelAccessories" formControlName="modelAccessories" pInputTextarea class="form-control"
+                  placeholder="Model Accessories"></textarea><label class="form-label" for="modelAccessories">Model
+                  Accessories</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <p-dropdown optionLabel="name" optionValue="id" [options]="frequency" formControlName="ppmFrequencyId"
+                  class="dropdown" placeholder="--Select--" (onChange)="checkList($event)"></p-dropdown> <label
+                  class="form-label">PPM Exempted<span class="text-danger">*</span></label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <textarea id="ppmChkLst" formControlName="ppmChkLst" pInputTextarea class="form-control"
+                  placeholder="PPM Checklist" [readonly]="check"></textarea><label class="form-label"
+                  for="ppmChkLst">PPM
+                  Checklist</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <label class="form-label" for="attatchmet">Picture of Model</label>
+              <app-attachments (onUploaded)="photoReady($event)" [attachments]="picNameApi">
+              </app-attachments>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <label class="form-label">Attachment</label>
+              <app-attachments formArrayName="attachments" (onUploaded)="attachmentReady($event)"
+                [attachments]="attachmentName">
+              </app-attachments>
+            </div>
+          </div>
+          <div class="row form-scrolle box-gryco ">
+            <div class="col-12">
+              <h3 class="section-heading">Related Defects</h3>
+            </div>
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div formArrayName="modelDefRelatedDefects">
+                <div class="row" [formGroupName]="i" *ngFor="let defect of relatedDefectsControl(); let i = index">
+
+                  @if(relatedDefectsControl().length>1)
+                  {<div class="col-12 d-flex justify-content-end">
+                    <button pButton type="button" (click)="removeDefects(i)"
+                      class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+                  </div>}
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <span class="p-float-label">
+                        <p-autoComplete [delay]="1000" [suggestions]="defectsList" field="name"
+                          (completeMethod)="searchDefects($event)" formControlName="defectId"
+                          (onSelect)="onSelectDefect($event, i)">
+                        </p-autoComplete> <label for="defectName">Defect Name</label>
+                      </span>
+
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input id="cause" formControlName="cause" type="text" pInputText class="form-control  "
+                        placeholder="Cause" /> <label for="cause">Cause</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input id="workPerformed" formControlName="workPerformed" type="text" pInputText
+                        class="form-control  " placeholder="Solution" /><label for="workPerformed">Solution</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input id="estimatedTime" formControlName="estimatedTime" type="number" pInputText
+                        class="form-control  " placeholder="Working Time" /><label for="estimatedTime">Working
+                        Time</label>
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    @if(i==relatedDefectsControl().length-1)
+                    { <button pButton type="button" (click)="addMoreDefects()"
+                      [disabled]="!relatedDefectsControl().at(i)?.valid" class=" plusbtn"><img
+                        src="assets/img/Vector.svg" alt="">
+                    </button><a [attr.disabled]="!relatedDefectsControl().at(i)?.valid ? true : null"
+                      [ngClass]="{ 'disabled-link': !relatedDefectsControl().at(i)?.valid }" (click)="addMoreDefects()"
+                      class="add-newtext">add new
+                      Defects</a> }
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- </p-tabPanel> -->
+            <!-- </p-tabView> -->
+          </div>
+          <div class="row box-gryco mt-4">
+            <app-transaction-history *ngIf="transactionHistory"
+              [transactionHistory]="transactionHistory"></app-transaction-history>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="fixed-bottom">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+          (click)="updateModelDefinition()" canUpdate>
+          Update
+        </button>
+      </div>
+    </div>
+    <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+  </div>
+</div>

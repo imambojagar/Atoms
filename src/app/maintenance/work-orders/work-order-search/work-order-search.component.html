@@ -1,0 +1,473 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class=" ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <!--beginbreadcrumb-->
+            <!-- <div class="card flex justify-content-center mb-5">
+              <p-breadcrumb [model]="items"></p-breadcrumb>
+            </div> -->
+            <!--endbreadcrumb-->
+          <div #drawerFilter  [ngClass]=" showmodal ? 'show' : ''"
+            class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+            <div class="offcanvas-header">
+              <h1 class="offcanvas-title offcanvas-heading">Search Workorder</h1>
+              <button type="button" class="btn-close" (click)="close_modal()"></button>
+            </div>
+              <div class="p-3">
+                <div class="row">
+                  <!--begin Search Fields -->
+                  <div class="mb-4 mb-xl-9">
+                    <!-- <div class="card-header">
+                      <div class="card-title">
+                        <h2 class="d-flex align-items-center text-white"> Search </h2>
+                      </div>
+                    </div> -->
+
+                    <div class="pt-2">
+
+                      <form [formGroup]="searchForm">
+                        <div class="row box-gryco py-3">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                               <label class="form-label ">Call Id</label>
+                            <p-autoComplete [delay]="1000"  placeholder="Call Id"
+                              formControlName="callId" [suggestions]="callId" field="callNo" (completeMethod)="selectCallId($event)"
+                              dataKey="id" (onSelect)="bindCallId($event )" (onClear)="clearCallId()"></p-autoComplete>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-floating mb-2">
+                                     <label class="form-label ">Asset Number</label>
+                            <p-autoComplete [delay]="1000"  placeholder="Asset Number"
+                              formControlName="assetNumber" [suggestions]="Asset_SNs" field="assetNumber"
+                              (completeMethod)="selectAssetNumber($event)" dataKey="id" (onSelect)="bindAssetNumber($event )"
+                              (onClear)="clearAssetNumber()"></p-autoComplete>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                               <label class="form-label ">Asset S.N</label>
+                            <p-autoComplete [delay]="1000"  placeholder="Asset S.N"
+                              formControlName="assetSerialNo" [suggestions]="Asset_SNs" field="assetSerialNo"
+                              (completeMethod)="selectAssetSN($event)" dataKey="id" (onSelect)="bindAssetSN($event )"
+                              (onClear)="clearAssetSN()"></p-autoComplete>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                               <label class="form-label ">Work Order No</label>
+                            <p-autoComplete [delay]="1000"  placeholder="Work Order No"
+                              formControlName="workOrderNo" [suggestions]="workOrderNo" field="workOrderNo"
+                              (completeMethod)="selectWorkOrderNo($event)" dataKey="id" (onSelect)="bindWorkOrderNo($event )"
+                              (onClear)="clearWorkOrderNo()"></p-autoComplete>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                               <label class="form-label ">Current Situation</label>
+                            <p-dropdown [options]="workOrderService.callslastSituationWO" optionLabel="name"
+                              formControlName="callslastSituationWO" class="dropdown" placeholder="select"></p-dropdown>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                               <label class="form-label ">Assgined Employee(s)</label>
+                            <div [formGroupName]="i" *ngFor="let assistantEmployee of assginedEmployeesControl(); let i =index">
+                              <p-multiSelect defaultLabel="Assgined Employee(s)" [options]="assginedEmployees"
+                                optionLabel="userName" [(ngModel)]="selectedAssginedEmployees" [filter]="false"
+                                [ngModelOptions]="{standalone: true}">
+                              </p-multiSelect>
+                            </div>
+                            </div>
+                          </div>
+                          <!-- <div class="col-md-3">
+                           <div class="form-floating mb-2">
+                               <label class="form-label ">Status</label>
+                            <div [formGroupName]="i" *ngFor="let s of statusControl(); let i =index">
+                              <p-multiSelect  defaultLabel="Status" [options]="workOrderService.statusWO"
+                                optionLabel="name" [(ngModel)]="selectedStatus" [filter]="false" [ngModelOptions]="{standalone: true}">
+                              </p-multiSelect>
+                            </div>
+                          </div> -->
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                               <label class="form-label ">Site</label>
+                            <p-autoComplete  [delay]="1000" placeholder="Site"
+                              formControlName="site" [suggestions]="sites" field="custName" (completeMethod)="onSelectSite($event)"
+                              dataKey="id" (onSelect)="bindSite($event )" (onClear)="clearSite()"></p-autoComplete>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                           <div class="form-floating mb-2">
+                               <label class="form-label ">Return Date Operator</label>
+                            <p-dropdown [options]="Operator_Dates" optionLabel="name" formControlName="visitDateSymbol" class="dropdown"
+                              ></p-dropdown>
+                          </div>
+                          </div>
+                          <ng-container
+                            *ngIf="(searchForm.get('visitDateSymbol')?.value==7)||(searchForm.get('visitDateSymbol')?.value==8) else elseTemp">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <div class="form-floating mb-2">
+                              <label class="form-label"> Return Date From</label>
+                              <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date"
+                                formControlName="visitDateFrom" dateFormat="yy-mm-dd" dataType="string">
+                              </p-calendar>
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <div class="form-floating mb-2">
+                              <label class="form-label">Return Date To</label>
+                              <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date"
+                                formControlName="visitDateTo" dateFormat="yy-mm-dd" dataType="string">
+                              </p-calendar>
+                            </div>
+                            </div>
+                          </ng-container>
+                          <ng-template #elseTemp>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <div class="form-floating mb-2">
+                              <label class="form-label">Return Date </label>
+                              <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date"
+                                formControlName="visitDateFrom" dateFormat="yy-mm-dd" dataType="string">
+                              </p-calendar>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="false">
+                            <div class="form-floating mb-2">
+                            <label class="form-label">Asset Group</label>
+                            <p-dropdown placeholder="Search Asset Group" [options]="assetGroupsList" [hidden]="true"
+                            optionLabel="name" optionValue="id" formControlName="assetGroup"></p-dropdown>
+                          </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- <div class="card-footer d-flex justify-content-end border-top py-6">
+                      <button type="button" class="btn btn-primary" (click)="searchWorkOrder()">Search</button>
+                      <button type="submit" class="btn btn-light btn-active-light-primary me-2" (click)="reset()" [disabled]="">Reset</button>
+                    </div> -->
+                  </div>
+                  <!--end Search Fields-->
+                  </div>
+
+                  <div class="fixed-bottom">
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="searchWorkOrder()">Apply Filter</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                  <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row  mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Work Order
+                        </div>
+                        <div class="float-start export-icon mt-3"><a class="m-5" (click)="exportWorkOrder() ">Export <img
+                              src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                        <div class="row float-end">
+                          <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                            <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                  src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                          </div>
+                          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                            <div class="form-floating float-start ">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here">
+                              <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                              <label for="floatingName">Search</label>
+                              <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                          (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                (click)="openModal()">Add </button></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p-table #dt
+                      [value]="workorder"
+                      [rows]="10"
+                      [paginator]="false"
+                      [globalFilterFields]= "tableConfig.tableHeaders"
+                      [(selection)]="selectedNames"
+                      [rowHover]="true"
+                      dataKey="id"
+                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                      [showCurrentPageReport]="true"
+                      sortMode="multiple"
+                      [rows]="searchFilter.pageSize"
+                      [lazy]="true"
+                      [scrollable]="true"
+                      [totalRecords]="totalRows"
+                      [tableStyle]="{width: 'max-content'}">
+
+                    <!-- <ng-template pTemplate="caption">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                          <h4 class="mt-3 inline main-heading">Work Order</h4>
+                          <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="exportWorkOrder()">Export <img src="navbar/export.svg" alt=""></a>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                            <div class="p-input-icon-left ">
+                              <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                                <img src="navbar/filter.svg" alt="">
+                              </p-button>
+                            </div>
+                            <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                  <div class="form-floating float-end">
+                                    <input type="text"
+                                      pInputText
+                                      class="form-control border-0 header-search-background"
+                                      id="floatingSearchInput"
+                                      value="Type here"
+                                      placeholder="Type here" (click)="clearValue($event);">
+                                    <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                    <label for="floatingSearchInput">Search</label>
+                                  </div>
+                            </div>
+                            <div class="p-input-icon-left">
+                              <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                Add New
+                              </button>
+                            </div>
+                        </div>
+                      </div>
+                    </ng-template> -->
+                    <ng-template pTemplate="header">
+                      <tr>
+                        @for(headers of tableConfig.tableHeaders; track headers) {
+                          @if(headers == 'Action') {
+                            <th class="sticky-header" alignFrozen="right" pFrozenColumn >{{headers}}</th>
+                          } @else {
+                            <th>{{headers}}</th>
+                          }
+                        }
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-workorder>
+
+                      <tr>
+                        <!-- <td><a class="link-info cursor-pointer" pRipple (click)="navToDetails(assets,0)">{{assets.id}}</a></td> -->
+
+                        <td>{{workorder.id}}</td>
+                        <td>{{workorder.callRequest.callNo}}</td>
+                        <td>{{workorder.workOrderNo}}</td>
+                        <td>{{workorder.visitDate==null ? '':  workorder.visitDate | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{workorder.assignedEmployee?.name}}</td>
+                        <td>{{workorder.callRequest.asset.assetNumber}}</td>
+                        <td>{{workorder.callRequest.asset.assetSerialNo}}</td>
+                        <td>{{workorder.callRequest.asset.modelDefinition.assetName}}</td>
+                        <td>{{workorder.callRequest.asset.modelDefinition.manufacturerName + '/' +workorder.callRequest.asset.modelDefinition.modelName}}</td>
+                        <td>{{workorder.callRequest.asset.site.custName }}</td>
+                        <td>{{workorder.calllastSituation?.name }}</td>
+                        <td>{{workorder.totalWorkingHours}}</td>
+                        <td>{{workorder.currentSituation?.name }}</td>
+                        <td>{{workorder.currentSituation?.value == 14 || workorder.currentSituation?.value == 10 ? "" : "Next Step"}}</td>
+
+
+                        <td class="val13">{{workorder.assetndcode}}</td>
+                        <td  class="sticky-header">
+                          <div class="d-flex">
+                            <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                              (click)="navToView(workorder,0)" >
+                              <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                            </button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                              (click)="editWorkOrder(workorder.id)" ></button>
+
+                          <!-- viewActionHistory(workorder.id) -->
+                          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                            (click)="deleteWorkorder(workorder)" ></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                    </p-table>
+                    <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+                    <!-- <app-table [tableData]="tableConfig" (paginate)="paginate($event)" (routeEvent)="route($event)"
+                      (editRow)="editWorkOrder($event)" (exportEvent)="exportWorkOrder()" [loading]="dataTableLoading"
+                      (viewEvent)="viewActionHistory($event)">
+                    </app-table> -->
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #drawerFilter  [ngClass]=" showDialog ? 'show' : ''"
+    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">Next Step </h1>
+      <button type="button" class="btn-close" (click)="close_modal()"></button>
+    </div>
+  <!-- <p-dialog header="Next Step" [(visible)]="showDialog" [modal]="true"
+      [style]="{width :'25vw',height:'60hw'}" [maximizable]="false" [draggable]="false" [resizable]="false"> -->
+
+
+    <div>
+      <button pButton type="button" label="Under repair-internal" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step1" (click)="clickStep(1)" ></button>
+    </div>
+      <div>
+        <button pButton type="button" label="Under repair-vendor" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step2" (click)="clickStep(2)" ></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Waiting for code" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step3"(click)="clickStep(3)" ></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Waiting for quotation" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step4" (click)="clickStep(4)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Waiting for vendor" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step5" (click)="clickStep(5)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Waiting for PR" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step6" (click)="clickStep(6)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Waiting for PO" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step7" (click)="clickStep(7)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Waiting for Delivery" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step8" (click)="clickStep(8)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Under observation" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step9" (click)="clickStep(9)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Asset to be retired" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step10" (click)="clickStep(10)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Duplicate" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step11" (click)="clickStep(11)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Part Installation" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step12" (click)="clickStep(12)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Equipment Installation" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step13" (click)="clickStep(13)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Fixed" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step14" (click)="clickStep(14)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Part Delivered" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step15" (click)="clickStep(15)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Waiting for IT" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step16" (click)="clickStep(16)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Under repair-vendor" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step17" (click)="clickStep(17)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Quotation" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step18" (click)="clickStep(18)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Purchase Request" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step19" (click)="clickStep(19)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Purchase Order" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step20" (click)="clickStep(20)"></button>
+      </div>
+      <div>
+        <button pButton type="button" label="Part Delivery" class="p-button-info col-md-12 col-xl-12 col-xxl-12" *ngIf="step21" (click)="clickStep(21)"></button>
+      </div>
+      <ng-template pTemplate="footer">
+
+          <p-button icon="pi pi-times" (click)="showDialog=false" label="Cancel" styleClass="p-button-text"></p-button>
+      </ng-template>
+ <!--  </p-dialog> -->
+</div>
+
+<div #drawerFilter  [ngClass]=" showActionHistoryDialog ? 'show' : ''"
+            class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">Action History</h1>
+      <button type="button" class="btn-close" (click)="closeActionDialog()"></button>
+    </div>
+    <!-- Action History -->
+    <!-- <p-dialog header="Action History" [(visible)]="showActionHistoryDialog" [modal]="true"
+              [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false"> -->
+
+        <div class="">
+          <p-table  #dt
+            [value]="actionHistoryList"
+            [rows]="filter.pageSize"
+            [tableStyle]="{}"
+            [lazy]="true"
+            [loading]="loading"
+            [rowHover]="false"
+            dataKey="id"
+            [tableStyle]="{width: 'max-content'}"
+            [totalRecords]="totalRows">
+            <ng-template pTemplate="caption">
+              <div class="flex align-items-center justify-content-between">
+                <div class="col-12">
+                  <div class="section-heading">
+                    <h4 class="">Action History Table of Work Order Number :  {{ WOnum }}  </h4>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <!-- <th>Work Order Number</th> -->
+                <th>Action Type</th>
+                <th>Call last Situation</th>
+                <th>Date</th>
+                <th>User Name</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-row>
+              <tr>
+                <!-- <td>{{row.workOrderNo}}</td> -->
+                <td>{{row.actionType}}</td>
+                <td>{{row.calllastSituation}}</td>
+                <td>{{row.dateTime | date: 'd MMMM y, h:mm a'}}</td>
+                <td>{{row.userName}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+        </div>
+
+    <!-- </p-dialog> -->
+</div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+
+@if(addTransferLoaded) {
+  <app-work-order-management [showmodal]="addTransferLoaded" [edit_asset_id]="work_order_edit_id" [edit_index]="editIndex" [querydata]="wororderPayload" (openModals)="openModal()"></app-work-order-management>
+}
+
+@if(work_order_edit_id && viewWorksTransferLoaded) {
+<app-work-order-view [showmodal]="viewWorksTransferLoaded" [edit_asset_id]="work_order_edit_id" [edit_index]="editIndex" [querydata]="wororderPayload" (openModals)="openViewModal()"></app-work-order-view>
+}
+
+<div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show" (click)="openModal()"></div>
+<div *ngIf="viewWorksTransferLoaded" class="offcanvas-backdrop fade show" (click)="openViewModal()" ></div>
+<div *ngIf="showmodal" class="offcanvas-backdrop fade show" (click)="showmodal = false" ></div>

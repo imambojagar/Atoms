@@ -1,0 +1,214 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="isAddMode">Create Gas Refill</h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="isEditMode">Edit Gas Refill</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <p-toast></p-toast>
+  <div class="p-3">
+    <div class="row">
+      <!--beginbreadcrumb-->
+      <!-- <div class="card flex justify-content-center ">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </div> -->
+      <!--endbreadcrumb-->
+      <!--begin Search Fields -->
+      <div class="mb-2 mb-xl-4" [ngClass]="{'disableDiv': hideButtonSave}">
+
+        <!-- <div class="">
+            <h2 class="d-flex align-items-center text-white" *ngIf="isAddMode">Create Gas Refill</h2>
+            <h2 class="d-flex align-items-center text-white" *ngIf="isViewMode">View Gas Refill</h2>
+            <h2 class="d-flex align-items-center text-white" *ngIf="isEditMode">Edit Gas Refill</h2>
+        </div> -->
+
+        <!-- <div class="card-header bg-primary">
+            <div class="card-title">
+              <h2 class="d-flex align-items-center text-white">Gas Refill Info</h2>
+            </div>
+          </div> -->
+
+          <form [formGroup]="gasRefillInfoForm">
+            <div class="form-scroller">
+              <div class="box-gryco">
+                <div class="row py-3">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2">
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Gas Refill No</label>
+                      <!-- <p-autoComplete placeholder="Please enter . . . " formControlName="gazRefillNo" field="gazRefillNo"
+                        [readonly]="true"></p-autoComplete> -->
+                      <input type="text" formControlName="gazRefillNo" name="gazRefillNo"
+                        class="form-control form-control-lg form-control-solid" readonly />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <h4 class="section-heading">Gas Refill Details</h4>
+                </div>
+                <div formArrayName="gazRefillDetails" [ngClass]="{'disableDiv': isViewMode}">
+                  <ng-container *ngFor="let contact of gazRefillDetails(); let i=index">
+                    <div class="d-flex align-items-end" [formGroupName]="i">
+                      <div class="row box-gryco">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': !(isNurse || isAdmin || isCallCenter)}">
+                          <div class="form-floating mb-2">
+                          <label class="form-label">Gas Types</label>
+                          <p-dropdown [options]="gasTypes" optionLabel="name" formControlName="gasType" class="dropdown"
+                            placeholder="select"></p-dropdown>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': !(isNurse || isAdmin || isCallCenter)}">
+                          <div class="form-floating mb-2">
+                          <label class="form-label">Cylinder Type</label>
+                          <p-dropdown [options]="cylinderTypes" optionLabel="name" formControlName="cylinderType" class="dropdown"
+                            placeholder="select"></p-dropdown>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': !(isNurse || isAdmin || isCallCenter)}">
+                          <div class="form-floating mb-2">
+                          <label class="form-label">Cylinder Size</label>
+                          <p-dropdown [options]="cylinderSizes" optionLabel="name" formControlName="cylinderSize" class="dropdown"
+                            placeholder="select"></p-dropdown>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': !(isNurse || isAdmin || isCallCenter)}">
+                          <div class="form-floating mb-2">
+                          <label class="form-label">Requested Qty</label>
+                          <p-inputNumber mode="decimal" formControlName="requestedQty" inputId="requestedQty">
+                          </p-inputNumber>
+                        </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " *ngIf="hideField=='false'"
+                        [ngClass]="{'disableDiv': (isNurse || isCallCenter)}">
+                          <label class="form-label">Deliverd Qty</label>
+                          <p-inputNumber mode="decimal" formControlName="deliverdQty" inputId="deliverdQty">
+                          </p-inputNumber>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+
+                <div class="row py-3">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " *ngIf="hideField=='false'"
+                    [ngClass]="{'disableDiv': (isNurse || isCallCenter)}">
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Expected Date</label>
+                      <p-calendar [showIcon]="true" [showOnFocus]="false"  styleClass="mb-1" formControlName="expectedDate" [showTime]="true" dataType="string" [minDate]="minDateVal"></p-calendar>
+                    </div>
+                    <!-- <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="expectedTime"  hourFormat="12" [timeOnly]="true"
+                        dataType="string"></p-calendar> -->
+
+                  </div>
+                  <!--  -->
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " *ngIf="hideField=='false'"
+                    [ngClass]="{'disableDiv': (isNurse || isCallCenter)}">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">Start Date</label>
+                    <p-calendar [showIcon]="true" [showOnFocus]="false"  styleClass="mb-1" formControlName="startDate" [showTime]="true" dataType="string" (onSelect)="selectStartTime($event)" (onBlur)="selectStartTime($event)" [minDate]="minDateVal"></p-calendar>
+                    <!-- <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="startTime" [showTime]="true" hourFormat="12" [timeOnly]="true" dataType="string" ></p-calendar> -->
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " *ngIf="hideField=='false'"
+                    [ngClass]="{'disableDiv': (isNurse || isCallCenter)}">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">End Date</label>
+                    <p-calendar [showIcon]="true" [showOnFocus]="false"  styleClass="mb-1" formControlName="endDate" [showTime]="true" dataType="string" (onSelect)="selectEndTime($event)" (onBlur)="selectEndTime($event)"></p-calendar>
+                    <!-- <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="endTime" [showTime]="true" hourFormat="12" [timeOnly]="true" dataType="string" [disabled]="!isViewFieldEngineer"></p-calendar> -->
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " *ngIf="hideField=='false'">
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Working hours</label>
+                      <p-inputNumber mode="decimal" formControlName="workingHours" inputId="workingHours" [useGrouping]="false"
+                        [readonly]="true"></p-inputNumber>
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': isEngineer}">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">Site</label>
+                    <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="site"
+                      [suggestions]="sites" field="custName" (completeMethod)="onSelectContractor($event)" dataKey="id"
+                      (onSelect)="onSelectContractor($event )"></p-autoComplete>
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': isEngineer}">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">Building</label>
+                    <p-dropdown [options]="buildingsList" optionLabel="name" formControlName="building"
+                      (onChange)="onSelectBulding($event)" placeholder="Please select ..."></p-dropdown>
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': isEngineer}">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">Floor</label>
+                    <p-dropdown [options]="floorsList" optionLabel="name" formControlName="floor"
+                      (onChange)="onSelectFloor($event)" placeholder="Please select ..."></p-dropdown>
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': isEngineer}">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">Department</label>
+                    <p-dropdown [options]="depBuild" optionLabel="name" formControlName="department"
+                      placeholder="Please select ..."></p-dropdown>
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " [ngClass]="{'disableDiv': (isEngineer || isNurse)}" *ngIf = "!isNurse">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">Assigned Employee</label>
+                    <p-dropdown [options]="assignedEmployees" optionLabel="userName" dataKey="userId"
+                      formControlName="assignedEmployee" placeholder="Please select ..."></p-dropdown>
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " *ngIf="hideField=='false'"
+                    [ngClass]="{'disableDiv': (isNurse || isCallCenter)}">
+                    <div class="form-floating mb-2">
+                    <label class="form-label">Status</label>
+                    <p-dropdown [options]="statuses" optionLabel="name" formControlName="status"
+                      placeholder="Please select ..."></p-dropdown>
+                  </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 " *ngIf="hideField=='false'"
+                    [ngClass]="{'disableDiv': (isNurse || isCallCenter)}">
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Comment</label>
+                        <textarea id="comment" formControlName="comment" placeholder="Enter Comment" pInputTextarea class="form-control form-control-lg form-control-solid"></textarea>
+                    </div>
+                  </div>
+                  <div class="card-body pt-5"  *ngIf="!isAddMode">
+                    <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        <!-- <div class="card-footer d-flex justify-content-end border-top py-6" [ngClass]="{'disableDiv': isSubmitted}">
+          <button pButton type="submit" label="Save" class="p-button-info col-lg-2" (click)="save()" *ngIf="!isViewMode"></button>
+          <button pButton type="button" label="Delete" class="p-button-info col-lg-2" (click)="delete()" *ngIf="isEditMode"
+            [disabled]=""></button>
+        </div> -->
+      </div>
+
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <button *ngIf="!isViewMode" class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="save()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

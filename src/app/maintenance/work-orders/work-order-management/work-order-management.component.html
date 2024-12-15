@@ -1,0 +1,563 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <!-- <h1 class="offcanvas-title offcanvas-heading">Add New Workorder</h1> -->
+
+    <h2 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='Add'">Create Work Order</h2>
+    <h2 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='View'">View Work Order</h2>
+    <h2 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='Edit'">Edit Work Order</h2>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+
+      <p-toast></p-toast>
+      <!--beginbreadcrumb-->
+      <!-- <div class="card flex justify-content-center mb-5">
+          <p-breadcrumb [model]="items"></p-breadcrumb>
+      </div> -->
+      <!--endbreadcrumb-->
+
+      <!--begin Search Fields -->
+      <div class=" mb-6 mb-xl-9">
+           <!--  <div class="card-title">
+                <h2 class="d-flex align-items-center text-white" *ngIf="typeScreen=='Add'">Create Work Order</h2>
+                <h2 class="d-flex align-items-center text-white" *ngIf="typeScreen=='View'">View Work Order</h2>
+                <h2 class="d-flex align-items-center text-white" *ngIf="typeScreen=='Edit'">Edit Work Order</h2>
+            </div> -->
+          <!-- <div class="row" *ngIf="ParentWOId>0 || id>0">
+              <div class="saveButton">
+                  <div *ngFor="let step of steps;let i=index" style="float: left; ">
+                      <button pButton type="button" label="{{step.name}}" class="p-button-success text-white" *ngIf="step.processed" (click)="clickStep(step)"></button>
+                      <button pButton type="button" label="{{step.name}}" class="p-button-info  text-white" *ngIf="!step.processed" (click)="clickStep(step)"></button>
+                  </div>
+                </div>
+          </div> -->
+          <div class="">
+            <div class="row  form-scroller">
+              <form [formGroup]="workOrderInfoForm">
+              <div class="py-3">
+                  <div class="row box-gryco" >
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                         <div class="form-floating mb-2">
+                          <label class="">Call Id</label>
+                          <input id="callId" formControlName="callId"  type="text" pInputText class="form-control" readonly  />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                         <div class="form-floating mb-2">
+                          <label class="">Total working hours</label>
+                          <input id="callId" formControlName="totalWorkingHours"  type="text" pInputText class="form-control" readonly  />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                         <div class="form-floating mb-2">
+                          <label class="">Asset No</label>
+                          <input id="assetNo" formControlName="assetNo"  type="text" pInputText class="form-control" readonly  />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                         <div class="form-floating mb-2">
+                          <label class="">WO No</label>
+                          <input id="workOrderNo" formControlName="workOrderNo"  type="text" pInputText class="form-control" readonly  />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                         <div class="form-floating mb-2">
+                          <label class="">Asset Name</label>
+                          <input id="assetName" formControlName="assetName"  type="text" pInputText class="form-control" readonly  />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                         <div class="form-floating mb-2">
+                          <label class="">Department</label>
+                          <input id="department" formControlName="department"  type="text" pInputText class="form-control" readonly style="width: 95%;" />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label class="">Asset SN</label>
+                          <input id="assetSN" formControlName="assetSN"  type="text" pInputText class="form-control" readonly  />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label class="">Model</label>
+                          <input id="model" formControlName="model"  type="text" pInputText class="form-control" readonly  />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                          <label class="">Manufacturer</label>
+                          <input id="manufacturer" formControlName="manufacturer"  type="text" pInputText class="form-control" readonly  />
+                      </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                         <div class="form-floating mb-2">
+                          <label class="">Site</label>
+                          <input id="site" formControlName="site"  type="text" pInputText class="form-control" readonly   />
+                      </div>
+                      </div>
+
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                        <div class="form-floating mb-2">
+                        <label class="">Asset Type</label>
+                            <input id="assetType" value="{{assetTypeName}}"  type="text" pInputText class="form-control" readonly  />
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                        <div class="form-floating mb-2">
+                        <label class=" ">Equipment Status</label>
+                        <p-dropdown placeholder="--Select--" formControlName="equipmentStatus"
+                            [options]="workOrdersService.defectTypes" optionLabel="name" class="dropdown">
+                        </p-dropdown>
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                        <div class="form-floating mb-2">
+                        <label class=" ">Service Type</label>
+                        <p-dropdown formControlName="serviceType"
+                            [options]="workOrdersService.serviceTypes" optionLabel="name" class="dropdown">
+                        </p-dropdown>
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="float:right;padding-right: 10px;">
+                      <div class="form-floating mb-2">
+                        <label class="">Return To Service</label>
+                        <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date"
+                            [inputStyle]="{'width':'100%'}"  [showTime]="true"
+                            formControlName="visitDate" dateFormat="yy-mm-dd" dataType="string" appendTo="body" [minDate]="returnToServiceMinDate" [readonlyInput]="true">
+                        </p-calendar>
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                        <div class="form-floating mb-2">
+                        <label class=" required">Failure Reasons</label>
+                        <p-dropdown [options]="workOrdersService.reasons" optionLabel="name"
+                            formControlName="reasons" class="dropdown"  placeholder="select"></p-dropdown>
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="float:right;padding-right: 10px;">
+                      <div class="form-floating mb-2">
+                        <label class="">Fault Description</label>
+                        <p-dropdown [options]="listDefect" optionLabel="defectName"
+                            formControlName="faultDescription" class="dropdown" placeholder="select"
+                            (onChange)="displayWorkPerformed($event)" ></p-dropdown>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                        <div class="form-floating mb-2">
+                        <label class="">Solution</label>
+                        <textarea id="workPerformed" formControlName="workPerformed" pInputText class="form-control"area
+                            readonly class="form-control form-control-lg form-control-solid" ></textarea>
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                        <div class="form-floating mb-2">
+                        <label class="">Call Comment</label>
+                        <textarea id="callComments" formControlName="callComments" pInputText class="form-control"area
+                            readonly class="form-control form-control-lg form-control-solid" ></textarea>
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                        <div class="form-floating mb-2">
+                        <label class=" ">Loan Availablity</label>
+                        <p-dropdown [options]="workOrdersService.loanAvailablities" optionLabel="name"
+                            formControlName="loanAvailablity" class="dropdown" placeholder="select"
+                            (onChange)="onChange($event)"></p-dropdown>
+                    </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"  *ngIf="loanAvaliblity?.value?.value==1">
+                      <div class="form-floating mb-2">
+                        <label class=" ">Loan Asset Number</label>
+                        <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0"
+                            formControlName="assetLoan" [suggestions]="loanAssetAuto"
+                            field="assetNumber"
+                            (completeMethod)="getAssetLoan($event.query)"
+                            (onSelect)="bindAssetLoan($event)"
+                            (onClear)="clearAssetLoan()"></p-autoComplete>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+              </form>
+
+              <p-tabView styleClass="tabview-custom">
+                  <p-tabPanel>
+                      <ng-template pTemplate="header">
+                          <i class="pi pi-calendar"></i>
+                          <span>Caller Info <small class="text-danger">*</small></span>
+                      </ng-template>
+                      <form [formGroup]="callerInfoForm">
+
+                          <ng-container formArrayName="siteContacts">
+                              <ng-container *ngFor=" let contact of siteContacts(); let i=index">
+                                  <div *ngIf="typeScreen != 'View'" class="row py-3" [formGroupName]="i"
+                                  [ngClass]="{'disableDiv': typeScreen=='View'}">
+                                    <div id="employeeCode{{i}}" class="col-md-6 col-xl-3 col-xxl-3 mb-3" >
+                                      <div class="form-floating mb-2">
+                                        <label class="">Employee Id</label>
+                                          <p-autoComplete [delay]="1000" class=""
+                                              formControlName="employeeCode" [suggestions]="listEmployee"
+                                              field="employeeCode" dataKey="userId"
+                                              (completeMethod)="onSelectEmployee($event)"
+                                              (onSelect)="bindEmployee($event,i)"
+                                              (onClear)="clearEmployee(i)"  [inputStyle]="{'width':'100%'}"></p-autoComplete>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" >
+                                      <div class="form-floating mb-2">
+                                        <label class="">Name</label>
+                                        <input id="name" formControlName="name"  type="text" pInputText class="form-control" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" >
+                                      <div class="form-floating mb-2">
+                                        <label class="">Telephone</label>
+                                        <input id="telephone" formControlName="telephone"  type="text" pInputText class="form-control" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" >
+                                      <div class="form-floating mb-2">
+                                        <label class="">Job</label>
+                                        <input id="job" formControlName="job"  type="text" pInputText class="form-control" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" >
+                                      <div class="form-floating mb-2">
+                                        <label class="">Email</label>
+                                        <input id="email" formControlName="email"  type="text" pInputText class="form-control" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" >
+                                      <div class="form-floating mb-2">
+                                        <label class="">Extension</label>
+                                            <input id="land" formControlName="land"  type="text" pInputText class="form-control" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4 col-xl-3 col-xxl-3 mb-3" *ngIf="typeScreen != 'View'">
+                                        <button pButton type="button" (click)="addMoreSiteContact()"
+                                            class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                                        <button pButton type="button" (click)="removeSiteContact(i)"
+                                            class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+
+                                    </div>
+
+                                  </div>
+                              </ng-container>
+                          </ng-container>
+                      </form>
+                  </p-tabPanel>
+                  <p-tabPanel>
+                      <ng-template pTemplate="header">
+                          <i class="pi pi-calendar"></i>
+                          <span>WO Detail<small class="text-danger">*</small></span>
+                      </ng-template>
+                      <form [formGroup]="woDetailForm">
+                          <div class="row box-gryco">
+                              <!-- <div class="col-md-8 d-flex flex-wrap" > -->
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class="">Assigned Employee</label>
+                                      <input id="assetSN" formControlName="assignedEmployee"  type="text" pInputText class="form-control" readonly />
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class="">Assistant Employees</label>
+                                      <p-multiSelect [options]="assistantEmployees" formControlName="assistantEmployees"
+                                          dataKey="userId" defaultLabel="Select assistant Employees" optionLabel="userName"
+                                          class="multiselect-custom" >
+                                      </p-multiSelect>
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class=" required">Start of work</label>
+                                      <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="startOfWorkTime" [showTime]="true"
+                                          dataType="string"   (onSelect)="selectStartOfWorkTime($event)" (onBlur)="selectStartOfWorkTime($event)" [minDate]="startMinDate"></p-calendar>
+                                  </div>
+                                  </div>
+                                  <!-- [showIcon]="true" [showOnFocus]="false" -->
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class=" required">End of work</label>
+                                      <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="endOfWorkTime" [showTime]="true"
+                                          dataType="string"  (onSelect)="selectEndOfWorkTime($event)" (onBlur)="selectEndOfWorkTime($event)"></p-calendar>
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class="">Working hours</label>
+                                      <input formControlName="workingHours" type="text"  pInputText class="form-control" readonly />
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class="">Travel Hours</label>
+                                      <input formControlName="travelingHours" type="number"  pInputText class="form-control" min="0" />
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class="">Travel Expenses</label>
+                                      <input formControlName="travelingExpenses" type="number"  pInputText class="form-control" min="0" />
+                                  </div>
+                                  </div>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class=" required">Call's last Situation</label>
+                                      <p-dropdown [options]="callslastSituationWO" optionLabel="name"
+                                          formControlName="callslastSituationWO" class="dropdown"
+                                          placeholder="select" (onChange)="selectTypeOfWO($event)" ></p-dropdown>
+                                  </div>
+                                  </div>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                  <div class="form-floating mb-2">
+                                    <label class="">Repair Location</label>
+                                      <p-dropdown [options]="repairLocation" optionLabel="name"
+                                          formControlName="repairLocation" class="dropdown"  placeholder="select"></p-dropdown>
+                                  </div>
+                                  </div>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"  *ngIf="showMRNumber =='true'">
+                                    <div class="form-floating mb-2">
+                                      <label class="">MR Number</label>
+                                      <input formControlName="MRNumber" type="text" pInputText class="form-control" />
+                                    </div>
+                                  </div>
+
+                              <!-- </div>
+                              <div class="col-md-4" > -->
+                                  <div class="col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                    <div class="form-floating mb-2">
+                                      <label class="">Technical Comment</label>
+                                      <textarea id="comment" formControlName="comment"  pInputText class="form-control"area class="form-control form-control-lg form-control-solid" rows="8"></textarea>
+                                    </div>
+                                  </div>
+                              <!-- </div> -->
+
+
+                              <div *ngIf="isExternal" class="col-md-12 col-xl-12 col-xxl-12 mb-3" style="padding-top: 20px;">
+
+                                  <h3>Supplier Info</h3>
+
+                                  <div class="col-md-12 col-xl-12 col-xxl-12 mb-3 d-flex flex-wrap" >
+                                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                     <div class="form-floating mb-2">
+                                       <label class="">Supplier</label>
+                                          <p-autoComplete [delay]="1000"  [inputStyle]="{'width':'100%'}"
+                                              placeholder="Supplier" formControlName="supplier" [suggestions]="suppliers"
+                                              field="suppliername" (completeMethod)="onSelectSupplier($event)" dataKey="id"
+                                              (onSelect)="bindSupplier($event)" (onClear)="clearSupplier()" ></p-autoComplete>
+                                      </div>
+                                      </div>
+                                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                        <div class="form-floating mb-2">
+                                          <label class="">Vendor Ticket Number</label>
+                                            <input id="vendorTicketNumber" formControlName="vendorTicketNumber" type="text"
+                                                pInputText class="form-control"  />
+                                        </div>
+                                      </div>
+                                  </div>
+
+                                  <h3>Supplier Engineers</h3>
+
+                                  <div class="col-md-12 col-xl-12 col-xxl-12">
+                                      <ng-container formArrayName="suppEngineers">
+                                          <ng-container *ngFor=" let spare of suppEngineers(); let i=index">
+                                              <div class="row py-3" [formGroupName]="i"
+                                                  [ngClass]="{'disableDiv': typeScreen=='View'}">
+                                                  <div class="row col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                                      <div class="col-12">
+                                                        <div class="form-floating mb-2">
+                                                          <label class="">Engineer</label>
+                                                          <!-- </div>
+                                                          <div class="col-10"> -->
+                                                          <p-dropdown [options]="listSuppContact" optionLabel="personName"
+                                                          formControlName="personName" class="dropdown"  placeholder="select" (onChange)="selectSuppEngineer(i,$event)"></p-dropdown>
+                                                        </div>
+                                                      </div>
+                                                      <div class="col-2">
+                                                          <button pButton type="button" (click)="addEngineerForSupplier(i)"
+                                                          class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                                                      </div>
+
+                                                  </div>
+                                                  <div class="col-md-6 col-xl-3 col-xxl-3 mmb-3" >
+                                                    <div class="form-floating mb-2">
+                                                      <label class="">Role</label>
+                                                      <input id="personRoleName" formControlName="personRoleName" type="text" pInputText class="form-control"
+                                                          readonly  />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-6 col-xl-3 col-xxl-3 mmb-3" >
+                                                    <div class="form-floating mb-2">
+                                                      <label class="">Contact</label>
+                                                      <input id="contact" formControlName="contact" type="text" pInputText class="form-control"
+                                                          readonly  />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-6 col-xl-3 col-xxl-3 mmb-3" >
+                                                    <div class="form-floating mb-2">
+                                                      <label class="">External Engineer Code</label>
+                                                      <input id="externalEngCode" formControlName="externalEngCode" type="text" pInputText class="form-control"
+                                                          readonly  />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-6 col-xl-3 col-xxl-3 mmb-3" >
+                                                    <div class="form-floating mb-2">
+                                                      <label class="">Email</label>
+                                                      <input id="email" formControlName="email" type="text" pInputText class="form-control"
+                                                          readonly  />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-4 col-xl-3 col-xxl-3 mb-3" *ngIf="typeScreen != 'View'">
+                                                      <button pButton type="button" (click)="addMoreSuppEngineer()"
+                                                          class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                                                      <button pButton type="button" (click)="removeSuppEngineer(i)"
+                                                          class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+                                                  </div>
+
+                                              </div>
+                                          </ng-container>
+                                      </ng-container>
+                                  </div>
+
+                              </div>
+                          </div>
+                      </form>
+                  </p-tabPanel>
+                  <p-tabPanel>
+                      <ng-template pTemplate="header">
+                          <!-- <i class="pi pi-calendar"></i> -->
+                          <span>Spare Parts<small class="text-danger">*</small></span>
+                      </ng-template>
+                      <form [formGroup]="sparePartForm">
+                          <ng-container formArrayName="spareParts">
+                              <ng-container *ngFor=" let spare of spareParts(); let i=index">
+                                  <div *ngIf="typeScreen != 'View'" class="row box-gryco py-3" [formGroupName]="i"
+                                      [ngClass]="{'disableDiv': typeScreen=='View'}">
+                                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3"  [ngClass]="{'disableDiv': hideReturnQty=='false'}">
+                                          <label class="">Part No</label>
+                                          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0"
+                                              formControlName="partNo" [suggestions]="sparePartsAutocomplete"
+                                              field="partNo" dataKey="id" (completeMethod)="onSelectSparePart($event)"
+                                              (onSelect)="bindSparePart($event,i)"
+                                              (onClear)="clearSparePart(i)"  [inputStyle]="{'width':'100%'}"></p-autoComplete>
+                                      </div>
+                                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" >
+                                        <div class="form-floating mb-2">
+                                          <label class="">Description</label>
+                                          <input id="description" formControlName="description" type="text" pInputText class="form-control"
+                                              readonly  />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [ngClass]="{'disableDiv': hideReturnQty=='false'}">
+                                        <div class="form-floating mb-2">
+                                          <label class="">Qty</label>
+                                          <input id="qty" formControlName="qty"  type="number" pInputText class="form-control" />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" *ngIf="hideReturnQty=='false'">
+                                        <div class="form-floating mb-2">
+                                          <label class="">Return Qty</label>
+                                          <input id="returnQty" formControlName="returnQty"  type="number" pInputText class="form-control" />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" *ngIf="hideReturnQty=='false'">
+                                        <div class="form-floating mb-2">
+                                          <label class="">Install Qty</label>
+                                          <input id="installQty" formControlName="installQty"  type="number" pInputText class="form-control" />
+                                        </div>
+                                      </div>
+                                      <div class="col-md-4 col-xl-3 col-xxl-3 mb-3" *ngIf="typeScreen != 'View'">
+                                          <button pButton type="button" (click)="addMoreSparePart()"
+                                              class="p-button-rounded p-button-info mr-2" icon="pi pi-plus" *ngIf="hideReturnQty=='true'" ></button>
+                                          <button pButton type="button" (click)="removeSparePart(i)"
+                                              class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash" *ngIf="hideReturnQty=='true'"></button>
+                                      </div>
+
+                                  </div>
+                              </ng-container>
+                          </ng-container>
+                      </form>
+                  </p-tabPanel>
+
+              </p-tabView>
+              <div class="card-body pt-5">
+                  <form [formGroup]="attachmentWorkOrderForm">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <label class="">Attachment</label>
+                            <app-attachments (onUploaded)="attachmentReady($event)" (onDeleted)="attachmentDelete($event)"   [hasDelete]="true" formArrayName="attachments" [attachments]="attachmentName"></app-attachments>
+                        </div>
+                  </form>
+              </div>
+              <div class="card-body pt-5"*ngIf="typeScreen!='Add'" >
+                  <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                  </div>
+
+            </div>
+          </div>
+          <!-- <div class="saveButton" [ngClass]="{'disableDiv': isSubmitted}">
+              <button pButton type="submit" label="Save" class="p-button-info col-lg-2" (click)="save()" *ngIf="typeScreen=='Add'"
+                  [disabled]="" canAdd></button>
+              <button pButton type="submit" label="Update" class="p-button-info col-lg-2" (click)="save()" *ngIf="typeScreen=='Edit'"
+                  [disabled]="" canUpdate></button>
+                  <button pButton  label="New Customer Survey" class="p-button-info col-lg-2" (click)="createSurvey()"
+                  [disabled]=""></button>
+              <button pButton type="button" label="delete" class="p-button-info col-lg-2" (click)="delete()" *ngIf="typeScreen=='Edit'"
+                  [disabled]=""></button>
+          </div> -->
+      </div>
+
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <button *ngIf="typeScreen=='Add'" class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="save()">Save</button>
+            <button *ngIf="typeScreen=='Edit'" class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="save()">Update</button>
+            <button class="btn btn-blue text-white form-button border-r10 float-end m-4" (click)="createSurvey()" [disabled]="">New Customer Survey</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+    </div>
+  </div>
+
+    <p-dialog header="Add engineer for supplier" [(visible)]="showDialog" [modal]="true"
+        [style]="{width :'40vw',height:'60hw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
+        <form [formGroup]="formEngineerSupplier">
+            <div class="row py-3">
+                <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+                    <label class="">Engineer Supplier Name</label>
+                    <input id="personName" formControlName="personName" type="text" pInputText class="form-control"  />
+                </div>
+                <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+                    <label class="">Role</label>
+                            <p-dropdown [options]="roleList" optionLabel="name" optionValue="id" formControlName="personRoleId"
+                              class="dropdown" placeholder="select"></p-dropdown>
+                </div>
+                <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+                    <label class="">Contact</label>
+                    <input id="contact" formControlName="contact" type="text" pInputText class="form-control" />
+                </div>
+                <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+                    <label class="">Email</label>
+                    <input id="email" formControlName="email" type="email"  pInputText class="form-control" />
+                </div>
+            </div>
+        </form>
+
+
+        <ng-template pTemplate="footer">
+            <p-button type="button" icon="pi pi-check" (click)="addengineer()" label="Submit"
+                styleClass="p-button-text"></p-button>
+            <p-button icon="pi pi-times" (click)="showDialog=false" label="Cancel" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+</div>

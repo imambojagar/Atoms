@@ -1,0 +1,153 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Models List
+                        </div>
+                        <div class="float-start export-icon mt-3">
+                          <a class="m-5" (click)="export()">Export
+                            <img src="assets/img/dashboard/excel.svg" alt="" /></a>
+                        </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row float-end">
+                          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 mb-2">
+                            <div class="float-end filter-icon h-100">
+                              <a (click)="openFilterModal()"><img src="assets/img/dashboard/filter.svg" alt="" /></a>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-9 col-9 mb-3">
+                            <div class="form-floating float-start">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here" />
+                              <a>
+                                <img class="float-end search-icon" src="assets/img/dashboard/search.svg" alt="" /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid">
+                              <button class="btn btn-blue text-white border-r10" type="button" (click)="openModal()">
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <p-table [value]="modelDefinition" [rows]="10" #dt>
+                        <ng-template pTemplate="header">
+                          <tr class="muiline">
+                            <th class="text-center">Code</th>
+                            <th class="text-center">Asset Nomenclature</th>
+                            <th class="text-center">Manufacturer</th>
+                            <th class="text-center">Model</th>
+                            <!-- <th class="text-center">Supplier</th> -->
+                            <th class="text-center">Asset Codes</th>
+                            <th class="text-center">Asset Orcale Name</th>
+                            <th class="text-center">Country of Origin</th>
+                            <th class="sticky-header" alignFrozen="right" pFrozenColumn [frozen]="balanceFrozen">
+                              Action
+                            </th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-model>
+                          <tr>
+                            <td class="text-center">
+                              {{ model.modelDefCode }}
+                            </td>
+                            <td class="text-center">
+                              {{ model.assetNDAssetName }}
+                            </td>
+                            <td class="text-center">
+                              {{ model.modelParentTaxonomyName }}
+                            </td>
+                            <td class="text-center">
+                              {{ model.modelTaxonomyName }}
+                            </td>
+                            <!-- <td class="text-center">
+                              <div *ngFor="let supplier of model.suppliers">
+                                <p *ngIf="supplier.supplierName" class="truncated-text"
+                                  [pTooltip]="supplier.supplierName" tooltipPosition="bottom" tooltip="bottom">
+                                  {{ supplier.supplierName }}
+                                </p>
+                              </div>
+                            </td> -->
+                            <td class="text-center">
+                              <div *ngFor="let code of model.oracleCodes">
+                                <p *ngIf="code.codeValue">
+                                  {{ code.codeTypeName }}: {{ code.codeValue }}
+                                </p>
+                              </div>
+                            </td>
+                            <td class="text-center">
+                              {{ model.assetNDOrcaleName }}
+                            </td>
+                            <td class="text-center">
+                              {{ model.countryOfOriginName }}
+                            </td>
+                            <td class="sticky-header" alignFrozen="right" pFrozenColumn [frozen]="balanceFrozen">
+                              <div class="d-flex">
+                                <span class="list-group list-group-horizontal align-items-center">
+
+                                  <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                    (click)="viewDetails(model,1)">
+                                    <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                  </button>
+                                  <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"
+                                    severity="success" (onClick)="navToDetails(model, 1)" canUpdate />
+
+                                  <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"
+                                    (onClick)="deleteModel(model)" canDelete /></span>
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <app-add-model-definition [showmodal]="addModelLoaded" [edit_model_id]="model_id"
+          [edit_model_index]="model_index" (openModals)="openModal()"></app-add-model-definition>
+
+        <app-edit-delete-model-definition [showmodal]="editModelLoaded" [edit_model_id]="model_id"
+          [edit_model_index]="model_index" (openModals)="openEditModal()"></app-edit-delete-model-definition>
+
+        <app-view-model [showmodal]="viewModelLoaded" [edit_model_id]="model_id" [edit_model_index]="model_index"
+          (openModals)="openViewModal()"></app-view-model>
+
+        <app-model-search [showmodal]="filterLoaded" (openSearchModals)="openFilterModal()"
+          (ModelSearch)="getModelSearch($event)"></app-model-search>
+
+        <div *ngIf="filterLoaded" class="offcanvas-backdrop fade show" (click)="openFilterModal()"></div>
+        <div *ngIf="addModelLoaded" class="offcanvas-backdrop fade show" (click)="openModal()"></div>
+        <div *ngIf="editModelLoaded" class="offcanvas-backdrop fade show" (click)="openEditModal()"></div>
+        <div *ngIf="viewModelLoaded" class="offcanvas-backdrop fade show" (click)="openViewModal()"></div>
+
+        <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+      </div>
+    </div>
+  </div>

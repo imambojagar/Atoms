@@ -1,0 +1,260 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+
+          <p-toast></p-toast>
+
+
+
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row  mb-3 content-heading">
+                      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Demo Requests List
+                        </div>
+                        <div *ngIf="!isMultiupdate && !isInApprovalsView" class="float-start export-icon mt-3"><a
+                            class="m-5" (click)="export() ">Export <img src="assets/img/dashboard/excel.svg" alt=""></a>
+                        </div>
+                      </div>
+                      <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+                        <div class="row ">
+
+                          <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-6 col-sm-12 col-12 mb-2"
+                            *ngIf="!isMultiupdate && !isInApprovalsView">
+                            <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                (click)="openModal()">Add </button></div>
+                          </div>
+                          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-2"
+                            *ngIf="!isMultiupdate && !isInApprovalsView">
+                            <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                [disabled]="selectedRows.length == 0" (click)="navTo('AddAssessment')">Add Demo
+                                Assessment </button></div>
+                          </div>
+                          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-2"
+                            *ngIf="!isMultiupdate && !isInApprovalsView">
+                            <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                [disabled]="selectedRows.length == 0" (click)="navTo('AddGatePass')">Add Gate
+                                Pass</button>
+                            </div>
+                          </div>
+                          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 mb-2"
+                            *ngIf="!isMultiupdate && !isInApprovalsView">
+                            <div class="d-grid">
+                              <button class="btn btn-blue text-white border-r10" type="button" (click)="navTo('')">Multi
+                                Update</button>
+                            </div>
+                          </div>
+                          <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-3"
+                            *ngIf="(!isMultiupdate && !isInApprovalsView) && (isAssessor || isAssessorTL)">
+                            <div class="d-grid">
+                              <button class="btn btn-blue text-white border-r10" type="button"
+                                (click)="filter.isPreview = !filter.isPreview; searchRequest()">
+                                {{ filter.isPreview ? 'Shrink' : 'Preview All' }}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="table-responsive table-bg">
+                        <p-table #dt [value]="demos" [(selection)]="selectedRows"
+                          styleClass="p-datatable-striped p-datatable-gridlines" [rows]="filter.pageSize"
+                          [tableStyle]="{'min-width': '75rem'}" [loading]="loading" [lazy]="true" [rowHover]="false"
+                          dataKey="id" [totalRecords]="totalRows">
+                          <!-- <ng-template pTemplate="caption">
+                          <div class="flex align-items-center justify-content-between">
+                            <div class="card-header bg-primary">
+                              <div class="card-title">
+                                <span class="text-white">
+                                  Demo Requests <br>
+                                  <span class="total_rows_data"> Total: {{totalRows}} </span>
+                                </span>
+                              </div>
+                              <div class="card-title table-btns">
+                                <a *ngIf="!isMultiupdate && !isInApprovalsView"
+                                  [routerLink]="['/demo/request/add-control']" class="nav-link" canAdd>
+                                  <button pButton pRipple label="Add" class="btn btn-light-primary me-2 mr-2"> </button>
+                                </a>
+                                <a *ngIf="!isMultiupdate && !isInApprovalsView" class="nav-link"
+                                  pTooltip="Select Demo Request!" tooltipPosition="bottom" canAdd>
+                                  <button pButton [disabled]="selectedRows.length == 0" (click)="navTo('AddAssessment')"
+                                    pRipple label="Add Demo Assessment" class="btn btn-light-primary me-2 mr-2">
+                                  </button>
+                                </a>
+                                <a *ngIf="!isMultiupdate && !isInApprovalsView" class="nav-link"
+                                  pTooltip="Select Demo Request!" tooltipPosition="bottom" canAdd>
+                                  <button pButton [disabled]="selectedRows.length == 0" (click)="navTo('AddGatePass')"
+                                    pRipple label="Add Gate Pass" class="btn btn-light-primary me-2 mr-2"> </button>
+                                </a>
+                                <button *ngIf="!isMultiupdate && !isInApprovalsView" pButton pRipple
+                                  label="Multi Update" (click)="navTo('')" class="btn btn-light-primary me-2"
+                                  canUpdate></button>
+
+                                <button *ngIf="!isMultiupdate && !isInApprovalsView" pButton pRipple label="Export"
+                                  (click)="export()" class="btn btn-light-primary me-2" canUpdate></button>
+
+                                <p-button *ngIf="(!isMultiupdate && !isInApprovalsView) && (isAssessor || isAssessorTL)"
+                                  (click)="filter.isPreview = !filter.isPreview; searchRequest()"
+                                  [label]="filter.isPreview? 'Shrink': 'Preview All'" icon="pi pi-eye"></p-button>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template> -->
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th *ngIf="!isMultiupdate && !isInApprovalsView" style="width: 4rem"><i
+                                  class="fa-solid fa-rectangle-list"></i>
+                              </th>
+                              <th *ngIf="isMultiupdate || isInApprovalsView" class="text-center">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                              </th>
+                              <th class="text-center">Request ID</th>
+                              <th class="text-center">Status</th>
+                              <th class="text-center">Employee Name</th>
+                              <th class="text-center">Doctor Email</th>
+                              <th class="text-center">Item Description</th>
+                              <th class="text-center">Request Period</th>
+                              <th class="text-center action-width" *ngIf="!isInApprovalsView">Action</th>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-demo>
+                            <tr>
+                              <td *ngIf="!isMultiupdate && !isInApprovalsView">
+                                <p-tableRadioButton [value]="demo"></p-tableRadioButton>
+                              </td>
+                              <td *ngIf="isMultiupdate || isInApprovalsView"> <p-tableCheckbox [value]="demo">
+                                </p-tableCheckbox></td>
+                              <td class="text-center">{{demo.id}} </td>
+                              <td class="text-center">{{demo.demoRequestStatusName}}</td>
+                              <td class="text-center">{{demo.employeeName}}</td>
+                              <td class="text-center">{{demo.doctor?.email}}</td>
+                              <td class="text-center">{{demo.assetName}}</td>
+                              <td class="text-center">{{demo.demoDuration}}</td>
+                              <td *ngIf="!isInApprovalsView" class="text-center">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info me-2"
+                                  (click)="navTo('DemoInfo',demo,1)" canUpdate></button>
+
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                  (click)="deleteDemoReq(demo)" canDelete></button>
+                              </td>
+                            </tr>
+                          </ng-template>
+
+                        </p-table>
+
+                      </div> <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows"
+                        (onPageChange)="paginate($event)" [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="isMultiupdate">
+    <p-accordion *ngIf="isAssessorTL">
+      <p-accordionTab header="Assign Assessor Employee">
+        <div class="row box-gryco mb-3">
+          <form [formGroup]="sumbitForm" (ngSubmit)="SaveCalls()">
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+              <span class="p-float-label">
+                <p-dropdown [options]="assessorEmp" optionLabel="userName" optionValue="userId"
+                  formControlName="assessorEmployeeId" class="dropdown" placeholder="select"></p-dropdown>
+                <label class="form-label ">Assessor Employee<small class="text-danger">*</small></label></span>
+            </div>
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button type="submit" label="{{'Save'|translate}}"
+                    class="btn btn-blue text-white form-button border-r10 float-end mx-4" pButton></button>
+
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+
+    <p-accordion *ngIf="isAssessor">
+      <p-accordionTab header="Update Demo Requests Status">
+        <div class="row box-gryco mb-3">
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <label class="form-label ">Documents has been uploaded?</label>
+            <div>
+              <button pButton pRipple label="Approve" class="p-button-success" (click)="documentUploaded()"></button>
+            </div>
+          </div>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+
+    <!-- <div class="saveButton card-footer d-flex justify-content-end border-top py-6">
+      <button label="Back" class="p-button-cancel col-lg-2" BackButton pButton></button>
+    </div> -->
+  </ng-container>
+  <ng-container *ngIf="isInApprovalsView">
+    <p-accordion>
+      <p-accordionTab header="Approval">
+        <div class="row box-gryco mb-3">
+          <form [formGroup]="approvalForm" (ngSubmit)="documentUploaded()">
+
+            <div class="col-xxl-6  col-xl-6   col-lg-6  col-md-6   col-sm-6  col-6  mb-3">
+              <span class="p-float-label">
+
+                <p-dropdown [options]="YesOrNo" optionLabel="key" optionValue="value" formControlName="isApproved"
+                  class="dropdown"></p-dropdown> <label class="form-label ">Update Approval<small
+                    class="text-danger">*</small></label></span>
+            </div>
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button type="submit" label="{{'Save'|translate}}"
+                    class="btn btn-blue text-white form-button border-r10 float-end mx-4" pButton></button>
+
+
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </ng-container>
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+
+  <!-- Add  -->
+  <app-demo-req-control *ngIf="Add" [showmodal]="Add" [mode]="'default'" (openModals)="closeModal()">
+  </app-demo-req-control>
+  <div *ngIf="Add" class="offcanvas-backdrop fade show" (click)="closeModal()"></div>
+  <!-- Add Assessment Component -->
+  <app-demo-req-control *ngIf="AddAssessment" [showmodal]="AddAssessment" [mode]="AddAssessment"
+    [inAssessmentForm]="true" (openModals)="closeModal()">
+  </app-demo-req-control>
+  <div *ngIf="AddAssessment" class="offcanvas-backdrop fade show" (click)="closeModal()"></div>
+
+  <!-- Demo Info Component -->
+  <app-demo-req-control *ngIf="DemoInfo" [showmodal]="DemoInfo" [data]="selectedRows" [mode]="DemoInfo"
+    [demoRequestId]="QP.data" [inDemoRequestForm]="true" (openModals)="closeModal()">
+  </app-demo-req-control>
+  <div *ngIf="DemoInfo" class="offcanvas-backdrop fade show" (click)="closeModal()"></div>
+
+  <!-- Add Gate Pass Component -->
+  <app-demo-req-control *ngIf="AddGatePass" [showmodal]="AddGatePass" [demoRequestId]="selectedRows?.id"
+    [mode]="AddGatePass" (openModals)="closeModal()">
+  </app-demo-req-control>
+  <div *ngIf="AddGatePass" class="offcanvas-backdrop fade show" (click)="closeModal()"></div>

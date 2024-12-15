@@ -1,0 +1,53 @@
+<div #drawerFilter1 [ngClass]=" showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Asset</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="searchForm">
+          <div class="row py-3 box-gryco">
+            <div class="  col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+              <span class="p-float-label">
+                <!-- Autocomplete input -->
+                <p-autoComplete class="ftest10 " [delay]="1000" formControlName="manufacturerName"
+                  [suggestions]="manufatureresList" (onSelect)="filter.manufacturerName=$event.value.taxonomyName"
+                  field="taxonomyName" (completeMethod)="searchManufacturerName($event)"
+                  (onClear)="filter.manufacturerName=null"></p-autoComplete>
+                <label>Manufacturer Name</label>
+              </span>
+            </div>
+
+            <div class=" col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+              <span class="p-float-label">
+                <!-- Autocomplete input -->
+                <p-autoComplete class="ftest10 " [delay]="1000" formControlName="manufacturerId"
+                  [suggestions]="manufatureresList" field="id" (completeMethod)="searchManufacturerID($event)"
+                  (onSelect)="filter.manufacturerId=$event.value.id" (onClear)="filter.id=null"></p-autoComplete>
+                <label>Manufacturer ID</label>
+              </span>
+            </div>
+
+          </div>
+
+
+
+        </form>
+      </div>
+
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button"
+              (click)="search()">Apply
+              Filter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,178 @@
+// Media query for large desktops
+@media only screen and (max-width: $desktop) {
+    .atoms-hide
+    {
+        display: none;
+    }
+
+    .atoms-create-work-order .select-buttons {
+        width: 97% !important;
+      }
+
+    .atoms-create-work-order .custom-dropdown-width{
+    width: 100% !important;
+    }
+
+    .atoms-create-work-order .margin-dropdown-negative{
+        margin-top: 4% !important;
+        margin-left: 0% !important;
+    }
+
+    .atoms-create-work-order .alert {
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        white-space: normal !important;
+      }
+
+      .atoms-create-work-order .select-button-text {
+        font-size: 11px !important;
+    }
+
+    .atoms-create-work-order .mx-mobile{
+        padding-left: 10px !important;
+    }
+
+    .search-modal-imam .offcanvas.show {
+        width: 91% !important;
+    }
+
+    .chapter-inner-box  {
+      width: 98%;
+      overflow-x: scroll;
+    }
+
+    .add-new-sidenav .footer {
+      bottom: 0;
+      text-align: right;
+      width: 80% !important;
+    }
+
+    .top-section {
+        margin: 50px 0px 0px -25px !important;
+        width: 107.5% !important;
+      }
+    
+      .top-section-employee {
+        position: relative !important;
+        margin: 70px 0px -1px -335px !important;
+        width: 142.5% !important;
+      }
+    
+      .atoms-create-work-order .buttons-margin {
+        margin: -15px 0px !important;
+        float: right !important;
+      }
+}
+
+@media only screen and  (min-width: $desktop) and (max-width: $large-desktop-max) {
+
+    .atoms-create-work-order .buttons-margin {
+        margin: -15px 0px !important;
+        float: right !important;
+      }
+    
+      .top-section-employee {
+        position: relative !important;
+        margin: 70px 0px -1px -335px !important;
+        width: 142.5% !important;
+      }
+    
+      .top-section {
+        margin: 50px 0px 0px -25px !important;
+        width: 107.5% !important;
+      }
+
+    .login-left-bg .content-center {
+        padding-left: 50px;
+    }
+
+    .login-page  .login-right-bg .margin-top-login {
+        margin-top: -5% !important;
+        padding: 20px !important;
+    }
+
+    .login-page .login-right-bg h3 {
+        font-size: 40px !important;
+        line-height: 23px !important;
+    }
+
+    .login-page .login-right-bg h5{
+        font-size: 15px !important;
+        line-height: 20px !important;
+    }
+
+    .login-page .login-right-bg .atoms-logo {
+        width: 150px !important;
+    }
+
+    .login-page .login-right-bg .input-field {
+        height: 40px !important;
+    }
+
+    .login-page .login-right-bg .forgotpassword-link a {
+        font-size: 12px !important;
+        line-height: 15px !important;
+    }
+
+    .login-page .login-right-bg .atoms-btn-primary,
+    .login-page .login-right-bg .atoms-btn-create {
+        font-size: 15px !important;
+        height: 50px !important;
+    }
+
+    .login-page .login-right-bg .margin-top-for-button{
+        margin-top: 0% !important;
+    }
+
+    .login-page .login-right-bg .desktop-class .powered-by-text{
+        font-size: 12px !important;
+        line-height: 20px !important;
+        bottom: 50px !important;
+    }
+
+    .login-page .login-right-bg .desktop-class .copyright-logo-class{
+        width: 35px !important;
+        bottom: 10px !important;
+    }
+
+    .login-page .login-right-bg .margin-top-icon-row{
+        margin-top: 0% !important;
+    }
+
+    .login-page .login-left-bg h3 {
+        font-size: 30px !important;
+        line-height: 38px !important;
+    }
+
+    .login-page .login-left-bg p {
+        font-size: 12px !important;
+        line-height: 20px !important;
+    }
+
+
+    .main-content-imam {
+        padding: 20px;
+        border-radius: 20px;
+        margin-left: 5%;
+        margin-right: 10px;
+      }
+
+      .atoms-create-work-order .select-buttons {
+        min-width: 97% !important;
+      }
+
+      .atoms-create-work-order .custom-dropdown-width{
+        width: 100% !important;
+      }
+
+      .atoms-create-work-order .margin-dropdown-negative{
+        margin-top: 4% !important;
+        margin-left: 0% !important;
+    }
+
+    .atoms-create-work-order .alert {
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        white-space: normal !important;
+      }
+}

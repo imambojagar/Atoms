@@ -1,0 +1,312 @@
+<!--beginbreadcrumb-->
+<div class="card flex justify-content-center mb-5">
+  <p-breadcrumb [model]="items"></p-breadcrumb>
+</div>
+<!--endbreadcrumb-->
+
+<!--begin Search Fields -->
+<div class="card card-flush mb-6 mb-xl-9">
+  <div class="card-header bg-primary">
+    <div class="card-title">
+      <h2 class="d-flex align-items-center text-white"> Create Invoice </h2>
+    </div>
+  </div>
+
+  <div class="card-body pt-5">
+
+    <p-tabView styleClass="tabview-custom">
+
+
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <i class="pi pi-calendar"></i>
+          <span>Invoice Info<small class="text-danger">*</small></span>
+        </ng-template>
+
+        <form [formGroup]="invoiceInfoForm">
+          <div class="row py-3">
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Invoice No.</label>
+              <p-autoComplete [delay]="1000" formControlName="invoiceNO" field="invoiceNO" dataKey="id"
+                placeholder="Please enter ..."></p-autoComplete>
+            </div>
+
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">PO Number</label>
+              <p-autoComplete [delay]="1000" formControlName="poNumber" field="poNumber" dataKey="id"
+                placeholder="Please enter ..."></p-autoComplete>
+            </div>
+
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Call</label>
+              <p-autoComplete [delay]="1000" formControlName="call" field="poNumber" dataKey="id"
+                placeholder="Please enter ..."></p-autoComplete>
+            </div>
+
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Asset</label>
+              <p-autoComplete [delay]="1000" formControlName="call" field="asset" dataKey="id"
+                placeholder="Please enter ..."></p-autoComplete>
+            </div>
+
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Site</label>
+              <p-autoComplete [delay]="1000" formControlName="site" field="asset" dataKey="id"
+                placeholder="Please enter ..."></p-autoComplete>
+            </div>
+
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Qoutation Id</label>
+              <p-autoComplete [delay]="1000" formControlName="quotationId" field="asset" dataKey="id"
+                placeholder="Please enter ..."></p-autoComplete>
+            </div>
+
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Cash Collected</label>
+              <p-autoComplete [delay]="1000" formControlName="cashCollected" field="asset" dataKey="id"
+                placeholder="Please enter ..."></p-autoComplete>
+            </div>
+
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Invoice Issue Date</label>
+              <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="invoiceIssueDate" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+            </div>
+
+          </div>
+
+            <h5>Spare Parts </h5>
+                      <div class="row py-3">
+
+            <hr>
+            <ng-container formArrayName="spareForm">
+              <ng-container *ngFor="let stageForm of spareForm.controls; let i = index">
+                <div class="add-more-value-border formline d-flex align-items-end" [formGroupName]="i">
+
+<!--                   <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+ -->             
+ <div class="col-md-3">
+
+                    <label class="form-label">Part No</label>
+
+                    <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="partNo"
+                      [suggestions]="sparePartsAutocomplete" field="partNo" dataKey="id"
+                      (completeMethod)="onSelectSparePart($event)" (onSelect)="bindSparePart($event,i)"
+                      (onClear)="clearSparePart(i)"></p-autoComplete>
+                  </div>
+
+<!--                   <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+  
+ -->     
+ <div class="col-md-3">
+  <label class="form-label">Description</label>
+
+                    <input id="description" formControlName="partName" type="text" pInputText />
+                  </div>
+
+<!--                   <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+ -->     
+ 
+ <div class="col-md-3">
+  <label class="form-label">Requested Qty</label>
+
+                    <input id="qty" formControlName="requestedQty" type="text" pInputText />
+                  </div>
+
+<!--                   <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+ -->        
+ 
+ <div class="col-md-3">
+
+                    <label class="form-label">Qty Received</label>
+
+                    <input id="qty" formControlName="qtyReceived" type="text" pInputText />
+                  </div>
+
+<!--                   <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+ -->          
+ <div class="col-md-3">
+
+  <label class="form-label">Unit Price</label>
+                    <input id="unitPrice" formControlName="unitPrice" type="text" pInputText />
+                  </div>
+
+<!--                   <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+ -->  
+ <div classs="col-md-3">
+  <label class="form-label">Currency</label>
+
+                    <p-dropdown placeholder="--Select--" formControlName="currency"
+                      [options]="invoiceinpoService.Currencies" optionLabel="name" class="dropdown">
+                    </p-dropdown>
+
+
+                  </div>
+<!--                   <div class="add-more-value-button col-md-6 col-xl-3 col-xxl-3 mb-5 ms-4 mb-4">
+ -->           
+ <div class="col-md-3">
+
+ <button pButton type="button" (click)="addspareForm()" [disabled]="!spareForm.controls[i].valid"
+                      class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                    <button pButton type="button" (click)="removespareForm(i)" [disabled]="!spareForm.controls[i].valid"
+                      class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash" [disabled]="i<=0"> </button>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+          <div class="row py-3">
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+
+            <label class="form-label">Total</label>
+            <p-autoComplete [delay]="1000" formControlName="total" field="total" dataKey="id"
+              placeholder="Please enter ..."></p-autoComplete>
+
+          </div>
+
+
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+
+            <label class="form-label">Residual</label>
+            <p-autoComplete [delay]="1000" formControlName="total" field="Residual" dataKey="id"
+              placeholder="Please enter ..."></p-autoComplete>
+
+
+          </div>
+        </div>
+</form>
+</p-tabPanel>
+
+  
+
+  <!-- Sales Info -->
+  <p-tabPanel header="Sales Info ">
+    <ng-template pTemplate="header">
+      <i class="pi pi-user"></i>
+      <span>Sales Info <small class="text-danger">*</small> </span>
+    </ng-template>
+    <form [formGroup]="invoiceInfoForm">
+      <div class="row py-3">
+
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Sales Person</label>
+          <p-dropdown [options]="invoiceinpoService.Currencies" optionLabel="name" formControlName="Sales Person"
+            placeholder="Please select ..."></p-dropdown>
+        </div>
+
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Invoice paid</label>
+          <p-dropdown [options]="invoiceinpoService.Currencies" optionLabel="name" formControlName="Invoice paid"
+            placeholder="Please select ..."></p-dropdown>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Finder</label>
+          <p-dropdown [options]="invoiceinpoService.Currencies" optionLabel="name" formControlName="Finder"
+            placeholder="Please select ..."></p-dropdown>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Delivered By</label>
+          <p-dropdown [options]="invoiceinpoService.Currencies" optionLabel="name" formControlName="Delivered By"
+            placeholder="Please select ..."></p-dropdown>
+        </div>
+      </div>
+    </form>
+  </p-tabPanel>
+
+  <!-- Print Info -->
+
+  <p-tabPanel header="Print Info">
+    <ng-template pTemplate="header">
+      <i class="pi pi-user"></i>
+      <span> Site in arabic <small class="text-danger">*</small> </span>
+    </ng-template>
+    <form [formGroup]="invoiceInfoForm">
+      <div class="row py-3">
+
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label"> Site in arabic</label>
+          <p-autoComplete [delay]="1000" formControlName=" Site in arabic" field="unitPrice" dataKey="id"
+            placeholder="Please enter ..."></p-autoComplete>
+        </div>
+
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label"> Invoice total</label>
+          <p-autoComplete [delay]="1000" formControlName=" Site in arabic" field=" Invoice total" dataKey="id"
+            placeholder="Please enter ..."></p-autoComplete>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+          <label class="form-label">Invoice total in letters</label>
+          <p-autoComplete [delay]="1000" formControlName="Invoice total in letters" field=" Invoice total" dataKey="id"
+            placeholder="Please enter ..."></p-autoComplete>
+        </div>
+      </div>
+
+      <!-- here -->
+
+      <div class="row py-3">
+    
+            <h5> Parts </h5>
+            <hr>
+            <ng-container formArrayName="parts">
+                <ng-container *ngFor="let stageForm of partsForm.controls; let i = index">
+                    <div class="add-more-value-border formline d-flex align-items-end" [formGroupName]="i">
+                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                            <label> Part Description</label>
+                            <input id="partDescription" formControlName="partDescription" type="text"
+                                pInputText />
+                        </div>
+                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                            <label> Qty</label>
+
+
+                            <input id="recievedQty" formControlName="recievedQty" type="text" pInputText />
+                        </div>
+                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                            <label> Unit Price</label>
+
+
+                            <input id="unitPrice" formControlName="unitPrice" type="text" pInputText />
+                        </div>
+
+
+                        <div class="add-more-value-button col-md-6 col-xl-3 col-xxl-3 mb-5 ms-4 mb-4">
+                            <button pButton type="button" (click)="addpartsForm()"
+                                [disabled]="!partsForm.controls[i].valid"
+                                class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                            <button pButton type="button" (click)="removepartsForm(i)"
+                                [disabled]="!partsForm.controls[i].valid"
+                                class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"
+                                [disabled]="i<=0"> </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+      </div>
+      <div class="card-body pt-5" *ngIf="!isAddMode">
+        <app-transaction-history></app-transaction-history>
+        </div>
+    </form>
+
+
+  </p-tabPanel>
+
+  </p-tabView>
+  <div class="card-footer d-flex justify-content-end border-top py-6">
+    <!-- <button type="button" class="btn btn-light btn-active-light-primary me-2"> Cancel </button> -->
+    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+  </div>
+  </div>

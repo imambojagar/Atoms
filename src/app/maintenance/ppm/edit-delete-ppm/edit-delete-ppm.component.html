@@ -1,0 +1,245 @@
+<p-toast></p-toast>
+<div class="card flex justify-content-center mb-5">
+  <p-breadcrumb [model]="items"></p-breadcrumb>
+</div>
+
+<p-tabView [(activeIndex)]="tabIndex" (onChange)="handleChange()">
+  <p-tabPanel header="View" leftIcon="pi pi-file">
+    <p-fieldset legend="PPM Info" class="card-body pt-5">
+      <form [formGroup]="addPpmForm" class="disable-view-fields">
+        <p-tabView>
+          <p-tabPanel header="PPM Information">
+
+            <div class="card-body pt-5">
+              <div class="row py-3">
+                <!-- Start View Content -->
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">PPM Frequency</label>
+                  <input type="text" formControlName="timePeriodName" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Type Of Service</label>
+                  <input formControlName="typeOfServiceName" [readonly]="true" pInputText />
+
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="check">
+                  <label class="form-label">Supplier</label>
+                  <p-autoComplete [delay]="1000" formControlName="supplierName" [suggestions]="suppliers" [readonly]="true"
+                    field="suppliername"></p-autoComplete>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Assigned To</label>
+                  <input formControlName="assignedToName" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Execution Time Frame</label>
+                  <input formControlName="executionTimeFrameName" pInputText [readonly]="true" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Contract NO</label>
+                  <input placeholder="{{contractName}}" type="text" [readonly]="true" pInputText />
+                </div>
+
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">From Date</label>
+                  <input pInputText type="text" placeholder="{{addPpmForm.value.fromDate|date:'dd/MM/yyyy'}}" />
+                </div>
+
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">To Date</label>
+                  <input pInputText type="text" placeholder="{{addPpmForm.value.toDate|date:'dd/MM/yyyy'}}" />
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label">Commnts</label>
+                  <input formControlName="comments" [readonly]="true" pInputText />
+                </div>
+
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="isShowInstructionDescription">
+                  <label class="form-label">Instruction Description</label>
+                  <input type="text" formControlName="instructionDescriptionView" pInputText [readonly]="true" />
+                </div>
+
+                <div class="card card-flush mb-6 mb-xl-9">
+                  <p-header class="header">
+                    <h6>Asset Serial Numbers</h6>
+                  </p-header>
+                  <fieldset>
+                    <dl *ngFor="let asset of PpmAssets" class="formline">
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                        <dd class="border-none">
+                          <input pInputText [readonly]="true" placeholder="{{asset.assetSerialNo}}" />
+                        </dd>
+                      </div>
+                      <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                        <dd class="border-none">
+                          <h6>Asset Number</h6>
+                          <input pInputText [readonly]="true" placeholder="{{asset.assetNumber}}" />
+                        </dd>
+                      </div>
+                    </dl>
+                  </fieldset>
+                </div>
+                <!-- End View Content -->
+              </div>
+            </div>
+          </p-tabPanel>
+
+
+        </p-tabView>
+      </form>
+    </p-fieldset>
+
+    <div class="card card-flush mb-6 mb-xl-9">
+        <div class="card-body pt-5" >
+          <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+          </div>
+    </div>
+
+  </p-tabPanel>
+
+
+  <p-tabPanel header="Edit" leftIcon="pi pi-file-edit">
+    <form [formGroup]="addPpmForm" (ngSubmit)="updatePpm()">
+      <p-tabView>
+        <p-tabPanel header="Model Information" leftIcon="pi pi-icon">
+
+          <div class="row py-3">
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">PPM Frequency<span class="span-color">*</span></label>
+              <p-dropdown [required]="true" placeholder="Select" formControlName="timePeriodId" [options]="period"
+                optionLabel="name" optionValue="id" (onChange)="changePeriod($event)" class="dropdown">
+              </p-dropdown>
+              <small class="p-error block"
+                *ngIf="addPpmForm.get('timePeriodId')?.invalid&&addPpmForm.get('timePeriodId')?.dirty">
+              </small>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Type of Service</label>
+              <p-dropdown [options]="TypeService" placeholder="Select" formControlName="typeOfServiceId"
+                (onChange)="changeService($event)" optionLabel="name" optionValue="id">
+              </p-dropdown>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="check">
+              <label class="form-label">Supplier</label>
+              <p-autoComplete [delay]="1000" formControlName="supplierName" [suggestions]="suppliers"
+                (onSelect)="onSelectSupplier($event)" (completeMethod)="searchSupplier($event)"
+                field="suppliername"></p-autoComplete>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Assigned To<span class="span-color">*</span></label>
+              <p-dropdown [required]="true" [options]="assigned" placeholder="Select" formControlName="assignedToId"
+                (onChange)="changeAssigned($event)" optionLabel="name" optionValue="id">
+              </p-dropdown>
+              <small class="p-error block"
+                *ngIf="addPpmForm.get('assignedToId')?.invalid&&addPpmForm.get('assignedToId')?.dirty">
+              </small>
+            </div>
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3"  >
+              <label class="form-label">Execution Time Frame </label>
+              <p-dropdown [options]="timeFrame" placeholder="Select" formControlName="executionTimeFrameId"
+                (onChange)="changeTimeFrame($event)" optionLabel="name" optionValue="id">
+              </p-dropdown>
+              <small class="p-error block"
+                  *ngIf="addPpmForm.get('executionTimeFrameId')?.invalid&&addPpmForm.get('executionTimeFrameId')?.dirty">
+               </small>
+            </div>
+
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Contract No</label>
+              <p-autoComplete [delay]="1000" [suggestions]="contractList" field="contractNumber"
+                (completeMethod)="searchContract($event)" formControlName="maintenanceContractId"
+                (onSelect)="onSelectContract($event)">
+              </p-autoComplete>
+            </div>
+
+            
+            <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+              <label class="form-label">Instruction Description</label>
+              <p-dropdown  placeholder="Select" formControlName="instructionDescription" [options]="InstructionDescription"
+                optionLabel="description" optionValue="id" (onChange)="changeInstructionDescription($event)" class="dropdown">
+              </p-dropdown>
+            </div>
+
+
+          </div>
+
+          <div class="first-date pt-4">
+            <h4 class="ps-3">First Next Date</h4>
+            <hr>
+            <div class="row py-3">
+
+              <div class="card card-flush mb-6 mb-xl-9">
+                <p-header class="header">
+                  <h6>Asset Serial Number</h6>
+                </p-header>
+                <fieldset>
+                  <dl *ngFor="let asset of PpmAssets" class="formline">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <dd class="border-none">
+                        <input pInputText [readonly]="true" placeholder="{{asset.assetSerialNo}}" />
+                      </dd>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                      <dd class="border-none">
+                        <h6>Asset Number</h6>
+                        <input pInputText [readonly]="true" placeholder="{{asset.assetNumber}}" />
+                      </dd>
+                    </div>
+                  </dl>
+                </fieldset>
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">From date <span class="span-color">*</span></label>
+                <p-calendar [required]="true" formControlName="fromDate" (onSelect)="selectFromDate($event)"
+                  [showIcon]="true" [showButtonBar]="true" [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">To date <span class="span-color">*</span></label>
+                <input pInputText [readonly]="true" [value]="addPpmForm.value.toDate|date:'dd/MM/yyyy'" type="datetime"
+                  formControlName="toDate" [required]="true">
+              </div>
+             
+            </div>
+            <div class="row py-3">
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <p-checkbox formControlName="autoRenew" (onChange)="setCheckbox($event)" [value]="false" [binary]="true"
+                  inputId="binary"></p-checkbox>
+                <label class="form-label">Auto Renew</label>
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Comments</label>
+                <textarea id="comment" formControlName="comments" pInputTextarea></textarea>
+              </div>
+
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                <label class="form-label">Attachment</label>
+                <app-attachments (onUploaded)="attachmentReady($event)" formArrayName="attachments" [attachments]="attachmentName"></app-attachments>
+              </div>
+            </div>
+          </div>
+
+        </p-tabPanel>
+
+      </p-tabView>
+
+      <div class="card card-flush mb-6 mb-xl-9">
+        <div class="card-body pt-5">
+          <div class="row py-3" [ngClass]="{'disableDiv': true}">
+            <div class="card-body pt-5" >
+              <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="saveButton">
+        <button pButton type="submit" (submit)="updatePpm()" label="Update" class="p-button-info col-lg-2" canUpdate></button>
+        <button pButton type="button" (click)="deletePpm()" label="Delete" class="p-button-danger col-lg-2" canDelete></button>
+        <button pButton type="button" label="Back" BackButton class="p-button-cancel col-lg-2"></button>
+      </div>
+    </form>
+  </p-tabPanel>
+</p-tabView>
+
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

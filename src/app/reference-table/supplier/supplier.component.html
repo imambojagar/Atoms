@@ -1,0 +1,388 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div
+                    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                  >
+                    <div class="row mb-3 content-heading">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3"
+                      >
+                        <div class="float-start main-heading">
+                          Suppliers Table
+                        </div>
+                        <div class="float-start export-icon mt-3">
+                          <a class="m-5" (click)="export()"
+                            >Export
+                            <img src="assets/img/dashboard/excel.svg" alt=""
+                          /></a>
+                        </div>
+                      </div>
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"
+                      >
+                        <div class="row float-end">
+                          <div
+                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3"
+                          >
+                            <div class="float-end filter-icon h-100">
+                              <a (click)="toggleFilter()"
+                                ><img
+                                  src="assets/img/dashboard/filter.svg"
+                                  alt=""
+                              /></a>
+                            </div>
+                          </div>
+                          <div
+                            class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3"
+                          >
+                            <div class="form-floating float-start">
+                              <input
+                                type="text"
+                                class="form-control input-field icon-padding"
+                                id="floatingName"
+                                [(ngModel)]="searchValue"
+                                (input)="applyGlobalFilter($event)"
+                                placeholder="Search"
+                                value="Type here"
+                              />
+                              <a>
+                                <img
+                                  class="float-end search-icon"
+                                  src="assets/img/dashboard/search.svg"
+                                  alt=""
+                              /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div
+                            class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3"
+                          >
+                            <div class="d-grid">
+                              <button
+                                class="btn btn-blue text-white border-r10"
+                                type="button"
+                                (click)="openAddModal()"
+                              >
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <!-- ================= -->
+                      <p-table
+                        [value]="suppliers"
+                        [rows]="10"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        #dt
+                      >
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th class="text-center">Supplier Name</th>
+                            <th class="text-center">Supplier Website</th>
+                            <th class="text-center">Supplier City</th>
+                            <th class="text-center">Supplier Status</th>
+                            <th class="text-center">Comment</th>
+                            <th class="text-center">Supplier Code</th>
+                            <th class="text-center">Supplier Oracle Code</th>
+                            <th class="text-center">Action</th>
+                          </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-supplier>
+                          <tr>
+                            <!-- <td>
+                    <a class="link-info" (click)="navToDetails(supplier, 0)">{{
+                      supplier.suppliername
+                    }}</a>
+                  </td> -->
+                            <td class="text-center">
+                              {{ supplier.suppliername }}
+                            </td>
+                            <td class="text-center">{{ supplier.website }}</td>
+                            <td class="text-center">{{ supplier.cityName }}</td>
+                            <td class="text-center">
+                              {{ supplier.suppStatusName }}
+                            </td>
+                            <td class="text-center">{{ supplier.comment }}</td>
+                            <td class="text-center">{{ supplier.code }}</td>
+                            <td class="text-center">
+                              <ul *ngFor="let code of supplier.suppTCodes">
+                                <li *ngIf="code.codeValue != ''">
+                                  {{ code.codeValue }}
+                                </li>
+                              </ul>
+                            </td>
+
+                            <td
+                              class="sticky-header"
+                              alignFrozen="right"
+                              pFrozenColumn
+                              [frozen]="balanceFrozen"
+                            >
+                              <div class="d-flex justify-content-center">
+                                <button
+                                  pButton
+                                  pRipple
+                                  icon="pi"
+                                  class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToView(supplier, 0)"
+                                >
+                                  <img
+                                    src="assets/img/dashboard/eye-1.svg"
+                                    alt="View"
+                                  />
+                                </button>
+
+                                <p-button
+                                  icon="pi pi-pencil"
+                                  class="mr-2"
+                                  [rounded]="true"
+                                  [outlined]="true"
+                                  severity="success"
+                                  (click)="navToDetails(supplier, 1)"
+                                  canUpdate
+                                />
+
+                                <p-button
+                                  icon="pi pi-trash"
+                                  severity="danger"
+                                  [rounded]="true"
+                                  [outlined]="true"
+                                  (click)="deleteSupplier(supplier)"
+                                  canDelete
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                      <p-paginator
+                        [rows]="filter.pageSize"
+                        [totalRecords]="totalRows"
+                        (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                      ></p-paginator>
+                    </div>
+                    <!-- =================== -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          #drawerFilter
+          [ngClass]="showFilterModal ? 'show' : ''"
+          class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+          id="r-step-1"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div class="offcanvas-header">
+            <h1 class="offcanvas-title offcanvas-heading">Search Supplier</h1>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="close_filter_modal()"
+            ></button>
+          </div>
+          <div class="p-3">
+            <div class="row">
+              <p-toast></p-toast>
+              <div
+                class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3"
+              >
+                <form [formGroup]="searchForm">
+                  <div class="row box-gryco">
+                    <div class="row py-3">
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <span class="p-float-label">
+                            <p-autoComplete
+                              [delay]="1000"
+                              formControlName="supplierName"
+                              [suggestions]="supplierNameList"
+                              (onSelect)="
+                                filter.supplierName = $event.value.suppliername
+                              "
+                              (completeMethod)="supplierNameFilter($event)"
+                              field="suppliername"
+                              inputId="supplierNameInput"
+                              [placeholder]="'Search Supplier Name'"
+                            ></p-autoComplete>
+                            <label for="supplierNameInput" class="form-label"
+                              >Supplier Name</label
+                            >
+                          </span>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <span class="p-float-label">
+                            <p-autoComplete
+                              [delay]="1000"
+                              [suggestions]="codeList"
+                              formControlName="code"
+                              (onSelect)="filter.code = $event.value.code"
+                              (completeMethod)="codeFilter($event)"
+                              field="code"
+                              inputId="supplierCodeInput"
+                              [placeholder]="'Search Supplier Code'"
+                            ></p-autoComplete>
+                            <label for="supplierCodeInput" class="form-label"
+                              >Supplier Code</label
+                            >
+                          </span>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-dropdown
+                            [options]="cityList"
+                            formControlName="cityId"
+                            optionLabel="name"
+                            optionValue="id"
+                            class="dropdown"
+                            (onChange)="filter.cityId = $event.value"
+                            placeholder="select"
+                          ></p-dropdown>
+                          <label class="form-label">Supplier City </label>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-dropdown
+                            [options]="statusList"
+                            formControlName="suppStatusId"
+                            optionLabel="name"
+                            optionValue="id"
+                            class="dropdown"
+                            (onChange)="filter.suppStatusId = $event.value"
+                            placeholder="select"
+                          ></p-dropdown>
+                          <label class="form-label">Supplier Status </label>
+                        </div>
+                      </div>
+
+                      <div
+                        class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                      >
+                        <div class="form-floating mb-2">
+                          <p-dropdown
+                            formControlName="codeTypeId"
+                            (onChange)="filter.codeTypeId = $event.value"
+                            [options]="codes"
+                            placeholder="Oracle Type"
+                            optionLabel="name"
+                            optionValue="id"
+                          ></p-dropdown>
+                          <label class="form-label">Oracle Type</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3" *ngIf="filter.codeTypeId != null">
+                        <input
+                          formControlName="codeValue"
+                          type="text"
+                          (keyup)="onCodeInput($event)"
+                          pInputText
+                          class="form-control"
+                          placeholder="Oracle Value"
+                        />
+                        <label class="form-label">Oracle Value</label>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                    type="button"
+                    (click)="search()"
+                  >
+                    Apply Filter
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+
+<app-edit-delete-supplier
+  [showmodal]="editSupplierLoaded"
+  [supplier_id]="supplier_id"
+  [supplier_index]="supplier_index"
+  (openModals)="openModal()"
+></app-edit-delete-supplier>
+
+<app-view-supplier
+  [showmodal]="viewSupplierLoaded"
+  [supplier_id]="supplier_id"
+  [supplier_index]="supplier_index"
+  (openModals)="openViewModal()"
+></app-view-supplier>
+
+<app-add-supplier
+  [showmodal]="addSupplierLoaded"
+  [supplier_id]="supplier_id"
+  [supplier_index]="supplier_index"
+  (openModals)="toggleAdd()"
+></app-add-supplier>
+
+<div
+  *ngIf="editSupplierLoaded"
+  class="offcanvas-backdrop fade show"
+  (click)="openModal()"
+></div>
+<div
+  *ngIf="showFilterModal"
+  class="offcanvas-backdrop fade show"
+  (click)="toggleFilter()"
+></div>
+<div
+  *ngIf="addSupplierLoaded"
+  class="offcanvas-backdrop fade show"
+  (click)="toggleAdd()"
+></div>
+<div
+  *ngIf="viewSupplierLoaded"
+  class="offcanvas-backdrop fade show"
+  (click)="openViewModal()"
+></div>

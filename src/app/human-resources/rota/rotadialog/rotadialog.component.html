@@ -1,0 +1,120 @@
+<div
+  #drawerFilter
+  [ngClass]="showFilterModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Rota</h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_filter_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="searchForm">
+          <div class="row form-scroller mb-4">
+            <div class="row box-gryco">
+              <div class="row py-3">
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  *ngIf="false"
+                >
+                  <label class="form-label">
+                    <span class="">Site</span>
+                  </label>
+
+                  <p-autoComplete
+                    [delay]="1000"
+                    class="input-field-add-more-value border rounded-0"
+                    [(ngModel)]="searchFilter.site"
+                    [suggestions]="Sites"
+                    field="custName"
+                    name="site"
+                  ></p-autoComplete>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <label class="form-label"> Date </label>
+
+                  <p-calendar
+                    [showIcon]="true"
+                    [showOnFocus]="false"
+                    [(ngModel)]="searchFilter.shiftDate"
+                    dateFormat="yy-mm-dd"
+                    name="date"
+                    dataType="string"
+                  ></p-calendar>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  *ngIf="false"
+                >
+                  <label class="form-label">Asset Group</label>
+                  <p-dropdown
+                    [options]="AssetGroups"
+                    optionLabel="name"
+                    [(ngModel)]="searchFilter.assetGroup"
+                    [hidden]="true"
+                    class="dropdown"
+                    placeholder="select"
+                  ></p-dropdown>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                >
+                  <label class="form-label"> Shift </label>
+                  <p-dropdown
+                    [options]="shifts"
+                    optionLabel="shiftName"
+                    class="dropdown"
+                    [(ngModel)]="searchFilter.defaultShift"
+                    placeholder="select"
+                    [style]="{ width: '100%' }"
+                    name="defaultShift"
+                  ></p-dropdown>
+                </div>
+                <div
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  *ngIf="false"
+                >
+                  <label class="form-label"> Employee </label>
+                  <p-dropdown
+                    [options]="employees"
+                    optionLabel="userName"
+                    class="dropdown"
+                    aria-readonly="true"
+                    [(ngModel)]="searchFilter.employee"
+                    [style]="{ width: '100%' }"
+                    name="employee"
+                  ></p-dropdown>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="selectProduct(searchFilter)"
+          >
+            Apply Filter
+          </button>
+        </div>
+      </div>
+    </div>
+    <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+  </div>
+</div>

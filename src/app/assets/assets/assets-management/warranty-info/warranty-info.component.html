@@ -1,0 +1,89 @@
+<form [formGroup]="assetFormService.warrantyForm">
+  <div class="row py-2">
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+      <div class="form-floating mb-2">
+
+        <span class="p-float-label">
+          <p-inputNumber formControlName="siteWarrantyMonthNo" mode="decimal" [useGrouping]="false"
+            (keyup)="assetFormService.setEndWarrentyDate()">
+          </p-inputNumber>
+          <label class="form-label">Site Warranty Months</label></span>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+      <div class="form-floating mb-2">
+
+        <span class="p-float-label">
+          <p-inputNumber formControlName="extendedWarrantyMonthNo" id="extendedWarrantyMonthNo" mode="decimal"
+            [useGrouping]="false" (keyup)="assetFormService.setEndWarrentyDate()">
+          </p-inputNumber>
+          <label for="extendedWarrantyMonthNo" class="form-label">Extended Warranty months</label></span>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+      <div class="form-floating mb-2">
+
+        <span class="p-float-label">
+          <p-inputNumber formControlName="remainderWarrantyMonthNo" id="remainderWarrantyMonthNo" mode="decimal"
+            [useGrouping]="false">
+          </p-inputNumber>
+          <label for="remainderWarrantyMonthNo" class="form-label">Remainder Warranty Months</label></span>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+      <div class="form-floating mb-2">
+
+        <span class="p-float-label">
+          <p-inputNumber formControlName="eomWarrantyMonthsNo" id="eomWarrantyMonthsNo" mode="decimal"
+            [useGrouping]="false">
+          </p-inputNumber>
+          <label for="eomWarrantyMonthsNo" class="form-label">EOM Warranty Months</label></span>
+      </div>
+    </div>
+    <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+            <label>Ppm time period</label>
+            <p-dropdown placeholder="--Select--" formControlName="ppmTimePeriod"
+                [options]="assetFormService.ppmTimePeriods" optionLabel="name" class="dropdown"
+                (onChange)="assetFormService.calculateAssetPeriods()">
+            </p-dropdown>
+
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+            <label> Please choose the first date that<br>you want to start your PPM plan on</label>
+            <div *ngFor="let a of assetFormService.assetPeriods" class="p-col-md-6 col-xl-3 col-xxl-3 mb-5-checkbox">
+                <p-radioButton [inputId]="a.id" [value]="a" formControlName="isStartDate"
+                    (onClick)="assetFormService.selectedRadioButton(a.id)"></p-radioButton>
+                <label> {{a.periodDate}}
+
+                </label>
+            </div>
+        </div> -->
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+      <div class="form-floating mb-2">
+
+        <label for="warrantyValue" class="form-label">Extended Warranty Value</label><input
+          class="form-control form-control-lg form-control-solid" id="warrantyValue" formControlName="warrantyValue"
+          type="text" pInputText />
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5" [ngClass]="{'disableDiv': true}">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false" id="warrantyEndDateDisplay"
+          formControlName="warrantyEndDateDisplay" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+        <label for="warrantyEndDateDisplay" class="form-label"> Warranty End Date</label>
+      </div>
+    </div>
+  </div>
+  <div class="row py-3">
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-5">
+      <div class="form-floating mb-2">
+        <textarea id="warrantyContractConditions" formControlName="warrantyContractConditions"
+          placeholder="Enter the Warranty Contract Conditions" class="form-control form-control-lg form-control-solid"
+          pInputTextarea></textarea>
+        <label for="warrantyContractConditions" class="form-label">Warranty Contract Conditions</label>
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,64 @@
+<form [formGroup]="assetFormService.installationForm">
+
+  <div class="row py-2 mb-2">
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date" id="productionDate"
+          formControlName="productionDate" dateFormat="dd-mm-yy"></p-calendar>
+        <label for="productionDate" class="form-label"> Production Date</label>
+      </div>
+    </div>
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date" id="edd"
+        formControlName="edd" dateFormat="dd-mm-yy"></p-calendar>
+        <label for="edd" class="form-label"> EDD</label>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false" id="deliveryInspectionDate" placeholder="Please select date"
+          formControlName="deliveryInspectionDate" dateFormat="dd-mm-yy"></p-calendar>
+        <label for="deliveryInspectionDate" class="form-label"> Delivery Inspection Date</label>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date" id="technicalInspectionDate"
+          formControlName="technicalInspectionDate" dateFormat="dd-mm-yy"></p-calendar>
+        <label for="technicalInspectionDate" class="form-label"> Technical Inspection Date</label>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date" id="endUserAcceptanceDate"
+          formControlName="endUserAcceptanceDate" dateFormat="dd-mm-yy" (onSelect)="assetFormService.setEndWarrentyDate()"></p-calendar>
+        <label for="endUserAcceptanceDate" class="form-label">End User Acceptance Date</label>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false"  placeholder="Please select date" id="technicalAcceptanceDate"
+          formControlName="technicalAcceptanceDate" dateFormat="dd-mm-yy" ></p-calendar>
+        <label for="technicalAcceptanceDate" class="form-label">Technical Acceptance Date</label>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false" id="finalAcceptanceDate" placeholder="Please select date"
+          formControlName="finalAcceptanceDate" dateFormat="dd-mm-yy" ></p-calendar>
+        <label for="finalAcceptanceDate" class="form-label">Final Acceptance Date</label>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="form-floating mb-2">
+        <p-calendar [showIcon]="true" [showOnFocus]="false" id="installationDate" placeholder="Please select date"
+          formControlName="installationDate" dateFormat="dd-mm-yy" ></p-calendar>
+          <label for="installationDate" class="form-label">Installation Date</label>
+        </div>
+    </div>
+
+  </div>
+</form>

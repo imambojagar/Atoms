@@ -1,0 +1,144 @@
+<div class="card card-flush">
+  <form [formGroup]="form">
+    <div class="card-body">
+      <div class="fv-row">
+        <div class="row py-3" [ngClass]="{'disableDiv': hideContinue==false}">
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            
+            <div class="d-flex">
+              <div class="col-lg-10">
+                <div class="form-floating mb-2"> 
+                  <label class="fs-6 fw-bold form-label">Validated By</label>
+                  <input type="text" formControlName="validatedBy" name="validatedBy"
+                  class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+              </div>
+              </div>
+              <div class="col-lg-2">
+                <app-employee-details-oracle (onSelectedEmployee)="onValidatedBySelected($event)"></app-employee-details-oracle>
+              </div>
+              <div *ngIf=" form.get('validatedBy')?.hasError('required') && form.get('validatedBy')?.touched "
+                class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Validated Date</label>
+            <p-calendar [showOnFocus]="false" placeholder="Please select date" [showIcon]="true" [showButtonBar]="true"
+              [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="validatedDate"
+              dateFormat="yy-mm-dd" dataType="string">
+            </p-calendar>
+            </div>
+            <div *ngIf=" form.get('validatedDate')?.hasError('required') && form.get('validatedDate')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+           
+            <div class="d-flex">
+              <div class="col-lg-10">
+                <div class="form-floating mb-2"> 
+                  <label class="fs-6 fw-bold form-label">Final Approved By</label>
+                <input id="mm" type="text" formControlName="finalApprovedBy" pInputText readonly />
+              </div>
+              </div>
+              <app-employee-details-oracle (onSelectedEmployee)="onFinalApprovedBySelected($event)"></app-employee-details-oracle>
+            </div>
+              <div *ngIf=" form.get('finalApprovedBy')?.hasError('required') && form.get('finalApprovedBy')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Approved Date</label>
+            <p-calendar [showOnFocus]="false" placeholder="Please select date" [showIcon]="true" [showButtonBar]="true"
+              [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="approvedDate"
+              dateFormat="yy-mm-dd" dataType="string">
+            </p-calendar>
+            </div>
+            <div *ngIf=" form.get('approvedDate')?.hasError('required') && form.get('approvedDate')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Acceptance Date</label>
+            <p-calendar [showOnFocus]="false" placeholder="Please select date" [showIcon]="true" [showButtonBar]="true"
+              [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="acceptanceDate"
+              dateFormat="yy-mm-dd" dataType="string">
+            </p-calendar>
+            </div>
+            <div *ngIf=" form.get('acceptanceDate')?.hasError('required') && form.get('acceptanceDate')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+        </div>
+        <h4 class="d-flex align-items-center text-primary mt-8">Invoice Details</h4>
+        <hr class="my-2">
+        <div class="row py-3" [ngClass]="{'disableDiv': hideContinue==false}">
+          <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Invoice Number</label>
+            <input type="number" formControlName="invoiceNumber" min="1" name="invoiceNumber"
+              class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+            </div>
+            <div *ngIf=" form.get('invoiceNumber')?.hasError('required') && form.get('invoiceNumber')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Invoice Date</label>
+            <p-calendar [showOnFocus]="false" placeholder="Please select date" [showIcon]="true" [showButtonBar]="true"
+              [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="invoiceDate"
+              dateFormat="yy-mm-dd" dataType="string">
+            </p-calendar>
+            <div *ngIf=" form.get('invoiceDate')?.hasError('required') && form.get('invoiceDate')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Invoice Amount</label>
+            <input type="number" formControlName="invoiceAmount" name="invoiceAmount" [required]="true"
+              class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+            <div *ngIf=" form.get('invoiceAmount')?.hasError('required') && form.get('invoiceAmount')?.touched "
+              class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+          </div>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Delivery Amount</label>
+            <input type="number" formControlName="deliveryAmount" name="deliveryAmount"
+              class="form-control form-control-lg form-control-solid" placeholder="Enter ..." readonly />
+          </div>
+          </div>
+          <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
+            <div class="form-floating mb-2"> 
+            <label class="fs-6 fw-bold form-label">Remarks</label>
+            <textarea formControlName="invoiceRemarks" name="invoiceRemarks"
+              class="form-control form-control-lg form-control-solid" placeholder="Enter ..." rows="2"></textarea>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="!isCancel">
+      <div class="col-12">
+        <button type="button" class="btn btn-primary mt-8 ml-6" (click)="back()">
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary mt-8 ml-6"
+          (click)="save()"
+          *ngIf="hideContinue"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary mt-8 ml-6"
+          (click)="print()"
+          *ngIf="!hideContinue"
+        >
+          Print
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

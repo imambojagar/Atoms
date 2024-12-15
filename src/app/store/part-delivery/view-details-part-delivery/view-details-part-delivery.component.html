@@ -1,0 +1,117 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+ class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+    id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading"> View Part Delivery</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+    <p-toast></p-toast>
+    <div class="">
+      <!-- <p-tabView [(activeIndex)]="tabIndex"> -->
+        <!-- <p-tabPanel header="View" leftIcon="pi pi-file" *ngIf="isDisplayView">
+          <p-fieldset legend="Request info"> -->
+            <div class="box-gryco pt-2">
+              <form [formGroup]="addPartDeliveryForm">
+                <div class="row py-3">
+                  <div class="saveButton" *ngIf="ParentWOId > 0">
+                    <div class="saveButton">
+                      <div *ngFor="let step of steps; let i = index" style="float: left;">
+                        <p class="viewp-text">{{ 'Step' }} {{ i + 1 }}: <span class="viewspan-text">{{ step.name }}</span></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Date' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.date }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Asset Name' }}: <span class="viewspan-text">{{ assetName }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Asset Number' }}: <span class="viewspan-text">{{ assetNumber }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Asset S.N' }}: <span class="viewspan-text">{{ assetSN }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Call Id' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.callIdValue }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Po.No.' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.poNoValue }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Model' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.model }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Site' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.customerName }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Related Emp' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.relatedEmpName }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Status Workflow Approval' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.statusWorkflow }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Approval Comment' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.approvalComment }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Status of Permission' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.statusPermission }}</span></p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">{{ 'Note' }}: <span class="viewspan-text">{{ addPartDeliveryForm.value.note }}</span></p>
+                  </div>
+                </div>
+
+                <div formArrayName="spareParts" *ngFor="let info of getControlsFor('spareParts'); let i = index">
+                  <fieldset class="formline" [formGroupName]="i" *ngIf="info.value.id != ''">
+                    <div class="row py-3">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <p class="viewp-text">{{ 'Part No' }}: <span class="viewspan-text">{{ info.value.partName }}</span></p>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <p class="viewp-text">{{ 'Description' }}: <span class="viewspan-text">{{ info.value.description }}</span></p>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <p class="viewp-text">{{ 'Quantity' }}: <span class="viewspan-text">{{ info.value.qty }}</span></p>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!isNeedSpare">
+                        <p class="viewp-text">{{ 'Installed Quantity' }}: <span class="viewspan-text">{{ info.value.installedQty }}</span></p>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!isNeedSpare">
+                        <p class="viewp-text">{{ 'Return Quantity' }}: <span class="viewspan-text">{{ info.value.returnedQty }}</span></p>
+                      </div>
+
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <p class="viewp-text">{{ 'Expected Date' }}: <span class="viewspan-text">{{ info.value.expectedDate }}</span></p>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </form>
+
+            </div>
+          <!-- </p-fieldset>
+        </p-tabPanel>
+      </p-tabView> -->
+
+      <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+    </div>
+</div>
+

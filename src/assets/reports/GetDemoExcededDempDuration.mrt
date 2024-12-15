@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="4">
+      <GetDemoCountBysite Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>GetDemoCountBysite</Alias>
+        <HeadersString />
+        <Key>9124c05498754992811f6ab6d4cda0ab</Key>
+        <Name>GetDemoCountBysite</Name>
+        <PathData>D:\Reports Schema\GetDemoCountBysite.json</PathData>
+      </GetDemoCountBysite>
+      <GetDemoStatusCount Ref="3" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>GetDemoStatusCount</Alias>
+        <HeadersString />
+        <Key>2878488e855a4f13938469e1bca7933c</Key>
+        <Name>GetDemoStatusCount</Name>
+        <PathData>D:\Reports Schema\GetDemoStatusCount.json</PathData>
+      </GetDemoStatusCount>
+      <GetDemoCompletedAndRejectedPercentage Ref="4" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>GetDemoCompletedAndRejectedPercentage</Alias>
+        <HeadersString />
+        <Key>b89a375987eb4800afc9c652aaa19a70</Key>
+        <Name>GetDemoCompletedAndRejectedPercentage</Name>
+        <PathData>D:\Reports Schema\GetDemoCompletedAndRejectedPercentage.json</PathData>
+      </GetDemoCompletedAndRejectedPercentage>
+      <GetDemosExceededDemoDurationCount Ref="5" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>GetDemosExceededDemoDurationCount</Alias>
+        <HeadersString />
+        <Key>3d9153bfed5940fba26779865e1bea46</Key>
+        <Name>GetDemosExceededDemoDurationCount</Name>
+        <PathData>D:\Reports Schema\GetDemosExceededDemoDurationCount.json</PathData>
+      </GetDemosExceededDemoDurationCount>
+    </Databases>
+    <DataSources isList="true" count="4">
+      <root Ref="6" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="3">
+          <value>ORIGINAL,SiteName,SiteName,SiteName,System.String,_x0035_bf74dc4fdfc4087bcd608d576d4375c</value>
+          <value>ORIGINAL,SiteId,SiteId,SiteId,System.Decimal,fc66182b1c074ccfb8e62eb7e4af1d2e</value>
+          <value>ORIGINAL,Count,Count,Count,System.Decimal,e0e97df1aa694041a1f7c2901586ff00</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>6400ed634e934205a663fac899790237</Key>
+        <Name>root</Name>
+        <NameInSource>GetDemoCountBysite.root</NameInSource>
+      </root>
+      <root2 Ref="7" type="DataTableSource" isKey="true">
+        <Alias>root2</Alias>
+        <Columns isList="true" count="3">
+          <value>ORIGINAL,statusName,statusName,statusName,System.String,_x0031_861b7514aa345f29414904f2a9ab398</value>
+          <value>ORIGINAL,statusId,statusId,statusId,System.String,e5208bac881142fda76d02d07131acba</value>
+          <value>ORIGINAL,count,count,count,System.Decimal,_x0038_a9d83019344413ba6fd45a954e16973</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>492add3321834ec4896124d519ea3567</Key>
+        <Name>root2</Name>
+        <NameInSource>GetDemoStatusCount.root</NameInSource>
+      </root2>
+      <root3 Ref="8" type="DataTableSource" isKey="true">
+        <Alias>root3</Alias>
+        <Columns isList="true" count="6">
+          <value>ORIGINAL,completedPercentage,completedPercentage,completedPercentage,System.Decimal,bf08364b37b9435596f8a1a2a34e5ace</value>
+          <value>ORIGINAL,rejectedPercentage,rejectedPercentage,rejectedPercentage,System.Decimal,_x0032_5705e46f40a4df58acc7dfd2b308629</value>
+          <value>ORIGINAL,completedCount,completedCount,completedCount,System.Decimal,_x0031_b7b0f13b887489ab29f65538ea4144e</value>
+          <value>ORIGINAL,rejectedCount,rejectedCount,rejectedCount,System.Decimal,_x0034_4c7ba54b7554d4e92e1d33e9ba6f218</value>
+          <value>ORIGINAL,totalCount,totalCount,totalCount,System.Decimal,f42064653fd44b04a98482810342940b</value>
+          <value>ORIGINAL,relationId,relationId,relationId,System.String,ff84d6de688a4513ab76eaaae5652f41</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>6ffef88df18d4e078ce9b20d2407ff5e</Key>
+        <Name>root3</Name>
+        <NameInSource>GetDemoCompletedAndRejectedPercentage.root</NameInSource>
+      </root3>
+      <root4 Ref="9" type="DataTableSource" isKey="true">
+        <Alias>root4</Alias>
+        <Columns isList="true" count="3">
+          <value>ORIGINAL,SiteName,SiteName,SiteName,System.String,dff4af7faddc4ebfba3033cb8d309387</value>
+          <value>ORIGINAL,SiteId,SiteId,SiteId,System.Decimal,d8e9c1322586493aa975bb946019083e</value>
+          <value>ORIGINAL,Count,Count,Count,System.Decimal,fafe0684dbbb44a8b3d6f80d9a1e8219</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>e3f7ebb20f6d499b94859db23295e4ce</Key>
+        <Name>root4</Name>
+        <NameInSource>GetDemosExceededDemoDurationCount.root</NameInSource>
+      </root4>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <UserFunctions isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>f7ceb9297ceb417b82bbe7d676877971</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="10" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <Tableroot4 Ref="11" type="Stimulsoft.Dashboard.Components.Table.StiTableElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <BackColor>Transparent</BackColor>
+          <Border>All;Gray;1;Solid</Border>
+          <ClientRectangle>220,100,760,320</ClientRectangle>
+          <Columns isList="true" count="2">
+            <Item11 Ref="12" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root4.SiteName</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <HorAlignment>Right</HorAlignment>
+              <Key>6de81cac2f8c4da8a93ff266fb29478b</Key>
+              <Label>SiteName</Label>
+              <Size Ref="13" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+            </Item11>
+            <Item12 Ref="14" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>root4.Count</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <HorAlignment>Right</HorAlignment>
+              <Key>2188cd62469740aca4b297227be5b8c5</Key>
+              <Label>Count</Label>
+              <ShowTotalSummary>True</ShowTotalSummary>
+              <Size Ref="15" type="Stimulsoft.Report.Dashboard.StiTableColumnSize" isKey="true" />
+              <TextFormat Ref="16" type="NumberFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+              </TextFormat>
+            </Item12>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,10,Bold</Font>
+          <FooterFont>Arial,10</FooterFont>
+          <FooterForeColor>Transparent</FooterForeColor>
+          <ForeColor>Transparent</ForeColor>
+          <Guid>7d9e029ca3a746f7947035800c99ed3b</Guid>
+          <HeaderFont>Arial,10</HeaderFont>
+          <HeaderForeColor>Transparent</HeaderForeColor>
+          <Margin>3,3,3,3</Margin>
+          <Name>Tableroot4</Name>
+          <Page isRef="10" />
+          <Parent isRef="10" />
+          <Shadow>[68:34:34:34];2, 2;5;True</Shadow>
+          <SizeMode>Fit</SizeMode>
+          <TableConditions isList="true" count="0" />
+          <Title Ref="17" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,15</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Exceded Demo Duration Period</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+        </Tableroot4>
+      </Components>
+      <DashboardWatermark Ref="18" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>86073b2a9453488b9d8fb4e21722a3ca</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportAuthor>Mohamed Alaa</ReportAuthor>
+  <ReportChanged>3/7/2024 5:38:13 PM</ReportChanged>
+  <ReportCreated>3/7/2024 5:25:34 PM</ReportCreated>
+  <ReportFile>D:\Reports\GetDemoExcededDempDuration.mrt</ReportFile>
+  <ReportGuid>46987ffa7afe4d62afc5f53f831d7959</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2024.1.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

@@ -1,0 +1,508 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class=" ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <!--beginbreadcrumb-->
+              <p-toast></p-toast>
+              <!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+              <div class="card flex justify-content-center mb-5">
+                <p-breadcrumb [model]="items"></p-breadcrumb>
+              </div> -->
+              <!--endbreadcrumb-->
+
+              <!--begin Search Fields -->
+                <div #drawerFilter  [ngClass]=" showmodal ? 'show' : ''"
+                   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                    <div class="offcanvas-header">
+                      <h1 class="offcanvas-title offcanvas-heading">Search Service Request</h1>
+                      <button type="button" class="btn-close" (click)="close_modal()"></button>
+                    </div>
+                      <div class="p-3">
+                        <div class="row">
+                          <div class="mb-6 mb-xl-9">
+                              <!-- <div class="card-title">
+                                <h2 class="d-flex align-items-center text-white"> Search </h2>
+                              </div> -->
+
+                            <div class="pt-2">
+                              <form [formGroup]="searchForm">
+                                <div class="row  form-scroller">
+                                <div class="box-gryco">
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label">Requested Date Operator</label>
+                                    <p-dropdown [options]="serviceRequestFormService.Operator_Dates" optionLabel="name"
+                                      formControlName="requestedDateSymbol" class="dropdown" placeholder="select" [filter]="true" filterBy="name" [showClear]="true"></p-dropdown>
+                                  </div>
+                                  </div>
+                                  <ng-container
+                                    *ngIf="(searchForm.get('requestedDateSymbol')?.value==7)||(searchForm.get('requestedDateSymbol')?.value==8) else elseTemp">
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label  class="form-label"> Requested End Date From</label>
+                                      <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="requestedDateFrom"
+                                        dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+                                      <!-- <small class="d-block fst-italic text-black-50">Format 18/12/2022</small> -->
+                                    </div>
+                                    </div>
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label  class="form-label"> Requested End Date To</label>
+                                      <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="requestedDateTo" dateFormat="yy-mm-dd"
+                                        dataType="string"></p-calendar>
+                                      <!-- <small class="d-block fst-italic text-black-50">Format 18/12/2022</small> -->
+                                    </div>
+                                    </div>
+                                  </ng-container>
+                                  <ng-template #elseTemp>
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label  class="form-label">Requested Date </label>
+                                      <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="requestedDateFrom"
+                                        dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+                                      <!-- <small class="d-block fst-italic text-black-50">Format 18/12/2022</small> -->
+                                    </div>
+                                    </div>
+                                  </ng-template>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label">Call Id</label>
+                                    <p-autoComplete [delay]="1000" formControlName="callId" [suggestions]="callId" field="callNo"
+                                      (completeMethod)="selectCallId($event)" dataKey="id" (onSelect)="bindCallId($event)"
+                                      (onClear)="clearInput()">
+                                    </p-autoComplete>
+                                  </div>
+                                  </div>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label">Asset Number</label>
+                                    <p-autoComplete [delay]="1000" formControlName="assetNo" [suggestions]="assetNumberList" field="assetNumber"
+                                      (completeMethod)="getAssetNumbersAuto($event)" dataKey="id" (onSelect)="bindAssetNumber($event)"
+                                      (onClear)="clearInputNumber()" placeholder="Please enter Asset Number"></p-autoComplete>
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label">Asset Serial Number</label>
+                                    <p-autoComplete [delay]="1000" formControlName="assetSerialNo" [suggestions]="assetSerialList"
+                                      field="assetSerialNo" (completeMethod)="getAssetSerialsAuto($event)" dataKey="id"
+                                      (onSelect)="bindAssetSearialNumber($event)" (onClear)="clearInputSerial()"
+                                      placeholder="Please enter Asset Number"></p-autoComplete>
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label">Call Last Situation</label>
+                                    <p-dropdown [options]="serviceRequestFormService.CallslastSituationWO" optionLabel="name"
+                                      formControlName="CallslastSituationWO" class="dropdown" placeholder="select" [filter]="true" filterBy="name" [showClear]="true"></p-dropdown>
+                                  </div>
+                                  </div>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label"> Assigned Employee</label>
+                                    <p-dropdown [options]="serviceRequestFormService.assignedEmployees" optionLabel="userName"
+                                      formControlName="assignedEmployee" class="dropdown" placeholder="select" ></p-dropdown>
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label"> First Action Status</label>
+                                    <p-dropdown [options]="serviceRequestFormService.firstActionStatuses" optionLabel="name"
+                                      formControlName="firstActionstatus" class="dropdown" placeholder="select" [filter]="true" filterBy="name" [showClear]="true"></p-dropdown>
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label">Asset Name</label>
+                                    <p-autoComplete [delay]="1000" formControlName="assetName"
+                                      [suggestions]="serviceRequestFormService.AssetNames" field="assetname"
+                                      (completeMethod)="selectAssetName($event)" dataKey="id" (onSelect)="bindAssetName($event)"
+                                      (onClear)="clearInput()" placeholder="Please enter Asset Name"></p-autoComplete>
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label" for="site">Manufacturer</label>
+                                    <!-- To Do -->
+                                    <p-autoComplete [delay]="1000" formControlName="manufacturer" [suggestions]="assetFormService.manufacturers"
+                                      field="name" dataKey="id" (completeMethod)="selectManufacturer($event)"
+                                      (onSelect)="bindManufacturer($event)" placeholder="Please enter Manufacturer"></p-autoComplete>
+                                  </div>
+                                  </div>
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label" for="modelDefinition">Model</label>
+                                    <!-- <p-autoComplete  [delay]="1000" formControlName="modelDefinition" [suggestions]="serviceRequestFormService.ModelDefinitions"
+                                                  dataKey="modelName" (onSelect)="selectModels($event)" (completeMethod)="bindModel($event)" field="modelDefCode"></p-autoComplete> -->
+                                    <p-autoComplete [delay]="1000" formControlName="modelName" [suggestions]="modelsList"
+                                      (onSelect)="bindModel($event)" (completeMethod)="modelNameFilter($event)" field="modelName"
+                                      placeholder="Please enter Model Name"></p-autoComplete>
+                                  </div>
+                                  </div>
+
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label" *ngIf="this.serviceRequestFormService.FMLookup">Type Of Request</label>
+                                    <label class="form-label" *ngIf="!this.serviceRequestFormService.FMLookup">Cost Code Name</label>
+                                    <p-dropdown [options]="serviceRequestFormService.typeOfrequests" optionLabel="name"
+                                      formControlName="typeOfrequest" class="dropdown" placeholder="select" [filter]="true" filterBy="name" [showClear]="true"></p-dropdown>
+                                  </div>
+                                  </div>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label " *ngIf="this.serviceRequestFormService.FMLookup">Urgent</label>
+                                    <label class="form-label " *ngIf="!this.serviceRequestFormService.FMLookup">Job Priority</label>
+                                    <p-dropdown [options]="serviceRequestFormService.yesOrNo" optionLabel="name"  formControlName="priority"
+                                      class="dropdown" placeholder="select" [filter]="true" filterBy="name" [showClear]="true"></p-dropdown>
+                                  </div>
+                                  </div>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label ">Status</label>
+                                    <p-dropdown [options]="serviceRequestFormService.statuses" optionLabel="name" formControlName="status"
+                                      class="dropdown" placeholder="select" [filter]="true" filterBy="name" [showClear]="true"></p-dropdown>
+                                  </div>
+                                  </div>
+
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label"><span class="">Site</span></label>
+                                    <p-autoComplete [delay]="1000" placeholder="Please enter . . . "   formControlName="site" [suggestions]="serviceRequestFormService.Sites" field="custName" dataKey="id"
+                                                  (completeMethod)="serviceRequestFormService.onSelectSite($event)" (onSelect)="serviceRequestFormService.bindSite($event)"
+                                                  (onClear)="serviceRequestFormService.clearSite()"></p-autoComplete>
+                                  </div>
+                                  </div>
+
+
+                                  <div *ngIf="!this.serviceRequestFormService.FMLookup" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label ">Job Status</label>
+                                    <p-dropdown placeholder="--Select--" formControlName="jobstatus"
+                                      [options]="serviceRequestFormService.defectTypes" optionLabel="name" class="dropdown"
+                                      [filter]="true" filterBy="name" [showClear]="true">
+                                    </p-dropdown>
+                                  </div>
+                                  </div>
+
+                                  <div *ngIf="!this.serviceRequestFormService.FMLookup" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label " *ngIf="!this.serviceRequestFormService.FMLookup">Source</label>
+                                    <p-dropdown [options]="serviceRequestFormService.requestedThrough" optionLabel="name"
+                                      formControlName="requestedThrough" class="dropdown" placeholder="select" [filter]="true" filterBy="name" [showClear]="true"></p-dropdown>
+
+                                  </div>
+                                  </div>
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!this.serviceRequestFormService.FMLookup">
+                                    <div class="form-floating mb-2">
+                                    <label class="form-label" *ngIf="!this.serviceRequestFormService.FMLookup"> Problem Description</label>
+                                    <p-dropdown [options]="serviceRequestFormService.problemDescriptions" optionLabel="name"
+                                      formControlName="problemDescription" class="dropdown" placeholder="select" [filter]="true" filterBy="name" [showClear]="true"></p-dropdown>
+                                  </div>
+                                  </div>
+
+                                  <div *ngIf="!this.serviceRequestFormService.FMLookup" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="form-floating mb-2">
+                                    <label class="form-label ">Long Description</label>
+                                    <textarea id="longDescription" formControlName="longDescription" placeholder="Enter Description"
+                                      pInputTextarea></textarea>
+                                  </div>
+                                  </div>
+
+
+                                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="false">
+                                    <div class="form-floating mb-2">
+                                    <label class="form-label">Asset Group</label>
+                                    <p-dropdown placeholder="Search Asset Group" [options]="serviceRequestFormService.assetGroupsList"
+                                      [hidden]="true" optionLabel="name" optionValue="id" formControlName="assetGroup"></p-dropdown>
+                                  </div>
+                                  </div>
+
+
+
+                                  <div class="col-md-6 col-xl-3 col-xxl-3 mt-4">
+                                    <div class="form-floating mb-2">
+                                      <p-checkbox formControlName="archivedData" (onChange)="setCheckbox($event)" [value]="false" [binary]="true"
+                                        inputId="ny" />
+                                      <label for="ny">Archived Data</label>
+                                    </div>
+                                  </div>
+
+
+                                  <!-- <div class="card-footer d-flex justify-content-end border-top py-6">
+                                    <button type="button" class="btn btn-primary" (click)="searchServiceRequest()">Search</button>
+                                    <button type="submit" class="btn btn-light btn-active-light-primary me-2" (click)="reset()"
+                                      [disabled]="">Reset</button>
+                                  </div> -->
+
+                                </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="fixed-bottom">
+                          <div class="row">
+                            <div class="col-12">
+                              <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="searchServiceRequest()">Apply Filter</button>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+                <div class="main">
+                  <div class="container-fluid">
+                    <div class="contents ngprime-custom">
+                      <div class="row">
+                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                          <div class="row  mb-3 content-heading">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                              <div class="float-start main-heading">
+                                Service Request
+                              </div>
+                              <div class="float-start export-icon mt-3"><a class="m-5" (click)="export() ">Export <img
+                                    src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                              <div class="row float-end">
+                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                                  <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                        src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                                </div>
+                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                                  <div class="form-floating float-start ">
+                                    <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                      [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                      value="Type here">
+                                    <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                                    <label for="floatingName">Search</label>
+                                    <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                                (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                                  </div>
+                                </div>
+                                <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                                  <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                      (click)="openModal()">Add </button></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <p-table #dt
+                            [value]="servicerequest"
+                            [rows]="10"
+                            [paginator]="false"
+                            [globalFilterFields]= "tableConfig.tableHeaders"
+                            [(selection)]="selectedNames"
+                            [rowHover]="true"
+                            dataKey="id"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true"
+                            sortMode="multiple"
+                            [rows]="searchFilter.pageSize"
+                            [lazy]="true"
+                            [scrollable]="true"
+                            [totalRecords]="totalRows"
+                            [tableStyle]="{width: 'max-content'}">
+
+                          <!-- <ng-template pTemplate="caption">
+                            <div class="row">
+                              <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                <h4 class="mt-3 inline main-heading">Service Request</h4>
+                                <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="export()">Export <img src="navbar/export.svg" alt=""></a>
+                              </div>
+                              <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+
+                                  <div class="p-input-icon-left ">
+                                    <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                                      <img src="navbar/filter.svg" alt="">
+                                    </p-button>
+                                  </div>
+                                  <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                        <div class="form-floating float-end">
+                                          <input type="text"
+                                            pInputText
+                                            class="form-control border-0 header-search-background"
+                                            id="floatingSearchInput"
+                                            value="Type here"
+                                            placeholder="Type here" (click)="clearValue($event);">
+                                          <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                          <label for="floatingSearchInput">Search</label>
+                                        </div>
+                                  </div>
+                                  <div class="p-input-icon-left">
+                                    <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                      Add Service Request
+                                    </button>
+                                  </div>
+                              </div>
+                            </div>
+                          </ng-template> -->
+                          <ng-template pTemplate="header">
+                            <tr>
+                              @for(headers of tableConfig.tableHeaders; track headers) {
+                                @if(headers == 'Action') {
+                                  <th class="sticky-header" alignFrozen="right" pFrozenColumn >{{headers}}</th>
+                                } @else {
+                                  <th>{{headers}}</th>
+                                }
+                              }
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-servicerequest>
+
+                            <tr>
+                              <!-- <td><a class="link-info cursor-pointer" pRipple (click)="navToDetails(assets,0)">{{assets.id}}</a></td> -->
+
+                              <!-- <td>{{servicerequest.Id}}</td> -->
+                              <!--  -->
+                              <td>{{servicerequest.CallId}}</td>
+                              <td>{{servicerequest.Status}}</td>
+                              <td>{{servicerequest.CallslastSituation}}</td>
+                              <td>{{servicerequest.AssetNumber}}</td>
+                              <td>{{servicerequest.sn}}</td>
+                              <td>{{servicerequest.AssetName}}</td>
+                              <td>{{servicerequest.Model}}</td>
+                              <td>{{servicerequest.Manufacturer}}</td>
+                              <td>{{servicerequest.Site}}</td>
+                              <td>{{servicerequest.AssignedEmployee}}</td>
+                              <td>{{servicerequest?.Operation}}</td>
+                              <td>{{servicerequest.CustomerSurvey}}</td>
+
+                              <td  class="sticky-header">
+                                <div class="d-flex">
+                                  <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                    (click)="navToView(servicerequest,0)" >
+                                    <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                  </button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToDetails(servicerequest,1)" ></button>
+
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                                  (click)="deleteServiceRequest(servicerequest)" ></button>
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-template>
+                          </p-table>
+                          <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                          [showCurrentPageReport]="true"
+                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <!-- <app-table [tableData]="tableConfig" (deleteRow)="deleteServiceRequest($event)" (editRow)="editServiceRequest($event)"
+                (viewEvent)="viewActionHistory($event)" (printRow)="print($event)" (paginate)="paginate($event)"
+                (exportEvent)="export()" (routeEvent)="route($event)" (addEvent)="add()" [loading]="dataTableLoading">
+              </app-table> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+<app-service-request-management [showmodal]="addTransferLoaded" [edit_asset_id]="service_request_edit_id" (openModals)="openModal()"></app-service-request-management>
+<app-service-request-view [showmodal]="viewServiceTransferLoaded" [edit_asset_id]="service_request_edit_id" (openModals)="openViewModal()"></app-service-request-view>
+<div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="viewServiceTransferLoaded" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="showmodal" class="offcanvas-backdrop fade show"></div>
+
+<!-- <p-dialog header="Customer Survey Comments" [(visible)]="showDialog" [modal]="true"
+  [style]="{width :'60vw',height:'60hw'}" [maximizable]="true" [draggable]="false" [resizable]="false"> -->
+
+  <div #drawerFilter  [ngClass]=" showDialog ? 'show' : ''"
+      class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+    <div class="row py-3">
+      <form [formGroup]="commentForm">
+        <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+          <label class="form-label">Comment</label>
+          <textarea id="comment" formControlName="comment" type="text" pInputTextarea
+            class="form-control form-control-lg form-control-solid"></textarea>
+        </div>
+        <div class="card-footer d-flex justify-content-start ">
+          <button type="button" class="btn btn-primary" (click)="saveComment()">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="row py-3" *ngFor="let comment of comments">
+      <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+        <label class="form-label">Created By : {{comment.createdBy.userName}}</label>
+      </div>
+      <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+        <label class="form-label">Created Date : {{comment.createdOn | date:'short'}}</label>
+      </div>
+      <div class="col-md-12 col-xl-12 col-xxl-12 mb-5">
+        <label class="form-label">Comment : {{comment.comment}}</label>
+      </div>
+    </div>
+</div>
+<!-- </p-dialog> -->
+
+
+
+
+
+<!-- Action History -->
+<!-- <p-dialog header="Action History" [(visible)]="showActionHistoryDialog" [modal]="true" [style]="{width: '50vw'}"
+  [maximizable]="true" [draggable]="false" [resizable]="false"> -->
+<div #drawerFilter  [ngClass]="showActionHistoryDialog ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="view-name-def-header card">
+    <p-table #dt [value]="actionHistoryList"
+      [rows]="filter.pageSize"
+      [lazy]="true"
+      [loading]="loading"
+      [rowHover]="false" dataKey="id"
+      [tableStyle]="{width: 'max-content'}"
+      [totalRecords]="totalRows" >
+      <ng-template pTemplate="caption">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="text-white">Action History Table of Service Request Number : {{ callReqNum }} <br>
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <!-- <th>Service Request Number</th> -->
+          <th>Action Type</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>User Name</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <!-- <td>{{row.callRequestNo}}</td> -->
+          <td>{{row.actionType}}</td>
+          <td>{{row.status}}</td>
+          <td>{{row.dateTime | date: 'd MMMM y, h:mm a'}}</td>
+          <td>{{row.userName}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+      [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    </p-paginator>
+  </div>
+</div>
+<!-- </p-dialog> -->

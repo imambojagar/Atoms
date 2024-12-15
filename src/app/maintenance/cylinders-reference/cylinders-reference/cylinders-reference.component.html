@@ -1,0 +1,109 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+ class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <!-- <h1 class="offcanvas-title offcanvas-heading">Add Edit Cylinder Reference</h1> -->
+    <h1 *ngIf="inAddMode" class="offcanvas-title offcanvas-heading">Add Site's Cylinders Reference</h1>
+    <h1 *ngIf="inEditMode" class="offcanvas-title offcanvas-heading">Update Site's Cylinders Reference</h1>
+    <h1 *ngIf="inViewMode" class="offcanvas-title offcanvas-heading">View Site's Cylinders Reference</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+    <div class="p-3">
+      <div class="row">
+
+      <p-toast></p-toast>
+        <!-- <div class="card flex justify-content-center mb-5">
+          <p-breadcrumb [model]="items"></p-breadcrumb>
+        </div> -->
+
+        <!-- <div *ngIf="id==0; then AddTemplate; else EditTemplate">
+
+        </div> -->
+
+
+        <!-- <ng-template #AddTemplate>
+          <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+        </ng-template>
+
+        <ng-template #EditTemplate>
+
+          <p-tabView [(activeIndex)]="tabIndex" (onChange)="changeTabIndex($event)">
+            <p-tabPanel header="View">
+              <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+            </p-tabPanel>
+            <p-tabPanel header="Edit">
+              <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+            </p-tabPanel>
+            <div class="box-gryco pt-2" >
+              <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+            </div>
+
+          </p-tabView>
+        </ng-template> -->
+
+        <!-- <ng-template #formTemplate> -->
+          <div class="mb-2 mb-xl-4">
+              <!-- <div class="card-title">
+                <h2 *ngIf="inAddMode" class="d-flex align-items-center text-white">Add Site's Cylinders Reference</h2>
+                <h2 *ngIf="inEditMode" class="d-flex align-items-center text-white">Update Site's Cylinders Reference</h2>
+                <h2 *ngIf="inViewMode" class="d-flex align-items-center text-white">View Site's Cylinders Reference</h2>
+              </div> -->
+
+            <div class="pt-2 box-gryco">
+              <form [formGroup]="refForm" (ngSubmit)="save()" *ngIf="model">
+                <div class="row py-3" [ngClass]="{'disableDiv': inViewMode}">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+                      <label class="" for="siteName">Site<small class="text-danger"
+                          *ngIf="!inViewMode">*</small></label>
+                      <p-autoComplete [delay]="1000" [suggestions]="sitesList" (onSelect)="sendSiteId($event)"
+                        (completeMethod)="searchSites($event)" field="custName" placeholder="Search Site Name"
+                        formControlName="siteName" [required]="true"></p-autoComplete>
+                  </div>
+                  </div>
+                </div>
+
+                <div class="row py-3" [ngClass]="{'disableDiv': inViewMode}">
+                  <ng-container *ngFor="let item of cylindersArr; let i =index">
+                    <ng-container>
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                        <div class="form-floating mb-2">
+                        <label class="" for="item.label">{{item.label}}</label>
+                        <input  id="item.label" type="text" [formControlName]="item.control.replace('Recieved', '')"
+                          pInputText class="form-control" />
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </div>
+
+                <!-- <div class="saveButton ">
+                  <button canUpdate type="submit" label="Save" *ngIf="inEditMode" class="p-button-info col-lg-2" pButton>
+                    <i *ngIf="isLoading" class="fa fa-spinner fa-spin text-white"></i>
+                  </button>
+                  <button type="submit" label="Save" *ngIf="inAddMode" class="p-button-info col-lg-2" pButton>
+                    <i *ngIf="isLoading" class="fa fa-spinner fa-spin text-white"></i>
+                  </button>
+                  <button canDelete type="button" (click)="delete()" label="Delete" *ngIf="inEditMode"
+                    class="p-button-danger col-lg-2" pButton></button>
+                  <button type="reset" label="Cancel" *ngIf="!inViewMode" class="p-button-cancel col-lg-2" BackButton
+                    pButton></button>
+                  <button type="reset" label="Back" *ngIf="inViewMode" class="p-button-cancel col-lg-2" BackButton
+                    pButton></button>
+                </div> -->
+              </form>
+            </div>
+
+          </div>
+        <!-- </ng-template> -->
+        <div class="fixed-bottom">
+          <div class="row">
+            <div class="col-12">
+              <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="save()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

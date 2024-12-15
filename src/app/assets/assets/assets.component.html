@@ -1,0 +1,149 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Assets List
+                        </div>
+                        <div class="float-start export-icon mt-3">
+                          <a class="m-5" (click)="exportAsset()">Export
+                            <img src="assets/img/dashboard/excel.svg" alt="" /></a>
+                        </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row float-end">
+                          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 mb-3">
+                            <div class="float-end filter-icon h-100">
+                              <a (click)="openFilterModal()"><img src="assets/img/dashboard/filter.svg" alt="" /></a>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="form-floating float-start">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here" />
+                              <a>
+                                <img class="float-end search-icon" src="assets/img/dashboard/search.svg" alt="" /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid">
+                              <button class="btn btn-blue text-white border-r10" type="button" (click)="openModal()">
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+
+                      <p-table #dt [value]="assets" [rows]="10" [paginator]="false"
+                        [globalFilterFields]="tableConfig.tableHeaders" [(selection)]="selectedNames" [rowHover]="true"
+                        dataKey="id" sortMode="multiple" [rows]="searchFilter.pageSize" [lazy]="true"
+                        [scrollable]="true" [totalRecords]="totalRows" (onLazyLoad)="loadUserData($event)">
+
+
+                        <ng-template pTemplate="header">
+                          <tr>
+                            @for(headers of tableConfig.tableHeaders; track headers) {
+                            @if(headers == 'Action') {
+                            <th class="sticky-header" alignFrozen="right" pFrozenColumn>{{headers}}</th>
+                            } @else {
+                            <th>{{headers}}</th>
+                            }
+                            }
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-assets>
+
+                          <tr>
+                            <!-- <td><a class="link-info cursor-pointer" pRipple (click)="navToDetails(assets,0)">{{assets.id}}</a></td> -->
+                            <!-- <td>{{assets.id}}</td> -->
+                            <!-- <td>{{assets.ass}}</td> -->
+                            <td>{{assets.assetNumber}}</td>
+                            <td>{{assets.utilizationStatus}}</td>
+                            <td>{{assets.assetSerialNo}}</td>
+                            <td>{{assets.assetName}}</td>
+                            <td>{{assets.modelName}}</td>
+                            <td>{{assets.manufacturerName}}</td>
+                            <td>{{assets.department?.departmentCode}}</td>
+                            <td>{{assets.customerCode}}</td>
+                            <td>{{assets.custName}}</td>
+                            <td>{{assets.endUserAcceptanceDate == null? '' : assets.endUserAcceptanceDate | date }}
+                            </td>
+                            <td>{{assets.warrantyEndDate == null ? '' : assets.warrantyEndDate | date }}</td>
+                            <td>{{assets.room?.name}}</td>
+                            <td>{{assets.technicalInspectionDate==null ? '' : assets.technicalInspectionDate | date }}
+                            </td>
+                            <td>{{assets.ipAddress}}</td>
+                            <td>{{assets.macAddress}}</td>
+                            <td>{{assets.poNo}}</td>
+                            <td>{{assets.replacementDate == null ? '' : assets.replacementDate | date }}</td>
+                            <td>{{assets.originDepartment?.departmentName}}</td>
+                            <td>{{assets.lastPOPrice}}</td>
+                            <td>{{assets.comment}}</td>
+                            <td>{{assets.portNumber}}</td>
+                            <td>{{assets.budgetYear}}</td>
+                            <!-- <td class="val4">
+                      <ul *ngFor="let code of assets.oracleCodes">
+                        <li *ngIf="code.codeValue!=''"> {{code.codeValue}}</li>
+                      </ul>
+                    </td> -->
+
+                            <td class="val13">{{assets.assetndcode}}</td>
+                            <td class="sticky-header">
+                              <div class="d-flex">
+                                <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToDetails(assets,0)">
+                                  <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                </button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToDetails(assets,1)" canUpdate></button>
+
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                                  (click)="deleteAsset(assets)" canDelete></button>
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-template>
+
+
+                      </p-table>
+                      <p-paginator [rows]="searchFilter.pageSize" [totalRecords]="totalRows"
+                        (onPageChange)="paginate($event)" [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-assets-management [showmodal]="addTransferLoaded" [edit_asset_id]="asset_id"
+    (openModals)="openModal()"></app-assets-management>
+  @if(addTransferLoaded&&asset_id&&mode=="view")
+  { <app-assets-management [showmodal]="addTransferLoaded" [edit_asset_id]="asset_id" [mode]="'view'"
+    (openModals)="openModal()"></app-assets-management>}
+  <app-search-assets [filter]="searchFilter" [showmodal]="filterLoaded" (openSearchModals)="openFilterModal()"
+    (AssetsTransferSearch)="getNameAssetSearch($event)"></app-search-assets>
+  <!-- <view-details-name-definition [showmodal]="addTransferLoaded && (assets_index == 1)" [edit_asset_id]="asset_id" (openModals)="openModal()"></view-details-name-definition> -->
+  <div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show" (click)="openModal()"></div>
+  <div *ngIf="filterLoaded" class="offcanvas-backdrop fade show" (click)="openFilterModal()"></div>
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

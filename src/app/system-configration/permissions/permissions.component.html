@@ -1,0 +1,139 @@
+<div class="mb-1 m-15">
+
+  <div class="p-3 ngprime-custom" [formGroup]="frm">
+    <!-- <div class="row">
+      <p-toast></p-toast>
+
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form">
+        <div class="row box-gryco">
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+              <p-dropdown (onChange)="getPermissionsByRole($event.value)" placeholder="Pleas Select Role"
+                [options]="roles" [optionLabel]="'name'" [optionValue]="'id'" placeholder="select"></p-dropdown>
+              <label>{{'Asset Risk Level'}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+
+    <div class="main p-3">
+      <div class="row mt-4">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <h2 class="mt-3 inline main-heading">Permissions </h2>
+        </div>
+        <p-toast></p-toast>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="form-floating mb-2 boxw-drop">
+            <p-dropdown (onChange)="getPermissionsByRole($event.value)" placeholder="Pleas Select Role"
+              [options]="roles" [optionLabel]="'name'" [optionValue]="'id'" placeholder="select"></p-dropdown>
+            <label>{{'Role'}}</label>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12" *ngFor="let group of data; let i = index">
+          <!-- Collapsible Header -->
+          <a class="aprma" data-bs-toggle="collapse" [attr.href]="'#collapseExample' + i" role="button"
+            [attr.aria-expanded]="i === 0 ? 'true' : 'false'" [attr.aria-controls]="'collapseExample' + i">
+            {{ group.title }} <span class="float-end">-</span>
+          </a>
+
+          <!-- Collapsible Content -->
+          <div class="collapse" [id]="'collapseExample' + i" [ngClass]="{ 'show': i === 0 }">
+            <div class="card card-body table-body-card">
+              <p-table #dt [value]="group.childrens" class="" rowGroupMode="subheader" groupRowsBy="title"
+                dataKey="title" styleClass="p-datatable-striped p-datatable-gridlines">
+                <!-- Table Caption -->
+                <!-- <ng-template pTemplate="caption">
+                      <div class="table-caption">
+                        Manage Permissions for {{ group.title }}
+                      </div>
+                    </ng-template> -->
+
+                <!-- Table Header -->
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>#</th>
+                    <th>Screen Name</th>
+                    <th>View</th>
+                    <th>Add</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </ng-template>
+
+                <!-- Table Body -->
+                <ng-template pTemplate="body" let-row let-rowIndex="rowIndex" formArrayName="sections">
+
+                  <tr [formGroup]="getRowForm(i, rowIndex)">
+                    <td>{{ row.title }}</td>
+
+                    <td>{{ row.title }}</td>
+                    <!-- <td>
+                        <p-checkbox [binary]="true" formControlName="canView"
+                          (onChange)="onCanViewChange($event.checked, rowIndex)" class="permission-view"></p-checkbox>
+                      </td>
+                      <td>
+                        <p-checkbox [binary]="true" formControlName="canAdd" (onChange)="onChange($event.checked, rowIndex)"
+                          class="permission-add"></p-checkbox>
+                      </td>
+                      <td>
+                        <p-checkbox [binary]="true" formControlName="canEdit"
+                          (onChange)="onChange($event.checked, rowIndex)" class="permission-edit"></p-checkbox>
+                      </td>
+                      <td>
+                        <p-checkbox [binary]="true" formControlName="canDelete"
+                          (onChange)="onChange($event.checked, rowIndex)" class="permission-delete"></p-checkbox>
+                      </td> -->
+                    <!-- Material Toggle for View -->
+                    <td>
+                      <mat-slide-toggle formControlName="canView" (change)="onCanViewChange($event, rowIndex,i)"
+                        class="permission-view" class="permission-view custom-toggle"></mat-slide-toggle>
+                    </td>
+
+                    <!-- Material Toggle for Add -->
+                    <td>
+                      <mat-slide-toggle formControlName="canAdd" (change)="onChange($event, rowIndex,i)"
+                        class="permission-add" class="permission-view custom-toggle"></mat-slide-toggle>
+                    </td>
+
+                    <!-- Material Toggle for Edit -->
+                    <td>
+                      <mat-slide-toggle formControlName="canEdit" (change)="onChange($event, rowIndex,i)"
+                        class="permission-edit" class="permission-view custom-toggle"></mat-slide-toggle>
+                    </td>
+
+                    <!-- Material Toggle for Delete -->
+                    <td>
+                      <mat-slide-toggle formControlName="canDelete" (change)="onChange($event, rowIndex,i)"
+                        class="permission-delete" class="permission-view custom-toggle"></mat-slide-toggle>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  -->
+
+
+
+
+</div>
+<div class="fixed-bottom">
+  <div class="row">
+    <div class="col-12">
+      <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+        (click)="updateRolePermissions()">{{'Save'}}</button>
+      <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{'Cancel'| tr:PAGE_TITLE| translate}}</button> -->
+    </div>
+  </div>
+</div>

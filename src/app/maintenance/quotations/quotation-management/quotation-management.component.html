@@ -1,0 +1,484 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='Add'">Add New Quotations </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='Edit'">Edit Quotation </h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+
+  <p-toast></p-toast>
+    <!-- <p-header class="header">
+        <h5 *ngIf="typeScreen=='Add'">New Quotation</h5>
+        <h5 *ngIf="typeScreen=='View'">View Quotation</h5>
+        <h5 *ngIf="typeScreen=='Edit'">Edit Quotation</h5>
+    </p-header> -->
+
+    <div class="">
+        <div class="saveButton">
+            <div class="saveButton">
+                <div *ngFor="let step of steps;let i=index" style="float: left; ">
+                    <button pButton type="button" label="{{step.name}}" class="p-button-success" *ngIf="step.processed" (click)="clickStep(step)"></button>
+                    <button pButton type="button" label="{{step.name}}" class="p-button-info" *ngIf="!step.processed" (click)="clickStep(step)"></button>
+                </div>
+              </div>
+        </div>
+
+        <!-- begin::Header -->
+        <div class="">
+            <ul class="nav nav-stretch nav-line-tabs fw-bold border-transparent flex-nowrap" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'QuotationInfo' }"
+                        (click)="setActiveTab('QuotationInfo')" role="tab">
+                        Quotation
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'PrintInfo' }"
+                        (click)="setActiveTab('PrintInfo')" role="tab">
+                        Print Information
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'MaintenanceCost' }"
+                        (click)="setActiveTab('MaintenanceCost')" role="tab">
+                        Maintenance Cost
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- end::Header -->
+
+
+        <!-- begin::Form -->
+        <form [formGroup]="quotationForm" (ngSubmit)="save()">
+
+            <!-- begin::Body -->
+            <div class="form-scroller">
+                <div class="tab-content pt-3">
+
+                    <!-- begin::Sidebar -->
+                    <div class="tab-pane" [ngClass]="{ active: activeTab === 'QuotationInfo' }">
+                        <div class="row py-3 box-gryco">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Asset Number</label>
+                                <input type="text" formControlName="assetNumber" name="assetNumber" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Asset Serial No</label>
+                                <input type="text" formControlName="assetSerialNo" name="assetSerialNo" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Asset Name</label>
+                                <input type="text" formControlName="assetName" name="assetName" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Call No</label>
+                                <input type="text" formControlName="callNo" name="callNo" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Work OrderNo</label>
+                                <input type="text" formControlName="workOrderNo" name="workOrderNo" [readonly]="true"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Fax No</label>
+                                <input type="text" formControlName="faxNo" name="assetSerialNo"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div> -->
+                        </div>
+                        <div class="row py-3 box-gryco">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class=" required">Quotation No</label>
+                                <input type="text" formControlName="quotationNoManual" name="quotationNoManual"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class=" required">Date</label>
+                                <p-calendar placeholder="Please select date" [showIcon]="true" [showButtonBar]="true" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                    formControlName="quotationDate" dateFormat="yy-mm-dd" dataType="string" [showOnFocus]="false">
+                                </p-calendar>
+                                </div>
+                                <div *ngIf=" quotationForm.get('quotationDate')?.hasError('required') && quotationForm.get('quotationDate')?.touched " class="fv-plugins-message-container invalid-feedback" > Filed is required </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Related Employee</label>
+                                <p-dropdown [options]="assignedEmployess" placeholder="Select"
+                                    formControlName="relatedEmployeeId" (onChange)="changeRelatedEmployee($event)"
+                                    optionLabel="userName" optionValue="userId" [style]="{'width':'100%'}" >
+                                </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [ngClass]="{'disableDiv': callDisabled=='true'}">
+                              <div class="form-floating mb-2">
+                                <label class="">Call Last Situation</label>
+                                <p-dropdown [options]="quotationCallLastSituation" placeholder="Select" formControlName="callLastSituationId"
+                                    (onChange)="changeCallLastSituation($event)" optionLabel="name" optionValue="id"
+                                    [style]="{'width':'100%'}" >
+                                </p-dropdown>
+                              </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Currency</label>
+                                <p-dropdown [options]="currencies" placeholder="Select"
+                                    formControlName="currencyId" (onChange)="changeCurrency($event)"
+                                    optionLabel="name" optionValue="id" [style]="{'width':'100%'}" [filter]="true" filterBy="name" [showClear]="true" >
+                                </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"  >
+                              <div class="form-floating mb-2">
+                                <label class=" required">Offer Type</label>
+                                <p-dropdown [options]="quotationOfferType" placeholder="Select"
+                                    formControlName="offerTypeId"
+                                    (onChange)="changeQuotationOfferType($event)" optionLabel="name"
+                                    optionValue="id" [style]="{'width':'100%'}" [filter]="true" filterBy="name"
+                                    [showClear]="true" >
+                                </p-dropdown>
+                              </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Supplier</label>
+                                <p-dropdown [options]="suppliers" placeholder="Select"
+                                    formControlName="supplierId"
+                                    (onChange)="changeSupplier($event)" optionLabel="suppliername"
+                                    optionValue="id" [style]="{'width':'100%'}" [filter]="true" filterBy="suppliername" [showClear]="true" >
+                                </p-dropdown>
+                              </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Start of work</label>
+                                <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="startOfWorkTime" [showTime]="true"
+                                    dataType="string" (onSelect)="selectStartDate($event)"   [readonlyInput]="true"></p-calendar>
+                                </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">End of work</label>
+                                <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="endOfWorkTime" [showTime]="true"
+                                    dataType="string" (onSelect)="selectEndDate($event)" [readonlyInput]="true"></p-calendar>
+                            </div>
+                            </div>
+
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <form [formGroup]="attachmentForm">
+                                    <label class="">Attachment</label>
+                                    <app-attachments (onUploaded)="attachmentReady($event)" formArrayName="attachments" [attachments]="attachmentName"></app-attachments>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 mb-6 mb-xl-9">
+                          <div class="col-12">
+                            <h3 class="section-heading">Spare Parts</h3>
+                          </div>
+
+                            <div class="pt-4">
+                                <div formArrayName="quotationSpareParts">
+                                    <div *ngFor=" let info of getControls('quotationSpareParts'); let i=index"
+                                        class="formline add-more-value-border add-more-values margin-bottom-add-more">
+                                        <div [formGroupName]="i" class="d-flex">
+                                            <fieldset class="formline">
+                                                <div class="row py-3 box-gryco">
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <label class="">Part No</label>
+                                                        <p-autoComplete [delay]="1000" class="input-field" formControlName="partId"
+                                                            [suggestions]="sparePartAutoComplete" field="partNo"
+                                                            dataKey="id" [style]="{'width':'100%'}"
+                                                            [inputStyle]="{'width':'100%'}"
+                                                            (completeMethod)="onSelectSparePart($event)"
+                                                            (onSelect)="bindSparePart($event,i)"></p-autoComplete>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <label class="">Description</label>
+                                                        <input type="text" formControlName="description" [readonly]="true" name="description"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            />
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <label class="">Quantity</label>
+                                                        <input type="number" formControlName="quantity" name="quantity"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            placeholder="Enter ..." />
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <label class="">Unit Price</label>
+                                                        <input type="number" formControlName="unitPrice" name="unitPrice"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            placeholder="Enter ..." />
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <label class="">Discount</label>
+                                                        <input type="number" formControlName="discount" name="discount"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            placeholder="Enter ..." />
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                        <label class="">Quotation Types</label>
+                                                        <p-dropdown [options]="quotationTypes" placeholder="Select"
+                                                            formControlName="quotationTypeId"
+                                                            (onChange)="changeGuotationTypes($event)" optionLabel="name"
+                                                            optionValue="id" [style]="{'width':'100%'}" [filter]="true" filterBy="name" [showClear]="true" >
+                                                        </p-dropdown>
+                                                    </div>
+                                                </div>
+
+
+                                            </fieldset>
+                                            <div class="add-more-value-button field ms-4 mb-4">
+                                                <button pButton type="button" (click)="addMoreSparePart()"
+                                                    class="p-button-rounded p-button-info mr-2" icon="pi pi-plus">
+                                                </button>
+                                                <button pButton type="button"
+                                                    (click)="removeControl('quotationSpareParts',i)"
+                                                    class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"
+                                                    [disabled]="i<=0"></button>
+                                            </div>
+                                        </div>
+                                        <!-- <hr class="my-10"> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end::Sidebar -->
+
+                    <!-- begin::Header -->
+                                                                                                        <!--     start     -->
+                    <div class="tab-pane" [ngClass]="{ active: activeTab === 'PrintInfo'}">
+                        <div class="row py-3 box-gryco">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Site</label>
+                                <input type="text" formControlName="siteNamePrint" name="siteNamePrint"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Presented To</label>
+                                <input type="text" formControlName="presentedTo" name="presentedTo"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Subject</label>
+                                <input type="text" formControlName="subject" name="subject"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                               <div class="form-floating mb-2">
+                                <label class="">Fax</label>
+                                <input type="text" formControlName="fax" name="fax"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row py-3 box-gryco">
+                            <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                               <div class="form-floating mb-2">
+                                <label class="">Conditions</label>
+                                <textarea formControlName="conditions" name="conditions"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter description"
+                                    rows="3"></textarea>
+                            </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                               <div class="form-floating mb-2">
+                                <label class="">End page</label>
+                                <textarea formControlName="endpage" name="endpage"
+                                    class="form-control form-control-lg form-control-solid" placeholder="Enter description"
+                                    rows="3"></textarea>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row py-3 box-gryco">
+                            <label class=" form-check form-check-custom form-check-solid align-items-start ">
+                                <input class="form-check-input me-3" type="checkbox" name="hideDescInprint" checked=""
+                                    (change)="onMapItemsToPrintChange($event)" />
+                                <span class="form-check-label d-flex flex-column align-items-start">
+                                    <span class="fw-bolder fs-5 mb-0">Hide Description In print</span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="card card-flush mt-6 mb-6 mb-xl-9">
+                            <div class="col-12">
+                                <h3 class="section-heading">Print Info Spare Parts</h3>
+                            </div>
+                            <div class="pt-4">
+                                <fieldset class="formline">
+                                    <div formArrayName="quotationPrintInfoSpareParts" class="mt-4 card">
+                                        <div *ngFor=" let info of getControls('quotationPrintInfoSpareParts'); let i=index"
+                                            class="add-more-value-border add-more-values margin-bottom-add-more">
+                                            <div [formGroupName]="i" class="d-flex">
+                                                <fieldset class="formline">
+                                                    <div class="row py-3 box-gryco">
+                                                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                               <div class="form-floating mb-2">
+                                                                  <label class="">Unit Price</label>
+                                                            <input type="number" formControlName="unitPrice_Print" name="unitPrice_Print" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                               <div class="form-floating mb-2">
+                                                                  <label class="">Quantity</label>
+                                                            <input type="number" formControlName="quantity_Print" name="quantity_Print" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                               <div class="form-floating mb-2">
+                                                                  <label class="">Returned Quantity</label>
+                                                            <input type="number" formControlName="returnedQuantity_Print" name="returnedQuantity_Print" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                               <div class="form-floating mb-2">
+                                                                  <label class="">Discount</label>
+                                                            <input type="number" formControlName="discount_Print" name="discount_Print" class="form-control form-control-lg form-control-solid" placeholder="Enter ..." />
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-3 box-gryco">
+                                                        <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
+                                                          <div class="form-floating mb-2">
+                                                            <label class="">Description</label>
+                                                            <textarea formControlName="description_Print" name="description_Print" class="form-control form-control-lg form-control-solid" placeholder="Enter description" rows="3"></textarea>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="add-more-value-button field ms-4 mb-4">
+                                                    <button pButton type="button" (click)="addMorePrintInfoSparePart()" class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"> </button>
+                                                    <button pButton type="button" (click)="removeControl('quotationPrintInfoSpareParts',i)" class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"
+                                                        [disabled]="i<=0"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>                                                                          <!--     end     -->
+                    </div>
+                    <!-- end::Header -->
+
+                    <!-- begin::Toolbar -->
+                    <div class="tab-pane" [ngClass]="{ active: activeTab === 'MaintenanceCost' }">
+                        <div class="mt-4 mb-6 mb-xl-4">
+
+                            <div class="col-12">
+                                <h3 class="section-heading">Estimated Working Hours</h3>
+                            </div>
+                            <div class="pt-4">
+                                <div formArrayName="estimatedWorkingHours">
+                                    <div *ngFor=" let info of getControls('estimatedWorkingHours'); let i=index"
+                                        class="add-more-value-border add-more-values margin-bottom-add-more">
+                                        <div [formGroupName]="i" class="d-flex">
+                                            <fieldset class="formline">
+                                                <div class="row py-3 box-gryco">
+                                                    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                                       <div class="form-floating mb-2">
+                                                           <label class="">Assigned Employee</label>
+                                                        <p-dropdown [options]="assignedEmployess" placeholder="Select"
+                                                            [style]="{'width':'100%'}" id="assignedEmployeeId"
+                                                            formControlName="assignedEmployeeId"
+                                                            (onChange)="changeRelatedEmployee($event)"
+                                                            optionLabel="userName" optionValue="userId"  >
+                                                        </p-dropdown>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                                       <div class="form-floating mb-2">
+                                                           <label class="">Working Hours</label>
+                                                        <input type="text" id="workingHours" formControlName="workingHours"
+                                                            class="form-control form-control-lg form-control-solid"
+                                                            placeholder="Enter ..." />
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="add-more-value-button field ms-4 mb-4">
+                                                <button pButton type="button" (click)="addMoreEstimatedWorkingHour()"
+                                                    class="p-button-rounded p-button-info mr-2" icon="pi pi-plus">
+                                                </button>
+                                                <button pButton type="button"
+                                                    (click)="removeControl('estimatedWorkingHours',i)"
+                                                    class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"
+                                                    [disabled]="i<=0"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end::Toolbar -->
+                    <div class="card-body pt-5"  *ngIf="typeScreen!='Add'">
+                        <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                    </div>
+                </div>
+            </div>
+            <!-- end::Body -->
+
+            <!-- begin::Footer -->
+            <!-- <div class="card-footer d-flex justify-content-end border-top py-6">
+                <button type="button" (click)="cancel()" class="btn btn-light btn-active-light-primary me-2">
+                    <ng-container>
+                        <span class="indicator-label">Cancel</span>
+                    </ng-container>
+                </button>
+                <button type="button" type="submit" (submit)="save()" class="btn btn-primary me-2" *ngIf="typeScreen!='View'">
+                    <ng-container>
+                        <span class="indicator-label">Save</span>
+                    </ng-container>
+                </button>
+                <button type="button" (click)="delete()" class="btn btn-danger me-2" *ngIf="typeScreen=='Edit'" canDelete>
+                    <ng-container>
+                        <span class="indicator-label">Delete</span>
+                    </ng-container>
+                </button>
+            </div> -->
+            <!-- end::Footer -->
+        </form>
+        <!-- end::Form -->
+
+        <div class="fixed-bottom">
+          <div class="row">
+            <div class="col-12">
+              <button *ngIf="typeScreen!='View'" class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="save()">Save</button>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+    <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

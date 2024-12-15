@@ -1,0 +1,21 @@
+<div style="display: flex;">
+  <div *ngFor="let item of attachments; let i = index">
+
+    <table *ngIf="hasDelete">
+      <td><a (click)="downloadFile(item)" class="saveButton" target="_blank">{{'Preview Attachment' | tr:'attachment' |
+        translate}} </a></td>
+      <td> <a (click)="deleteFile(i)" >{{'X'}} </a></td>
+    </table>
+
+      <a (click)="downloadFile(item)"  class="saveButton" target="_blank" *ngIf="!hasDelete">{{'Preview Attachment' | tr:'attachment' |
+        translate}} </a>
+
+    
+  </div>
+  <input type="file" #fileInput style="display:none;" (change)="uploadFile($event)">
+  <ng-container *ngIf="showButton">
+    <div *ngIf="!canNotUploadFile" (click)="fileInput.click()" label="{{'Upload New' | tr:'attachment' | translate}}" [loading]="isUploading"
+      loadingIcon="pi pi-spin pi-spinner" class="p-button-info col-lg-2" pButton style="cursor: pointer;">
+    </div>
+  </ng-container>
+</div>

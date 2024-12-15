@@ -1,0 +1,113 @@
+<div #addmodel [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    @if(inEditMode){
+    <h1 class="offcanvas-title offcanvas-heading">Gate Pass</h1>}
+    @else{
+    <h1 class="offcanvas-title offcanvas-heading">Gate Pass</h1>}
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <p-toast></p-toast>
+  <div class="p-3 ngprime-custom form-scroller">
+    <ng-template #AddTemplate>
+      <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+    </ng-template>
+
+    <ng-template #EditTemplate>
+      <!-- <p-tabView [(activeIndex)]="tabIndex" (onChange)="changeTabIndex($event)">
+        <p-tabPanel header="View" leftIcon="pi pi-file"> -->
+      <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+      <!-- </p-tabPanel>
+        <p-tabPanel header="Edit" leftIcon="pi pi-file"> -->
+      <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+      <!-- </p-tabPanel>
+      </p-tabView> -->
+    </ng-template>
+
+    <ng-template #formTemplate> -
+      <!-- <div class="card-body pt-5"> -->
+      <form [formGroup]="gatePassForm" (ngSubmit)="save()" *ngIf="model">
+        <div class="col-12">
+          <h3 class="section-heading">{{'Gate Pass Information'| translate}}</h3>
+        </div>
+
+        <div class="row box-gryco">
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+
+              <input id="company" type="text" formControlName="company" pInputText />
+              <label class="form-label ms-2" for="company">Company Name</label>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+
+              <input id="site" type="text" formControlName="site" pInputText [readOnly]="true" /> <label
+                class="form-label ms-2" for="site">Site</label>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+
+              <input id="demoRequestId" type="text" formControlName="demoRequestId" pInputText [readOnly]="true" />
+              <label class="form-label ms-2" for="demoRequestId">DEMO No.</label>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+
+              <p-calendar formControlName="edd" [showIcon]="true" [showButtonBar]="true" [dateFormat]="'dd/mm/yy'"
+                [showOnFocus]="false">
+              </p-calendar> <label class="form-label ms-2" for="edd">EDD</label>
+            </div>
+          </div>
+
+          <div *ngIf="!inAddMode" class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+
+            <p-dropdown formControlName="isConfirmed" [options]="confirmationList">
+            </p-dropdown> <label class="form-label ms-2">Is Confirmed</label>
+          </div>
+
+
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" *ngIf="gatePassForm.value.isConfirmed">
+
+            <p-calendar formControlName="finalEddDate" [showIcon]="true" [showButtonBar]="true"
+              (onSelect)="currentFinalEDDDate = gatePassForm.value.finalEddDate"
+              [required]="gatePassForm.value.isConfirmed" [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar>
+            <label class="form-label" for="customerId">Final EDD Date <small *ngIf="!inViewMode"
+                class="text-danger">*</small></label>
+          </div>
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-floating mb-2">
+              <input id="acknowledgment" type="text" formControlName="acknowledgment" pInputText />
+              <label class="form-label ms-2" for="acknowledgment">Acknowledgment</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="fixed-bottom">
+          <div class="row">
+            <div class="col-12">
+              @if(inEditMode){
+              <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                (click)="save()">Update
+              </button>
+              }
+              @else{
+              <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                (click)="save()">Add
+              </button>}
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </div>
+
+</div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

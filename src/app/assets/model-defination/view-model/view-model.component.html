@@ -1,0 +1,174 @@
+<div #drawer [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Model Definition</h1>
+
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+      <p-toast></p-toast>
+
+      <div class="row form-scroller mb-4">
+        <div class="col-12">
+          <h3 class="section-heading">Create Model Definition</h3>
+        </div>
+
+        <div class="row box-gryco">
+          <!-- Asset Nomenclature -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'Asset Nomenclature' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.assetNDAssetNameView }}
+              </span>
+            </p>
+          </div>
+
+          <!-- Manufacturer -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'Manufacturer' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.modelParentTaxonomyName }}
+              </span>
+            </p>
+          </div>
+
+          <!-- Model -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'Model' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.modelTaxonomyNameView }}
+              </span>
+            </p>
+          </div>
+
+          <!-- Suppliers -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'Suppliers' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                <span *ngFor="let supplier of suppliers; let i = index">
+                  {{ supplier.supplierName }}<span *ngIf="i < suppliers.length - 1">, </span>
+                </span>
+              </span>
+            </p>
+          </div>
+
+          <!-- End of Support Date -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'End of Support Date' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.endOfSupportDateView }}
+              </span>
+            </p>
+          </div>
+
+          <!-- Country of Origin -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'Country of Origin' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.countryOfOriginName }}
+              </span>
+            </p>
+          </div>
+
+          <!-- Special Tools -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'Special Tools' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.specialTools }}
+              </span>
+            </p>
+          </div>
+
+          <!-- Model Accessories -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'Model Accessories' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.modelAccessories }}
+              </span>
+            </p>
+          </div>
+
+          <!-- PPM Exempted -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'PPM Exempted' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.ppmFrequencyName }}
+              </span>
+            </p>
+          </div>
+
+          <!-- PPM Checklist -->
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <p class="viewp-text">
+              {{ 'PPM Checklist' | tr:PAGE_TITLE | translate }} :
+              <span class="viewspan-text">
+                {{ addModelForm.value.ppmChkLst }}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Related Defects -->
+        <div class="col-12">
+          <h3 class="section-heading">Related Defects</h3>
+        </div>
+
+
+        <div *ngFor="let defect of defects; let i = index">
+          <div class="row box-gryco mb-2">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">
+                {{ 'Defect Name' | tr:PAGE_TITLE | translate }} :
+                <span class="viewspan-text">
+                  {{ defect.defectName }}
+                </span>
+              </p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">
+                {{ 'Cause' | tr:PAGE_TITLE | translate }} :
+                <span class="viewspan-text">
+                  {{ defect.cause }}
+                </span>
+              </p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">
+                {{ 'Solution' | tr:PAGE_TITLE | translate }} :
+                <span class="viewspan-text">
+                  {{ defect.workPerformed }}
+                </span>
+              </p>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <p class="viewp-text">
+                {{ 'Working Time' | tr:PAGE_TITLE | translate }} :
+                <span class="viewspan-text">
+                  {{ defect.estimatedTime }}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+  </div>
+</div>

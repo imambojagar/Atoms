@@ -1,0 +1,270 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 " id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">View Asset Delivery</h1>
+    <!-- <h1 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='Edit'">Edit Asset Delivery</h1> -->
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+        <p-toast></p-toast>
+          <div class="row">
+            <form [formGroup]="assetForm">
+              <div class="box-gryco">
+                <div class="col-12">
+                  <h4 class="section-heading">Purchase Order</h4>
+                </div>
+
+                <div class="row py-3">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Site' }} :
+                      <span class="viewspan-text">
+                        {{ assetForm.value.operatingUnit }}
+                      </span>
+                    </p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'PO Number' }} :
+                      <span class="viewspan-text">{{ assetForm.value.poNumber }}</span>
+                    </p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Status' }} :
+                      <span class="viewspan-text">{{ assetForm.value.status }}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row py-3">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Supplier' }} :
+                      <span class="viewspan-text">{{ assetForm.value.supplier }}</span>
+                    </p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Supplier Site' }} :
+                      <span class="viewspan-text">{{ assetForm.value.site }}</span>
+                    </p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Buyer' }} :
+                      <span class="viewspan-text">{{ assetForm.value.buyer }}</span>
+                    </p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Type' }} :
+                      <span class="viewspan-text">{{ assetForm.value.type }}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row py-3">
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Total' }} :
+                      <span class="viewspan-text">{{ assetForm.value.total }}</span>
+                    </p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Total Delivery Amount' }} :
+                      <span class="viewspan-text">{{ assetForm.value.totalDeliveryAmount }}</span>
+                    </p>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <p class="viewp-text">
+                      {{ 'Warranty Period' }} :
+                      <span class="viewspan-text">{{ assetForm.value.warrantyPeriod }}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row py-3">
+                  <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <p class="viewp-text">
+                      {{ 'Remark' }} :
+                      <span class="viewspan-text">{{ assetForm.value.remark }}</span>
+                    </p>
+                  </div>
+
+                  <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <p class="viewp-text">
+                      {{ 'Payment Terms' }} :
+                      <span class="viewspan-text">{{ assetForm.value.paymentTerms }}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <h4 class="section-heading">Delivery</h4>
+                </div>
+
+                <div class="box-gryco mt-2">
+                  <p-table #dt [value]="deliveryNumbers" [tableStyle]="{ width: '100%' }">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th style="width: 4rem">#</th>
+                        <th>Delivery Number</th>
+                        <th>Status</th>
+                        <th>Delivery Amount</th>
+                        <th>Invoice Amount</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-delivery>
+                      <tr>
+                        <td>{{ delivery.id }}</td>
+                        <td>{{ delivery.number }}</td>
+                        <td>{{ delivery.status }}</td>
+                        <td>{{ delivery.deliveryAmount }}</td>
+                        <td>{{ delivery.invoiceAmount }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+    </div>
+  </div>
+</div>
+
+
+<div #drawer [ngClass]=" showmodal1 ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 " id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Add New Nomenclature</h1>
+    <button type="button" class="btn-close" (click)="close_modelfd()"></button>
+  </div>
+     <div class="row">
+        <!-- <app-search-component (OnSearch)="searchPODialog()" (OnReset)="resetPODialog()"> -->
+            <form [formGroup]="dialogPOForm">
+                <div class="row py-1">
+                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+
+                        <label class="form-label ">PO Number</label>
+                        <input type="text" class="form-control form-control-lg form-control-solid"
+                            formControlName="poNumber" pInputText />
+                      </div>
+                    </div>
+            </form>
+
+           <!--  <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="searchPODialog()">Apply Filter</button>
+                </div>
+              </div>
+            </div> -->
+        <!-- </app-search-component> -->
+    </div>
+    <div>
+        <p-table #dt [value]="poNumbers" [lazy]="true" styleClass="p-datatable-striped p-datatable-gridlines"
+            [rows]="filterPO.pageSize" [tableStyle]="{width :'60vw'}" [lazy]="true" [totalRecords]="totalPORows"
+            [rowHover]="false" dataKey="pO_HEADER_ID">
+            <ng-template pTemplate="caption">
+                <div>
+                    PO Numbers Table <br>
+                    <span class="total_rows_data"> Total: {{ totalPORows }} </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>PO Number</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-po>
+
+                <tr (click)="selectRowPO(po.pO_HEADER_ID,po.pO_NUMBER)">
+                    <td>{{po.pO_NUMBER}}</td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        <p-paginator [rows]="filterPO.pageSize" [totalRecords]="totalPORows" (onPageChange)="paginatePO($event)"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="showDialogPO=false" label="Cancel" styleClass="p-button-text"></p-button>
+    </ng-template>
+</div>
+
+ 
+<div #drawer  [ngClass]=" showmodal2 ? 'show' : ''"
+    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 " id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">Add New Nomenclature</h1>
+      <button type="button" class="btn-close" (click)="close_models()"></button>
+    </div>
+    <div>
+        <p-table #dt [value]="viewHistories" [lazy]="true" styleClass="p-datatable-striped p-datatable-gridlines"
+            [tableStyle]="{width :'60vw'}" [lazy]="true" [rowHover]="false">
+            <ng-template pTemplate="caption">
+                <div>
+                    View History Table <br>
+
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Date</th>
+                    <th>Status Name</th>
+                    <th>Created By</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-history>
+
+                <tr>
+                    <td>{{history.createdDate}}</td>
+                    <td>{{history.statusName}}</td>
+                    <td>{{history.createdByName}}</td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+    </div>
+
+    <ng-template pTemplate="footer">
+
+        <p-button icon="pi pi-times" (click)="showDialogHistory=false" label="Cancel"
+            styleClass="p-button-text"></p-button>
+    </ng-template>
+</div>
+
+<!-- <p-dialog header="Registry Files" [(visible)]="showDialogRegistryFiles" [modal]="true"
+    [style]="{width :'60vw',height:'60hw',  overflow:'scroll'}" [maximizable]="true" [draggable]="false"
+    [resizable]="false"> -->
+<div #drawer  [ngClass]=" showmodal3 ? 'show' : ''"
+    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 " id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">Add New Nomenclature</h1>
+      <button type="button" class="btn-close" (click)="close_modalas()"></button>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-registry-files-model [registryFilesInput]="registryFiles"
+                (closeModel)="closeRegistryFilesModel()"></app-registry-files-model>
+        </div>
+    </div>
+</div>
+<!-- </p-dialog> -->

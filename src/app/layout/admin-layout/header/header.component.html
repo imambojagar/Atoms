@@ -1,0 +1,288 @@
+<!-- <header class="header" id="header">
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-12 ">
+      <div class="pt-2 pe-3 align-items-center">
+        <div class="menu-icon" id="header-toggle" (click)="handleSidebarToggle()">
+
+
+          <div class="hamburger sidebar-toggle header_toggle">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="col-sm-12 ps-2">
+          <div style="--bs-breadcrumb-divider: ' ';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">Dashboard</li>
+              <li class="breadcrumb-item">{{breadCrumbText ? breadCrumbText: ''}}</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-12 ">
+      <div class="pt-2 pe-3 align-items-center">
+
+        <ul class="d-flex ps-0 pull-right">
+          <li class="header-icon hhcompnaydr">
+
+            <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="AssetGroups" optionLabel="name"
+              (onChange)="switchAssetGroup()" *ngIf="AssetGroups.length>1" class="dropdown" placeholder="Asset Group"
+              [(ngModel)]="AssetGroup"></p-dropdown>
+
+          </li>
+          <li class="header-icon dib" id="notifications" #notifications>
+            <i class="fa fa-bell-o"></i>
+            <div class="drop-down">
+              <div class="dropdown-content-heading">
+                <span class="text-left">Recent Notifications</span>
+              </div>
+              <div class="dropdown-content-body">
+                <ul>
+                  <li>
+                    <a>
+
+                      <div class="notification-content">
+                        <small class="notification-timestamp pull-right">02:34
+                          PM</small>
+                        <div class="notification-heading">Mr. John</div>
+                        <div class="notification-text">5 members joined today </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+
+                      <div class="notification-content">
+                        <small class="notification-timestamp pull-right">02:34
+                          PM</small>
+                        <div class="notification-heading">Mariam</div>
+                        <div class="notification-text">likes a photo of you</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+
+                      <div class="notification-content">
+                        <small class="notification-timestamp pull-right">02:34
+                          PM</small>
+                        <div class="notification-heading">Tasnim</div>
+                        <div class="notification-text">Hi Teddy, Just wanted to let you
+                          ...</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+
+                      <div class="notification-content">
+                        <small class="notification-timestamp pull-right">02:34
+                          PM</small>
+                        <div class="notification-heading">Mr. John</div>
+                        <div class="notification-text">Hi Teddy, Just wanted to let you
+                          ...</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="text-center">
+                    <a class="more-link">See All</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="header-icon dib ps-4">
+            <i class="fa  fa-user-o"></i>
+          </li>
+          <li class="header-icon dib ps-2" id="profile" #profile>
+            <span class="user-avatar">Mahmoud <i class="fa fa-angle-down"></i></span>
+            <div class="drop-down dropdown-profile" style="z-index: 999 !important;">
+              <div class="dropdown-content-heading text-center">
+                <div class="header_img">
+                  <img src="https://i.imgur.com/hczKIze.jpg" alt="">
+                </div>
+                <div class="p-2 profile-text">
+                  <label>Mahmoud Shrouf </label>
+                  <span>Engineer</span>
+                </div>
+              </div>
+              <div class="dropdown-content-body">
+                <ul>
+                  <li><a><i class="fa fa-lock"></i> <span>Change Password</span></a></li>
+                  <li><a><i class="fa fa-gear"></i> <span>Preferences</span></a></li>
+                  <li class="mt-4 pb-4 logout">
+                    <a style="cursor: pointer;" (click)="logout()">
+                      <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd" d="M3 13H15V11H3V13Z" fill="black" fill-rule="evenodd" />
+                        <path clip-rule="evenodd"
+                          d="M5.79282 7.79291L2.29282 11.2929C1.90229 11.6834 1.90229 12.3166 2.29282 12.7071L5.79282 16.2071L7.20703 14.7929L4.41414 12L7.20703 9.20712L5.79282 7.79291Z"
+                          fill="black" fill-rule="evenodd" />
+                        <path clip-rule="evenodd"
+                          d="M8 4C8 3.44772 8.44772 3 9 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H9C8.44772 21 8 20.5523 8 20V17H10V19H20V5H10V7H8V4Z"
+                          fill="black" fill-rule="evenodd" />
+                      </svg>
+                      <span>Logout</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header> -->
+
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-between h-100 ">
+    <div class="p-2 align-items-center">
+      <div class="float-start">
+        <div #hamburger class="hamburger sidebar-toggle">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="float-start p-2"> Dashboard</div>
+    </div>
+    <div class="p-2 align-items-center">
+      <div class="float-end">
+        <ul>
+          <li class="header-icon hhcompnaydr p-0">
+            <!-- <div class="p-field p-col-12 p-md-4"> -->
+            <!-- <span class="p-float-label"> -->
+            <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="AssetGroups" optionLabel="name"
+              (onChange)="switchAssetGroup()" *ngIf="AssetGroups.length>1" class="dropdown" placeholder="Asset Group"
+              [(ngModel)]="AssetGroup"></p-dropdown>
+            <!-- <label for="dropdown">Asset Group</label> -->
+            <!-- </span> -->
+            <!-- </div> -->
+          </li>
+
+          <li class="header-icon dib " #notifications><img src="assets/img/sidebar/user.svg" alt="">
+            <i class="fa fa-bell-o"></i>
+            <span class="position-absolute translate-middle badge rounded-pill bg-notification">
+              {{ notificationss.length }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+            <div class="drop-down dropdown-profile p-2 box-shadow dropdown-1">
+
+              <div class="dropdown-content-body">
+                @if(notificationss.length === 0)
+                {
+                <ul>
+                  <li class="notification-item no-notifications">
+                    No new notifications
+                  </li>
+                </ul>}
+                <ul>
+                  @for (notify of notificationss; track $index) {
+                  <li class="notification-item"> {{ notify.text }}</li>}
+
+
+                </ul>
+              </div>
+              <div *ngIf="notificationss.length > 0" class="load-more-container"
+                style="height:50px; text-align: center;">
+                <button type="button" class="btn btn-link" (click)="onScrollingFinished()">Load More</button>
+              </div>
+            </div>
+          </li>
+          <li class="header-icon dib" #profile><img src="assets/img/sidebar/user.svg" alt=""> <span
+              class="user-avatar">{{userName}} <i class="fa fa-angle-down f-s-10"></i></span>
+            <div class="drop-down dropdown-profile p-2 box-shadow dropdown-1">
+              <div class="qips-user">
+
+                <div class="d-flex justify-content-center text-center">
+                  <img src="{{imageSource}}" alt="">
+
+                </div>
+                <div class="text-center">
+                  <h5> <span class="ms-2">{{ userName | titlecase }}</span></h5>
+                  <h6> <span class="ms-2">{{ role | titlecase }}</span></h6>
+
+                </div>
+
+              </div>
+              <div class="dropdown-content-body">
+                <ul>
+                  <li><a (click)="openModal()"><img src="assets/img/sidebar/chang-pas.svg" alt="" class="pr-2">
+                      <span>Change
+                        Password</span></a></li>
+
+                  <!-- <li><a href="#"><img src="assets/img/sidebar/setting.svg" alt=""> <span>Setting</span></a></li> -->
+
+                  <li><a (click)="logout()" href="#"><img src="assets/img/sidebar/logout.jpg" alt="" class="pr-2">
+                      <span>Logout</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Update Account Information" [(visible)]="displayModal" [modal]="true" [closable]="false"
+  [style]="{width: '50vw'}">
+  <form [formGroup]="employeeForm" id="signupForm">
+
+    <img src="" id="signupLogo" />
+
+    <div class="inputDiv">
+      <label class="inputLabel" for="password">Password <small class="text-danger">*</small></label>
+      <p-password formControlName="password" [toggleMask]="true" (ngModelChange)="confirmPasswordMatch()"
+        [required]="true">
+        <ng-template pTemplate="header">
+          <h6>Pick a password</h6>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p-divider></p-divider>
+          <p class="p-mt-2">Suggestions</p>
+          <ul class="p-pl-2 p-ml-2 p-mt-0">
+            <li>At least one lowercase</li>
+            <li>At least one uppercase</li>
+            <li>At least one numeric</li>
+            <li>At least one special charachter</li>
+            <li>Minimum 8 characters</li>
+          </ul>
+        </ng-template>
+      </p-password>
+      <small
+        *ngIf="employeeControls['password'].touched && employeeControls['password'].errors && employeeControls['password'].errors['required']"
+        class="text-danger">
+        Password is required
+      </small>
+    </div>
+
+    <div class="inputDiv">
+      <label class="inputLabel" for="cPassword">Confirm Password <small class="text-danger">*</small></label>
+      <p-password match="password" formControlName="cPassword" [toggleMask]="true" [feedback]="false"
+        (ngModelChange)="confirmPasswordMatch()" [required]="true"></p-password>
+      <div *ngIf="employeeControls['cPassword'].touched && employeeControls['cPassword'].invalid" class="text-danger">
+        <div *ngIf="employeeControls['cPassword'].errors && employeeControls['cPassword'].errors['required']"
+          class="text-danger">
+          Confirm Password is required
+        </div>
+      </div>
+      <div>
+        <small *ngIf="employeeControls['cPassword'].errors && employeeControls['cPassword'].errors['mismatch']"
+          class="block text-danger">
+          Password does not match
+        </small>
+      </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+      <button pButton type="button" label="Save" (click)="updateProfile()"></button>
+      <button pButton type="button" label="Cancel" (click)="closeModal()"></button>
+    </div>
+
+  </form>
+</p-dialog>
+<p-toast></p-toast>

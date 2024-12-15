@@ -1,0 +1,135 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Technical Retirement List
+                        </div>
+                        <div class="float-start export-icon mt-3">
+                          <a class="m-5" (click)="export()">Export
+                            <img src="assets/img/dashboard/excel.svg" alt="" /></a>
+                        </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row float-end">
+                          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 mb-3">
+                            <div class="float-end filter-icon h-100">
+                              <a (click)="openFilterModal()"><img src="assets/img/dashboard/filter.svg" alt="" /></a>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="form-floating float-start">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here" />
+                              <a>
+                                <img class="float-end search-icon" src="assets/img/dashboard/search.svg" alt="" /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid">
+                              <button class="btn btn-blue text-white border-r10" type="button" (click)="openModal()">
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+                      <p-table #dt [value]="techs" [loading]="loading" [rows]="filter.pageSize" [lazy]="true"
+                        [totalRecords]="totalRows" [rowHover]="false" dataKey="id" [scrollable]="true"
+                        [tableStyle]="{width: 'max-content'}" (onLazyLoad)="loadUserData($event)">
+
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>ID</th>
+                            <th>Asset SN</th>
+                            <th>Asset Number</th>
+                            <th>Asset Name</th>
+                            <th>Retirement Date</th>
+                            <th>Part No</th>
+                            <th>Part Name</th>
+                            <th>Retirement Type</th>
+
+                            <th>Comments</th>
+                            <th class="sticky-header" alignFrozen="right" pFrozenColumn>Actions</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-tech>
+
+
+                          <tr>
+                            <!-- <td><a class="link-info" pRipple (click)="navToDetails(tech,0)">{{tech.id}}</a></td> -->
+                            <td>{{tech.id}}</td>
+                            <td>{{tech.assetSerialNo}}</td>
+                            <td>{{tech.assetNumber}}</td>
+                            <td>{{tech.assetName}}</td>
+                            <td>{{tech.retirementDate |date}}</td>
+                            <td>
+                              <ul *ngFor="let part of tech.tRetirementParts">
+                                <li *ngIf="tech.tRetirementParts!=''">{{part.partNumber}}</li>
+                              </ul>
+                            </td>
+                            <td>
+                              <ul *ngFor="let part of tech.tRetirementParts">
+                                <li *ngIf="tech.tRetirementParts!=''">{{part.partName}}</li>
+                              </ul>
+                            </td>
+                            <td>{{tech.reasonName}}</td>
+
+                            <td>{{tech.comments}}</td>
+                            <td class="sticky-header" alignFrozen="right" pFrozenColumn>
+                              <div class="d-flex">
+                                <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                  (click)="viewDetails(tech,1)">
+                                  <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                </button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                                  (click)="navToDetails(tech,1)" canUpdate></button>
+
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                                  (click)="delete(tech)" canDelete></button>
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-template>
+
+                      </p-table>
+                      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<add-edit-t-retirement [showmodal]="addEditTechnicalRetairementLoaded" [edit_asset_id]="asset_id"
+  [edit_asset_index]="edit_index" (openModals)="openModal()"></add-edit-t-retirement>
+<app-search-technical-retairements [filters]="filter" [showmodal]="filterLoaded" (openSearchModals)="openFilterModal()"
+  (AssetsTransferSearch)="getNameAssetSearch($event)"></app-search-technical-retairements>
+<view-details-t-retirement [showmodal]="viewTechnicalRetairementLoaded" [edit_asset_id]="asset_id"
+  [edit_asset_index]="edit_index" (openModals)="openViewModal()"></view-details-t-retirement>
+<div *ngIf="addEditTechnicalRetairementLoaded" class="offcanvas-backdrop fade show" (click)="openModal()"></div>
+<div *ngIf="viewTechnicalRetairementLoaded" class="offcanvas-backdrop fade show" (click)="openViewModal()"></div>
+<div *ngIf="filterLoaded" class="offcanvas-backdrop fade show" (click)="openFilterModal()"></div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

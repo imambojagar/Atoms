@@ -1,0 +1,28 @@
+<form [formGroup]="serviceRequestFormService.serviceReviewForm">
+    <div class="row py-3">
+       <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+         <label class="form-label ">Call Status<small class="text-danger">*</small></label>
+
+         <p-dropdown [options]="serviceRequestFormService.statuses" optionLabel="name"
+             formControlName="status" class="dropdown" placeholder="select"></p-dropdown>
+      </div>
+      <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+        <label class="form-label ">Call Review</label>
+        <p-dropdown placeholder="--Select--" formControlName="callReview"
+            [options]="serviceRequestFormService.callReview" optionLabel="name" class="dropdown"
+            (onChange)="serviceRequestFormService.withComment1($event)">
+        </p-dropdown>
+    </div>
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="serviceRequestFormService.viewComment=='true'">
+        <label class="form-label "> Review Comments</label>
+        <textarea id="reviewComment" formControlName="reviewComment"
+            placeholder="Enter Review Comments" pInputTextarea></textarea>
+
+
+    </div>
+
+    <app-table [tableData]="tableConfig" [hidePagination]="true" (routeEvent)="route($event)" >
+    </app-table>
+
+    </div>
+</form>

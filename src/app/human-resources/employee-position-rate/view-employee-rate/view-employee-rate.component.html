@@ -1,0 +1,88 @@
+<div
+  #drawer
+  [ngClass]="showViewModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">
+      View Employee Rate Position
+    </h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_view_modal()"
+    ></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+      <p-toast></p-toast>
+      <div
+        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form"
+      >
+        
+          <form
+            [formGroup]="empRateForm"
+          >
+            <div class="row mb-4">
+              <div class="row box-gryco">
+                  <div class="row py-3">
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    >
+                      <label class="form-label">Position : </label>
+                      <span>{{ empRateForm.get("positionId")?.value }}</span>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    >
+                      <label class="form-label">Rate : </label>
+                      <span>{{ empRateForm.get("rateId")?.value }}</span>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    >
+                      <label class="form-label">Employee Departments : </label>
+                      <span>{{ empRateForm.get("departmentId")?.value }}</span>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    >
+                      <label class="form-label">Service Team : </label>
+
+                      <span>{{ empRateForm.get("serviceTeamId")?.value }}</span>
+                    </div>
+                  </div>
+                
+
+                <div *ngIf="!isAddMode" class="mb-6 mb-xl-9">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <label class="form-label">Modified ON: </label>
+                    <span *ngIf="modifiedOn != null">
+                      {{ modifiedOn | date : "medium" }}
+                    </span>
+                    <span *ngIf="modifiedOn == null">None</span>
+                  </div>
+                  <!-- <div class="card-body pt-5">
+                    <div class="row py-3" [ngClass]="{ disableDiv: true }">
+                      <app-transaction-history
+                        *ngIf="transactionHistory"
+                        [transactionHistory]="transactionHistory"
+                      ></app-transaction-history>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </form>
+        
+      </div>
+    </div>
+  </div>
+  <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+</div>

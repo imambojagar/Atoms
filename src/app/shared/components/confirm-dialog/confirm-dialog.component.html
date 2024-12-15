@@ -1,0 +1,12 @@
+<div class="modal-header ">
+    <h4 class="modal-title">
+        {{ title |translate}}
+    </h4>
+</div>
+<div class="modal-body ">
+    {{ message |translate}}
+</div>
+<div class="modal-footer d-flex justify-content-end">
+    <button type="button" class="btn btn-secondary me-3" (click)="decline()">{{ btnCancelText |translate}}</button>
+    <button type="button" *ngIf="btnOkText" class="btn btn-primary" (click)="accept()">{{ btnOkText |translate}}</button>
+</div>

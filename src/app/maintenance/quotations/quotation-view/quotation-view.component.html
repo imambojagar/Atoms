@@ -1,0 +1,242 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" >View Quotations </h1>
+    <!-- <h1 class="offcanvas-title offcanvas-heading" *ngIf="typeScreen=='Edit'">Edit Quotation </h1> -->
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+     <p-toast></p-toast>
+    <div class="">
+        <div class="">
+            <ul class="nav nav-stretch nav-line-tabs fw-bold border-transparent flex-nowrap" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'QuotationInfo' }"
+                        (click)="setActiveTab('QuotationInfo')" role="tab">
+                        Quotation
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'PrintInfo' }"
+                        (click)="setActiveTab('PrintInfo')" role="tab">
+                        Print Information
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'MaintenanceCost' }"
+                        (click)="setActiveTab('MaintenanceCost')" role="tab">
+                        Maintenance Cost
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <form [formGroup]="quotationForm" (ngSubmit)="save()">
+
+            <!-- begin::Body -->
+            <div class="">
+                <div class="tab-content pt-3">
+
+                    <!-- begin::Sidebar -->
+                    <div class="tab-pane" [ngClass]="{ active: activeTab === 'QuotationInfo' }">
+                      <div class="row py-3 box-gryco">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Asset Number'}}: <span class="viewspan-text">{{ quotationForm.get('assetNumber')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Asset Serial No'}}: <span class="viewspan-text">{{ quotationForm.get('assetSerialNo')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Asset Name'}}: <span class="viewspan-text">{{ quotationForm.get('assetName')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Call No'}}: <span class="viewspan-text">{{ quotationForm.get('callNo')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Work OrderNo'}}: <span class="viewspan-text">{{ quotationForm.get('workOrderNo')?.value }}</span></p>
+                        </div>
+                      </div>
+
+                      <div class="row py-3 box-gryco">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Quotation No'}}: <span class="viewspan-text">{{ quotationForm.get('quotationNoManual')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Date'}}: <span class="viewspan-text">{{ quotationForm.get('quotationDate')?.value | date:'shortDate' }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Related Employee'}}: <span class="viewspan-text">{{ quotationForm.get('relatedEmployeeId')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Call Last Situation'}}: <span class="viewspan-text">{{ quotationForm.get('callLastSituationId')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Currency'}}: <span class="viewspan-text">{{ quotationForm.get('currencyId')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Offer Type'}}: <span class="viewspan-text">{{ quotationForm.get('offerTypeId')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Supplier'}}: <span class="viewspan-text">{{ quotationForm.get('supplierId')?.value }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'Start of work'}}: <span class="viewspan-text">{{ quotationForm.get('startOfWorkTime')?.value | date:'short' }}</span></p>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p class="viewp-text">{{'End of work'}}: <span class="viewspan-text">{{ quotationForm.get('endOfWorkTime')?.value | date:'short' }}</span></p>
+                        </div>
+                      </div>
+
+                      <div class="mt-6 mb-6 mb-xl-9">
+                        <div class="col-12">
+                          <h3 class="section-heading">Spare Parts</h3>
+                        </div>
+                        <div class="pt-4">
+                          <div formArrayName="quotationSpareParts">
+                            <div *ngFor="let info of getControls('quotationSpareParts'); let i=index" class="formline add-more-value-border add-more-values margin-bottom-add-more">
+                              <div [formGroupName]="i" class="d-flex">
+                                <fieldset class="formline">
+                                  <div class="row py-3 box-gryco">
+                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                      <p class="viewp-text">{{'Part No'}}: <span class="viewspan-text">{{ info.get('partId')?.value?.partNo }}</span></p>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                      <p class="viewp-text">{{'Description'}}: <span class="viewspan-text">{{ info.get('description')?.value }}</span></p>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                      <p class="viewp-text">{{'Quantity'}}: <span class="viewspan-text">{{ info.get('quantity')?.value }}</span></p>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                      <p class="viewp-text">{{'Unit Price'}}: <span class="viewspan-text">{{ info.get('unitPrice')?.value }}</span></p>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                      <p class="viewp-text">{{'Discount'}}: <span class="viewspan-text">{{ info.get('discount')?.value }}</span></p>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                      <p class="viewp-text">{{'Quotation Types'}}: <span class="viewspan-text">{{ info.get('quotationTypeId')?.value }}</span></p>
+                                    </div>
+                                  </div>
+                                </fieldset>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- end::Sidebar -->
+
+                    <!-- begin::Header -->
+                    <!--     start     -->
+                    <div class="tab-pane" [ngClass]="{ active: activeTab === 'PrintInfo'}">
+                      <div class="row py-3 box-gryco">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <p class="viewp-text">{{'Site'}}: <span class="viewspan-text">{{ quotationForm.get('siteNamePrint')?.value }}</span></p>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <p class="viewp-text">{{'Presented To'}}: <span class="viewspan-text">{{ quotationForm.get('presentedTo')?.value }}</span></p>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <p class="viewp-text">{{'Subject'}}: <span class="viewspan-text">{{ quotationForm.get('subject')?.value }}</span></p>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <p class="viewp-text">{{'Fax'}}: <span class="viewspan-text">{{ quotationForm.get('fax')?.value }}</span></p>
+                          </div>
+                      </div>
+                      <div class="row py-3 box-gryco">
+                          <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                              <p class="viewp-text">{{'Conditions'}}: <span class="viewspan-text">{{ quotationForm.get('conditions')?.value }}</span></p>
+                          </div>
+                          <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                              <p class="viewp-text">{{'End page'}}: <span class="viewspan-text">{{ quotationForm.get('endpage')?.value }}</span></p>
+                          </div>
+                      </div>
+                      <div class="row py-3 box-gryco">
+                          <p class="viewp-text">
+                              <input class="form-check-input me-3" type="checkbox" [checked]="quotationForm.get('hideDescInprint')?.value" disabled />
+                              <span class="viewspan-text">{{'Hide Description In print'}}</span>
+                          </p>
+                      </div>
+                      <div class="card card-flush mt-6 mb-6 mb-xl-9">
+                          <div class="col-12">
+                              <h3 class="section-heading">Print Info Spare Parts</h3>
+                          </div>
+                          <div class="pt-4">
+                              <fieldset class="formline">
+                                  <div formArrayName="quotationPrintInfoSpareParts" class="mt-4 card">
+                                      <div *ngFor="let info of getControls('quotationPrintInfoSpareParts'); let i = index" class="add-more-value-border add-more-values margin-bottom-add-more">
+                                          <div [formGroupName]="i" class="d-flex">
+                                              <fieldset class="formline">
+                                                  <div class="row py-3 box-gryco">
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Unit Price'}}: <span class="viewspan-text">{{ info.get('unitPrice_Print')?.value }}</span></p>
+                                                      </div>
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Quantity'}}: <span class="viewspan-text">{{ info.get('quantity_Print')?.value }}</span></p>
+                                                      </div>
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Returned Quantity'}}: <span class="viewspan-text">{{ info.get('returnedQuantity_Print')?.value }}</span></p>
+                                                      </div>
+                                                      <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                                          <p class="viewp-text">{{'Discount'}}: <span class="viewspan-text">{{ info.get('discount_Print')?.value }}</span></p>
+                                                      </div>
+                                                  </div>
+                                                  <div class="row py-3 box-gryco">
+                                                      <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                                          <p class="viewp-text">{{'Description'}}: <span class="viewspan-text">{{ info.get('description_Print')?.value }}</span></p>
+                                                      </div>
+                                                  </div>
+                                              </fieldset>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </fieldset>
+                          </div>
+                      </div>
+                    </div>
+
+                    <!-- end::Header -->
+
+                    <!-- begin::Toolbar -->
+                    <div class="tab-pane" [ngClass]="{ active: activeTab === 'MaintenanceCost' }">
+                      <div class="mt-4 mb-6 mb-xl-4">
+                          <div class="col-12">
+                              <h3 class="section-heading">Estimated Working Hours</h3>
+                          </div>
+                          <div class="pt-4">
+                              <div formArrayName="estimatedWorkingHours">
+                                  <div *ngFor="let info of getControls('estimatedWorkingHours'); let i=index"
+                                       class="add-more-value-border add-more-values margin-bottom-add-more">
+                                      <div [formGroupName]="i" class="d-flex">
+                                          <fieldset class="formline">
+                                              <div class="row py-3 box-gryco">
+                                                  <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                                      <p class="viewp-text">{{'Assigned Employee'}}: <span class="viewspan-text">{{ info.get('assignedEmployeeId')?.value?.userName }}</span></p>
+                                                  </div>
+                                                  <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                                      <p class="viewp-text">{{'Working Hours'}}: <span class="viewspan-text">{{ info.get('workingHours')?.value }}</span></p>
+                                                  </div>
+                                              </div>
+                                          </fieldset>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+
+                    <!-- end::Toolbar -->
+                    <div class="pt-2"  *ngIf="typeScreen!='Add'">
+                        <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end::Footer -->
+        </form>
+    </div>
+  </div>
+</div>
+
+    <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

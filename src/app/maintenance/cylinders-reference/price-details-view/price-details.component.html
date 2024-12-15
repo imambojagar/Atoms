@@ -1,0 +1,62 @@
+<div #drawer [ngClass]=" showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <!-- <h1 class="offcanvas-title offcanvas-heading">Add Edit Cylinder Reference</h1> -->
+   <!--  <h1 *ngIf="inAddMode" class="offcanvas-title offcanvas-heading">Add Cylinders Price Reference</h1>
+    <h1 *ngIf="inEditMode" class="offcanvas-title offcanvas-heading">Update Cylinders Price Reference</h1> -->
+    <h1 class="offcanvas-title offcanvas-heading">View Cylinders Price Reference</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+  <div class="row">
+
+    <p-toast></p-toast>
+      <!-- <ng-template #formTemplate> -->
+        <div class="mb-2 mb-xl-4">
+          <div class="box-gryco pt-2">
+            <form [formGroup]="refForm" *ngIf="model">
+              <!-- Supplier Field -->
+              <div class="row-3 py-3">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                  <p class="viewp-text">
+                    Supplier: <span class="viewspan-text">{{ refForm.value.supplierName }}</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Cylinders Array -->
+              <div class="row py-3">
+                <ng-container *ngFor="let item of cylindersArr; let i = index">
+                  <ng-container *ngIf="!item.control.includes('liquidNitrogen')">
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                      <p class="viewp-text">
+                        {{ item.label }}: <span class="viewspan-text">{{ refForm.value[item.control.replace('Recieved', '')] }}</span>
+                      </p>
+                    </div>
+                  </ng-container>
+                </ng-container>
+
+                <!-- Liquid Nitrogen Field -->
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                  <p class="viewp-text">
+                    Liquid Nitrogen (Gallon): <span class="viewspan-text">{{ refForm.value.liquidNitrogenSmall30LEmpty }}</span>
+                  </p>
+                </div>
+
+                <!-- LOX Field -->
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                  <p class="viewp-text">
+                    LOX (Gallon): <span class="viewspan-text">{{ refForm.value.loX1Volume }}</span>
+                  </p>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+      <!-- </ng-template> -->
+  </div>
+</div>
+  <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

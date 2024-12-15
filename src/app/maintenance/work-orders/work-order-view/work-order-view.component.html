@@ -1,0 +1,281 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title offcanvas-heading">View Work Order</h2>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class=" mb-6 mb-xl-9">
+          <div class="">
+            <div class="row">
+              <form [formGroup]="workOrderInfoForm">
+                <div class="py-3">
+                  <div class="row box-gryco">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p class="viewp-text">Call Id: <span class="viewspan-text">{{ workOrderInfoForm.value.callId }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Total working hours: <span>{{ workOrderInfoForm.value.totalWorkingHours }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Asset No: <span>{{ workOrderInfoForm.value.assetNo }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>WO No: <span>{{ workOrderInfoForm.value.workOrderNo }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Asset Name: <span>{{ workOrderInfoForm.value.assetName }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Department: <span>{{ workOrderInfoForm.value.department }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Asset SN: <span>{{ workOrderInfoForm.value.assetSN }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Model: <span>{{ workOrderInfoForm.value.model }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Manufacturer: <span>{{ workOrderInfoForm.value.manufacturer }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Site: <span>{{ workOrderInfoForm.value.site }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Asset Type: <span>{{ assetTypeName }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Equipment Status: <span>{{ workOrderInfoForm.value.equipmentStatus }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Service Type: <span>{{ workOrderInfoForm.value.serviceType }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Return To Service: <span>{{ workOrderInfoForm.value.visitDate }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Failure Reasons: <span>{{ workOrderInfoForm.value.reasons }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Fault Description: <span>{{ workOrderInfoForm.value.faultDescription }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Solution: <span>{{ workOrderInfoForm.value.workPerformed }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Call Comment: <span>{{ workOrderInfoForm.value.callComments }}</span></p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <p>Loan Availability: <span>{{ workOrderInfoForm.value.loanAvailablity }}</span></p>
+                    </div>
+                    <div
+                      class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                      *ngIf="workOrderInfoForm.value.loanAvailablity == 1"
+                    >
+                      <p>Loan Asset Number: <span>{{ workOrderInfoForm.value.assetLoan }}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+
+              <p-tabView styleClass="tabview-custom">
+                  <p-tabPanel>
+                      <ng-template pTemplate="header">
+                          <i class="pi pi-calendar"></i>
+                          <span>Caller Info <small class="text-danger">*</small></span>
+                      </ng-template>
+                      <form [formGroup]="callerInfoForm">
+                        <ng-container formArrayName="siteContacts">
+                          <ng-container *ngFor="let contact of siteContacts(); let i = index">
+                            <div class="row py-3">
+                              <div id="employeeCode{{ i }}" class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                <p class="viewp-text">Employee Id: <span class="viewspan-text">{{ contact.value.employeeCode }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                <p class="viewp-text">Name: <span class="viewspan-text">{{ contact.value.name }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                <p class="viewp-text">Telephone: <span class="viewspan-text">{{ contact.value.telephone }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                <p class="viewp-text">Job: <span class="viewspan-text">{{ contact.value.job }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                <p class="viewp-text">Email: <span class="viewspan-text">{{ contact.value.email }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                <p class="viewp-text">Extension: <span class="viewspan-text">{{ contact.value.land }}</span></p>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </form>
+
+                  </p-tabPanel>
+                  <p-tabPanel>
+                      <ng-template pTemplate="header">
+                          <i class="pi pi-calendar"></i>
+                          <span>WO Detail<small class="text-danger">*</small></span>
+                      </ng-template>
+                      <form [formGroup]="woDetailForm">
+                        <div class="row box-gryco">
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">Assigned Employee: <span class="viewspan-text">{{ woDetailForm.value.assignedEmployee }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">Assistant Employees: <span class="viewspan-text">{{ woDetailForm.value.assistantEmployees }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">Start of Work: <span class="viewspan-text">{{ woDetailForm.value.startOfWorkTime }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">End of Work: <span class="viewspan-text">{{ woDetailForm.value.endOfWorkTime }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">Working Hours: <span class="viewspan-text">{{ woDetailForm.value.workingHours }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">Travel Hours: <span class="viewspan-text">{{ woDetailForm.value.travelingHours }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">Travel Expenses: <span class="viewspan-text">{{ woDetailForm.value.travelingExpenses }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">Call's Last Situation: <span class="viewspan-text">{{ woDetailForm.value.callslastSituationWO }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="viewp-text">Repair Location: <span class="viewspan-text">{{ woDetailForm.value.repairLocation }}</span></p>
+                          </div>
+
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="showMRNumber == 'true'">
+                            <p class="viewp-text">MR Number: <span class="viewspan-text">{{ woDetailForm.value.MRNumber }}</span></p>
+                          </div>
+
+                          <div class="col-md-12 col-xl-12 col-xxl-12 mb-3">
+                            <p class="viewp-text">Technical Comment: <span class="viewspan-text">{{ woDetailForm.value.comment }}</span></p>
+                          </div>
+
+                          <div *ngIf="isExternal" class="col-md-12 col-xl-12 col-xxl-12 mb-3" style="padding-top: 20px;">
+                            <h3>Supplier Info</h3>
+
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <p class="viewp-text">Supplier: <span class="viewspan-text">{{ woDetailForm.value.supplier }}</span></p>
+                            </div>
+
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                              <p class="viewp-text">Vendor Ticket Number: <span class="viewspan-text">{{ woDetailForm.value.vendorTicketNumber }}</span></p>
+                            </div>
+
+                            <h3>Supplier Engineers</h3>
+
+                            <div class="col-md-12 col-xl-12 col-xxl-12">
+                              <ng-container formArrayName="suppEngineers">
+                                <ng-container *ngFor="let spare of suppEngineers(); let i = index">
+                                  <div class="row py-3">
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                      <p class="viewp-text">Engineer: <span class="viewspan-text">{{ spare.value.personName }}</span></p>
+                                    </div>
+
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                      <p class="viewp-text">Role: <span class="viewspan-text">{{ spare.value.personRoleName }}</span></p>
+                                    </div>
+
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                      <p class="viewp-text">Contact: <span class="viewspan-text">{{ spare.value.contact }}</span></p>
+                                    </div>
+
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                      <p class="viewp-text">External Engineer Code: <span class="viewspan-text">{{ spare.value.externalEngCode }}</span></p>
+                                    </div>
+
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                      <p class="viewp-text">Email: <span class="viewspan-text">{{ spare.value.email }}</span></p>
+                                    </div>
+                                  </div>
+                                </ng-container>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+
+                  </p-tabPanel>
+                  <p-tabPanel>
+                      <ng-template pTemplate="header">
+                          <!-- <i class="pi pi-calendar"></i> -->
+                          <span>Spare Parts<small class="text-danger">*</small></span>
+                      </ng-template>
+                      <form [formGroup]="sparePartForm">
+                        <ng-container formArrayName="spareParts">
+                          <ng-container *ngFor="let spare of spareParts(); let i = index">
+                            <div class="row box-gryco py-3" [formGroupName]="i" [ngClass]="{'disableDiv': typeScreen == 'View'}">
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [ngClass]="{'disableDiv': hideReturnQty == 'false'}">
+                                <p class="viewp-text">Part No: <span class="viewspan-text">{{ spare.value.partNo }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                <p class="viewp-text">Description: <span class="viewspan-text">{{ spare.value.description }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [ngClass]="{'disableDiv': hideReturnQty == 'false'}">
+                                <p class="viewp-text">Qty: <span class="viewspan-text">{{ spare.value.qty }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" *ngIf="hideReturnQty == 'false'">
+                                <p class="viewp-text">Return Qty: <span class="viewspan-text">{{ spare.value.returnQty }}</span></p>
+                              </div>
+
+                              <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" *ngIf="hideReturnQty == 'false'">
+                                <p class="viewp-text">Install Qty: <span class="viewspan-text">{{ spare.value.installQty }}</span></p>
+                              </div>
+
+                              <div class="col-md-4 col-xl-3 col-xxl-3 mb-3" *ngIf="typeScreen != 'View'">
+                                <!-- Buttons are removed since only values are to be displayed -->
+                              </div>
+
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </form>
+
+                  </p-tabPanel>
+
+              </p-tabView>
+              <!-- <div class="pt-2">
+                  <form [formGroup]="attachmentWorkOrderForm">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <label class="">Attachment</label>
+                            <app-attachments (onUploaded)="attachmentReady($event)" (onDeleted)="attachmentDelete($event)"   [hasDelete]="true" formArrayName="attachments" [attachments]="attachmentName"></app-attachments>
+                        </div>
+                  </form>
+              </div> -->
+              <div class="pt-2"*ngIf="typeScreen!='Add'" >
+                <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+              </div>
+
+            </div>
+          </div>
+      </div>
+      <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+    </div>
+  </div>
+</div>

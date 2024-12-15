@@ -1,0 +1,141 @@
+<div
+  #drawerAdd
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="isAddMode">
+      Add Employee Position Rate
+    </h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="!isAddMode">
+      Edit Employee Position Rate
+    </h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <p-toast></p-toast>
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <!-- ======================= -->
+        <form
+          [formGroup]="empRateForm"
+          (ngSubmit)="onSubmit()"
+          class="add-content-type"
+        >
+          <div class="row mb-4">
+            <div class="row box-gryco">
+              <!-- <div class="card-body pt-5"> -->
+                <div class="row py-3">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Position</label>
+                      <p-dropdown
+                        [options]="positions"
+                        optionLabel="name"
+                        optionValue="id"
+                        formControlName="positionId"
+                        class="dropdown"
+                        (onChange)="changePosition($event)"
+                        placeholder="select"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Rate</label>
+                      <p-dropdown
+                        [options]="rates"
+                        optionLabel="name"
+                        optionValue="id"
+                        formControlName="rateId"
+                        class="dropdown"
+                        (onChange)="changeRate($event)"
+                        placeholder="select"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Employee Departments</label>
+                      <p-dropdown
+                        [options]="departmentList"
+                        optionLabel="departmentName"
+                        optionValue="id"
+                        formControlName="departmentId"
+                        class="dropdown"
+                        (onChange)="changeDepartment($event)"
+                        placeholder="select"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Service Team</label>
+                      <p-dropdown
+                        [options]="teams"
+                        optionLabel="name"
+                        optionValue="id"
+                        formControlName="serviceTeamId"
+                        class="dropdown"
+                        (onChange)="changeTeams($event)"
+                        placeholder="select"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+              <!-- </div> -->
+            </div>
+            <div *ngIf="!isAddMode">
+              <div class="mt-3" [ngClass]="{ disableDiv: true }">
+                <app-transaction-history
+                  *ngIf="transactionHistory"
+                  [transactionHistory]="transactionHistory"
+                ></app-transaction-history>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+        <!-- ========================= -->
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="onSubmit()"
+            *ngIf="isAddMode"
+          >
+            Save
+          </button>
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="onSubmit()"
+            *ngIf="!isAddMode"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+  </div>
+</div>

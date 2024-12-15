@@ -1,0 +1,204 @@
+<div
+  #drawerAdd
+  [ngClass]="showAddModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom"
+  id="r-step-1"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Rota</h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="close_add_modal()"
+    ></button>
+  </div>
+  <div class="p-3">
+    <div class="row form-scroller mb-4">
+      <div class="row">
+        <p-toast></p-toast>
+        <div
+          class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3"
+        >
+          <form [formGroup]="searchForm">
+            <div class="row mb-4">
+              <div class="row box-gryco">
+                <div class="row py-3">
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                  <div class="form-floating mb-2">
+                    <span class="p-float-label">
+                      <p-autoComplete
+                        [delay]="1000"
+                        [(ngModel)]="searchFilter.site"
+                        [suggestions]="Sites"
+                        field="custName"
+                        (completeMethod)="onSelectSite($event)"
+                        (onSelect)="onSelectSite($event); searchShifts()"
+                        formControlName="site"
+                        inputId="siteInput"
+                        placeholder="Search Site"
+                      ></p-autoComplete>
+                      <label for="siteInput" class="form-label">Site</label>
+                    </span>
+                  </div>
+                  
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label"> Date </label>
+                      <p-calendar
+                        [showIcon]="true"
+                        [showOnFocus]="false"
+                        [(ngModel)]="searchFilter.shiftDate"
+                        view="month"
+                        dateFormat="yy-mm"
+                        formControlName="date"
+                        dataType="string"
+                        (onSelect)="searchShifts()"
+                      ></p-calendar>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    *ngIf="false"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label">Asset Group</label>
+                      <p-dropdown
+                        [options]="AssetGroups"
+                        optionLabel="name"
+                        [hidden]="true"
+                        [(ngModel)]="searchFilter.assetGroup"
+                        placeholder="select"
+                        (onChange)="selectAssetGroup($event)"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    *ngIf="isAddMode"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label"> Shift </label>
+                      <p-dropdown
+                        [options]="shifts"
+                        optionLabel="shiftName"
+                        [(ngModel)]="searchFilter.defaultShift"
+                        placeholder="select"
+                        [style]="{ width: '100%' }"
+                        formControlName="defaultShift"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                    *ngIf="isAddMode"
+                  >
+                    <div class="form-floating mb-2">
+                      <label class="form-label"> Employees</label>
+                      <p-multiSelect
+                        [options]="Employees"
+                        optionLabel="userName"
+                        [(ngModel)]="searchFilter.employees"
+                        dataKey="userId"
+                        defaultLabel="Select assistant Employees"
+                        class="multiselect-custom"
+                        formControlName="employees"
+                        placeholder="Select"
+                      >
+                      </p-multiSelect>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- <div class="fixed-bottom"> -->
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-blue text-white form-button border-r10 float-end m-4"
+            type="button"
+            (click)="apply()"
+          >
+            Apply Filter
+          </button>
+        </div>
+      </div>
+      <!-- </div> -->
+      <div class="card card-flush mb-6 mb-xl-9">
+        <div class="card-header">
+          <div class="card-toolbar">
+            <div data-kt-user-table-toolbar="base">
+              <h1 class="offcanvas-title offcanvas-heading">Shift Details</h1>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="card-body pt-5">
+        <full-calendar
+          *ngIf="options"
+          defaultView="month"
+          [events]="events"
+          [options]="options"
+          (onEventClick)="function($event)"
+        ></full-calendar>
+        <h4 *ngIf="!options">
+          <no-data></no-data>
+        </h4>
+      </div> -->
+
+        <div class="card-body pt-5">
+          <!-- <full-calendar
+            [options]="calendarOptions"
+            (eventClick)="calanderFunction($event)"
+          ></full-calendar> -->
+
+          <full-calendar [options]="calendarOptions"></full-calendar>
+
+          <h4 *ngIf="!calendarOptions">
+            <no-data></no-data>
+          </h4>
+        </div>
+        <div class="fixed-bottom">
+          <div class="row">
+            <div class="col-12">
+              <button
+                *ngIf="isAddMode"
+                class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                type="button"
+                (click)="save()"
+              >
+                Save
+              </button>
+              <button
+                *ngIf="isEditMode"
+                class="btn btn-blue text-white form-button border-r10 float-end m-4"
+                type="button"
+                (click)="save()"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog> -->
+    </div>
+  </div>
+</div>
+
+<!-- <app-rotadialog
+  [showmodal]="formRotaLoaded"
+  [data]="ref"
+  (openModals)="openRotaModal()"
+></app-rotadialog> -->
+
+<!-- <div *ngIf="formRotaLoaded" class="offcanvas-backdrop fade show"></div> -->

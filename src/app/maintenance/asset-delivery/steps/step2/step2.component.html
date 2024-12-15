@@ -1,0 +1,204 @@
+
+<div class="card card-flush">
+  <form [formGroup]="form">
+  <div class="card-body">
+    <div class="fv-row">
+      <div class="row py-3">
+        <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+          <div class="form-floating mb-2"> 
+          <label class="fs-6 fw-bold form-label">Cost Center</label>
+          <p-dropdown [options]="costCenterList" placeholder="Please select" formControlName="costCenter"
+            (onChange)="changeCostCenter($event)" optionLabel="costCenter" optionValue="costCenter"
+            [style]="{'width':'100%'}" [filter]="true" filterBy="costCenter" [showClear]="true"> </p-dropdown>
+          <div *ngIf=" form.get('costCenter')?.hasError('required') && form.get('costCenter')?.touched "
+            class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+        </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4" *ngIf="showFiled" [ngClass]="{'disableDiv': hideContinue==false}">
+          <div class="form-floating mb-2"> 
+          <label class="fs-6 fw-bold form-label">Accepted Date</label>
+          <p-calendar [showOnFocus]="false" placeholder="Please select date" [showIcon]="true" [showButtonBar]="true"
+            [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="acceptanceDate"
+            dateFormat="yy-mm-dd" dataType="string">
+          </p-calendar>
+          <div *ngIf=" form.get('acceptanceDate')?.hasError('required') && form.get('acceptanceDate')?.touched "
+          class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+        </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4" *ngIf="showFiled" [ngClass]="{'disableDiv': hideContinue==false}">
+          
+          <div class="d-flex">
+            <div class="col-lg-10">
+              <div class="form-floating mb-2"> 
+                <label class="fs-6 fw-bold form-label">Accepted By</label>
+                  <input id="mm" type="text" formControlName="acceptedBy" pInputText readonly />
+              </div>
+            </div>
+            <app-employee-details-oracle (onSelectedEmployee)="onAcceptedBySelected($event)"></app-employee-details-oracle>
+          </div>
+            <div *ngIf=" form.get('acceptedBy')?.hasError('required') && form.get('acceptedBy')?.touched "
+            class="fv-plugins-message-container invalid-feedback"> Filed is required </div>
+        </div>
+      </div>
+      <div class="card card-flush mt-6 mb-6 mb-xl-9" *ngIf="showFiled" [ngClass]="{'disableDiv': hideContinue==false}">
+        <div class="card-body pt-4">
+          <div formArrayName="assets">
+            <h4 class="d-flex align-items-center text-primary mt-8" *ngIf="getControls('assets').length > 0">Assets</h4>
+             <hr class="my-2" *ngIf="getControls('assets').length > 0">
+            <div *ngFor="let info of getControls('assets'); let i=index"
+              class="formline add-more-value-border add-more-values margin-bottom-add-more">
+              <div [formGroupName]="i" class="d-flex">
+                <fieldset class="formline">
+                  <div class="row py-3">
+                    <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                      <div class="form-floating mb-2"> 
+                      <label class="fs-6 fw-bold form-label">Item</label>
+                      <input type="text" formControlName="item" name="item" readonly
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..." />
+                    </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                      <div class="form-floating mb-2"> 
+                        <div class="form-floating mb-2"> 
+                          <label class="fs-6 fw-bold form-label">Asset Number</label>
+                          <input type="text" formControlName="assetNumber" name="assetNumber" readonly
+                            class="form-control form-control-sm form-control-solid" placeholder="Enter ..." />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                      <div class="form-floating mb-2"> 
+                      <label class="fs-6 fw-bold form-label">Serial Number</label>
+                      <input type="text" formControlName="serialNumber" name="serialNumber" readonly
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..." />
+                    </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                      <div class="form-floating mb-2"> 
+                        <label class="fs-6 fw-bold form-label required">Status</label>
+                        <p-dropdown [options]="status" placeholder="Please select" formControlName="endUserAcceptanceStatusId"
+                          [filter]="true" filterBy="name" [showClear]="true"
+                          (onChange)="changeStatusControl('assets',i,$event)" optionLabel="name" optionValue="id"
+                          [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-3">
+                    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                      <div class="form-floating mb-2"> 
+                      <label class="fs-6 fw-bold form-label">Rejection Reason</label>
+                      <textarea formControlName="rejectionReason" name="rejectionReason"
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..."
+                        rows="2"></textarea>
+                    </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                      <div class="form-floating mb-2"> 
+                      <label class="fs-6 fw-bold form-label">Description</label>
+                      <textarea formControlName="description" name="description"
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..."
+                        rows="2"></textarea>
+                    </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="card card-flush mt-6 mb-6 mb-xl-9" *ngIf="showFiled" [ngClass]="{'disableDiv': hideContinue==false}">
+        <div class="card-body pt-4">
+          <div formArrayName="accessories">
+            <h4 class="d-flex align-items-center text-primary" *ngIf="getControls('accessories').length > 0">Accessories</h4>
+            <hr class="my-2" *ngIf="getControls('accessories').length > 0">
+            <div *ngFor="let info of getControls('accessories'); let i=index"
+              class="formline add-more-value-border add-more-values margin-bottom-add-more">
+              <div [formGroupName]="i" class="d-flex">
+                <fieldset class="formline">
+                  <div class="row py-3">
+                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                      <label class="fs-6 fw-bold form-label">Item</label>
+                      <input type="text" formControlName="item" name="item" readonly
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..." />
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                      <label class="fs-6 fw-bold form-label required">Status</label>
+                      <p-dropdown [options]="status" placeholder="Please select" formControlName="endUserAcceptanceStatusId"
+                        [filter]="true" filterBy="name" [showClear]="true"
+                        (onChange)="changeStatusControl('accessories',i,$event)" optionLabel="name" optionValue="id"
+                        [style]="{'width':'100%'}">
+                      </p-dropdown>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                      <label class="fs-6 fw-bold form-label">Received</label>
+                      <input type="text" formControlName="received" name="received" readonly
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..." />
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                      <label class="fs-6 fw-bold form-label">Rejected</label>
+                      <input type="number" formControlName="rejected" name="rejected"
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..." />
+                    </div>
+                  </div>
+                  <div class="row py-3">
+                    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                      <label class="fs-6 fw-bold form-label">Rejection Reason</label>
+                      <textarea formControlName="rejectionReason" name="rejectionReason"
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..."
+                        rows="2"></textarea>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                      <label class="fs-6 fw-bold form-label">Description</label>
+                      <textarea formControlName="description" name="description"
+                        class="form-control form-control-sm form-control-solid" placeholder="Enter ..."
+                        rows="2"></textarea>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="row" *ngIf="!isCancel">
+  <div class="col-12">
+    <button type="button" class="btn btn-primary mt-8 ml-6" (click)="back()">
+      Back
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mt-8 ml-6"
+      (click)="save()"
+      *ngIf="hideContinue"
+    >
+      Save
+    </button>
+ 
+    
+    <button
+      type="button"
+      class="btn btn-primary mt-8 ml-6"
+      (click)="continue()"
+      *ngIf="!hideContinue"
+    >
+      Continue
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mt-8 ml-6"
+      (click)="print()"
+      *ngIf="!hideContinue"
+    >
+      Print
+    </button>
+  </div>
+</div>
+
+<!-- *ngIf="!hideContinue" -->

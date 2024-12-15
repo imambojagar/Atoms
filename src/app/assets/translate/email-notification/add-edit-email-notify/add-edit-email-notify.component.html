@@ -1,0 +1,173 @@
+<p-toast></p-toast>
+<div class="">
+
+    <div class="card flex justify-content-center mb-5">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+    </div>
+
+    <div class="card card-flush mb-6 mb-xl-9">
+        <div class="card-header bg-primary">
+            <div class="card-title" [hidden]="isAddMode==false">
+                <h2 class="d-flex align-items-center text-white">Create Email Notification </h2>
+
+            </div>
+            <div class="card-title" [hidden]="isAddMode==true">
+                <h2 class="d-flex align-items-center text-white">Update Email Notification </h2>
+            </div>
+        </div>
+        <p-tabView [(activeIndex)]="tabIndex">
+            <p-tabPanel header="View" class="view-data-li" leftIcon="pi pi-file" *ngIf="!isAddMode">
+                <form [formGroup]="EmailForm" class="add-content-type">
+                    <div class="card card-flush">
+                        <div class="card-body pt-5">
+                            <div class="row py-3">
+                                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                    <label class="form-label">Subject</label>
+                                    <input [readOnly]="true" formControlName="subject" pInputText />
+
+                                </div>
+                                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input id="email" formControlName="email" type="email" pKeyFilter="email" [readOnly]="true" pInputText />
+
+                                </div>
+                                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                    <label class="form-label">Ignore</label>
+                                    <input [readOnly]="true" formControlName="ignore" pInputText />
+
+                                </div>
+                                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                    <label class="form-label">Sent</label>
+                                    <input [readOnly]="true" formControlName="sent" pInputText />
+
+                                </div>
+
+                                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                    <label class="form-label">Is HTML</label>
+                                    <p-dropdown [options]="isHtmlList" placeholder="Select" 
+                                    formControlName="isHTML" optionLabel="name" [readonly]="true"
+                                     optionValue="id"></p-dropdown>
+
+                                </div>
+                            </div>
+                            <div class="row py-3">
+                                <div class="col-md-12 col-xl-12 col-xxl-12 mb-3" [hidden]="isChecked==false">
+                                        <label class="form-label">Body</label>
+                                        <p-editor formControlName="body" [readonly]="true" ></p-editor>
+
+                                </div>
+                                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="isChecked==true">
+                                    <label class="form-label">Body</label>
+                                    <textarea formControlName="body" [readOnly]="true" pInputTextarea></textarea>
+                                   
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-flush mb-6 mb-xl-9" *ngIf="!isAddMode">
+                        <div class="card-body pt-5">
+                            <div class="row py-3" [ngClass]="{'disableDiv': true}">
+                                <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </p-tabPanel>
+
+            <p-tabPanel [header]="isAddMode ? 'Add' : 'Edit' " leftIcon="pi pi-file-edit">
+
+                <form [formGroup]="EmailForm" (ngSubmit)="onSubmit()">
+                 
+
+                            <div class="card-body pt-5">
+                                <div class="row py-3">
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                        <label class="form-label">Subject</label>
+                                        <input formControlName="subject" pInputText />
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input id="email" formControlName="email" type="email" pKeyFilter="email" pInputText />
+    
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                        <label class="form-label">Is HTML</label>
+                                        <p-dropdown [options]="isHtmlList" placeholder="Select" 
+                                        formControlName="isHTML" optionLabel="name" (onChange)="setCheckbox($event)"
+                                         optionValue="id"></p-dropdown>
+
+                                    </div>
+                                </div>
+                                <div class="row py-3">
+                                    <div class="col-md-12 col-xl-12 col-xxl-12 mb-3" [hidden]="isChecked==false">
+                                            <label class="form-label">Body</label>
+                                            <p-editor formControlName="body" ></p-editor>
+
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-3" [hidden]="isChecked==true">
+                                        <label class="form-label">Body</label>
+                                        <textarea formControlName="body" pInputTextarea></textarea>
+                                       
+
+
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="card card-flush mb-6 mb-xl-9" *ngIf="!isAddMode">
+                                <div class="card-body pt-5">
+                                    <div class="row py-3" [ngClass]="{'disableDiv': true}">
+                                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                            <label class="form-label">Created ON </label>
+                                            <span *ngIf="createdOn!=null">
+                                                <input type="text" pInputText
+                                                    placeholder="{{createdOn|date :'medium'}}" />
+                                            </span>
+                                            <span *ngIf="createdOn==null">
+                                                <input type="text" pInputText placeholder="None" />
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                                            <label class="form-label">Modified ON </label>
+                                            <span *ngIf="modifiedOn!=null">
+                                                <input type="text" pInputText
+                                                    placeholder="{{modifiedOn|date :'medium'}}" />
+                                            </span>
+                                            <span *ngIf="modifiedOn==null">
+                                                <input type="text" pInputText placeholder=" " />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="formline3" *ngIf="!isAddMode">
+                                <div class="saveButton">
+                                    <button pButton type="submit" (submit)="onSubmit()" label="Update"
+                                        class="p-button-info col-lg-2" canUpdate></button>
+                                    <button pButton type="button" (click)="delete()" label="Delete"
+                                        class="p-button-danger col-lg-2" canDelete></button>
+
+                                    <button pButton type="button" label="Back" BackButton
+                                        class="p-button-info col-lg-2"></button>
+                                </div>
+                            </div>
+                            <div class="formline3" *ngIf="isAddMode">
+                                <div class="saveButton">
+                                    <button pButton type="submit" (submit)="onSubmit()" label="Save"
+                                        class="p-button-info col-lg-2"></button>
+                                    <button pButton type="button" (click)="cancel()" label="Cancel"
+                                        class="p-button-cancel col-lg-2"></button>
+                                </div>
+                            </div>
+
+                     
+                </form>
+            </p-tabPanel>
+        </p-tabView>

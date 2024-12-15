@@ -1,0 +1,344 @@
+<p-toast></p-toast>
+<!--beginbreadcrumb-->
+<div class="card flex justify-content-center mb-5">
+  <p-breadcrumb [model]="items"></p-breadcrumb>
+</div>
+<!--endbreadcrumb-->
+
+<!--begin Search Fields -->
+<div class="card card-flush mb-6 mb-xl-9">
+  <div class="card-header bg-primary">
+    <div class="card-title">
+      <h2 class="d-flex align-items-center text-white"> Search </h2>
+    </div>
+  </div>
+
+  <div class="card-body pt-5">
+    <form [formGroup]="searchForm">
+      <div class="row py-3">
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label class="form-label ">Asset Number</label>
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="assetNo"
+            [suggestions]="assetFormService.Asset_SNs" field="assetNumber" (completeMethod)="selectAssetNumber($event)"
+            dataKey="id" (onSelect)="bindAssetNumber($event)" (onClear)="clearAssetNumber()"></p-autoComplete>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label class="form-label ">Asset Serial No</label>
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0"
+            formControlName="assetSerialNumber" [suggestions]="assetFormService.Asset_SNs" field="assetSerialNo"
+            (completeMethod)="selectAssetSN($event)" dataKey="id" (onSelect)="bind($event)"
+            (onClear)="clearSN()"></p-autoComplete>
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label class="form-label ">Warranty Date Operator</label>
+          <p-dropdown [options]="assetFormService.Operator_Dates" optionLabel="name" optionValue="value"
+            formControlName="warrantyEndDateSymbol" class="dropdown" placeholder="select"></p-dropdown>
+        </div>
+        <ng-container
+          *ngIf="(searchForm.get('warrantyEndDateSymbol')?.value==7)||(searchForm.get('warrantyEndDateSymbol')?.value==8) else elseTemp">
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+            <label class="form-label "> Warranty End Date From</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="warrantyEndDateFrom"
+              dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+          </div>
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+            <label class="form-label "> Warranty End Date To</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="warrantyEndDateTo"
+              dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+          </div>
+        </ng-container>
+        <ng-template #elseTemp>
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+            <label class="form-label "> Warranty Date</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="warrantyEndDateFrom"
+              dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+          </div>
+        </ng-template>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label class="form-label ">Delivery Inspection Date Operator</label>
+          <p-dropdown [options]="assetFormService.Operator_Dates" optionLabel="name" optionValue="value"
+            formControlName="delieveryInspectionDateSymbol" class="dropdown" placeholder="select"></p-dropdown>
+        </div>
+        <ng-container
+          *ngIf="(searchForm.get('delieveryInspectionDateSymbol')?.value==7)||(searchForm.get('delieveryInspectionDateSymbol')?.value==8) else elseTemp1">
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+            <label class="form-label ">Delivery Inspection Date From</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="deliveryInspectionDateFrom"
+              dateFormat="yy-mm-dd" dataType="string">
+            </p-calendar>
+            <!-- <small class="d-block fst-italic text-black-50">Format: 18/12/2022</small> -->
+
+          </div>
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+            <label class="form-label "> Delivery Inspection Date To</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="deliveryInspectionDateTo"
+              dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+          </div>
+        </ng-container>
+        <ng-template #elseTemp1>
+          <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+            <label class="form-label "> Delivery Inspection Date</label>
+            <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="deliveryInspectionDateFrom"
+              dateFormat="yy-mm-dd" dataType="string">
+            </p-calendar>
+          </div>
+        </ng-template>
+
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label class="form-label " for="modelDefinition">Model Name</label>
+          <!-- <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="modelDefinition"
+            dataKey="modelName" (onSelect)="bindModel($event)" [suggestions]="ModelDefinitions"
+            (completeMethod)="selectModels($event)" field="modelDefCode" (onClear)="clearModel()"></p-autoComplete> -->
+          <p-autoComplete [delay]="1000" formControlName="modelName" [suggestions]="modelsList"
+            (onSelect)="bindModel($event)" (completeMethod)="modelNameFilter($event)" field="modelName"
+            placeholder="Please enter . . ." (onClear)="clearModel()">
+          </p-autoComplete>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label class="form-label " for="site">Site</label>
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="site"
+            [suggestions]="assetFormService.Sites" field="custName" dataKey="custName"
+            (completeMethod)="onSelectContractor($event)" (onSelect)="bindContractor($event)" (onClear)="clearSite()">
+          </p-autoComplete>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label class="form-label " for="site">Manufacturer</label>
+          <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0"
+            formControlName="manufacturer" [suggestions]="assetFormService.manufacturers" field="name" dataKey="id"
+            (completeMethod)="selectManufacturer($event)" (onSelect)="bindManufacturer($event)"
+            (onClear)="clearManufacturer()"></p-autoComplete>
+
+        </div>
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="false">
+          <label class="form-label">Asset Group</label>
+          <p-dropdown placeholder="Search Asset Group" [options]="assetGroupsList" [hidden]="true" optionLabel="name"
+            optionValue="id" formControlName="assetGroup"></p-dropdown>
+        </div>
+
+
+      </div>
+
+    </form>
+    <div class="card-footer d-flex justify-content-end border-top py-6">
+      <button type="submit" label="Search" class="btn btn-primary" (click)="searchAsset()"
+        [disabled]="">Seagggrch</button>
+      <button type="submit" class="btn btn-light btn-active-light-primary me-2" (click)="reset()"
+        [disabled]="">Reset</button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<app-table [tableData]="tableConfig" (paginate)="paginate($event)" [checkbox]="true" (exportEvent)="exportAsset()"
+  [loading]="dataTableLoading">
+</app-table>
+<p-paginator [rows]="searchFilter.pageSize" [totalRecords]="tableConfig.pageFilter.totalItems"
+  (onPageChange)="paginate($event)" [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+
+
+<!--begin Search Fields -->
+<div class="card card-flush mb-6 mb-xl-9">
+
+  <div class="row py-3">
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+
+      <span class="p-float-label">
+        <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" dataKey="id"
+          (onSelect)="bindModelSave($event)" [suggestions]="ModelDefinitions"
+          (completeMethod)="selectModelsSave($event)" field="modelDefCode"
+          (onClear)="clearModelSave()"></p-autoComplete>
+        <label class="form-label " for="modelDefinitionSave">Model Definition</label></span>
+    </div>
+    <!--
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label for="site">Site</label>
+          <p-autoComplete class="input-field-add-more-value border rounded-0" [suggestions]="assetFormService.Sites"
+            field="custName" dataKey="id" (completeMethod)="onSelectSiteSave($event)"
+            (onSelect)="bindSiteSave($event)" (onClear)="clearSiteSave()"></p-autoComplete>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+          <label class="form-label ">Department</label>
+          <p-dropdown [options]="assetFormService.Departments " optionLabel="departmentName" optionValue="id"
+            (onChange)="selectDepartment($event)" class="dropdown" placeholder="select"></p-dropdown>
+        </div> -->
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <label class="form-label ">Delivery Inspection Date</label>
+      <p-calendar [showIcon]="true" [showOnFocus]="false" dateFormat="yy-mm-dd"
+        (onSelect)="onChangeInstallationDate($event)" (onBlur)="onInstallationDateClear()"
+        dataType="string"></p-calendar>
+
+    </div>
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <p-calendar [showIcon]="true" [showOnFocus]="false" dateFormat="yy-mm-dd"
+        (onSelect)="onChangeAcceptanceDate($event)" (onBlur)="onAcceptanceDateClear()" dataType="string"></p-calendar>
+      <label class="form-label ">End User Acceptance Date</label>
+
+    </div>
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <span class="p-float-label">
+        <p-inputNumber formControlName="siteWarrantyMonthNo" mode="decimal" [useGrouping]="false">
+        </p-inputNumber>
+        <label class="form-label ">Site Warranty Months</label></span>
+    </div>
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+
+      <span class="p-float-label">
+        <input id="PONo" type="text" pInputText [(ngModel)]="poNo" />
+        <label class="form-label "> PO No.</label></span>
+    </div>
+    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+      <span class="p-float-label">
+        <input id="Price" type="number" pInputText [(ngModel)]="purchasePrice" />
+        <label class="form-label "> Price</label></span>
+    </div>
+
+    <div class="card-footer d-flex justify-content-end border-top py-6">
+      <button type="button" class="btn btn-primary" (click)="SaveAssets()" canUpdate>Save</button>
+      <!-- <button  type="button" class="btn btn-primary" (click)="showPrintDialog()">QR Code</button> -->
+      <a>
+        <button [icon]="'pi '+this.isPrinting" (click)="showDialogPrint=true" pButton pRipple label="Print Asset Tags"
+          class="btn btn-light-primary me-2"></button>
+      </a>
+      <!-- <a>
+        <button [icon]="'pi '+this.isCustomPrinting" (click)="showDialog = true" pButton pRipple
+          label="Custom Print Asset Tags" class="btn btn-light-primary me-2"
+          ></button>
+      </a> -->
+
+    </div>
+
+
+  </div>
+
+
+
+  <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+</div>
+<div #drawerFilter [ngClass]=" displayPrintAssets ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">print Asset</h1>
+    <button type="button" class="btn-close" (click)="displayPrintAssets=false"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <!--begin Search Fields -->
+        <div class="mb-6 mb-xl-9">
+
+
+          <div class="pt-2">
+            <div id="htmlToBePrinted" class="d-flex flex-wrap"
+              [style]="{display:'flex', justifyContent: 'center', alignItems: 'center'}">
+              <div *ngFor="let asset of selectedToBePrinte; let i = index">
+                <div class="card-body card border border-primary m-5" style="width: 18rem;" id="{{ 'div' + i }}">
+                  <h6 class="card-subtitle mb-2 text-center">HMG</h6>
+                  <h6 class="card-subtitle mb-2 text-center">FLOW MEDICAL</h6>
+                  <h6 class="card-subtitle mb-2 text-center">
+                    <!-- <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="asset.assetNumber">
+          </ngx-qrcode> -->
+                  </h6>
+
+
+                  <h6 class="card-subtitle mb-2 text-center">{{asset.assetNumber}}</h6>
+                </div>
+              </div>
+            </div>
+            <div class="fixed-bottom">
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                    (click)="printAssets()" label="Print"></button>
+
+                  <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{ 'Cancel' }}</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div #drawerFilter [ngClass]=" showDialog ? 'show' : ''"
+    class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+    role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">print Asset</h1>
+      <button type="button" class="btn-close" (click)="showDialog=false"></button>
+    </div>
+    <div class="p-3">
+      <div class="row">
+        <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+          <!--begin Search Fields -->
+          <div class="mb-6 mb-xl-9">
+
+
+            <div class="pt-2">
+              <div class="row py-3">
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label" for="contentType">Custom Label</label>
+                  <p-dropdown placeholder="--Select--" [(ngModel)]="selectedCustomCardId" [options]="customLabelsList"
+                    optionLabel="name" optionValue="id" class="dropdown">
+                  </p-dropdown>
+                </div>
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-3">
+                  <label class="form-label" for="contentType">Language</label>
+                  <p-dropdown placeholder="--Select--" [(ngModel)]="languageId" [options]="languages" optionLabel="name"
+                    optionValue="id" class="dropdown">
+                  </p-dropdown>
+                </div>
+              </div>
+
+              <div class="fixed-bottom">
+                <div class="row">
+                  <div class="col-12">
+                    <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                      (click)="AssetCardCustomPrint()" label="Print"></button>
+
+                    <!-- <button type="button" (click)="cancel()" class="btn btn-light form-button float-end mx-4">{{ 'Cancel' }}</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-dialog header="Print Asset" [(visible)]="showDialogPrint" [modal]="true" [style]="{width: '50vw', height:'50vh'}"
+    [maximizable]="true" [draggable]="false" [resizable]="true">
+    <div class="row py-3">
+      <!-- <div class="col-md-6" *ngIf="userAssetGroups.length>1">
+      <p-dropdown appendTo="body" [(ngModel)]="selectedGroupId" [options]="userAssetGroups" formControlName="assetGroup"
+        placeholder="Select an Asset Group" (onChange)="SelectGroup($event)" optionLabel="name" [required]="true">
+      </p-dropdown>
+    </div> -->
+
+      <div class="col-md-6">
+        <p-dropdown [(ngModel)]="selectedPrintTypeId" [options]="printTypeList" placeholder="Select Print Type"
+          optionLabel="name" optionValue="id" class="dropdown">
+        </p-dropdown>
+      </div>
+
+    </div>
+
+    <ng-template pTemplate="footer">
+
+      <p-button (click)="downloadPDFToPrintAssets()" label="Print" styleClass="p-button-text"
+        [disabled]="!selectedPrintTypeId"></p-button>
+    </ng-template>
+  </p-dialog>

@@ -1,0 +1,225 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class=" ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <p-toast />
+
+            <div class="main">
+              <div class="container-fluid">
+                <div class="contents ngprime-custom">
+                  <div class="row">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="row  mb-3 content-heading">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                          <div class="float-start main-heading">
+                            Assets List Transfer
+                          </div>
+                          <div class="float-start export-icon mt-3">
+                            <!-- <a class="m-5" (click)="expo() ">Export <img
+                                src="assets/img/dashboard/excel.svg" alt=""></a> -->
+                              </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                          <div class="row float-end">
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                              <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                    src="assets/img/dashboard/filter.svg" alt=""></a></div>
+                            </div>
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                              <div class="form-floating float-start ">
+                                <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                  [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                  value="Type here">
+                                <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                                <label for="floatingName">Search</label>
+                                <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                            (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                              </div>
+                            </div>
+                            <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                              <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                  (click)="openModal()">Add </button></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <p-table
+                          #dt
+                          [value]="assets"
+                          [rows]="10"
+                          [paginator]="false"
+                          [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                          [(selection)]="selectedAssets"
+                          [rowHover]="true"
+                          dataKey="id"
+                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                          [showCurrentPageReport]="true"
+                          sortMode="multiple"
+                          [loading]="loading"
+                          [rows]="filter.pageSize"
+                          [lazy]="true"
+                          [totalRecords]="totalRows"
+                          [tableStyle]="{width: 'max-content'}" >
+
+                          <!-- <ng-template pTemplate="caption">
+                            <div class="row">
+                              <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                <h4 class="mt-3 inline main-heading">Assets List Transfer</h4>
+                                <a href="#" class="ps-4 mt-4 exportfile">Export <img src="navbar/export.svg" alt=""></a>
+                              </div>
+                              <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+
+                                  <div class="p-input-icon-left">
+                                    <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                                      <img src="navbar/filter.svg" alt="">
+                                    </p-button>
+                                  </div>
+                                  <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                        <div class="form-floating float-end">
+                                          <input type="text"
+                                            pInputText
+                                            class="form-control border-0 header-search-background"
+                                            id="floatingSearchInput"
+                                            value="Type here"
+                                            placeholder="Type here">
+                                          <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                          <label for="floatingSearchInput">Search</label>
+                                        </div>
+                                  </div>
+                                  <div class="p-input-icon-left ">
+                                    <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                      Add New Request
+                                    </button>
+                                  </div>
+                              </div>
+                            </div>
+                          </ng-template> -->
+                          <ng-template pTemplate="header">
+                              <tr>
+                                  <!-- <th style="width: 4rem">
+                                      <p-tableHeaderCheckbox />
+                                  </th> -->
+                                  <!-- <th pSortableColumn="name" style="min-width:15rem">
+                                      Name <p-sortIcon field="name" />
+                                  </th>
+                                  <th>
+                                      Image
+                                  </th>
+                                  <th pSortableColumn="price">
+                                      Price <p-sortIcon field="price" />
+                                  </th>
+                                  <th pSortableColumn="category" style="min-width:10rem">
+                                      Category <p-sortIcon field="category" />
+                                  </th>
+                                  <th pSortableColumn="rating">
+                                      Reviews <p-sortIcon field="rating" />
+                                  </th>
+                                  <th pSortableColumn="inventoryStatus" style="min-width:10rem">
+                                      Status <p-sortIcon field="inventoryStatus" />
+                                  </th> -->
+                                  <th>Title</th>
+                                  <th>Asset Number</th>
+                                  <th>Asset Name</th>
+                                  <th>AssetSN</th>
+                                  <th>Assigned FE Receiver</th>
+                                  <th>Assigned FE Sender</th>
+                                  <th>Destination Site</th>
+                                  <th>Building</th>
+                                  <th>Floor</th>
+                                  <th>Department</th>
+                                  <th>Room</th>
+                                  <th>Machine Status Sender</th>
+                                  <th>Comment Sender</th>
+                                  <th>Travelling Hours Sender</th>
+                                  <!-- <th>Working Hours Receiver</th> -->
+                                  <th>Machine Status Receiver</th>
+                                  <th>Comment Receiver</th>
+                                  <th>Travelling Hours Receiver</th>
+                                  <th class="sticky-header">Actions</th>
+                              </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-asset>
+                              <tr>
+                                <!--  <td>
+                                      <p-tableCheckbox [value]="asset" />
+                                  </td> -->
+                                  <!-- <td> {{ asset.name }} </td>
+                                  <td> <img [src]="'https://primefaces.org/cdn/primeng/images/demo/asset/' + asset.image" [alt]="asset.name" width="50" class="shadow-4" /> </td>
+                                  <td> {{ asset.price | currency : 'USD' }} </td>
+                                  <td> {{ asset.category }} </td>
+                                  <td> <p-rating [(ngModel)]="asset.rating" [readonly]="true" [cancel]="false" /> </td>
+                                  <td> <p-tag [value]="asset.inventoryStatus" [severity]="getSeverity(asset.inventoryStatus)" /></td> -->
+
+                              <!-- <td><a class="link-info" pRipple (click)="navToDetails(asset,0)">{{asset.transferCode}}</a></td> -->
+                              <td>{{asset.transferCode}}</td>
+                              <td>{{asset.assetNumber}}</td>
+                              <td>{{asset.assetName}}</td>
+                              <td>{{asset.assetSerialNo}}</td>
+                              <td>{{asset.receiverAssignedEmployeeName}}</td>
+                              <td>{{asset.senderAssignedEmployeeName}}</td>
+                              <td>{{asset.destSiteName}}</td>
+                              <td>{{asset.destBuildingName}}</td>
+                              <td>{{asset.destFloorName}}</td>
+                              <td>{{asset.destDepartmentName}}</td>
+                              <td>{{asset.destRoom}}</td>
+                              <td>{{asset.senderMachineStatusName}}</td>
+                              <td>{{asset.senderComment}}</td>
+                              <td>{{asset.senderTravelingHours}}</td>
+                              <!-- <td>{{asset.receiverWorkingHours}}</td> -->
+                              <td>{{asset.receiverMachineStatusName}}</td>
+                              <td>{{asset.receiverComment}}</td>
+                              <td>{{asset.receiverTravelingHours}}</td>
+                                  <td class="sticky-header">
+                                    <div class="d-flex">
+                                      <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                        (click)="viewDetails(assets,0)" >
+                                        <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                      </button>
+                                      <p-button
+                                          icon="pi pi-pencil"
+                                          class="mr-2"
+                                          [rounded]="true"
+                                          [outlined]="true"
+                                          severity="success"
+                                          (onClick)="navToDetails(asset,1)" canUpdate />
+
+                                      <p-button
+                                          icon="pi pi-trash"
+                                          severity="danger"
+                                          [rounded]="true"
+                                          [outlined]="true"
+                                          (onClick)="deleteRow(asset)" canDelete />
+                                    </div>
+                                  </td>
+                              </tr>
+                          </ng-template>
+                          <!-- <ng-template pTemplate="summary">
+                              <div class="flex align-items-center justify-content-between">
+                                  In total there are {{ assets ? assets.length : 0 }} assets.
+                              </div>
+                          </ng-template> -->
+                      </p-table>
+                      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                      [showCurrentPageReport]="true"
+                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+<app-add-control [showmodal]="addTransferLoaded"  [edit_asset_id]="asset_id" [navIndes]="navIndes" (openModals)="openModal()"></app-add-control>
+<app-view-add-control [showmodal]="viewAssetTransferLoaded"  [edit_asset_id]="asset_id" [navIndes]="navIndes" (openModals)="openViewModal()"></app-view-add-control>
+<app-asset-search [filter]="filter" [showmodal]="filterLoaded" (openSearchModals)="openFilterModal()" (AssetsTransferSearch)="getAssetsTransferSearch($event)"></app-asset-search>
+<div *ngIf="addTransferLoaded" class="offcanvas-backdrop fade show" (click)="openModal()"></div>
+<div *ngIf="viewAssetTransferLoaded" class="offcanvas-backdrop fade show" (click)="openViewModal()" ></div>
+<div *ngIf="filterLoaded" class="offcanvas-backdrop fade show" (click)="filterLoaded = false"></div>

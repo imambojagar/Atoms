@@ -1,0 +1,708 @@
+<div #addmodel [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    @if(inEditMode){
+    <h1 class="offcanvas-title offcanvas-heading">Edit Demo</h1>}
+    @if(inAddMode){
+    <h1 class="offcanvas-title offcanvas-heading">Add Demo</h1>}
+    @if(inViewMode){
+    <h1 class="offcanvas-title offcanvas-heading">Veiw Demo</h1>}
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <p-toast></p-toast>
+  <div class="p-3 ngprime-custom form-scroller">
+
+    <ng-container *ngIf="id==0 || inAssessmentForm ||   inEvaluationForm; then AddTemplate; else EditTemplate">
+
+    </ng-container>
+
+    <ng-template #AddTemplate>
+      <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+    </ng-template>
+
+    <ng-template #EditTemplate>
+
+      <!-- <div class="col-12">
+        <p-steps *ngIf="loadingSteps" [model]="steps" [readonly]="false"></p-steps>
+        <div *ngIf="!loadingSteps" class="text-center fs-5 m-5">
+          <i class="fa fa-spinner fa-spin"></i>
+        </div>
+      </div> -->
+
+      <!--
+      <p-tabView [(activeIndex)]="tabIndex" (onChange)="changeTabIndex($event)">
+        <p-tabPanel header="{{'View'|tr:PAGE_TITLE|translate}}" leftIcon="pi pi-file"> -->
+      <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+      <!-- </p-tabPanel>
+        <p-tabPanel header="{{'Edit'|tr:PAGE_TITLE|translate}}" leftIcon="pi pi-file"> -->
+      <!-- <ng-container *ngTemplateOutlet="formTemplate"></ng-container> -->
+      <!-- </p-tabPanel> -->
+      <div *ngIf="!model" class="text-center fs-5 m-5">
+        <app-skeleton-loader></app-skeleton-loader>
+      </div>
+      <!-- </p-tabView> -->
+    </ng-template>
+
+    <ng-template #formTemplate>
+
+      <form [formGroup]="demoForm" (ngSubmit)="save()" *ngIf="model">
+
+        <div class="col-12" [ngClass]="{'disableDiv': inViewMode}">
+
+          <h2 class="d-flex align-items-center ">{{'Requester Information'|tr:PAGE_TITLE|translate}}
+          </h2>
+        </div>
+
+
+        <div class="row box-gryco mb-3">
+          <div *ngIf="!inAddMode" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+            <div class="form-floating ">
+
+              <input type="text" formControlName="demoRequestStatusName" pInputText [readOnly]="true"
+                class="form-control input-field icon-padding"
+                placeholder="{{'Request Status'|tr:PAGE_TITLE|translate}}" />
+              <label class="form-label">{{'Request Status'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div *ngIf="!inAddMode" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+            <div class="form-floating ">
+              <input type="text" formControlName="id" pInputText [readOnly]="true"
+                placeholder="{{'Demo Number'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding" />
+              <label class="form-label">{{'Demo Number'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+            <div class="form-floating ">
+              <p-dropdown [options]="assignedEmpList" optionLabel="userName" optionValue="userId"
+                *ngIf="!inViewMode && !inAssessmentForm && !inEvaluationForm && !hasHospitalRoles"
+                formControlName="employeeId" class="dropdown" (onChange)="setAssignedEmployee($event)"
+                placeholder="select"></p-dropdown>
+              <input *ngIf="inViewMode || inAssessmentForm ||  inEvaluationForm || hasHospitalRoles" id="employeeName"
+                class="form-control input-field icon-padding" type="text" formControlName="employeeName" pInputText
+                [readOnly]="true" placeholder="{{'Employee Name'|tr:PAGE_TITLE|translate}}" />
+
+              <label class="form-label">{{'Employee Name'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+              <input id="empemail" type="email" formControlName="email" pInputText [readOnly]="true"
+                class="form-control input-field icon-padding" placeholder="email" />
+              <label class="form-label ms-2" for="email">{{'Email'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+              <p-dropdown placeholder="--Select--" formControlName="departmentId" [options]="DepartmentList"
+                *ngIf="!inAssessmentForm && !inEvaluationForm" optionLabel="departmentName" optionValue="id"
+                class="dropdown">
+              </p-dropdown>
+              <input *ngIf="inAssessmentForm ||  inEvaluationForm" type="text" formControlName="departmentName"
+                class="form-control input-field icon-padding" pInputText
+                placeholder="{{'Department'|tr:PAGE_TITLE|translate}}"
+                [readOnly]="inAssessmentForm ||  inEvaluationForm" /> <label
+                class="form-label ms-2">{{'Department'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+              <input id="extensionNumber" type="text" formControlName="extensionNumber" pInputText
+                placeholder="  {{'Extension Number'|tr:PAGE_TITLE|translate}}"
+                class="form-control input-field icon-padding" [readOnly]="inAssessmentForm ||  inEvaluationForm" />
+              <label class="form-label ms-2" for="extensionNumber">
+                {{'Extension Number'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+              <input id="mobile" type="number" formControlName="mobile" pInputText [readOnly]="true"
+                placeholder="{{'Mobile'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding" />
+              <label class="form-label ms-2" for="mobile">{{'Mobile'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+              <input id="branch" type="text" formControlName="branch" pInputText
+                placeholder="{{'Branch'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding"
+                [readOnly]="inAssessmentForm ||  inEvaluationForm" />
+              <label class="form-label ms-2" for="branch">{{'Branch'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <span class="p-float-label">
+              <p-autoComplete [delay]="1000" id="site" [suggestions]="sitesList"
+                (completeMethod)="customerNameFilter($event)" (onSelect)="logSiteData($event)" field="custName"
+                emptyFilterMessage=" Site" formControlName="siteName"
+                [disabled]="!inDemoRequestForm || inViewMode"></p-autoComplete> <label class="form-label ms-2"
+                for="branch">{{'Site'|tr:PAGE_TITLE|translate}}<small class="text-danger"
+                  *ngIf="!inViewMode&& !inAssessmentForm &&  !inEvaluationForm">*</small></label></span>
+          </div>
+
+          <div class="row py-3" formGroupName="doctor">
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+              <div class="form-floating ">
+
+                <input id="email" type="email" formControlName="email" pInputText
+                  class="form-control input-field icon-padding" placeholder="{{'Doctor Email'|tr:PAGE_TITLE|translate}}"
+                  [readOnly]="inAssessmentForm ||  inEvaluationForm" /><label class="form-label ms-2"
+                  for="branch">{{'Doctor Email'|tr:PAGE_TITLE|translate}}<small class="text-danger"
+                    *ngIf="!inViewMode&& !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+              </div>
+            </div>
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+              <div class="form-floating ">
+                <p-dropdown placeholder="--Select--" formControlName="departmentId" [options]="DepartmentList"
+                  *ngIf="!inAssessmentForm &&  !inEvaluationForm" optionLabel="departmentName" optionValue="id"
+                  class="dropdown">
+                </p-dropdown>
+                <input *ngIf="inAssessmentForm ||  inEvaluationForm" type="text" formControlName="departmentName"
+                  class="form-control input-field icon-padding" pInputText
+                  placeholder="{{'Doctor Department'|tr:PAGE_TITLE|translate}}"
+                  [readOnly]="inAssessmentForm ||  inEvaluationForm" /><label class="form-label ms-2">{{'Doctor
+                  Department'|tr:PAGE_TITLE|translate}}</label>
+              </div>
+            </div>
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+              <div class="form-floating ">
+                <input id="contactNumber" type="text" formControlName="contactNumber" pInputText placeholder="{{'Doctor Contact
+                  Number'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding"
+                  [readOnly]="inAssessmentForm ||  inEvaluationForm" />
+                <label class="form-label ms-2" for="contactNumber">{{'Doctor Contact
+                  Number'|tr:PAGE_TITLE|translate}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row box-gryco mb-3" *ngIf="inAssessmentForm">
+          <div class="col-12">
+
+            <h2 class="d-flex align-items-center ">{{'Assessment Information'|tr:PAGE_TITLE|translate}}
+            </h2>
+          </div>
+
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <input id="comments" type="text" formControlName="comments" pInputText placeholder="{{'Assessor
+                comments'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding"
+                [required]="inAssessmentForm" />
+              <label class="form-label ms-2" for="comments">{{'Assessor
+                comments'|tr:PAGE_TITLE|translate}}<small class="text-danger">*</small></label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+
+              <p-dropdown [options]="YesOrNo" optionLabel="label" optionValue="value"
+                formControlName="specialConfiguration" class="dropdown" placeholder="select"></p-dropdown>
+              <label class="form-label ms-2" for="finishEvaluationForm">
+                {{'Does this technology need special installation
+                requirement?'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <p-dropdown [options]="YesOrNo" optionLabel="label" optionValue="value" formControlName="requireSLA"
+                class="dropdown" placeholder="select"></p-dropdown><label class="form-label ms-2"
+                for="finishEvaluationForm">
+                {{'Does this technology requires SLA?'|tr:PAGE_TITLE|translate}}</label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+
+              <p-dropdown [options]="YesOrNo" optionLabel="label" optionValue="value"
+                formControlName="specialCalibration" class="dropdown" placeholder="select"></p-dropdown> <label
+                class="form-label ms-2" for="finishEvaluationForm">
+                {{'Does this technology need special calibration?'|tr:PAGE_TITLE|translate}}
+              </label>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <p-dropdown [options]="YesOrNo" optionLabel="label" optionValue="value" formControlName="recommendIt"
+                class="dropdown" placeholder="select"></p-dropdown><label class="form-label ms-2"
+                for="finishEvaluationForm">
+                {{'Do you Recommend it?'|tr:PAGE_TITLE|translate}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        @if(inEvaluationForm)
+        { <div class="row box-gryco mb-3" *ngIf="inEvaluationForm">
+          <div class="col-12">
+            <div class="card-title">
+              <h2 class="d-flex align-items-center ">{{'End-User Evaluation'|tr:PAGE_TITLE|translate}}
+              </h2>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+              <input id="advantages" type="text" formControlName="advantages" pInputText
+                placeholder="{{'Advantages'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding"
+                [required]="inEvaluationForm" />
+
+              <label class="form-label ms-2" for="advantages">{{'Advantages'|tr:PAGE_TITLE|translate}}<small
+                  class="text-danger">*</small></label>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <input id="disadvantages" type="text" formControlName="disadvantages" pInputText
+                placeholder="{{'Disadvantages'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding"
+                [required]="inEvaluationForm" />
+              <label class="form-label ms-2" for="disadvantages">{{'Disadvantages'|tr:PAGE_TITLE|translate}}<small
+                  class="text-danger">*</small></label>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <input id="improvements" type="text" formControlName="improvements" pInputText placeholder="
+                {{'How did the Demo technology improve current practice technology?'|tr:PAGE_TITLE|translate}}"
+                class="form-control input-field icon-padding" [required]="inEvaluationForm" />
+              <label class="form-label ms-2" for="improvements">
+                {{'How did the Demo technology improve current practice technology?'|tr:PAGE_TITLE|translate}}
+                <small class="text-danger">*</small></label>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <p-dropdown [options]="YesOrNo" optionLabel="label" optionValue="value" formControlName="isSavingTime"
+                class="dropdown" placeholder="select" [required]="inEvaluationForm"></p-dropdown>
+              <label class="form-label ms-2" for="finishEvaluationForm">
+                {{'Did the Demo technology save time?'|tr:PAGE_TITLE|translate}}
+                <small class="text-danger">*</small></label>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <p-dropdown [options]="YesOrNo" optionLabel="label" optionValue="value"
+                formControlName="isClinicalSuitable" class="dropdown" placeholder="select"
+                [required]="inEvaluationForm"></p-dropdown>
+              <label class="form-label ms-2" for="finishEvaluationForm">
+                {{'Does it suit the clinical needs?'|tr:PAGE_TITLE|translate}}
+                <small class="text-danger">*</small></label>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <p-dropdown [options]="YesOrNo" optionLabel="label" optionValue="value" formControlName="isRecommendable"
+                class="dropdown" placeholder="select"></p-dropdown> <label class="form-label ms-2"
+                for="finishEvaluationForm">
+                {{'Would you recommend the product to others?'|tr:PAGE_TITLE|translate}}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+            <div class="form-floating ">
+
+              <input id="addComments" type="text" formControlName="comments" pInputText placeholder="
+                {{'Additional Information/Comments'|tr:PAGE_TITLE|translate}}"
+                class="form-control input-field icon-padding" /><label class="form-label ms-2" for="addComments">
+                {{'Additional Information/Comments'|tr:PAGE_TITLE|translate}}
+              </label>
+            </div>
+          </div>
+
+
+          <div class="row box-gryco mb-3">
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+              <p-slider (onChange)="changeRate()" formControlName="easeOfUse" [min]="0" [max]="5"
+                [step]="1"></p-slider><label class="form-label ms-2">
+                {{'Ease of Use'|tr:PAGE_TITLE|translate}} {{demoForm.value.easeOfUse}}
+              </label>
+            </div>
+
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+              <p-slider (onChange)="changeRate()" formControlName="easeOfApplication" [min]="0" [max]="5"
+                [step]="1"></p-slider><label class="form-label ms-2">{{'Ease of
+                Application'|tr:PAGE_TITLE|translate}}
+                {{demoForm.value.easeOfApplication}}</label>
+            </div>
+
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+              <p-slider (onChange)="changeRate()" formControlName="easeOfConnection" [min]="0" [max]="5"
+                [step]="1"></p-slider><label class="form-label ms-2">{{'Ease connection & disconnection from
+                patient'|tr:PAGE_TITLE|translate}}
+                {{demoForm.value.easeOfConnection}}</label>
+            </div>
+
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+              <p-slider (onSlideEnd)="changeRate()" formControlName="patientComfort" [min]="0" [max]="5"
+                [step]="1"></p-slider> <label class="form-label ms-2">{{'Patient
+                Comfort'|tr:PAGE_TITLE|translate}}
+                {{demoForm.value.patientComfort}}</label>
+            </div>
+
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+              <div class="form-floating ">
+                <input id="overAllPerformance" type="text" formControlName="overAllPerformance" pInputText placeholder="{{'Overall performance
+                rate'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding" [readOnly]="true" />
+                <label class="form-label ms-2" for="overAllPerformance">{{'Overall performance
+                  rate'|tr:PAGE_TITLE|translate}}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row box-gryco mb-3">
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3 checkbox-div">
+
+
+              <input id="isInformationCorrect" type="checkbox" formControlName="isInformationCorrect"
+                placeholder="
+                {{'I Acknowledge that the above information is correct and reflects my experience with the                DEMO.'|tr:PAGE_TITLE|translate}}" />
+              <label class="form-label ms-2" for="isInformationCorrect">
+                {{'I Acknowledge that the above information is correct and reflects my experience with the
+                DEMO.'|tr:PAGE_TITLE|translate}}</label>
+
+            </div>
+          </div>
+        </div>}
+        <div class="row box-gryco mb-3">
+          <div class="col-12">
+            <div class="card-title">
+              <h2 class="d-flex align-items-center ">{{'Demo Request
+                Information'|tr:PAGE_TITLE|translate}}</h2>
+            </div>
+          </div>
+          <div class="col-12 pt-5" [ngClass]="{'disableDiv': inViewMode || inAssessmentForm || inEvaluationForm}">
+            <div class="row py-3">
+
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+                <div class="form-floating ">
+                  <p-dropdown [required]="true" formControlName="demoRequestTypeId" [options]="demoTypes"
+                    optionLabel="name" optionValue="id" placeholder="--Select--">
+                  </p-dropdown> <label class="form-label ms-2">{{'Type'|tr:PAGE_TITLE|translate}}<small
+                      class="text-danger"
+                      *ngIf="!inViewMode && !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </div>
+              </div>
+
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                <span class="p-float-label"> <p-autoComplete [delay]="1000" [suggestions]="assets"
+                    formControlName="assetName" field="assetname" (completeMethod)="searchAsset($event)"
+                    (onSelect)="onSelectAsset($event)" *ngIf="!inAssessmentForm &&  !inEvaluationForm">
+                  </p-autoComplete>
+                  <input *ngIf="inAssessmentForm ||  inEvaluationForm" type="text" placeholder="{{'Item
+                    Description/Name'|tr:PAGE_TITLE|translate}}" class="form-control input-field icon-padding"
+                    [value]="model.assetName?.assetname" pInputText
+                    [readOnly]="inAssessmentForm ||  inEvaluationForm" />
+                  <label class="form-label ms-2">{{'Item
+                    Description/Name'|tr:PAGE_TITLE|translate}}<small class="text-danger"
+                      *ngIf="!inViewMode&& !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </span>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                <span class="p-float-label">
+
+                  <p-autoComplete [delay]="1000" [suggestions]="manufatureresList" formControlName="manufactureName"
+                    field="taxonomyName" (completeMethod)="searchManufacturer($event)"
+                    (onSelect)="onSelectManufacturer($event)" *ngIf="!inAssessmentForm &&  !inEvaluationForm">
+                  </p-autoComplete>
+                  <input *ngIf="inAssessmentForm ||  inEvaluationForm" type="text"
+                    placeholder="{{'Manufacturer'|tr:PAGE_TITLE|translate}}"
+                    class="form-control input-field icon-padding" [value]="model.manufactureName?.taxonomyName"
+                    pInputText [readOnly]="inAssessmentForm ||  inEvaluationForm" /><label
+                    class="form-label ms-2">{{'Manufacturer'|tr:PAGE_TITLE|translate}}</label>
+                </span>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                <span class="p-float-label" *ngIf="!inAssessmentForm &&  !inEvaluationForm">
+
+                  <p-autoComplete [delay]="1000" [suggestions]="modelDef" formControlName="modelDefinationName"
+                    field="modelDefCode" (completeMethod)="searchModel($event)" optionValue="id"
+                    (onSelect)="onSelectModel($event)" *ngIf="!inAssessmentForm &&  !inEvaluationForm">
+                  </p-autoComplete>
+                  <label class="form-label ms-2">{{'Model'|tr:PAGE_TITLE|translate}}</label>
+                </span>
+
+                <div class="form-floating " *ngIf="inAssessmentForm ||  inEvaluationForm">
+                  <input type="text" placeholder="{{'Model'|tr:PAGE_TITLE|translate}}"
+                    class="form-control input-field icon-padding" [value]="model.modelDefinationName?.modelDefCode"
+                    pInputText [readOnly]="inAssessmentForm ||  inEvaluationForm" /> <label
+                    class="form-label ms-2">{{'Model'|tr:PAGE_TITLE|translate}}</label>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                <span class="p-float-label" *ngIf="!inAssessmentForm &&  !inEvaluationForm">
+
+                  <p-autoComplete [delay]="1000" [suggestions]="suppliersList" formControlName="vendorName"
+                    field="suppliername" (completeMethod)="getSpplier($event)" (onSelect)="onSelectSupplier($event)"
+                    *ngIf="!inAssessmentForm &&  !inEvaluationForm"></p-autoComplete><label
+                    class="form-label ms-2">{{'Vendor'|tr:PAGE_TITLE|translate}}<small class="text-danger"
+                      *ngIf="!inViewMode&& !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+
+                </span>
+
+                <div class="form-floating " *ngIf="inAssessmentForm ||  inEvaluationForm">
+                  <input type="text" placeholder="{{'Vendor'|tr:PAGE_TITLE|translate}}"
+                    class="form-control input-field icon-padding" [value]="model.vendorName?.suppliername" pInputText
+                    [readOnly]="inAssessmentForm ||  inEvaluationForm" /><label
+                    class="form-label ms-2">{{'Vendor'|tr:PAGE_TITLE|translate}}<small class="text-danger"
+                      *ngIf="!inViewMode&& !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+                <div class="form-floating ">
+                  <input id="vendorEmail" type="email" formControlName="vendorEmail" pInputText [readOnly]="true"
+                    placeholder="{{'Vendor Email'|tr:PAGE_TITLE|translate}}"
+                    class="form-control input-field icon-padding" [readOnly]="inAssessmentForm ||  inEvaluationForm" />
+                  <label class="form-label ms-2" for="vendorEmail">{{'Vendor Email'|tr:PAGE_TITLE|translate}}</label>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+                <div class="form-floating ">
+                  <input id="vendorMobile" type="text" formControlName="vendorMobile" pInputText
+                    class="form-control input-field icon-padding" [readOnly]="inAssessmentForm ||  inEvaluationForm"
+                    placeholder="{{'Vendor Mobile'|tr:PAGE_TITLE|translate}}" />
+                  <label class="form-label ms-2" for="vendorMobile">{{'Vendor Mobile'|tr:PAGE_TITLE|translate}}<small
+                      class="text-danger"
+                      *ngIf="!inViewMode && !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </div>
+              </div>
+
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+                <div class="form-floating ">
+                  <p-dropdown [required]="true" formControlName="demoDuration" [options]="months"
+                    placeholder="--Select--" *ngIf="!inAssessmentForm &&  !inEvaluationForm">
+                  </p-dropdown>
+                  <input *ngIf="inAssessmentForm ||  inEvaluationForm" type="text" formControlName="demoDuration"
+                    placeholder="{{'How long the DEMO period(day)'|tr:PAGE_TITLE|translate}}"
+                    class="form-control input-field icon-padding" pInputText
+                    [readOnly]="inAssessmentForm ||  inEvaluationForm" /> <label class="form-label ms-2">{{'How long the
+                    DEMO period(day)'|tr:PAGE_TITLE|translate}}<small class="text-danger"
+                      *ngIf="!inViewMode && !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </div>
+              </div>
+
+              <div *ngIf="!inAddMode" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                <div class="p-float-label ">
+                  <label class="form-label">{{'Installation Date'|tr:PAGE_TITLE|translate}}</label>
+                  <p-calendar formControlName="installationDate" [showButtonBar]="true" [dateFormat]="'dd/mm/yy'"
+                    [readonlyInput]="true" [showIcon]="true" [showOnFocus]="false">
+                  </p-calendar>
+                </div>
+              </div>
+
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3"
+                *ngIf="!inDemoRequestForm || inEditMode || inViewMode">
+                <div class="form-floating ">
+                  <input type="text" formControlName="expirationDate" pInputText [readOnly]="true"
+                    placeholder="{{'Expiration Date'|tr:PAGE_TITLE|translate}}"
+                    class="form-control input-field icon-padding" /> <label class="form-label">{{'Expiration
+                    Date'|tr:PAGE_TITLE|translate}}</label>
+                </div>
+              </div>
+
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3"
+                *ngIf="!inDemoRequestForm || inEditMode || inViewMode">
+
+                <div class="form-floating ">
+
+                  <input type="text" formControlName="retirementDate" pInputText [readOnly]="true"
+                    placeholder="{{'Retirement Date'|tr:PAGE_TITLE|translate}}"
+                    class="form-control input-field icon-padding" /><label class="form-label">{{'Retirement
+                    Date'|tr:PAGE_TITLE|translate}}</label>
+                </div>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+
+                <div class="form-floating ">
+
+                  <input id="link" type="text" formControlName="link" pInputText
+                    [readOnly]="inAssessmentForm ||  inEvaluationForm" class="form-control input-field icon-padding" />
+                  <label class="form-label ms-2" for="link">
+                    {{'Technology link, website, YouTube or journal etc.'|tr:PAGE_TITLE|translate}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
+                <div class="form-floating ">
+                  <input id="description" type="text" formControlName="description" pInputText
+                    placeholder="  {{'Technology link, website, YouTube or journal etc.'|tr:PAGE_TITLE|translate}}"
+                    [readOnly]="inAssessmentForm ||  inEvaluationForm"
+                    class="form-control input-field icon-padding" /><label class="form-label ms-2" for="description">
+                    {{'How would the DEMO technology solve the current practice and/or serve the
+                    purpose?'|tr:PAGE_TITLE|translate}}
+                    <small class="text-danger"
+                      *ngIf="!inViewMode&& !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </div>
+
+              </div>
+
+              <div class="row py-3" [ngClass]="{'disableDiv': inAssessmentForm}">
+                <div class="col-md-6 col-xl-4 col-xxl-4 mb-3 checkbox-div">
+                  <input id="finishEvaluationForm" type="checkbox" formControlName="finishEvaluationForm"
+                    [readOnly]="inAssessmentForm ||  inEvaluationForm" />
+                  <label class="form-label ms-2" for="finishEvaluationForm">
+                    {{'I acknowledge after the trial period I will complete the DEMO outcome evaluation
+                    form.'|tr:PAGE_TITLE|translate}}
+                    <small class="text-danger"
+                      *ngIf="!inViewMode&& !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </div>
+                <div class="col-md-6 col-xl-4 col-xxl-4 mb-3 checkbox-div">
+                  <input id="bookPatientOnDemo" type="checkbox" formControlName="bookPatientOnDemo"
+                    [readOnly]="inAssessmentForm ||  inEvaluationForm" />
+                  <label class="form-label ms-2" for="bookPatientOnDemo">
+                    {{'I acknowledge after the trial period I won’t book patient on the
+                    DEMO.'|tr:PAGE_TITLE|translate}}
+                    <small class="text-danger"
+                      *ngIf="!inViewMode&& !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </div>
+                <div class="col-md-6 col-xl-4 col-xxl-4 mb-3 checkbox-div">
+                  <input id="useTheDemo" type="checkbox" formControlName="useTheDemo"
+                    [readOnly]="inAssessmentForm ||  inEvaluationForm" />
+                  <label class="form-label ms-2" for="useTheDemo">
+                    {{'I acknowledge after the trial period I won’t use the DEMO.'|tr:PAGE_TITLE|translate}}
+                    <small class="text-danger"
+                      *ngIf="!inViewMode && !inAssessmentForm &&  !inEvaluationForm">*</small></label>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                  <label class="form-label">{{'Attachment' | tr:PAGE_TITLE |translate }}</label>
+                  <app-attachments *ngIf="inDemoRequestForm && !inViewMode" (onUploaded)="attachmentReady($event)"
+                    [attachments]="attachmentName" [showButton]="!inViewMode"></app-attachments>
+                  <p *ngIf="inViewMode && (attachmentName.length === 0 || !attachmentName)" class="fw-bold">No
+                    Attachments
+                    Avaliable</p>
+                </div>
+              </div>
+
+              <div class="row py-3" *ngIf="!inAddMode">
+
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                  <div class="form-floating ">
+                    <input type="text" formControlName="assessorEmployeeName" pInputText [readOnly]="true"
+                      placeholder="{{'Assessor'|tr:PAGE_TITLE|translate}}"
+                      class="form-control input-field icon-padding" />
+
+                    <label class="form-label ">{{'Assessor'|tr:PAGE_TITLE|translate}}</label>
+                  </div>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                  <div class="form-floating ">
+                    <input type="text" class="form-control input-field icon-padding" placeholder="{{'Assessor
+                    Approval'|tr:PAGE_TITLE|translate}}"
+                      [value]="demoForm.value.assessorApproval? 'Approved': demoForm.value.assessorApproval=== false? 'Rejected': 'None'"
+                      pInputText [readOnly]="true" /> <label class="form-label ms-2"
+                      for="finishEvaluationForm">{{'Assessor
+                      Approval'|tr:PAGE_TITLE|translate}}</label>
+                  </div>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                  <div class="form-floating ">
+                    <input type="text" formControlName="assessorTeamLeaderName" pInputText [readOnly]="true"
+                      placeholder="{{'Assessor Team Leader'|tr:PAGE_TITLE|translate}}"
+                      class="form-control input-field icon-padding" />
+                    <label class="form-label ">{{'Assessor Team Leader'|tr:PAGE_TITLE|translate}}</label>
+                  </div>
+                </div>
+
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                  <div class="form-floating ">
+
+                    <input type="text" class="form-control input-field icon-padding" placeholder="{{'Assessor Team Leader
+                    Approval'|tr:PAGE_TITLE|translate}}"
+                      [value]="demoForm.value.assessmentTLApproval? 'Approved': demoForm.value.assessmentTLApproval=== false? 'Rejected': 'None'"
+                      pInputText [readOnly]="true" /><label class="form-label ms-2"
+                      for="assessmentTLApproval">{{'Assessor Team Leader
+                      Approval'|tr:PAGE_TITLE|translate}}</label>
+                  </div>
+                </div>
+
+                <div class="row py-3">
+                  <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                    <div class="form-floating ">
+                      <input type="text" formControlName="apiDirectorName" pInputText [readOnly]="true"
+                        class="form-control input-field icon-padding"
+                        placeholder="{{'API Director'|tr:PAGE_TITLE|translate}}" />
+                      <label class="form-label ">{{'API Director'|tr:PAGE_TITLE|translate}}</label>
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                    <div class="form-floating ">
+
+                      <input type="text" class="form-control input-field icon-padding" placeholder="{{'API Director
+                    Approval'|tr:PAGE_TITLE|translate}}"
+                        [value]="demoForm.value.apiDirectoryApproval? 'Approved': demoForm.value.apiDirectoryApproval=== false? 'Rejected': 'None'"
+                        pInputText [readOnly]="true" /><label class="form-label ms-2" for="apiDirectoryApproval">{{'API
+                        Director
+                        Approval'|tr:PAGE_TITLE|translate}}</label>
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                    <div class="form-floating ">
+
+                      <input type="text" formControlName="branchManagerDirectorName" pInputText [readOnly]="true"
+                        placeholder="{{'Branch Manager Director'|tr:PAGE_TITLE|translate}}"
+                        class="form-control input-field icon-padding" /> <label class="form-label ">{{'Branch Manager
+                        Director'|tr:PAGE_TITLE|translate}}</label>
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 mb-3">
+                    <div class="form-floating ">
+
+                      <input type="text" class="form-control input-field icon-padding" placeholder="{{'Branch MD
+                    Approval'|tr:PAGE_TITLE|translate}}"
+                        [value]="demoForm.value.branchMDApproval? 'Approved': demoForm.value.branchMDApproval=== false? 'Rejected': 'None'"
+                        pInputText [readOnly]="true" /><label class="form-label ms-2" for="branchMDApproval">{{'Branch
+                        MD
+                        Approval'|tr:PAGE_TITLE|translate}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="fixed-bottom">
+                <div class="row">
+                  <div class="col-12">
+                    <button type="submit" label="{{'Save'|tr:PAGE_TITLE|translate}}" *ngIf="!inViewMode"
+                      class="btn btn-blue text-white form-button border-r10 float-end mx-4" pButton><i *ngIf="isLoading"
+                        class="fa fa-spinner fa-spin "></i></button>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>

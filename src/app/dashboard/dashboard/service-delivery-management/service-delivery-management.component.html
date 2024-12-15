@@ -1,0 +1,418 @@
+<p-toast position="bottom-right"></p-toast>
+<div #addServiceReq [ngClass]="showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="mode=='add'">Add New Request</h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="mode=='view'">View New Request</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3 ngprime-custom hpl-33">
+    <div class="row">
+
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 stepper-form ">
+        <form *ngIf="mode=='view'">
+          <div class="row form-scroller">
+            <div class="col-12">
+              <h3 class="section-heading">Requestor Info</h3>
+            </div>
+            <div class="row box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text"> User Created by: <span
+                    class="viewspan-text">{{ServicerequestForm.value?.callCreatedBy}}
+                  </span> </p>
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Requested Date:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.requestedDate}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text">Requested Time:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.requestedTime}}</span>
+                </p>
+              </div>
+            </div>
+            <div class="col-12">
+              <h3 class="section-heading">Asset Info</h3>
+            </div>
+            <div class="row box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingModel">Asset Number:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.assets[0]?.assetNumber}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Serial Number:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.assets[0]?.assetSerialNo}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName"> Asset Name:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.assets[0]?.assetName}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Model:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.assets[0]?.model}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Manufacturer:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.assets[0]?.manufacturer}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Site:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.assets[0]?.site?.siteName}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Department:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.assets[0]?.department}}</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Contact</h3>
+            </div>
+            <div class="row box-gryco">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingModel">Employee Id:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.employeeCode?.id}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Name:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.employeeName}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Telephone:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.mobilePhone}}</span>
+                </p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Email: <span
+                    class="viewspan-text">{{ServicerequestForm.value?.email}}</span></p>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <p class="viewp-text" for="floatingName">Extension:
+                  <span class="viewspan-text">{{ServicerequestForm.value?.extension}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+        <form [formGroup]="ServicerequestForm" *ngIf="mode=='add'">
+          <div class="row form-scroller">
+            <div class="col-12">
+              <h3 class="section-heading">Requestor info</h3>
+            </div>
+            <div class="row box-gryco">
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating">
+
+                  <input id="userCreatedBy" formControlName="callCreatedBy" type="text" pInputText
+                    class="form-control icon-padding hback autofulled" />
+                  <label for="floatingName">User Created by</label>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <!-- <div class="p-field p-col-12 p-md-4"> -->
+                <span class="p-float-label hback">
+                  <p-calendar inputId="calendar" formControlName="requestedDate" dateFormat="yy-mm-dd" [showIcon]="true"
+                    [showOnFocus]="false"></p-calendar>
+                  <label class="inputfilddate autofulled" for="calendar">Requested Date</label>
+                </span>
+                <!-- </div> -->
+
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating">
+                  <!-- <input type="time" class="form-control input-field" id="floatingName" placeholder="dd/mm/yy"  formControlName="requestedTime"
+                  value="11:30 am"> -->
+                  <span class="p-float-label">
+                    <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="requestedTime"
+                      [showTime]="true" hourFormat="12" [timeOnly]="true" dataType="string">
+                    </p-calendar>
+                    <label class="inputfilddate autofulled" for="calendar">Requested Time</label>
+                  </span>
+
+                </div>
+              </div>
+            </div>
+
+
+
+            <div formArrayName="assets" class="col-12">
+              <ng-container *ngFor="let stageForm of assets.controls; let i = index">
+                <div class="row" [formGroupName]="i">
+                  @if(assets.length>1)
+                  {<div class="col-12 d-flex justify-content-end">
+                    <button pButton type="button" (click)="removeassetForm(i)" *ngIf="mode=='add'"
+                      class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+                  </div>}
+                  <div class="row box-gryco">
+                    <div class=" col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                      <span class="p-float-label">
+                        <p-autoComplete inputId="autocomplete" [delay]="1000" formControlName="assetNumber"
+                          [suggestions]="asset_Numbers" field="assetNumber" field="assetNumber"
+                          (completeMethod)="getAssetsDataByAssetNumber($event.query)"
+                          (onSelect)="selectAsset(i, $event)" [ngClass]="{
+                              'is-invalid': assets.at(i).get('assetNumber')?.invalid &&
+                              (assets.at(i).get('assetNumber')?.dirty || assets.at(i).get('assetNumber')?.touched),
+                              'is-valid': assets.at(i).get('assetNumber')?.valid
+                            }"></p-autoComplete>
+
+                        <label for="autocomplete">Asset Number</label>
+                      </span>
+                    </div>
+
+
+
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control input-field icon-padding hback"
+                          formControlName="assetSerialNo" placeholder="Serial Number" value="Serial Number">
+                        <label for="floatingName">Serial Number</label>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                          formControlName="assetName" placeholder="Serial Number" value="Serial Number">
+                        <label for="floatingName"> Asset Name</label>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                          formControlName="model" placeholder="Serial Number" value="Serial Number">
+                        <label for="floatingName">Model</label>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                          formControlName="manufacturer" placeholder="Serial Number" value="Serial Number">
+                        <label for="floatingName">Manufacturer</label>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                          formControlName="site" placeholder="Serial Number" value="Serial Number">
+                        <label for="floatingName">Site</label>
+                      </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                          formControlName="department" placeholder="Serial Number" value="Serial Number">
+                        <label for="floatingName">Department</label>
+                      </div>
+                    </div>
+                    <div class="col-12 ">
+
+
+                      <div class="col-12 mt-3">
+                        <h3 class="section-heading">Request Info </h3>
+                      </div>
+                      <div class="row">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating">
+                            <p-dropdown placeholder="--Select--" formControlName="defectType" [options]="defectTypes"
+                              optionLabel="name" class="dropdown">
+                            </p-dropdown>
+
+                            <label *ngIf="this.FMLookup" for="floatingSelect">Equipment Status<span
+                                class="mandatory-star">*</span></label>
+                            <label *ngIf="!this.FMLookup" for="floatingSelect">Job Status<span
+                                class="mandatory-star">*</span></label>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating">
+                            <p-dropdown [options]="yesOrNo" optionLabel="name" formControlName="priority"
+                              class="dropdown" placeholder="select"></p-dropdown>
+
+
+                            <label for="floatingSelect" *ngIf="this.FMLookup">Urgent<span
+                                class="mandatory-star">*</span></label>
+                            <label for="floatingSelect" *ngIf="!this.FMLookup">Job Priority<span
+                                class="mandatory-star">*</span></label>
+                          </div>
+                          <!--
+                          <mat-slide-toggle formControlName="priority" color="warn" [checked]="true">High
+                            Priority</mat-slide-toggle> -->
+                        </div>
+                        @if(!this.FMLookup)
+                        {<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating">
+                            <p-dropdown [options]="problemDescriptions" optionLabel="name"
+                              formControlName="problemDescription" class="dropdown" placeholder="select"></p-dropdown>
+
+                            <label for="floatingSelect">Problem Description</label>
+                          </div>
+                        </div>}
+
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating">
+                            <p-dropdown [options]="requestedThrough" optionLabel="name"
+                              formControlName="requestedThrough" class="dropdown" placeholder="select"></p-dropdown>
+                            <label for="floatingSelect" *ngIf="this.FMLookup "> Requested Through<span
+                                class="mandatory-star">*</span></label>
+                            <label for="floatingSelect" *ngIf="!this.FMLookup">Source<span
+                                class="mandatory-star">*</span></label>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating">
+                            <p-dropdown [options]="typeOfrequests" optionLabel="name" formControlName="typeofRequest"
+                              (onChange)="changeTypeOfReq($event)" class="dropdown" placeholder="select"></p-dropdown>
+
+                            <label for="floatingSelect" *ngIf="this.FMLookup">Type Of Request<span
+                                class="mandatory-star">*</span></label>
+                            <label for="floatingSelect" *ngIf="!this.FMLookup">Cost Code Name<span
+                                class="mandatory-star">*</span></label>
+                          </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
+                          *ngIf="this.FMLookup && showSafety =='true'">
+                          <div class="form-floating">
+                            <p-dropdown [options]="safety" optionLabel="name" formControlName="Safety" class="dropdown"
+                              placeholder="select"></p-dropdown>
+
+                            <label for="floatingSelect">Electrical Safety Test</label>
+                          </div>
+                        </div>
+                        <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating">
+                        <p-button (click)="downloadFile()" label="Voice Note" class="p-button-info col-lg-2"></p-button>
+                        <input id="voiceNote" formControlName="voiceNote" type="file" pInputText />
+                      </div>
+                    </div> -->
+
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="p-field mb-3">
+                            <!-- <textarea id="callComments" formControlName="callComments" placeholder="Comment"
+                          pInputTextarea></textarea>
+
+                        <label for="callComments">Comment</label> -->
+                            <span class="p-float-label">
+                              <textarea inputId="textarea" rows="3" style="resize: none;" cols="35"
+                                formControlName="callComments" pInputTextarea></textarea>
+                              <label for="textarea">Comment</label>
+                            </span>
+
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <p-accordion (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
+                        <p-accordionTab header="ٌRequest Info">
+
+                        </p-accordionTab>
+                      </p-accordion> -->
+                    </div>
+
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    @if(i==assets.length-1)
+                    { <button pButton type="button" *ngIf="mode=='add'" (click)="addassets()"
+                      [disabled]="!assets.controls[i].valid" class=" plusbtn"><img src="assets/img/Vector.svg" alt="">
+                    </button><a *ngIf="mode=='add'" [attr.disabled]="!assets.controls[i].valid ? true : null"
+                      [ngClass]="{ 'disabled-link': !assets.controls[i].valid }" (click)="addassets()"
+                      class="add-newtext">add new
+                      assets</a> }
+
+                  </div>
+
+
+
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Contact</h3>
+            </div>
+            <div class="row box-gryco">
+              <div class=" col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                <span class="p-float-label">
+                  <label for="employeeCode">Employee Id</label>
+                  <p-autoComplete [delay]="1000" [suggestions]="listEmployee" [readonly]="false" field="employeeCode"
+                    (completeMethod)="onSelectEmployee($event)" (onSelect)="bindEmployee($event)"
+                    (onClear)="clearEmployee()">
+                  </p-autoComplete>
+                </span>
+              </div>
+              <!-- <p-autoComplete [delay]="1000"
+                  class="form-control input-field icon-padding" formControlName="employeeCode"
+                  [suggestions]="listEmployee" field="employeeCode" dataKey="userId"
+                  (completeMethod)="onSelectEmployee($event)" (onSelect)="bindEmployee($event)"
+                  (onClear)="clearEmployee()"></p-autoComplete>
+                <a > <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a> -->
+              <!-- <label for="floatingName">Employee Id</label> -->
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating">
+                  <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                    formControlName="name" placeholder="Serial Number" value="Serial Number">
+                  <label for="floatingName">Name</label>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating">
+                  <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                    formControlName="telephone" placeholder="Serial Number" value="Serial Number">
+                  <label for="floatingName">Telephone</label>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating">
+                  <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                    formControlName="email" placeholder="Serial Number" value="Serial Number">
+                  <label for="floatingName">Email</label>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating">
+                  <input type="text" class="form-control input-field icon-padding hback" id="floatingName"
+                    formControlName="land" placeholder="Serial Number" value="Serial Number">
+                  <label for="floatingName">Extension</label>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="card-body">
+              <form [formGroup]="attachmentAssetForm">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <label class="form-label">Attachment</label>
+                  <app-attachments (onUploaded)="attachmentReady($event)" formArrayName="attachments"
+                    [attachments]="attachmentName"></app-attachments>
+                </div>
+              </form>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="fixed-bottom" *ngIf="mode=='add'">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white border-r10 float-end" type="button" (click)="save()">Save</button>
+        </div>
+      </div>
+
+    </div>
+  </div>

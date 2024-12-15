@@ -1,0 +1,116 @@
+<div #drawerFilter [ngClass]=" showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Asset</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <!-- (onSelect)="filter.assetName=$event.assetname" -->
+        <form [formGroup]="searchForm">
+          <div class="row box-gryco py-3">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" formControlName="assetName" id="assetName" [delay]="1000"
+                  [suggestions]="assetnamesList" (completeMethod)="assetNameFilter($event)"
+                  (onSelect)="onNameFilterSelect($event)" field="assetname"></p-autoComplete>
+                <label for="assetName" class="form-label">Asset Name</label>
+              </span>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Asset Risk Level</label>
+                <p-dropdown formControlName="riskLevel" [options]="riskOptions" optionLabel="name" optionValue="id"
+                  (onChange)="filter.riskLevel=$event.value" placeholder="Search Asset Risk Level"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Mission Critical</label>
+                <p-dropdown formControlName="businessCritical" (onChange)="filter.businessCritical=$event.value"
+                  placeholder="Search Business Critical" [options]="businessOptions" optionLabel="name"
+                  optionValue="id"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Category</label>
+                <p-dropdown formControlName="category" [options]="categoriesOptions" optionLabel="name" optionValue="id"
+                  (onChange)="filter.category=$event.value" placeholder="Search Category"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Classification</label>
+                <p-dropdown formControlName="classification" [options]="classOptions" optionLabel="name"
+                  optionValue="id" (onChange)="filter.classification=$event.value"
+                  placeholder="Search Classification"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Complexity</label>
+                <p-dropdown formControlName="complexity" [options]="complexOptions"
+                  (onChange)="filter.complexity=$event.value" placeholder="Search Complixity"></p-dropdown>
+              </div>
+            </div>
+            <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Asset Name Code</label>
+              <p-autoComplete [delay]="1000" formControlName="assetNDCode" [suggestions]="ntCodeList"
+                (onSelect)="filter.assetNDCode=$event.assetndcode" (completeMethod)="ntCodeFilter($event)"
+                field="assetndcode"></p-autoComplete>
+            </div> -->
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Modality</label>
+                <p-dropdown formControlName="modility" (onChange)="filter.modility=$event.value"
+                  placeholder="Search Modility" [options]="modilityOptions" optionLabel="name"
+                  optionValue="id"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input formControlName="submodility" type="text" id="submodility" class="form-control  icon-padding"
+                  (keyup)="onInput($event)" pInputText placeholder="Sub Modality" />
+                <label for="submodility" class="form-label">Sub Modality</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label for="codeTypeId" class="form-label">Code Type</label>
+                <p-dropdown id="codeTypeId" formControlName="codeTypeId" (onChange)="filter.codeTypeId=$event.value"
+                  [options]="codes" placeholder="Select Code Type" optionLabel="name" optionValue="id"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="filter.codeTypeId!=null">
+              <div class="form-floating mb-2">
+                <input formControlName="codeValue" type="text" id="codeValue" class="form-control  icon-padding"
+                  (keyup)="onCodeInput($event)" pInputText placeholder="Code Value" />
+                <label for="codeValue" class="form-label">Code Value</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input formControlName="orcalName" type="text" id="orcalName" class="form-control  icon-padding"
+                  (keyup)="onOracleNameInput($event)" pInputText placeholder="Oracle Name" />
+                <label for="orcalName" class="form-label">Oracle Name</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button"
+            (click)="search()">Apply Filter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

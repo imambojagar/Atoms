@@ -1,0 +1,128 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <!-- <h1 class="offcanvas-title offcanvas-heading" *ngIf="isAddMode">Create Gas Refill</h1> -->
+    <h1 class="offcanvas-title offcanvas-heading">View Gas Refill</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <p-toast></p-toast>
+  <div class="p-3">
+    <div class="row">
+      <div class="mb-2 mb-xl-4" [ngClass]="{'disableDiv': hideButtonSave}">
+
+        <form [formGroup]="gasRefillInfoForm">
+          <div class="">
+            <div class="box-gryco">
+              <div class="row py-3">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-2">
+                  <p class="viewp-text">Gas Refill No:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.gazRefillNo }}</span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <h4 class="section-heading">Gas Refill Details</h4>
+              </div>
+              <div formArrayName="gazRefillDetails">
+                <ng-container *ngFor="let contact of gazRefillDetails(); let i=index">
+                  <div class="d-flex align-items-end" [formGroupName]="i">
+                    <div class="row box-gryco">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <p class="viewp-text">Gas Type:
+                          <span class="viewspan-text">{{ gasTypes | json }}</span>
+                        </p>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <p class="viewp-text">Cylinder Type:
+                          <span class="viewspan-text">{{ cylinderTypes | json }}</span>
+                        </p>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <p class="viewp-text">Cylinder Size:
+                          <span class="viewspan-text">{{ cylinderSizes | json }}</span>
+                        </p>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <p class="viewp-text">Requested Qty:
+                          <span class="viewspan-text">{{ contact.value.requestedQty }}</span>
+                        </p>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="hideField=='false'">
+                        <p class="viewp-text">Delivered Qty:
+                          <span class="viewspan-text">{{ contact.value.deliverdQty }}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+
+              <div class="row py-3">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="hideField=='false'">
+                  <p class="viewp-text">Expected Date:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.expectedDate }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="hideField=='false'">
+                  <p class="viewp-text">Start Date:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.startDate }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="hideField=='false'">
+                  <p class="viewp-text">End Date:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.endDate }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Working Hours:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.workingHours }}</span>
+                  </p>
+                </div>
+
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Site:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.site }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Building:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.building }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Floor:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.floor }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <p class="viewp-text">Department:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.department }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!isNurse">
+                  <p class="viewp-text">Assigned Employee:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.assignedEmployee }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="hideField=='false'">
+                  <p class="viewp-text">Status:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.status }}</span>
+                  </p>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="hideField=='false'">
+                  <p class="viewp-text">Comment:
+                    <span class="viewspan-text">{{ gasRefillInfoForm.value.comment }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+
+      <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

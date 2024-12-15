@@ -1,0 +1,210 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="custom-card ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+
+            <p-toast></p-toast>
+            <!-- <div class="card flex justify-content-center mb-5">
+              <p-breadcrumb [model]="items"></p-breadcrumb>
+            </div> -->
+
+            <!-- <p-dialog header="Add New Instruction Description" [(visible)]="displayAdd" [modal]="true" (onHide)="onHideDialog()"
+                [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false"
+                [contentStyle]="{ 'overflow-y': 'none !important' }"> -->
+            <div #drawer [ngClass]=" showmodal ? 'show' : ''"
+              class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1"
+              aria-modal="true" role="dialog">
+              <div class="offcanvas-header">
+                <h1 class="offcanvas-title offcanvas-heading"> Add New Instruction Description Mapping</h1>
+                <button type="button" class="btn-close" (click)="close_modal()"></button>
+              </div>
+
+              <p-toast></p-toast>
+              <div class="p-3">
+                <div class="row box-gryco">
+                  <form [formGroup]="inputForm">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label class="mb-3">Instruction Description</label>
+                        <p-dropdown [options]="ListinstructionDescription" dataKey="id" optionLabel="description"
+                          [filter]="true" filterBy="description" (onChange)="onChange($event)"
+                          formControlName="ListinstructionDescription" class="dropdown mb-2 spanmp-0"
+                          placeholder="select">
+
+                        </p-dropdown>
+                      </div>
+                      <!-- <div class="col-md-4">
+          <label>Instruction Text</label>
+          <p-multiSelect [options]="ListinstructionText" formControlName="ListinstructionText" dataKey="id"
+            defaultLabel="Select" optionLabel="text" class="multiselect-custom">
+          </p-multiSelect>
+        </div>
+          <div class="col-md-4 mt-7">
+            <div class="card-title table-btns">
+              <button type="button" class="btn btn-primary" (click)="Save()">Save</button>
+            </div>
+          </div>-->
+
+                    </div>
+
+                  </form>
+                  <div class="fixed-bottom">
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                          (click)="Save()" styleClass="p-button-text">Save</button>
+                        <!-- <p-button icon="pi pi-times" (click)=" displayAdd=false" label="Cancel" styleClass="p-button-text"></p-button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <p-table #dt [value]="ListInstructionTextDescription" styleClass="p-datatable-striped p-datatable-gridlines"
+              [rows]="filter.pageSize" [tableStyle]="{}" [lazy]="true" [loading]="loading" [rowHover]="false"
+              dataKey="id" [totalRecords]="totalRows">
+              <ng-template pTemplate="caption">
+                <div class="row">
+                  <div class="row">
+                    <div class="float-start main-heading col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9 mb-3">
+                      Instruction Description Mapping List
+                    </div>
+
+
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3 float-end">
+                      <div class="row align-items-center justify-content-start">
+
+
+                        <div class="p-input-icon-left col-3">
+                          <p-button [outlined]="false" class="header-icon-background header-icon float-end"
+                            (click)="openFilterModal()">
+                            <img src="navbar/filter.svg" alt="">
+                          </p-button>
+                        </div>
+                        <div class="form-floating col-9 ">
+                          <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                            [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                            value="Type here">
+                          <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                          <label for="floatingName">Search</label>
+                          <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                        (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="display: none;">Id</th>
+                  <th>Instruction Description</th>
+                  <!-- <th>Instruction Text</th>-->
+                  <th>Action</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-description>
+                <tr>
+                  <td style="display: none;">{{description.id}}</td>
+                  <td>{{description.instructionDescription}}</td>
+                  <!-- <td>{{description.instructionText}}</td> -->
+                  <td class="pb-2">
+                    <button pButton pRipple icon="pi pi-pencil" (click)="showUpdateDialog(description)"
+                      class="p-button-rounded p-button-info me-2"></button>
+                    <!-- <button pButton pRipple icon="pi pi-trash" (click)="onDelete(description.id)" class="p-button-rounded p-button-danger"></button>-->
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            </p-paginator>
+
+
+
+            <div #drawer [ngClass]=" displayUpdate ? 'show' : ''"
+              class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1"
+              aria-modal="true" role="dialog">
+              <div class="offcanvas-header">
+                <h1 class="offcanvas-title offcanvas-heading"> Update Instruction Description </h1>
+                <button type="button" class="btn-close" (click)="close_modals()"></button>
+              </div>
+
+              <p-toast></p-toast>
+              <div class="p-3">
+
+                <form [formGroup]="updateForm">
+                  <div class="row box-gryco">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                      <div class="form-floating mb-2">
+                        <label>Instruction Description</label>
+                        <p-dropdown [readonly]="true" [options]="ListinstructionDescription" dataKey="id"
+                          optionLabel="description" [filter]="true" filterBy="description"
+                          class="form-control  icon-padding" formControlName="ListinstructionDescription"
+                          class="dropdown" placeholder="select">
+                        </p-dropdown>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="row form-scroller" formArrayName="updateFormValues">
+
+                    <div *ngFor=" let info of UpdateFromValuesControl(); let i=index">
+                      <div class="col-12" [formGroupName]="i">
+                        <div class="row box-gryco">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-floating mb-2">
+                              <label>Instruction Text</label>
+
+                              <p-dropdown [options]="ListinstructionText" dataKey="id" optionLabel="text"
+                                [filter]="true" filterBy="description" class="form-control  icon-padding"
+                                formControlName="ListinstructionText" class="dropdown" placeholder="select">
+                              </p-dropdown>
+                            </div>
+                          </div>
+                          <div class="col-md-3 ms-4 add-more-value-button">
+                            <button pButton type="button" (click)="addMoreValues()"
+                              class="p-button-rounded p-button-info mr-2" icon="pi pi-plus"></button>
+                            <button pButton type="button" (click)="removeValues(i)"
+                              class="p-button-rounded  mr-2 btn btn-danger " icon="pi pi-trash"></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </form>
+
+                <div class="fixed-bottom">
+                  <div class="row">
+                    <div class="col-12">
+                      <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                        (click)="onUpdate()" styleClass="p-button-text">Save</button>
+                      <!-- <p-button icon="pi pi-times" (click)=" displayAdd=false" label="Cancel" styleClass="p-button-text"></p-button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+
+
+          <div *ngIf="showmodal" class="offcanvas-backdrop fade show" (click)="close_modal()"></div>
+          <div *ngIf="displayUpdate" class="offcanvas-backdrop fade show" (click)="close_modals()"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,335 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+          <p-toast></p-toast>
+          <div class="main">
+            <div class="container-fluid">
+              <div class="contents ngprime-custom">
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row mb-3 content-heading">
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                        <div class="float-start main-heading">
+                          Asset Inventory List
+                        </div>
+                        <div class="float-start export-icon mt-3">
+                          <a class="m-5" (click)="export()">Export
+                            <img src="assets/img/dashboard/excel.svg" alt="" /></a>
+                        </div>
+                      </div>
+                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="row float-end">
+                          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 mb-3">
+                            <div class="float-end filter-icon h-100">
+                              <a (click)="openFilterModal()"><img src="assets/img/dashboard/filter.svg" alt="" /></a>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="form-floating float-start">
+                              <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                value="Type here" />
+                              <a>
+                                <img class="float-end search-icon" src="assets/img/dashboard/search.svg" alt="" /></a>
+                              <label for="floatingName">Search</label>
+                            </div>
+                          </div>
+                          <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                            <div class="d-grid">
+                              <button class="btn btn-blue text-white border-r10" type="button" (click)="openModal()">
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="table-responsive table-bg">
+
+                      <p-table [value]="survey" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" #dt>
+
+
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>Title</th>
+                            <th>Site</th>
+                            <th>Building</th>
+                            <th>Floor</th>
+                            <th>Department</th>
+                            <th>Room</th>
+                            <th>Date</th>
+                            <th alignFrozen="right" pFrozenColumn [frozen]="balanceFrozen">
+                              Action
+                            </th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-survey>
+                          <tr>
+                            <!-- <td class="val12 link-info" (click)="navToDetails(survey, 0)">
+                    <a>{{ survey.surveyCode }}</a>
+                  </td> -->
+                            <td>
+                              {{ survey.surveyCode }}
+                            </td>
+                            <td>{{ survey.siteName }}</td>
+                            <td>{{ survey.buildingName }}</td>
+                            <td class="val3">{{ survey.floorName }}</td>
+                            <td class="val4">{{ survey.departmentName }}</td>
+                            <td class="val3">{{ survey.roomName }}</td>
+                            <td class="val3">{{ survey.surveyDate | date }}</td>
+                            <td class="d-flex gap-1" alignFrozen="right" pFrozenColumn [frozen]="balanceFrozen">
+                              <p-button icon="pi pi-book" class="mr-2" [rounded]="true" [outlined]="true"
+                                severity="success" (click)="showPrintDialog(survey)" pTooltip="Print Asset Inventory" />
+
+                              <!-- <p-button
+                      icon="pi pi-eye"
+                      class="mr-2"
+                      [rounded]="true"
+                      [outlined]="true"
+                      severity="success"
+                      (onClick)="viewDetails(survey, 1)"
+                    /> -->
+                              <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                                (click)="viewDetails(survey,1)">
+                                <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                              </button>
+                              <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"
+                                severity="success" (click)="navToDetails(survey, 1)" canUpdate />
+
+                              <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"
+                                (click)="delete(survey)" canDelete />
+                            </td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-edit-inventory [showmodal]="addAssetInventoryLoaded" [edit_asset_inventory_id]="asset_inventory_id"
+  [edit_asset_inventory_index]="asset_inventory_index" (openModals)="openModal()"></app-add-edit-inventory>
+
+<app-view-asset-inventory [showmodal]="viewAssetInventoryLoaded" [edit_asset_inventory_id]="asset_inventory_id"
+  [edit_asset_inventory_index]="asset_inventory_index" (openModals)="openEditModal()"></app-view-asset-inventory>
+
+<!-- <app-asset-inventory-search [showmodal]="filterLoaded" (openSearchModals)="openFilterModal()"
+  (AssetInventorySearch)="getAssetInventorySearch($event)"></app-asset-inventory-search> -->
+
+<div #drawerFilter [ngClass]="showFilterModal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Asset Inventory</h1>
+    <button type="button" class="btn-close" (click)="close_filter_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="searchForm">
+          <div class="row form-scroller mb-4">
+            <div class="row box-gryco">
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-autoComplete [delay]="1000" formControlName="surveyCode" [suggestions]="titleList"
+                      (completeMethod)="fillTitle($event)" (onSelect)="filter.surveyCode = $event.value.surveyCode"
+                      field="surveyCode"></p-autoComplete>
+                    <label class="form-label">Title</label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-autoComplete [delay]="1000" [suggestions]="customers" [field]="'custName'"
+                      (onSelect)="getBuildingList($event)" (completeMethod)="getCustomers($event)"
+                      formControlName="siteId"></p-autoComplete>
+                    <label class="form-label">Site </label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+
+                    <p-dropdown placeholder="--Select--" (onChange)="getFloorList($event)" formControlName="buildingId"
+                      [options]="buildingList" optionLabel="name" optionValue="id" class="dropdown">
+                    </p-dropdown>
+                    <label class="form-label">Building </label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+
+                    <p-dropdown placeholder="--Select--" (onChange)="getDepartments($event)" formControlName="floorId"
+                      [options]="floorList" optionLabel="name" optionValue="id" class="dropdown">
+                    </p-dropdown> <label class="form-label">Floor </label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+
+                    <p-dropdown placeholder="--Select--" (onChange)="onSelectDept($event)"
+                      formControlName="departmentId" [options]="departmentList" optionLabel="name" optionValue="id"
+                      class="dropdown">
+                    </p-dropdown> <label class="form-label">Department</label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+
+                    <p-dropdown placeholder="--Select--" (onChange)="onSelectRoom($event)" formControlName="roomId"
+                      [options]="roomList" optionLabel="name" optionValue="id" class="dropdown">
+                    </p-dropdown> <label class="form-label">Room</label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-calendar formControlName="surveyDateFrom" (onSelect)="filter.surveyDateFrom = $event"
+                      dateFormat="yy/mm/dd" dataType="string" [showIcon]="true" [showButtonBar]="true"
+                      [showOnFocus]="false"></p-calendar>
+                    <label class="form-label">Date From</label></span>
+                  <!-- <label for="floatingSendeStartrDate" class="select-label">Sender Start Date</label>
+                        <p-calendar formControlName="startDateTime" (onSelect)="selectSenderStart($event,i)"
+                          (onBlur)="selectSenderStart($event,i)" [minDate]="minDateVal" [showTime]="true"
+                          [dateFormat]="'dd/mm/yy'" hourFormat="12" [showIcon]="true"  [iconDisplay]="'input'"
+                          id="floatingSendeStartrDate"  >
+                        </p-calendar> -->
+                </div>
+              </div>
+
+              <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+
+                  <span class="p-float-label">
+                    <p-calendar formControlName="surveyDateTo" (onSelect)="filter.surveyDateTo = $event"
+                      dateFormat="yy/mm/dd" dataType="string" [showIcon]="true" [showButtonBar]="true"
+                      [showOnFocus]="false"></p-calendar>
+                    <label class="form-label">Date To</label>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="Search()">
+            Apply Filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="addAssetInventoryLoaded" class="offcanvas-backdrop fade show" (click)="openModal()"></div>
+<div *ngIf="showFilterModal" class="offcanvas-backdrop fade show" (click)="close_filter_modal()"></div>
+<div *ngIf="viewAssetInventoryLoaded" class="offcanvas-backdrop fade show" (click)="openEditModal()"></div>
+
+<div *ngIf="displayPrint" class="offcanvas-backdrop fade show" (click)="displayPrint=false"></div>
+
+<p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+<div #drawerFilter [ngClass]="displayPrint ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Print Asset Inventory</h1>
+    <button type="button" class="btn-close" (click)="displayPrint=false"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div id="htmlToBePrinted" class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3 form-scroller">
+
+        <h2 class="text-center">Asset Inventory</h2>
+        <br />
+        <table class="tg">
+          <tbody>
+            <tr>
+              <td class="tg-0pky">Site</td>
+              <td class="tg-0pky">Building</td>
+              <td class="tg-0pky">Floor</td>
+              <td class="tg-0pky">Department</td>
+              <td class="tg-0pky">Room</td>
+              <td class="tg-0pky">Date</td>
+            </tr>
+            <tr>
+              <td class="tg-0pky">{{ dataPrinted?.siteName }}</td>
+              <td class="tg-0pky">{{ dataPrinted?.buildingName }}</td>
+              <td class="tg-0pky">{{ dataPrinted?.floorName }}</td>
+              <td class="tg-0pky">{{ dataPrinted?.departmentName }}</td>
+              <td class="tg-0pky">{{ dataPrinted?.roomName }}</td>
+              <td class="tg-0pky">{{ dataPrinted?.surveyDate | date }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table class="tg">
+          <tbody>
+            <tr>
+              <td class="tg-0pky">Asset Number</td>
+              <td class="tg-0pky">Asset Name</td>
+              <td class="tg-0pky">Asset SN</td>
+              <td class="tg-0pky">Status</td>
+            </tr>
+            <tr *ngFor="let asset of dataPrinted?.details">
+              <td class="tg-0pky">{{ asset.assetNumber }}</td>
+              <td class="tg-0pky">{{ asset.assetName }}</td>
+              <td class="tg-0pky">{{ asset.assetSerialNo }}</td>
+              <td class="tg-0pky">{{ asset.statusName }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button"
+              (click)="printPPMs()">
+              Print
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

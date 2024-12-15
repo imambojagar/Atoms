@@ -1,0 +1,21 @@
+
+  <div class="browse-file drag-zone">
+    <div class="drop_box"  (click)="fileInput.click()"
+      [appDragDrop]="dragDropEnabled" (dropped)="handleFileDrop($event)">
+        <input
+          type="file"
+          [accept]="fileType"
+          [multiple]="multiple"
+          (change)="uploadFile($event)"
+          #fileInput
+          class="visually-hidden">
+        <button class="browse-btn"> <i class="fa fa-paperclip" aria-hidden="true"></i> Upload New</button>
+        <ng-content></ng-content>
+
+        <p class="text-center">The maximum file size: 30 MB. Allowed files are:Pdf,JPG,.docx,PNG</p>
+    </div>
+  </div>
+
+@if (message) {
+  <div class="alert alert-secondary" role="alert">{{ message }}</div>
+}

@@ -1,0 +1,568 @@
+<div #drawer
+  [ngClass]=" showmodal ? 'show' : ''"
+   class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="!edit_asset_id">Add New Asset List</h1>
+    <h1 class="offcanvas-title offcanvas-heading" *ngIf="edit_asset_id">Edit Asset List</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 p-3 border-end">
+        <div class="atom-stepper d-flex flex-column mt-2">
+          <div class="d-flex ">
+            <div class="d-flex flex-column pr-4 align-items-center">
+              <div class="rounded-circle text-white bg-maroon stepper-circle-class">1</div>
+              <div class="line h-100"></div>
+            </div>
+            <div>
+              <div class="title step-active">Asset Info</div>
+
+
+            </div>
+          </div>
+          <div class="d-flex ">
+            <div class="d-flex flex-column pr-4 align-items-center">
+              <div class="rounded-circle bg-gray stepper-circle-class stepper-circle-number-class">2</div>
+              <div class="line h-100"></div>
+            </div>
+            <div>
+              <div class="title">Transfer Asset Info</div>
+
+
+            </div>
+          </div>
+          <div class="d-flex ">
+            <div class="d-flex flex-column pr-4 align-items-center">
+              <div class="rounded-circle bg-gray stepper-circle-class stepper-circle-number-class">3</div>
+              <div class="line h-100 "></div>
+            </div>
+            <div>
+              <div class="title">Asset Sender Info</div>
+            </div>
+          </div>
+          <div class="d-flex ">
+            <div class="d-flex flex-column pr-4 align-items-center">
+              <div class="rounded-circle bg-gray stepper-circle-class stepper-circle-number-class">4</div>
+              <div class="line h-100 d-none"></div>
+            </div>
+            <div>
+              <div class="title">Asset Receiver Info </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form">
+        <form [formGroup]="addAssetForm" >
+          <div class="row form-scroller">
+            <div class="col-12">
+              <h3 class="section-heading">Asset info</h3>
+            </div>
+
+            <div class="row box-gryco"> 
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <!-- <input type="text" pInputText formControlName="assetId"  class="form-control header-search-background icon-padding" id="floatingAsset" placeholder="FrontEnd_CallCenter" value="Asset" (click)="clearValue($event);"> -->
+                  <!-- <label for="floatingAsset">Asset</label> -->
+                  <button type="button" (click)="openDialog()" pButton class="p-button-info btn btn-blue col-lg-2 asset-lookup w-100"
+                  icon="pi pi-external-link" label="Select Asset" [disabled]="disableButton"></button>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <input type="text" pInputText formControlName="assetNumber" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingNumber" placeholder="FrontEnd_CallCenter" value="Asset Number" (click)="clearValue($event);">
+                  <label for="floatingNumber">Asset Number</label>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <input type="text" pInputText formControlName="assetSerialNo" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingAssetSN" placeholder="FrontEnd_CallCenter" value="">
+                  <label for="floatingAssetSN">Asset SN</label>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <input type="text" pInputText formControlName="assetName" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingAssetName" placeholder="FrontEnd_CallCenter" value="">
+                  <label for="floatingAssetName">Asset Name</label>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <input type="text" pInputText formControlName="modelName" [readonly]="true"  class="form-control header-search-background icon-padding" id="floatingModel" placeholder="FrontEnd_CallCenter" value="">
+                  <label for="floatingModel">Model</label>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <input type="text" pInputText formControlName="manufacturerName" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingManufacturer" placeholder="FrontEnd_CallCenter" value="">
+                  <label for="floatingManufacturer">Manufacturer</label>
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <input type="text" pInputText formControlName="supplierName" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingSupplier" placeholder="FrontEnd_CallCenter" value="">
+                  <label for="floatingSupplier">Supplier</label>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              </div>
+            </div> 
+
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Transfer Asset Info</h3>
+            </div>
+          
+          <div class="row box-gryco">   
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <!-- <input type="text" pInputText formControlName="senderSiteName" class="form-control header-search-background icon-padding" id="floatingModel" placeholder="FrontEnd_CallCenter" value=""> -->
+                <label for="floatingModel">Destination Site</label>
+                <p-autoComplete [delay]="1000" [suggestions]="destSiteList" [readonly]="disabledFlag"
+                formControlName="destSiteIdString" [required]="true" (completeMethod)="fillSite($event)"
+                (onSelect)="selectSite($event)" field="custName">
+              </p-autoComplete>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <!-- <input type="text" pInputText formControlName="senderBuildingName"  class="form-control header-search-background icon-padding" id="floatingManufacturer" placeholder="FrontEnd_CallCenter" value=""> -->
+                <label for="floatingManufacturer">Building</label>
+                <p-dropdown [options]="buildingList" optionLabel="name" [readonly]="disabledFlag" optionValue="id"
+                formControlName="destBuildingId" class="dropdown" (onChange)="changeBuilding($event)"
+                placeholder="select"></p-dropdown>
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+               <!--  <input type="text" pInputText formControlName="senderFloorName"  class="form-control header-search-background icon-padding" id="floatingModel" placeholder="FrontEnd_CallCenter" value=""> -->
+                <label for="floatingModel">Floor</label>
+                <p-dropdown [options]="floorList" optionLabel="name" [readonly]="disabledFlag" optionValue="id"
+                  formControlName="destFloorId" class="dropdown" (onChange)="changeFloor($event)"
+                placeholder="select"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <!-- <input type="text" pInputText formControlName="senderDepartmentName"  class="form-control header-search-background icon-padding" id="floatingManufacturer" placeholder="FrontEnd_CallCenter" value=""> -->
+                <label for="floatingManufacturer">Department</label>
+                <p-dropdown [options]="departmentList" optionLabel="name" [readonly]="disabledFlag" optionValue="id"
+                formControlName="destDepartmentId" class="dropdown" (onChange)="changeDepartment($event)"
+                placeholder="select"></p-dropdown>
+
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                  <label for="floatingModel" class="select-label">Room</label>
+                  <p-dropdown
+                    [options]="roomList"
+                    [checkmark]="false"
+                    optionLabel="name"
+                    [showClear]="false"
+                    [filter]="true"
+                    filterBy="name"
+                    formControlName="senderRoom"
+                    placeholder="Select a Room"
+                    class="header-search-background"
+                    id="floatingModel"
+                    (onChange)="changeRoom($event)" />
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <textarea formControlName="comment" [readonly]="disabledFlag" placeholder="Enter Comment"
+                pInputTextarea   class="form-control header-search-background icon-padding" id="floatingComment" placeholder="FrontEnd_CallCenter" value=""></textarea>
+                <label for="floatingComment">Comment</label>
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                  <label for="floatingReceiver" class="select-label">Receiver End User</label>
+                  <p-dropdown
+                    [options]="Room"
+                    [checkmark]="false"
+                    optionLabel="name"
+                    [showClear]="false"
+                    [filter]="true"
+                    filterBy="name"
+                    formControlName="receiverEndUserName"
+                    placeholder="Select a Receiver End User"
+                    class="header-search-background"
+                    (onChange)="changereceiverEndUserName($event)"
+                    id="floatingReceiver" />
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"></div>
+          </div>  
+          
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Asset Sender Info.</h3>
+            </div>
+
+          <div class="row box-gryco">   
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input type="text" pInputText formControlName="senderSiteName"  class="form-control header-search-background icon-padding" id="floatingSenderClient"   [readonly]="true" [required]="true">
+                <label for="floatingSenderClient">Sender Client</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input type="text" pInputText formControlName="senderBuildingName" [readonly]="true"  class="form-control header-search-background icon-padding" id="floatingBuilding" placeholder="FrontEnd_CallCenter" value="">
+                <label for="floatingBuilding">Sender Building</label>
+              </div>
+            </div>
+
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input type="text" pInputText formControlName="senderFloorName" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingSenderClient" placeholder="FrontEnd_CallCenter" value="">
+                <label for="floatingSenderClient">Sender Floor</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input type="text" pInputText formControlName="senderDepartmentName" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingBuilding" placeholder="FrontEnd_CallCenter" value="">
+                <label for="floatingBuilding">Sender Department</label>
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input type="text" pInputText formControlName="senderRoom" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingBuilding" placeholder="FrontEnd_CallCenter" value="">
+                <label for="floatingBuilding">Sender Room</label>
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Assigned FE Sender</label>
+                <input formControlName="senderAssignedEmployeeName" type="text" [readonly]="true" class="form-control header-search-background icon-padding" pInputText />
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label"> Status Sender</label>
+                <input formControlName="senderMachineStatusName" type="text" [readonly]="true" class="form-control header-search-background icon-padding" pInputText />
+              </div>
+            </div>
+
+            <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                  <label for="floatingAssignedFESender" class="select-label">Assigned FE Sender</label>
+                  <p-dropdown
+                    [options]="Room"
+                    [checkmark]="false"
+                    optionLabel="name"
+                    [showClear]="false"
+                    [filter]="true"
+                    filterBy="name"
+                    formControlName="senderAssignedEmployeeName"
+                    placeholder="Select a Assigned FE Sender"
+                    class="header-search-background"
+                    id="floatingAssignedFESender"
+                    (onChange)="changeAssignedSender($event)" />
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                  <label for="floatingStatusSender" class="select-label">Status Sender</label>
+                  <p-dropdown
+                    [options]="Room"
+                    [checkmark]="false"
+                    optionLabel="name"
+                    [showClear]="false"
+                    [filter]="true"
+                    filterBy="name"
+                    formControlName="senderMachineStatusName"
+                    placeholder="Select a Status Sender"
+                    class="header-search-background"
+                    id="floatingStatusSender" />
+              </div>
+            </div> -->
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input type="text" pInputText formControlName="senderComment" [readonly]="true" class="form-control header-search-background icon-padding" id="floatingSenderComment" placeholder="FrontEnd_CallCenter" value="">
+                <label for="floatingSenderComment">Sender Comment</label>
+              </div>
+            </div>
+
+            <!-- <div class="row">
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                  <div class="form-floating">
+                    <label for="floatingDate" class="select-label">Sender Start date</label>
+                    <p-calendar
+                      formControlName="assetId"
+                      [iconDisplay]="'input'"
+                      [showIcon]="true"
+                      inputId="icondisplay"
+                      id="floatingDate" />
+                </div>
+              </div>
+              <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                  <div class="form-floating">
+                    <label for="floatingDate" class="select-label">Sender End date</label>
+                    <p-calendar
+                      formControlName="assetId"
+                      [iconDisplay]="'input'"
+                      [showIcon]="true"
+                      inputId="icondisplay"
+                      id="floatingDate" />
+                </div>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <input type="text" pInputText formControlName="assetId"  class="form-control header-search-background icon-padding" id="floatingSenderComment" placeholder="FrontEnd_CallCenter" value="1" (click)="clearValue($event);">
+                  <label for="floatingSenderComment">Working Hours Sender</label>
+                </div>
+              </div>
+              <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-6 col-6">
+                <p-button [outlined]="false" icon="pi pi-plus" class="form-icon-button header-icon">
+                </p-button>
+              </div>
+            </div> -->
+          </div>  
+            <div class="row">
+              <ng-container formArrayName="assetTransferSenderTimers">
+                <div  *ngFor="let assetTransferSenderTimer of assetTransferSenderTimers().controls; let i=index" [formGroupName]="i" >
+                  <div class="row py-3" [formGroupName]="i" [ngClass]="{'disableDiv': senderFlag}">
+                    <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating">
+                        <label for="floatingSendeStartrDate" class="select-label">Sender Start Date</label>
+                        <p-calendar formControlName="startDateTime" (onSelect)="selectSenderStart($event,i)"
+                          (onBlur)="selectSenderStart($event,i)" [minDate]="minDateVal" [showTime]="true"
+                          [dateFormat]="'dd/mm/yy'" hourFormat="12" [showIcon]="true"  [iconDisplay]="'input'"
+                          id="floatingSendeStartrDate"  >
+                        </p-calendar>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating">
+                        <label for="floatingSenderendDate" class="select-label">Sender End Date</label>
+                        <p-calendar formControlName="endDateTime" (onSelect)="selectSenderEnd($event,i)"
+                          (onBlur)="selectSenderEnd($event,i)" [showTime]="true" [dateFormat]="'dd/mm/yy'" hourFormat="12"
+                          [showIcon]="true"  [iconDisplay]="'input'"  id="floatingSenderendDate"  >
+                        </p-calendar>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating">
+                        <label for="floatingSenderWorkinghours" class="select-label">Working Hours</label>
+                        <p-inputNumber mode="decimal"
+                          formControlName="workingHours" id="floatingSenderWorkinghours" [useGrouping]="false">
+                        </p-inputNumber>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                      <p-button class="p-button-dynamic p-button-info form-icon-button m-3" icon="pi pi-plus" (click)="addAssetTransferSenderTimers()"></p-button>
+                      <p-button *ngIf=" i > 0"  class="p-button-dynamic  m-3 p-button-danger " icon="pi pi-trash" (click)="deleteAssetTransferSenderTimers(i)"></p-button>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Attachment</h3>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <app-file-upload-component
+                (filesChanged)="setSenderFileList($event)"
+                [multiple]="true"
+                [dragDropEnabled]="true">
+                  <div>  {{ senderFileList | json }} </div>
+              </app-file-upload-component>
+            </div>
+
+
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Asset Receiver Info.</h3>
+            </div>
+            <div class="row box-gryco"> 
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label">Assigned FE Receiver</label>
+                <input formControlName="receiverAssignedEmployeeName" type="text" class="form-control header-search-background icon-padding" [readonly]="true" pInputText />
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"></div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label class="form-label"> Status Receiver</label>
+                <input formControlName="receiverMachineStatusName" type="text" class="form-control header-search-background icon-padding" [readonly]="true" pInputText />
+              </div>
+            </div>
+            <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                  <label for="floatingStatusSender" class="select-label">Status Sender</label>
+                  <p-dropdown
+                    [options]="Room"
+                    [checkmark]="false"
+                    optionLabel="name"
+                    [showClear]="false"
+                    [filter]="true"
+                    filterBy="name"
+                    placeholder="Select a Status Sender"
+                    class="header-search-background"
+                    id="floatingStatusSender" />
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"></div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                  <label for="floatingStatusSender" class="select-label">Status Sender</label>
+                  <p-dropdown
+                    [options]="Room"
+                    [checkmark]="false"
+                    optionLabel="name"
+                    [showClear]="false"
+                    [filter]="true"
+                    filterBy="name"
+                    placeholder="Select a Status Sender"
+                    class="header-search-background"
+                    id="floatingStatusSender" />
+              </div>
+            </div> -->
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <input type="text" pInputText formControlName="assetId"  class="form-control header-search-background icon-padding" id="floatingReceiverComment" placeholder="FrontEnd_CallCenter" value="">
+                <label for="floatingReceiverComment">Receiver Comment</label>
+              </div>
+            </div>
+            </div>
+
+           <!--  <div class="row">
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                  <div class="form-floating">
+                    <label for="floatingDate" class="select-label">Receiver Start date</label>
+                    <p-calendar
+                      [(ngModel)]="receverStartdate"
+                      [iconDisplay]="'input'"
+                      [showIcon]="true"
+                      inputId="icondisplay"
+                      id="floatingDate" />
+                </div>
+              </div>
+              <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                  <div class="form-floating">
+                    <label for="floatingDate" class="select-label">Receiver End date</label>
+                    <p-calendar
+                      [(ngModel)]="receverEndate"
+                      [iconDisplay]="'input'"
+                      [showIcon]="true"
+                      inputId="icondisplay"
+                      id="floatingDate" />
+                </div>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                <div class="form-floating mb-2">
+                  <input type="text" pInputText formControlName="assetId"  class="form-control header-search-background icon-padding" id="floatingSenderComment" placeholder="FrontEnd_CallCenter"  value="1" (click)="clearValue($event);">
+                  <label for="floatingSenderComment">Working Hours Receiver</label>
+                </div>
+              </div>
+              <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
+                <p-button [outlined]="false" icon="pi pi-plus" class="form-icon-button header-icon">
+                </p-button>
+              </div>
+            </div> -->
+
+            <div class="row box-gryco">
+              <ng-container formArrayName="assetTransferReceiverTimers">
+                <div  *ngFor="let assetTransferReceiverTimer of assetTransferReceiverTimers().controls; let j=index" >
+                  <div class="row py-3" [formGroupName]="j" [ngClass]="{'disableDiv': recieverFlag}">
+                    <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating">
+                        <label for="floatingSendeStartrDate" class="select-label">Receiver Start Date</label>
+                        <p-calendar formControlName="startDateTime" (onSelect)="selectReceiverStart($event,j)"
+                          (onBlur)="selectReceiverStart($event, j)" [minDate]="minDateVal" [showTime]="true"
+                          [dateFormat]="'dd/mm/yy'" hourFormat="12" [showIcon]="true"  [iconDisplay]="'input'"
+                          id="floatingSendeStartrDate" >
+                        </p-calendar>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating">
+                        <label for="floatingReceiverendDate" class="select-label">Receiver End Date</label>
+                        <p-calendar formControlName="endDateTime" (onSelect)="selectReceiverEnd($event,j)"
+                          (onBlur)="selectReceiverEnd($event, j)" [showTime]="true" [dateFormat]="'dd/mm/yy'" hourFormat="12"
+                          [showIcon]="true"  [iconDisplay]="'input'" id="floatingReceiverendDate" >
+                        </p-calendar>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                      <div class="form-floating">
+                        <label for="floatingReceiverWorkinghours"  class="select-label">Working Hours</label>
+                        <p-inputNumber mode="decimal" class="header-search-background icon-padding"
+                        [readonly]="true" formControlName="workingHours" id="floatingReceiverWorkinghours" [useGrouping]="false">
+                        </p-inputNumber>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-xl-3 col-xxl-3 mb-3">
+                      <p-button  class="p-button-dynamic p-button-info form-icon-button header-icon m-3" icon="pi pi-plus" (click)="addAssetTransferReceiverTimers()"></p-button>
+                      <p-button *ngIf="j > 0" class="p-button-dynamic  p-button-danger header-icon m-3" icon="pi pi-trash" (click)="deleteAssetTransferReceiverTimers(j)"></p-button>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <div class="col-12 mt-3">
+              <h3 class="section-heading">Attachment</h3>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <app-file-upload-component
+                (filesChanged)="setReciverFileList($event)"
+                [multiple]="true"
+                [dragDropEnabled]="true">
+                  <div>  {{ receiverFileList | json }} </div>
+              </app-file-upload-component>
+            </div>
+            <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="browse-file">
+                <div class="drop_box">
+
+                    <input type="file" hidden="" accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
+                    <button class="browse-btn"> <i class="fa fa-paperclip" aria-hidden="true"></i> Upload New</button>
+
+                    <p class="text-center">The maximum file size: 30 MB. Allowed files
+                        are:Pdf,JPG,.docx,PNG</p>
+
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button" (click)="submitForm()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-assets-table-lookup [showDialog]="showDialog" (onSelect)="onCloseDialog($event)"
+  (onHideDialog)="onHide($event)"></app-assets-table-lookup>
+
+
+   <!-- <p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog> -->
+</div>

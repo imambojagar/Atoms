@@ -1,0 +1,266 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class=" ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+
+          <p-toast></p-toast>
+            <!-- <div class="card flex justify-content-center mb-5">
+              <p-breadcrumb [model]="items"></p-breadcrumb>
+            </div> -->
+
+              <!-- <p-dialog header="Add New store" [(visible)]="displayAdd" [modal]="true" (onHide)="onHideDialog()"
+                [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false"
+                [contentStyle]="{ 'overflow-y': 'none !important' }"> -->
+              <div #drawer [ngClass]=" showmodal ? 'show' : ''"
+                 class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                  <div class="offcanvas-header">
+                    <h1 class="offcanvas-title offcanvas-heading"> Add New store</h1>
+                    <button type="button" class="btn-close" (click)="close_modal()"></button>
+                  </div>
+
+                  <p-toast></p-toast>
+                  <div class="p-3">
+                    <div class="row">
+                      <form [formGroup]="storesForm">
+                        <div class="row box-gryco">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-floating mb-2"> 
+                            <input formControlName="storeName" id="add" type="text" pInputText placeholder="Add store"  class="form-control " [required]="true">
+                            <label for="add">Add store <span class="text-danger">*</span></label>
+                          </div>
+                        </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2">
+                            <span class="p-float-label">
+                            <p-autoComplete inputId="site" [delay]="1000" [suggestions]="customers" (completeMethod)="getCustomers($event)" [field]="'custName'"
+                              formControlName="siteId"></p-autoComplete>
+                              <label for="site">Site <span class="text-danger">*</span></label>
+                            </span>
+                          </div>
+                        </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-floating mb-2">
+                            <input formControlName="storeCode" id="code" type="text" pInputText placeholder="Store Code" class="form-control " [required]="true">
+                            <label for="code"  >Store Code <span class="text-danger">*</span></label>
+                          </div>
+                        </div>
+                        </div>
+                      </form>
+                      <div class="fixed-bottom">
+                        <div class="row">
+                          <div class="col-12">
+                            <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button" (click)="onAdd()" styleClass="p-button-text">Save</button>
+                            <!-- <p-button icon="pi pi-times" (click)=" displayAdd=false" label="Cancel" styleClass="p-button-text"></p-button> -->
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <!-- </p-dialog> -->
+
+              <!-- <p-dialog header="Update store" [(visible)]="displayUpdate" [modal]="true" (onHide)="onHideDialog()"
+                [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false"> -->
+
+              <div #drawer [ngClass]=" displayUpdate ? 'show' : ''"
+                 class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                  <div class="offcanvas-header">
+                    <h1 class="offcanvas-title offcanvas-heading"> Update Store </h1>
+                    <button type="button" class="btn-close" (click)="close_update()"></button>
+                  </div>
+
+                  <p-toast></p-toast>
+                  <div class="p-3">
+                    <div class="row">
+
+                      <form [formGroup]="storesForm">
+                        <div class="row box-gryco">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="form-floating mb-2"> 
+                            <input formControlName="storeName" type="text" pInputText placeholder="Update store"  class="form-control ">
+                            <label>Update store</label>
+                            </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-floating mb-2"> 
+                              <span class="p-float-label">
+                              <p-autoComplete inputId="site" [delay]="1000" [suggestions]="customers" (completeMethod)="getCustomers($event)" [field]="'custName'"
+                              formControlName="siteId"></p-autoComplete>
+                              <label for="site">Site</label>
+                            </span>
+                          </div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-floating mb-2"> 
+                            <input formControlName="storeCode" type="text" pInputText   placeholder="Store Code"  class="form-control ">
+                            <label>Store Code</label>
+                          </div>
+                          </div>
+                        </div>
+                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pt-2" >
+                          <app-transaction-history *ngIf="transactionHistory" [transactionHistory]="transactionHistory"></app-transaction-history>
+                          </div>
+                      </form>
+                      <!-- <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-check" (click)="onUpdate()" label="Update" styleClass="p-button-text"></p-button>
+                        <p-button icon="pi pi-times" (click)="displayUpdate=false" label="Cancel" styleClass="p-button-text"></p-button>
+
+                      </ng-template> -->
+                      <div class="fixed-bottom">
+                        <div class="row">
+                          <div class="col-12">
+                            <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" (click)="onUpdate()" styleClass="p-button-text">Update</button>
+                            <!-- <p-button icon="pi pi-times" (click)=" displayAdd=false" label="Cancel" styleClass="p-button-text"></p-button> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+              <!-- </p-dialog> -->
+              <div class="main">
+                <div class="container-fluid">
+                  <div class="contents ngprime-custom">
+                    <div class="row">
+                      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="row  mb-3 content-heading">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3">
+                            <div class="float-start main-heading">
+                              Define Store Table  <span class="total_rows_data"> Total: {{ totalRows }} </span>
+                            </div>
+                            <div class="float-start export-icon mt-3"><a class="m-5" (click)="exportToExcel() ">Export <img
+                                  src="assets/img/dashboard/excel.svg" alt=""></a></div>
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                            <div class="row float-end">
+                              <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 mb-3">
+                                <!-- <div class="float-end filter-icon h-100"><a (click)="openFilterModal()"><img
+                                      src="assets/img/dashboard/filter.svg" alt=""></a></div> -->
+                              </div>
+                              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-9 col-9 mb-3">
+
+                                <div class="form-floating float-start ">
+                                  <input type="text" class="form-control input-field icon-padding" id="floatingName"
+                                    [(ngModel)]="searchValue" (input)="applyGlobalFilter($event)" placeholder="Search"
+                                    value="Type here">
+                                  <a> <img class="float-end search-icon " src="assets/img/dashboard/search.svg" alt=""></a>
+                                  <label for="floatingName">Search</label>
+                                  <!--  <input pInputText type="text" [(ngModel)]="searchValue"
+                              (input)="dt.filterGlobal($event, 'contains')" placeholder="Keyboard Search" /> -->
+                                </div>
+                              </div>
+                              <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
+                                <div class="d-grid"><button class="btn btn-blue text-white border-r10" type="button"
+                                    (click)="openModal()">Add </button></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      <p-table #dt [value]="storesList"  [rows]="filter.pageSize"
+                        [tableStyle]="{'min-width': '69rem'}" [lazy]="true" 
+                        [loading]="loading" 
+                        [rowHover]="false" dataKey="id"
+                        [globalFilterFields]="['name','country.name','representative.name','status']" 
+                        [totalRecords]="totalRows">
+                        <!-- <ng-template pTemplate="caption">
+                          <div class="flex align-items-center justify-content-between">
+                            <div class="card-header bg-primary">
+                              <div class="card-title">
+                                <span class="text-white">
+                                  Define Store Table <br>
+                                  <span class="total_rows_data"> Total: {{totalRows}} </span>
+                                </span>
+                              </div>
+                              <div class="card-title table-btns">
+                                <button pButton pRipple label="Add store" class="btn btn-light-primary me-2 mr-2 "
+                                  (click)="showAddDialog()"></button>
+                                <button pRipple (click)="exportToExcel()" class="btn btn-light-primary me-2">Export</button>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template> -->
+
+                        <!-- <ng-template pTemplate="caption">
+                          <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                              <h4 class="mt-3 inline main-heading">Define Store Table <span class="total_rows_data"> Total: {{totalRows}} </span></h4>
+                              <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="exportToExcel()">Export <img src="navbar/export.svg" alt=""></a>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                                
+                                <div class="p-input-icon-left">
+                                  
+                                </div>
+                                <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                                    <div class="form-floating float-end">
+                                      <input  class="form-control "
+                                        class="form-control border-0 header-search-background" 
+                                        placeholder="Type here"
+                                        pInputText type="text" 
+                                        id="floatingSearchInput"
+                                        (input)="dt.filterGlobal($event.target, 'contains')" 
+                                        >
+                                        <span><img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                                      <label for="floatingSearchInput">Search</label>
+                                    </div>
+                                </div>
+                                <div class="p-input-icon-left">
+                                  <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                                    Add New
+                                  </button>
+                                </div>
+                            </div>
+                          </div>
+                        </ng-template> -->
+
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>Store Name</th>
+                            <th>Site Name</th>
+                            <th>Store Code</th>
+                            <th class="sticky-header">Action</th>
+                          </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-store>
+                          <tr>
+                            <td>{{store.storeName}}</td>
+                            <td>{{store.siteName }} </td>
+                            <td>{{store.storeCode }} </td>
+                            <td class="sticky-header">
+                              <div class="d-flex">
+                              <!--  <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2" (click)="navToDetails(item,0)" >
+                                  <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                                </button> -->
+                              <button (click)="showUpdateDialog(store); storeId=store.id;" pButton pRipple icon="pi pi-pencil"
+                                class="p-button-rounded p-button-info me-2"></button>
+                              <button (click)="onDelete(store)" pButton pRipple icon="pi pi-trash"
+                                class="p-button-rounded p-button-danger"></button>
+                              </div>  
+                            </td>
+                          </tr>
+                        </ng-template>
+
+
+                      </p-table>
+                      <p-paginator [rows]="filter.pageSize" [totalRecords]="totalRows" (onPageChange)="paginate($event)"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
+                  </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>   
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '600px'}"></p-confirmDialog>
+<div *ngIf="displayUpdate" class="offcanvas-backdrop fade show"></div>
+<div *ngIf="showmodal" class="offcanvas-backdrop fade show"></div>

@@ -1,0 +1,381 @@
+<div #drawer [ngClass]="showmodal ? 'show' : ''" class="offcanvas offcanvas-end offcanvas-container w-75 ps-md-4"
+  id="r-step-1" aria-modal="true" role="dialog">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+
+  <div class="p-3 ngprime-custom">
+    <div class="row">
+
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assets-form form-scroller">
+        <h1 class="offcanvas-title offcanvas-heading mb-3">
+          Add Model Definition
+        </h1>
+        <p-toast></p-toast>
+        <form [formGroup]="addModelForm">
+          <!-- <form [formGroup]="addModelForm" (ngSubmit)="addModelSubmit()"> -->
+          <div class="row  box-gryco mb-2">
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" [suggestions]="asset" field="assetname"
+                  (completeMethod)="searchAsset($event)" formControlName="assetNDId" (onSelect)="onSelectAsset($event)">
+                </p-autoComplete> <label for="assetNDId">Asset Name<span class="text-danger">*</span></label>
+              </span>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" formControlName="manuName" [suggestions]="manufatureresList"
+                  field="taxonomyName" (completeMethod)="searchManufacturer($event)"
+                  (onSelect)="onSelectManufacturer($event)">
+
+                </p-autoComplete> <label for="manufacture">Manufacturer<span class="text-danger">*</span></label>
+              </span>
+              <button style="background-color: white; border-style: none" type="button" (click)="openDialog()" pButton
+                class="navbar-brand look p-0" icon="pi pi-external-link" label="Add Manufacturer"></button>
+            </div>
+
+            <div #drawer [ngClass]="showDialog ? 'show' : ''"
+              class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4" id="r-step-1" aria-modal="true"
+              role="dialog">
+              <div class="offcanvas-header">
+                <button type="button" class="btn-close" (click)="showDialog=false;manufacturerForm.reset()"></button>
+              </div>
+              <h1 class="offcanvas-title offcanvas-heading ">
+                Add Manufacturer
+              </h1>
+              <div class="p-3 ngprime-custom">
+                <div class="row">
+
+
+                  <form [formGroup]="manufacturerForm" (ngSubmit)="addManufacturer()">
+
+                    <div class="row box-gryco">
+                      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="form-floating">
+
+                          <input type="text" formControlName="manufacturerName" pInputText [required]="true"
+                            class="form-control  " placeholder="Manufacturer Name" /> <label>Manufacturer Name</label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="fixed-bottom">
+                  <div class="row">
+                    <div class="col-12">
+                      <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                        (click)="addManufacturer()">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showDialog" class="offcanvas-backdrop fade show"
+              (click)="showDialog=false;manufacturerForm.reset()"></div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" formControlName="modelId" [suggestions]="model" field="modelName"
+                  (completeMethod)="searchModel($event)" optionValue="modelId" (onSelect)="onSelectModel($event)">
+                </p-autoComplete> <label for="modelId">Model<span class="text-danger">*</span></label>
+              </span>
+
+              <button style="background-color: white; border-style: none" type="button" (click)="openModelDialog()"
+                pButton class="navbar-brand look p-0" icon="pi pi-external-link" label="Add Model"></button>
+
+              <div #drawer [ngClass]="showModelDialog ? 'show' : ''"
+                class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4" id="r-step-1" aria-modal="true"
+                role="dialog">
+                <div class="offcanvas-header">
+                  <button type="button" class="btn-close" (click)="showModelDialog=false;modelForm.reset()"></button>
+                </div>
+                <h1 class="offcanvas-title offcanvas-heading ">
+                  Add Model
+                </h1>
+                <div class="p-3 ngprime-custom">
+                  <div class="row">
+                    <form [formGroup]="modelForm" (ngSubmit)="addModel()">
+
+                      <div class="row box-gryco">
+                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                          <div class="form-floating">
+
+
+                            <input type="text" formControlName="modelName" pInputText [required]="true"
+                              class="form-control  " placeholder="Model Name" /> <label>Model Name</label>
+
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+
+                  <div class="fixed-bottom">
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+                          (click)="addModel()">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="showModelDialog" class="offcanvas-backdrop fade show"
+                (click)="showModelDialog=false;modelForm.reset()"></div>
+            </div>
+
+
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="row d-flex">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 d-flex" *ngFor="
+                      let supplier of suppliersControls().controls;
+                      let i = index
+                    ">
+
+
+                  <div class="col-11">
+                    <span class="p-float-label ">
+                      <p-autoComplete [delay]="1000" class="input-field-add-more-value  rounded-0 my-2"
+                        [formControlName]="i" [suggestions]="suppliersList" field="suppliername"
+                        (completeMethod)="getSpplier($event)" (onSelect)="onSelectSupplier($event, i)"></p-autoComplete>
+                      <label>Supplier {{i+1}}</label>
+                    </span>
+                  </div>
+                  <div class="col-1"> <p-button class="col-2" icon="pi pi-trash" severity="danger" [rounded]="true"
+                      [outlined]="true" (click)="removeSuppliers(i)" [disabled]="i <= 0" canDelete /></div>
+
+                </div>
+                <!-- @if(i==suppliersControls().controls.length) -->
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-4 d-flex">
+                  <button class="atoms-button-outline-dashed me-auto" (click)="addMoreSuppliers()">
+                    + Add more
+                  </button>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" formArrayName="modelDefTCodes">
+              <div class="row">
+
+                <div [formGroupName]="i" *ngFor="let code of modelDefTCodesControl(); index as i"
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="form-floating mb-2">
+
+                    <input formControlName="codeValue" type="text" pInputText class="form-control  icon-padding"
+                      placeholder="{{ codeName[i] }}" />
+
+                    <label>{{ codeName[i] }}</label>
+                    <input formControlName="modelDefinitionId" type="hidden" class="form-control  icon-padding" />
+                    <input formControlName="id" type="hidden" class="form-control  icon-padding" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <p-dropdown placeholder="--Select--" formControlName="ppmFrequencyId" [options]="frequency"
+                  optionLabel="name" optionValue="id" class="dropdown" (onChange)="checkList($event)">
+
+                </p-dropdown> <label>PPM Exempted<span class="text-danger">*</span></label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <p-calendar [showIcon]="true" [showOnFocus]="false" formControlName="endOfSupportDate"
+                  dateFormat="yy-mm-dd" dataType="string"></p-calendar> <label>End of Support
+                  Date</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <p-dropdown placeholder="--Select--" formControlName="countryOfOriginId" [options]="country"
+                  optionLabel="name" optionValue="id" class="dropdown">
+                </p-dropdown><label>Country of
+                  Origin</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <textarea id="specialTools" formControlName="specialTools" pInputTextarea class="form-control"
+                  placeholder="Special Tools"></textarea> <label for="specialTools">Special Tools</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <textarea id="modelAccessories" formControlName="modelAccessories" pInputTextarea class="form-control"
+                  placeholder="Model Accessories"></textarea> <label for="modelAccessories">Model Accessories</label>
+              </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+
+                <textarea id="ppmChkLst" formControlName="ppmChkLst" pInputTextarea class="form-control"
+                  placeholder="PPM Checklist" [readonly]="check"></textarea> <label for="ppmChkLst">PPM
+                  Checklist</label>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <!--     <div class="form-floating mb-2"> -->
+              <label for="attatchmet">Picture of Model</label>
+              <app-attachments class="my-5" (onUploaded)="photoReady($event)"></app-attachments>
+
+              <!-- </div> -->
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <!--     <div class="form-floating mb-2"> -->
+              <label>Attachment</label>
+              <app-attachments [showButton]="true" (onUploaded)="attachmentReady($event)"
+                formArrayName="attachments"></app-attachments>
+              <!-- </div> -->
+            </div>
+          </div>
+          <div class="row form-scrolle box-gryco ">
+            <div class="col-12">
+              <h3 class="section-heading">Related Defects</h3>
+            </div>
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div formArrayName="modelDefRelatedDefects">
+                <div class="row" [formGroupName]="i" *ngFor="let defect of relatedDefectsControl(); let i = index">
+
+                  @if(relatedDefectsControl().length>1)
+                  {<div class="col-12 d-flex justify-content-end">
+                    <button pButton type="button" (click)="removeSupplier(i)"
+                      class="p-button-rounded  mr-2 p-button-danger " icon="pi pi-trash"></button>
+                  </div>}
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <span class="p-float-label">
+                        <p-autoComplete [delay]="1000" [suggestions]="defectsList" field="name"
+                          (completeMethod)="searchDefects($event)" formControlName="defectId"
+                          (onSelect)="onSelectDefect($event, i)">
+                        </p-autoComplete> <label for="defectName">Defect Name</label>
+                      </span>
+                      <button style="background-color: white; border-style: none" type="button"
+                        (click)="openDefectDialog()" pButton class="navbar-brand look p-0" icon="pi pi-external-link"
+                        label="Add Defect"></button>
+
+
+
+
+                      <div #drawer [ngClass]="showDefectDialog ? 'show' : ''"
+                        class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4" id="r-step-1" aria-modal="true"
+                        role="dialog">
+                        <div class="offcanvas-header">
+                          <button type="button" class="btn-close"
+                            (click)="showDefectDialog=false;defectForm.reset()"></button>
+                        </div>
+                        <h1 class="offcanvas-title offcanvas-heading ">
+                          Add Defect
+                        </h1>
+                        <div class="p-3 ngprime-custom">
+                          <div class="row">
+                            <form [formGroup]="defectForm" (ngSubmit)="addDefect()">
+                              <div class="row box-gryco">
+                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                  <div class="form-floating">
+
+
+                                    <input type="text" formControlName="name" pInputText [required]="true"
+                                      class="form-control  " placeholder="Defect
+                                  Name" /> <label>Defect
+                                      Name</label>
+                                    <!-- <button
+                                    pButton
+                                    type="submit"
+                                    class="btn btn-blue text-white form-button mt-3"
+                                    label="Save"
+                                  ></button> -->
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+
+                        </div>
+                        <div class="fixed-bottom">
+                          <div class="row">
+                            <div class="col-12">
+                              <button class="btn btn-blue text-white form-button border-r10 float-end mx-4"
+                                type="button" (click)="addDefect()">Save</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="showDefectDialog" class="offcanvas-backdrop fade show"
+                      (click)="showDefectDialog=false;defectForm.reset()"></div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input id="cause" formControlName="cause" type="text" pInputText class="form-control  "
+                        placeholder="Cause" /> <label for="cause">Cause</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input id="workPerformed" formControlName="workPerformed" type="text" pInputText
+                        class="form-control  " placeholder="Solution" /><label for="workPerformed">Solution</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-floating mb-2">
+
+                      <input id="estimatedTime" formControlName="estimatedTime" type="number" pInputText
+                        class="form-control  " placeholder="Working Time" /><label for="estimatedTime">Working
+                        Time</label>
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    @if(i==relatedDefectsControl().length-1)
+                    { <button pButton type="button" (click)="addMoreDefects()"
+                      [disabled]="!relatedDefectsControl().at(i)?.valid" class=" plusbtn"><img
+                        src="assets/img/Vector.svg" alt="">
+                    </button><a [attr.disabled]="!relatedDefectsControl().at(i)?.valid ? true : null"
+                      [ngClass]="{ 'disabled-link': !relatedDefectsControl().at(i)?.valid }" (click)="addMoreDefects()"
+                      class="add-newtext">add new
+                      Defects</a> }
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="fixed-bottom">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-blue text-white form-button border-r10 float-end mx-4" type="button"
+          (click)="addModelSubmit()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  <p-confirmDialog [style]="{ width: '600px' }"></p-confirmDialog>
+</div>

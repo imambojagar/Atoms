@@ -1,0 +1,41 @@
+<form [formGroup]="searchForm5" *ngIf="assetGroupName=='FM' || assetGroupName=='Both'">
+    <div class="row py-3">
+        <div class="col-md-4">
+            <label class="form-label">Sites</label>
+            <p-multiSelect [options]="sites" formControlName="sites"
+                                    dataKey="id" defaultLabel="Select" 
+                                    optionLabel="name"
+                                    (onChange)="onChangeChart9($event)"
+                                    class="multiselect-custom" >
+                                </p-multiSelect>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">From Date</label>
+            <p-calendar formControlName="dateFrom" [showIcon]="true" [showTime]="false"
+                [showButtonBar]="true" (onSelect)="onChangeChart9($event)" [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar>
+        </div> 
+        <div class="col-md-4">
+            <label class="form-label">To Date</label>
+            <p-calendar formControlName="dateTo" [showIcon]="true" [showTime]="false"
+            [showButtonBar]="true" (onSelect)="onChangeChart9($event)"  [dateFormat]="'dd/mm/yy'" [showOnFocus]="false"></p-calendar>
+        </div>
+    </div>
+</form>
+<div class="col-md-12 col-12" *ngIf="assetGroupName=='FM' || assetGroupName=='Both'" >
+    <div id="chart9" style="position: relative;z-index: 42;">
+        Loading...
+    </div>
+</div>
+<div class="row" *ngIf="assetGroupName=='FM' || assetGroupName=='Both'">
+    <div class="col-12">
+        <div class="outer">
+
+            <div class="div1" *ngFor="let p of sites">
+              {{p.name}}
+              <div id="chart10{{p.id}}" style="position: relative;z-index: 41;">
+                  Loading...
+              </div>
+            </div>
+          </div>
+    </div>
+</div>

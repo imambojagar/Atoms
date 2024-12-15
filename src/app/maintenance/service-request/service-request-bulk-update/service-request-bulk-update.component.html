@@ -1,0 +1,336 @@
+<div class="atoms-workorder">
+  <div class="row">
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="m-2 qipsa-content-bg">
+        <div class="custom-card ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12 ngprime-custom">
+            <!--beginbreadcrumb-->
+            <!-- <div class="card flex justify-content-center mb-5">
+                <p-breadcrumb [model]="items"></p-breadcrumb>
+            </div> -->
+            <!--endbreadcrumb-->
+
+            <div #drawerFilter  [ngClass]=" showmodal ? 'show' : ''"
+              class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+                <div class="offcanvas-header">
+                  <h1 class="offcanvas-title offcanvas-heading">Search Service Request</h1>
+                  <button type="button" class="btn-close" (click)="close_modal()"></button>
+                </div>
+                <div class="p-3">
+                  <div class="row">
+                    <!--begin Search Fields -->
+                    <div class="card card-flush mb-6 mb-xl-9">
+                        <div class="card-header bg-primary">
+                            <div class="card-title">
+                                <h2 class="d-flex align-items-center text-white"> Search </h2>
+                            </div>
+                        </div>
+
+                        <div class="card-body pt-5">
+                            <form [formGroup]="searchForm">
+
+                                <div class="row py-3">
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label ">Requested Date Operator</label>
+                                        <!-- TO DO -->
+                                        <p-dropdown [options]="serviceRequestFormService.Operator_Dates" optionLabel="name"
+                                                    formControlName="requestedDateSymbol" class="dropdown"placeholder="select"></p-dropdown>
+                                    </div>
+                                    <ng-container
+                                        *ngIf="(searchForm.get('requestedDateSymbol')?.value==7)||(searchForm.get('requestedDateSymbol')?.value==8) else elseTemp">
+                                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                            <label class="form-label "> Requested End Date From</label>
+                                            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="requestedDateFrom" dateFormat="yy-mm-dd"
+                                                dataType="string" ></p-calendar>
+                                            <!-- <small class="d-block fst-italic text-black-50">Format 18/12/2022</small> -->
+
+                                        </div>
+                                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                            <label class="form-label "> Requested End Date To</label>
+                                            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="requestedDateTo" dateFormat="yy-mm-dd"
+                                                dataType="string"></p-calendar>
+                                            <!-- <small class="d-block fst-italic text-black-50">Format 18/12/2022</small> -->
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #elseTemp>
+                                        <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                            <label class="form-label ">Requested Date </label>
+                                            <p-calendar [showIcon]="true" [showOnFocus]="false"  formControlName="requestedDateFrom" dateFormat="yy-mm-dd"
+                                                dataType="string"></p-calendar>
+                                            <!-- <small class="d-block fst-italic text-black-50">Format 18/12/2022</small> -->
+                                        </div>
+                                    </ng-template>
+
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label">Asset Number</label>
+                                        <p-autoComplete [delay]="1000" formControlName="assetNo" [suggestions]="assetNumberList"
+                                            field="assetNumber" (completeMethod)="getAssetNumbersAuto($event)" dataKey="id"
+                                            (onSelect)="bindAssetNumber($event)" (onClear)="clearInputNumber()" placeholder="Please enter Asset Number"></p-autoComplete>
+
+                                        <!-- <label class="form-label ">Asset NO</label>
+                                        <input formControlName="assetNo" type="text" pInputText /> -->
+                                    </div>
+
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label">Asset Serial Number</label>
+                                        <p-autoComplete [delay]="1000" formControlName="assetSerialNo" [suggestions]="assetSerialList"
+                                        field="assetSerialNo" (completeMethod)="getAssetSerialsAuto($event)" dataKey="id"
+                                        (onSelect)="bindAssetSearialNumber($event)" (onClear)="clearInputSerial()" placeholder="Please enter Asset Serial Number"></p-autoComplete>
+
+                                        <!-- <label class="form-label ">S.N</label> -->
+                                        <!-- <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0"
+                                            formControlName="assetSerialNumber" [suggestions]="serviceRequestFormService.Asset_SNs"
+                                            field="assetSerialNo" (completeMethod)="selectServiceRequestSN($event)" dataKey="id"
+                                            (onSelect)="bind($event )" (onClear)="clearInput()"></p-autoComplete> -->
+
+                                        <!-- <label class="form-label">Asset Serial Number</label>
+                                        <p-autoComplete [delay]="1000" formControlName="assetSerialNo" [suggestions]="serviceRequestFormService.Asset_SNs"
+                                            field="assetSerialNo" (completeMethod)="selectServiceRequestSN($event)" dataKey="id"
+                                            (onSelect)="bind($event)" (onClear)="clearInput()"></p-autoComplete> -->
+                                    </div>
+
+                                    <!-- <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label ">Maintenance Situation</label>
+                                        <p-dropdown [options]="serviceRequestFormService.maintenanceSituations" optionLabel="name"
+                                            optionValue="value" formControlName="maintenanceSituation" class="dropdown"
+                                            placeholder="select"></p-dropdown>
+                                    </div> -->
+
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label">Status</label>
+                                        <p-dropdown [options]="serviceRequestFormService.statuses" optionLabel="name"
+                                            formControlName="status" class="dropdown" placeholder="select"></p-dropdown>
+                                    </div>
+
+                                    <!-- <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label "> Group Leader</label>
+                                        <p-dropdown [options]="serviceRequestFormService.groupleaders" optionLabel="userName"
+                                            formControlName="groupLeader" class="dropdown" placeholder="select"></p-dropdown>
+                                    </div> -->
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label "> Assigned Employee</label>
+                                        <p-dropdown [options]="serviceRequestFormService.assignedEmployees" optionLabel="userName"
+                                            formControlName="assignedEmployee" class="dropdown" placeholder="select"></p-dropdown>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label ">First Action Status</label>
+                                        <p-dropdown [options]="serviceRequestFormService.firstActionStatuses" optionLabel="name"
+                                            formControlName="firstActionstatus" class="dropdown" placeholder="select"></p-dropdown>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label ">Asset Name</label>
+                                        <!-- <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="assetName"
+                                            [suggestions]="serviceRequestFormService.AssetNames" field="assetSerialNo"
+                                            (completeMethod)="selectAssetName($event)" dataKey="id" (onSelect)="bind($event )"
+                                            (onClear)="clearInput()"></p-autoComplete> -->
+
+                                        <p-autoComplete [delay]="1000" formControlName="assetName" [suggestions]="serviceRequestFormService.AssetNames"
+                                        field="assetname" (completeMethod)="selectAssetName($event)" dataKey="id"
+                                        (onSelect)="bindAssetName($event)" (onClear)="clearInputAssetName()" placeholder="Please enter Asset Name"></p-autoComplete>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label " for="site">Manufacturer</label>
+                                        <!-- To Do -->
+                                        <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0" formControlName="manufacturer"
+                                            [suggestions]="assetFormService.manufacturers" field="name" dataKey="id"
+                                            (completeMethod)="selectManufacturer($event)"
+                                            (onSelect)="bindManufacturer($event)" placeholder="Please enter Manufacturer"></p-autoComplete>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label " for="modelDefinition">Model</label>
+                                        <!-- <p-autoComplete [delay]="1000" class="input-field-add-more-value border rounded-0"
+                                            formControlName="modelDefinition" dataKey="modelName" (onSelect)="selectModels($event)"
+                                            [suggestions]="serviceRequestFormService.ModelDefinitions" (completeMethod)="bindModel($event)"
+                                            field="modelDefCode"></p-autoComplete> -->
+
+                                            <p-autoComplete [delay]="1000" formControlName="modelName" [suggestions]="modelsList"
+                                            (onSelect)="bindModel($event)" (completeMethod)="modelNameFilter($event)" field="modelName" placeholder="Please enter Model Name"></p-autoComplete>
+
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label "> Type Of Request</label>
+                                        <p-dropdown [options]="serviceRequestFormService.typeOfrequests" optionLabel="name"
+                                            formControlName="typeOfrequest" class="dropdown" placeholder="select"></p-dropdown>
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                                        <label class="form-label "> Urgent</label>
+                                        <p-dropdown [options]="serviceRequestFormService.yesOrNo" optionLabel="name"
+                                            formControlName="priority" class="dropdown" placeholder="select"></p-dropdown>
+
+                                    </div>
+                                    <div class="col-md-6 col-xl-3 col-xxl-3 mb-5" *ngIf="false">
+                                        <label class="form-label">Asset Group</label>
+                                        <p-dropdown placeholder="Search Asset Group" [options]="assetGroupsList"  [hidden]="true"
+                                        optionLabel="name" optionValue="id" formControlName="assetGroup"></p-dropdown>
+                                      </div>
+                                    <div class="card-footer d-flex justify-content-end border-top py-6">
+                                        <button type="submit" class="btn btn-primary" (click)="searchServiceRequest()">Search</button>
+                                        <button type="submit" class="btn btn-light btn-active-light-primary me-2" (click)="reset()" [disabled]="">Reset</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <p-table #dt
+                [value]="serviBlulkUpdte"
+                [rows]="10"
+                [paginator]="true"
+                [globalFilterFields]= "tableConfig.tableHeaders"
+                [(selection)]="selectedNames"
+                [rowHover]="true"
+                dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [showCurrentPageReport]="true"
+                sortMode="multiple"
+                [rows]="searchFilter.pageSize"
+                [lazy]="true"
+                [scrollable]="true"
+                [totalRecords]="totalRows"
+                [tableStyle]="{width: 'max-content'}">
+
+              <ng-template pTemplate="caption">
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                    <h4 class="mt-3 inline main-heading">Service Request Update</h4>
+                    <a class="ps-4 mt-4 exportfile  cursor-pointer" (click)="export()">Export <img src="navbar/export.svg" alt=""></a>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-12 text-right">
+                      <!-- <h5 class="m-0">Manage assets</h5> -->
+                      <div class="p-input-icon-left ">
+                        <p-button [outlined]="false" class="header-icon-background header-icon float-end" (click)="openFilterModal()">
+                          <img src="navbar/filter.svg" alt="">
+                        </p-button>
+                      </div>
+                      <div class="p-input-icon-left px-lg-3 px-md-2 ps-sm-1">
+                            <div class="form-floating float-end">
+                              <input type="text"
+                                pInputText
+                                class="form-control border-0 header-search-background"
+                                id="floatingSearchInput"
+                                value="Type here"
+                                placeholder="Type here" (click)="clearValue($event);">
+                              <span> <img class="float-end search-icon " src="navbar/search.svg" alt=""></span>
+                              <label for="floatingSearchInput">Search</label>
+                            </div>
+                      </div>
+                      <!-- <div class="p-input-icon-left">
+                        <button class="btn btn-blue text-white border-0 p-4 float-end" (click)="openModal()" >
+                          Add New
+                        </button>
+                      </div> -->
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  @for(headers of tableConfig.tableHeaders; track headers) {
+                    @if(headers == 'Action') {
+                      <th class="sticky-header" alignFrozen="right" pFrozenColumn >{{headers}}</th>
+                    } @else {
+                      <th>{{headers}}</th>
+                    }
+                  }
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-serviBlulkUpdte>
+
+                <tr>
+                  <!-- <td><a class="link-info cursor-pointer" pRipple (click)="navToDetails(assets,0)">{{assets.id}}</a></td> -->
+
+                  <td>{{serviBlulkUpdte.id}}</td>
+                  <td>{{serviBlulkUpdte.callNo}}</td>
+                  <td>{{serviBlulkUpdte.status?.name}}</td>
+                  <td>{{serviBlulkUpdte.callLastSituation?.name}}</td>
+                  <td>{{serviBlulkUpdte.asset.modelDefinition.assetNumber}}</td>
+                  <td>{{serviBlulkUpdte.asset.assetSerialNo}}</td>
+                  <td>{{serviBlulkUpdte.asset.modelDefinition.assetName}}</td>
+                  <td>{{serviBlulkUpdte.asset.modelDefinition.modelName}}</td>
+                  <td>{{serviBlulkUpdte.asset.modelDefinition.manufacturerName}}</td>
+                  <td>{{serviBlulkUpdte.asset.department?.departmentName }}</td>
+                  <td>{{serviBlulkUpdte.asset.site.custName }}</td>
+                  <td>{{"New Work Order"}}</td>
+                  <td>{{serviBlulkUpdte.assignedEmployee?.name }}</td>
+                  <td>{{serviBlulkUpdte.workOrder?.faultDescription?.name}}</td>
+                  <td>{{serviBlulkUpdte.callComments}}</td>
+                  <td>{{serviBlulkUpdte.workOrder?.workPerformed?.name}}</td>
+                  <td>{{serviBlulkUpdte.workOrder?.endofWork?.name}}</td>
+                  <td>{{serviBlulkUpdte.workOrder?.updateDate}}</td>
+                  <td>{{serviBlulkUpdte.callCreatedBy?.name}}</td>
+                  <td>{{serviBlulkUpdte.requestedThrough?.name}}</td>
+                  <td>{{" "}}</td>
+                  <td>{{serviBlulkUpdte.comments}}</td>
+                  <td>{{serviBlulkUpdte.workOrder?.debriefedHours}}</td>
+                  <td>{{serviBlulkUpdte.workOrder?.reasons?.name}}</td>
+
+                  <!-- <td>{{serviBlulkUpdte.replacementDate == null ? '' : serviBlulkUpdte.replacementDate | date }}</td> -->
+
+                  <td  class="sticky-header">
+                    <div class="d-flex">
+                      <button pButton pRipple icon="pi" class="p-button-rounded p-button-info mr-2"
+                        (click)="navToDetails(serviBlulkUpdte,0)" >
+                        <img src="assets/img/dashboard/eye-1.svg" alt="View">
+                      </button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
+                      (click)="navToDetails(serviBlulkUpdte,1)" canUpdate></button>
+
+                    <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded btn btn-danger"
+                      (click)="deleteAsset(serviBlulkUpdte)" canDelete></button> -->
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+
+            <!-- <app-table [tableData]="tableConfig" [checkbox]="true" (paginate)="paginate($event)" (exportEvent)="export()">
+            </app-table> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--begin Search Fields -->
+<!-- <div class="card card-flush mb-6 mb-xl-9"> -->
+<div #drawerFilter  [ngClass]=" showmodal1 ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true" role="dialog">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title offcanvas-heading">Search Service Request</h1>
+      <button type="button" class="btn-close" (click)="close_modal()"></button>
+    </div>
+    <div class="p-3">
+      <div class="row">
+
+
+        <form [formGroup]="sumbitForm">
+            <div class="row py-3">
+
+                <!-- <div class="field">
+            <label class="form-label "> Group Leader</label>
+            <p-dropdown [options]="serviceRequestFormService.groupleaders" optionLabel="name"
+                formControlName="groupLeader" class="dropdown"
+                placeholder="select"></p-dropdown>
+        </div> -->
+                <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                    <label class="form-label "> Assigned Employee</label>
+                    <p-dropdown [options]="serviceRequestFormService.assignedEmployees" optionLabel="userName"
+                        dataKey="userId" formControlName="assignedEmployee" class="dropdown"
+                        placeholder="select"></p-dropdown>
+                </div>
+            </div>
+        </form>
+        <div class="card-footer d-flex justify-content-end border-top py-6">
+            <button pButton type="button" label="Save" class="p-button-info col-lg-2" (click)="SaveCalls()" canUpdate></button>
+        </div>
+      </div>
+    </div>
+</div>
+<p-confirmDialog [style]="{width :'600px'}"></p-confirmDialog>

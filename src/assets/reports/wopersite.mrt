@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <response_1698741174316 Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>response_1698741174316</Alias>
+        <HeadersString />
+        <Key>4577a5fe68d74afe908b27f9873a2ccf</Key>
+        <Name>response_1698741174316</Name>
+        <PathData>resource://Json5</PathData>
+      </response_1698741174316>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <root Ref="3" type="DataTableSource" isKey="true">
+        <Alias>root</Alias>
+        <Columns isList="true" count="2">
+          <value>ORIGINAL,periodName,periodName,periodName,System.String,ee3fe8a5a2c24ab3a10d2b239468d96f</value>
+          <value>ORIGINAL,dashboardCallLastSituationWithCountDtos,dashboardCallLastSituationWithCountDtos,dashboardCallLastSituationWithCountDtos,System.String,_x0032_050f34f7328486d908f970dcf827be3</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>6787f0b7c064409a8105187ca55449f4</Key>
+        <Name>root</Name>
+        <NameInSource>response_1698741174316.root</NameInSource>
+      </root>
+      <root_dashboardCallLastSituationWithCountDtos Ref="4" type="DataTableSource" isKey="true">
+        <Alias>root_dashboardCallLastSituationWithCountDtos</Alias>
+        <Columns isList="true" count="4">
+          <value>ORIGINAL,callLastSituationName,callLastSituationName,callLastSituationName,System.String,_x0035_b41c42fe587437cb89047f021c7e3c0</value>
+          <value>ORIGINAL,callLastSituationCount,callLastSituationCount,callLastSituationCount,System.Decimal,_x0032_092522ad3c447538c601a03d3400510</value>
+          <value>ORIGINAL,relationId,relationId,relationId,System.String,_x0037_335abeb6fcf49fca9b2a938bdf9e0c8</value>
+          <value>callLastSituationPercentage,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>3689c6b1ac5a4b7287636b773aa86b9b</Key>
+        <Name>root_dashboardCallLastSituationWithCountDtos</Name>
+        <NameInSource>response_1698741174316.root_dashboardCallLastSituationWithCountDtos</NameInSource>
+      </root_dashboardCallLastSituationWithCountDtos>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <root Ref="5" type="DataRelation" isKey="true">
+        <Alias>root</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>relationId</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Key>fe1e0abf495b4919a7d2b87037133b8e</Key>
+        <Name>root</Name>
+        <NameInSource>root_dashboardCallLastSituationWithCountDtos</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>dashboardCallLastSituationWithCountDtos</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </root>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="1">
+      <value>Name=Json5, Alias=Json5, Type=Json, Content=NEHbPq2rFyHmykqB2QyM7lSn85iCAEKWyZS9S02PORl4323SWHSC75OLkXZLPuruTFP5JDwKN0tMiu_x002F_iKNWM1EGOXXivDOwWUF7_x002B_NZLKj6fVB6GgC9r6FJRQNM0LgEGpnDnjNPDTQ5_x002F_uKGZqEd1qfm7QMmhIeKz5DiFKaDhzWzPFRrUtkCugwThWWqrZwFrpDUmReWuKJrLeARbwzErzsq8vZ9b7QneKnkStTIfJ_x002B_WN73qOB77L5hziy1OmvPD5jU8pA_x002F_KSEUrBXRMe3bTD_x002F_ezWbw40g1X5YZEhb6_x002B_BCBNj_x002F_oF1Log1oXa3_x002B_QfIuDgJaSFpVykyF9xruiZGtajzluhqOysiHg_x002B_BfwkcFWGxmL3iNBE2oEtGvuDxYy49lMo_x002F_DWCdtcTc0g72CIYr2N88qwlnyvGHdXlR_x002B_3MYGc17t62NnpmOqc8OoqtW1sBpxTdYKhbu7p5bcXNFNBSjzMaxCtkMXcjS3_x002F__x002B_fFjcA6WFKFlo9yZPhBi7VsQJn93CqJrvuHUSScmYiqehtUn1gltK9PgQfWQjqvgrSgvV4ZIP5HceYAjS_x002F_WBWLTsTHFP1XkOh95W7uOWHGWBdHxnV1x5sA_x002B_2KB6uvQglcxGtrm2U0HdnoOhmURyau8MAoiQFKN3c9Ml0UxaKZcmJf6Am_x002F__x002F_KqWL5sKTC0mZtwl30qaFPt8ez3AKIhlBoeCEr</value>
+    </Resources>
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>9b60dda8cb9e40c9b374ee3b1150d3e0</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="6" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <Mission_Crictical_Wo_per_site Ref="7" type="Stimulsoft.Dashboard.Components.Chart.StiChartElement" isKey="true">
+          <AltClientRectangle>0,0,0,0</AltClientRectangle>
+          <Area Ref="8" type="Stimulsoft.Dashboard.Components.Chart.StiChartArea" isKey="true">
+            <InterlacingHor Ref="9" type="Stimulsoft.Dashboard.Components.Chart.StiHorChartInterlacing" isKey="true">
+              <Color>Transparent</Color>
+            </InterlacingHor>
+            <InterlacingVert Ref="10" type="Stimulsoft.Dashboard.Components.Chart.StiVertChartInterlacing" isKey="true">
+              <Color>Transparent</Color>
+            </InterlacingVert>
+          </Area>
+          <Arguments isList="true" count="0" />
+          <BackColor>Transparent</BackColor>
+          <ChartConditions isList="true" count="0" />
+          <ClientRectangle>0,0,440,440</ClientRectangle>
+          <CloseValues isList="true" count="0" />
+          <ConstantLines isList="true" count="0" />
+          <DashboardInteraction Ref="11" type="Stimulsoft.Dashboard.Interactions.StiChartDashboardInteraction" isKey="true">
+            <AllowUserSorting>False</AllowUserSorting>
+            <DrillDownParameters isList="true" count="0" />
+            <ToolTip>&lt;font face="Arial" size="12"&gt;&lt;text-align="Center"&gt;{Value}%&lt;/text-align&gt;&lt;/font&gt;</ToolTip>
+          </DashboardInteraction>
+          <DataFilters isList="true" count="0" />
+          <EndValues isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>26fec1392c714b51b900a81a5d3720e4</Guid>
+          <HighValues isList="true" count="0" />
+          <Labels Ref="12" type="Stimulsoft.Dashboard.Components.Chart.StiChartLabels" isKey="true">
+            <Font>Arial,8</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Style>Value</Style>
+            <TextAfter>%</TextAfter>
+          </Labels>
+          <Legend Ref="13" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegend" isKey="true">
+            <Labels Ref="14" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegendLabels" isKey="true">
+              <Color>Transparent</Color>
+              <Font>Arial,8</Font>
+            </Labels>
+            <Title Ref="15" type="Stimulsoft.Dashboard.Components.Chart.StiChartLegendTitle" isKey="true">
+              <Color>Transparent</Color>
+              <Font>Arial,12,Bold</Font>
+            </Title>
+          </Legend>
+          <LowValues isList="true" count="0" />
+          <ManuallyEnteredChartMeter Ref="16" type="Stimulsoft.Dashboard.Components.Chart.StiValueChartMeter" isKey="true">
+            <Key>c50fc0a5408d4dad86143941519fd32f</Key>
+          </ManuallyEnteredChartMeter>
+          <ManuallyEnteredData>H4sIAAAAAAAEAIvm5VJQiAYRCgpKYYk5palKOlCea14KqoBzTn5xKqqQT345qoBHZnoGqohjUXppbmpeCVwgPBWoBsENTi3KTC1WAvFiebliAcwjTseRAAAAWklQ</ManuallyEnteredData>
+          <Margin>3,3,3,3</Margin>
+          <Marker Ref="17" type="Stimulsoft.Dashboard.Components.Chart.StiChartMarker" isKey="true" />
+          <Name>Mission_Crictical_Wo_per_site</Name>
+          <NegativeSeriesColors />
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <ParetoSeriesColors />
+          <RoundValues>True</RoundValues>
+          <Series Ref="18" type="Stimulsoft.Dashboard.Components.Chart.StiSeriesChartMeter" isKey="true">
+            <Expression>root_dashboardCallLastSituationWithCountDtos.callLastSituationName</Expression>
+            <Key>2237a9ca7e0d43b5a58a4adb7b01dccb</Key>
+            <Label>Call Last Situatioion</Label>
+          </Series>
+          <SeriesColors />
+          <Title Ref="19" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>Mission Critical Wo Per Site</Text>
+            <Visible>False</Visible>
+          </Title>
+          <TopN Ref="20" type="Stimulsoft.Data.Engine.StiDataTopN" isKey="true" />
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <TrendLines isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+          <UserViewStates isList="true" count="0" />
+          <ValueFormat Ref="21" type="NumberFormat" isKey="true">
+            <DecimalDigits>2</DecimalDigits>
+            <GroupSeparator>,</GroupSeparator>
+            <NegativePattern>1</NegativePattern>
+          </ValueFormat>
+          <Values isList="true" count="1">
+            <Item7 Ref="22" type="Stimulsoft.Dashboard.Components.Chart.StiValueChartMeter" isKey="true">
+              <Expression>Sum(root_dashboardCallLastSituationWithCountDtos.callLastSituationPercentage)</Expression>
+              <Key>39e2cd90ca71451680e0322b038b28f2</Key>
+              <Label>callLastSituationPercentage</Label>
+              <SeriesType>Pie</SeriesType>
+            </Item7>
+          </Values>
+          <Weights isList="true" count="0" />
+        </Mission_Crictical_Wo_per_site>
+      </Components>
+      <DashboardWatermark Ref="23" type="Stimulsoft.Base.Drawing.StiAdvancedWatermark" isKey="true">
+        <TextColor>Gray</TextColor>
+        <TextFont>Arial,36</TextFont>
+        <WeaveMajorColor>119, 119, 119, 119</WeaveMajorColor>
+        <WeaveMinorColor>85, 119, 119, 119</WeaveMinorColor>
+      </DashboardWatermark>
+      <Expressions isList="true" count="0" />
+      <Guid>47ceb647f1fa436e814f50b357a81c22</Guid>
+      <Height>440</Height>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+      <Width>440</Width>
+    </Dashboard1>
+  </Pages>
+  <PreviewSettings>58663423</PreviewSettings>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Mission Critical WO per Site</ReportAlias>
+  <ReportAuthor>Ahmad Majed</ReportAuthor>
+  <ReportChanged>1/11/2024 6:08:50 PM</ReportChanged>
+  <ReportCreated>10/29/2023 3:24:15 PM</ReportCreated>
+  <ReportFile>C:\inetpub\wwwroot\CloudERP\Atoms\Frontend\Atom-NewDesign\src\assets\reports\wopersite.mrt</ReportFile>
+  <ReportGuid>d7b2fec3ec8c4508972496fd34e393a9</ReportGuid>
+  <ReportName>Mission Critical WO per Site</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.3.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Mission_Critical_WO_per_Site : Stimulsoft.Report.StiReport
+    {
+        public Mission_Critical_WO_per_Site()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

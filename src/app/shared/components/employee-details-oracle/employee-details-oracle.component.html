@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-12">
+    <button
+      type="button"
+      (click)="openDialog()"
+      pButton
+      class="p-button-info col-lg-2 asset-lookup"
+    ><span class="p-button-icon pi pi-users" aria-hidden="true"></span></button>
+    <p-dialog
+      header="Search Employee Details"
+      [(visible)]="showDialog"
+      [modal]="true"
+      [style]="{ width: '60vw', height: '60hw' }"
+      [maximizable]="true"
+      [draggable]="false"
+      [resizable]="false"
+    >
+      <div [style]="{ marginTop: '30px' }">
+        <!-- <app-search-component
+          (OnSearch)="searchEmployeeDetails()"
+          (OnReset)="Reset()"
+        > -->
+          <form [formGroup]="searchForm">
+            <div class="row py-3">
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                <label class="form-label">Employee Number</label>
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="employeeNumber"
+                  placeholder="Please enter employee number"
+                />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                <label class="form-label">Employee Name</label>
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="employeeName"
+                  placeholder="Please enter employee name"
+                />
+              </div>
+              <div class="col-md-6 col-xl-3 col-xxl-3 mb-5">
+                <label class="form-label">Employee Email</label>
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="employeeEmail"
+                  placeholder="Please enter employee email"
+                />
+              </div>
+            </div>
+          </form>
+        <!-- </app-search-component> -->
+      </div>
+      <div>
+        <app-table
+          [tableData]="tableConfig"
+          (viewRow)="selectEmployee($event)"
+          (paginate)="paginate($event)"
+          (routeEvent)="route($event)"
+        >
+        </app-table>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <p-button
+          icon="pi pi-times"
+          (click)="showDialog = false"
+          label="Cancel"
+          styleClass="p-button-text"
+        ></p-button>
+      </ng-template>
+    </p-dialog>
+  </div>
+</div>

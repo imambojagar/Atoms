@@ -1,0 +1,118 @@
+<div #drawerFilter1 [ngClass]=" showmodal ? 'show' : ''"
+  class="offcanvas offcanvas-end offcanvas-container w-50 ps-md-4 ngprime-custom" id="r-step-1" aria-modal="true"
+  role="dialog">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title offcanvas-heading">Search Maintenence Contract</h1>
+    <button type="button" class="btn-close" (click)="close_modal()"></button>
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+        <form [formGroup]="mContractSearch">
+          <div class="row box-gryco">
+
+            <div class="field col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="false">
+
+              <span class="p-float-label">
+                <label>Asset Group</label>
+                <p-dropdown [options]="AssetGroups" optionLabel="name" formControlName="assetGroup" [hidden]="true"
+                  class="dropdown" placeholder="select"></p-dropdown>
+              </span>
+            </div>
+            <div class="field col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" placeholder="Asset Number" [suggestions]="assetNameList"
+                  (onSelect)=" this.filter.assetId = $event.value.id" (completeMethod)="assetNameFilter($event)"
+                  field="assetNumber" formControlName="assetNo">
+                </p-autoComplete> <label>Asset Number</label>
+              </span>
+            </div>
+
+            <div class="field col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" placeholder="Site Name" [suggestions]="siteList"
+                  (onSelect)="this.filter.siteId = $event.value.id" (completeMethod)="siteFilter($event)"
+                  field="custName" formControlName="site">
+                </p-autoComplete> <label>Site</label>
+              </span>
+            </div>
+
+            <div class="field col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" [suggestions]="contractNumberList"
+                  (onSelect)="filter.maintenanceContractNumber = $event.value.contractNumber"
+                  (completeMethod)="cNumberFilter($event)" field="contractNumber" placeholder="Search Contract Number"
+                  formControlName="contractNo"></p-autoComplete> <label>Contract Number</label>
+              </span>
+            </div>
+
+            <div class="field col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+                <p-autoComplete [delay]="1000" [suggestions]="contractNameList"
+                  (onSelect)=" filter.maintenanceContractName = $event.value.contractName"
+                  (completeMethod)="cNameFilter($event)" field="contractName" placeholder="Search Contract Number"
+                  formControlName="cName"></p-autoComplete>
+                <label>Contract Name</label>
+              </span>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label>Contract Status</label>
+                <p-dropdown (onChange)="this.filter.contractStatus = $event.value" dropdownIcon="pi pi-angle-down"
+                  class="dropdown" (onFilter)="cStatusFilter(filter.contractStatus)"
+                  placeholder="Search Contract Status" [options]="contractStatus" optionLabel="name" optionValue="id"
+                  formControlName="cStatus"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label>Contract Type</label>
+                <p-dropdown (onChange)="filter.contractType= $event.value.value;" class="dropdown"
+                  (onFilter)="cStatusType(filter.contractType)" [options]="contractType" optionLabel="name"
+                  dropdownIcon="pi pi-angle-down" placeholder="Search Contract Type" optionValue="id"
+                  formControlName="cType"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label>Contract Start Date</label>
+                <p-calendar (onSelect)="searchStartDate($event)" placeholder="Contract Start Date" dateFormat="yy-mm-dd"
+                  [showIcon]="true" dataType="string" formControlName="sDate" [showOnFocus]="false"></p-calendar>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="form-floating mb-2">
+                <label>Contract End Date</label>
+                <p-calendar (onSelect)="searchEndDate($event)" placeholder="Contract End Date" dateFormat="yy-mm-dd"
+                  [showIcon]="true" dataType="string" formControlName="endDate" [showOnFocus]="false"></p-calendar>
+              </div>
+            </div>
+
+
+            <div class="field col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <span class="p-float-label">
+
+                <p-autoComplete [delay]="1000" [suggestions]="suppliersList"
+                  (onSelect)=" filter.supplierId = $event.value.id" (completeMethod)="getSpplier($event)"
+                  field="suppliername" placeholder="Search Supplier" formControlName="supplier"></p-autoComplete>
+                <label>Supplier</label>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="fixed-bottom">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-blue text-white form-button border-r10 float-end m-4" type="button"
+              (click)="search()">Apply
+              Filter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
